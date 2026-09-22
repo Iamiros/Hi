@@ -90,8 +90,10 @@ def build(outfile, bilingual, label):
         d = pymupdf.open(outfile)
         d.set_metadata({
             'title': 'Disorders of Vascular Flow — Medical Pathology Session 3 (%s)' % label,
-            'author': 'Study guide synthesized from Zhejiang University lecture slides, Robbins & Kumar Basic Pathology 11e, and Pathoma',
-            'subject': 'Hyperemia and Congestion, Edema, Hemorrhage, Thrombosis, Embolism, Infarction',
+            'author': 'Amirhossein Dehghan',
+            'subject': 'Hyperemia and Congestion, Edema, Hemorrhage, Thrombosis, Embolism, Infarction. '
+                       'Synthesized from Zhejiang University lecture slides (Prof. Zhengrong Mao), '
+                       'Robbins & Kumar Basic Pathology 11e, and Pathoma.',
             'keywords': 'pathology, hemodynamics, thrombosis, embolism, infarction, edema, congestion, hemorrhage',
             'creator': 'WeasyPrint',
         })

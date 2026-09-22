@@ -279,3 +279,7 @@ h2{ bookmark-level:2;}
 h3{ bookmark-level:3; bookmark-state:closed;}
 .fa-block{ bookmark-level:none;}
 h1.tp-title, h1.part-title, h1.fm-h{ bookmark-level:1; bookmark-label:attr(data-bm);}
+
+/* title-page byline (first page only) */
+.tp-credit{ color:var(--ink-2);}
+.tp-credit b{ font-family:'Inter'; font-weight:600; color:var(--ink); letter-spacing:.01em;}
