@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "pubmed-mcp": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@ncukondo/pubmed-mcp",
+        "--email",
+        "iamirosdehghan@gmail.com"
+      ],
+      "env": {}
+    }
+  }
+}
