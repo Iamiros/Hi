@@ -1,0 +1,313 @@
+/* ============ FONTS ============ */
+@font-face{font-family:'SourceSerif';src:url(../fonts/SourceSerif-400.woff2);font-weight:400;font-style:normal}
+@font-face{font-family:'SourceSerif';src:url(../fonts/SourceSerif-400i.woff2);font-weight:400;font-style:italic}
+@font-face{font-family:'SourceSerif';src:url(../fonts/SourceSerif-600.woff2);font-weight:600;font-style:normal}
+@font-face{font-family:'SourceSerif';src:url(../fonts/SourceSerif-600i.woff2);font-weight:600;font-style:italic}
+@font-face{font-family:'SourceSerif';src:url(../fonts/SourceSerif-700.woff2);font-weight:700;font-style:normal}
+@font-face{font-family:'Inter';src:url(../fonts/Inter-400.woff2);font-weight:400}
+@font-face{font-family:'Inter';src:url(../fonts/Inter-500.woff2);font-weight:500}
+@font-face{font-family:'Inter';src:url(../fonts/Inter-600.woff2);font-weight:600}
+@font-face{font-family:'Inter';src:url(../fonts/Inter-700.woff2);font-weight:700}
+@font-face{font-family:'Vazir';src:url(../fonts/Vazirmatn-Regular.ttf);font-weight:400}
+@font-face{font-family:'Vazir';src:url(../fonts/Vazirmatn-Medium.ttf);font-weight:500}
+@font-face{font-family:'Vazir';src:url(../fonts/Vazirmatn-Bold.ttf);font-weight:700}
+
+/* ============ TOKENS — microbiology palette ============ */
+:root{
+  --ink:#10201f;            /* near-black with a green cast */
+  --ink-2:#39504e;
+  --ink-3:#6d8280;
+  --rule:#d3dedc;
+  --rule-2:#e7eeed;
+  --teal:#0b5c60;           /* primary — culture medium / petri dish */
+  --teal-dk:#07373a;
+  --teal-bg:#eef6f6;
+  --amber:#8a5a12;          /* agar amber — secondary accent */
+  --amber-bg:#fdf5e9;
+  --violet:#5b2a86;         /* Gram-POSITIVE — crystal violet */
+  --violet-bg:#f3eef8;
+  --pink:#b03060;           /* Gram-NEGATIVE — safranin */
+  --pink-bg:#fbeef3;
+  --moss:#2f5d3a;           /* mechanism chains */
+  --moss-bg:#f1f7f2;
+  --slate:#24506b;          /* clinical */
+  --slate-bg:#eff4f8;
+  --lab:#7a4a05;            /* lab pearl */
+  --lab-bg:#fdf3e4;
+  --crimson:#8b1a2b;        /* exam traps stay warm-red */
+}
+
+/* ============ PAGE ============ */
+*{box-sizing:border-box}
+@page{
+  size:A4; margin:19mm 17mm 18mm 17mm;
+  @top-left{ content:string(parttitle); font-family:'Inter'; font-size:7.6pt; letter-spacing:.09em;
+             text-transform:uppercase; color:#8ba09e; vertical-align:bottom; padding-bottom:3mm;}
+  @top-right{ content:string(sectitle); font-family:'Inter'; font-size:7.6pt; color:#8ba09e;
+              vertical-align:bottom; padding-bottom:3mm;}
+  @bottom-center{ content:counter(page); font-family:'Inter'; font-size:8.5pt; color:#7f9391;
+                  vertical-align:top; padding-top:4mm;}
+}
+@page:first{ margin:0; @top-left{content:none} @top-right{content:none} @bottom-center{content:none} }
+@page part{ @top-left{content:none} @top-right{content:none} }
+@page frontmatter{ @top-left{content:none} @top-right{content:none}
+  @bottom-center{ content:counter(page,lower-roman); font-family:'Inter'; font-size:8.5pt; color:#7f9391;
+                  vertical-align:top; padding-top:4mm;} }
+
+/* ============ BASE TYPE ============ */
+body{ font-family:'SourceSerif',serif; font-size:9.6pt; line-height:1.52; color:var(--ink);
+      margin:0; padding:0; text-align:justify; hyphens:auto; -weasy-hyphens:auto;}
+p{margin:0 0 .52em 0}
+strong,b{font-weight:700;color:#08181a}
+em,i{font-style:italic}
+sub,sup{font-size:.7em;line-height:0}
+.lead{font-size:10.4pt;line-height:1.55;color:var(--ink-2)}
+.note{font-size:8.6pt;color:var(--ink-3);font-style:italic}
+/* binomial names */
+.sp{font-style:italic}
+
+/* ============ TITLE PAGE ============ */
+.titlepage{ page:first; height:297mm; width:210mm; position:relative; page-break-after:always;
+            background:#fff; overflow:hidden; text-align:left; hyphens:none; -weasy-hyphens:none;}
+.tp-band{ position:absolute; top:0; left:0; right:0; height:112mm; background:var(--teal-dk);}
+.tp-band:after{ content:''; position:absolute; bottom:0; left:0; right:0; height:5mm;
+                background:linear-gradient(90deg,var(--violet) 0%,var(--violet) 50%,var(--pink) 50%,var(--pink) 100%);}
+.tp-inner{ position:absolute; top:0; left:0; right:0; padding:24mm 24mm 0 24mm; color:#fff;}
+.tp-kicker{ font-family:'Inter'; font-size:8.6pt; letter-spacing:.24em; text-transform:uppercase;
+            color:#9dbdbc; margin-bottom:8mm;}
+.tp-session{ font-family:'Inter'; font-size:10pt; font-weight:600; letter-spacing:.16em; text-transform:uppercase;
+             color:#e7b877; margin-bottom:4mm;}
+.tp-title{ font-family:'SourceSerif'; font-size:33pt; font-weight:700; line-height:1.08; letter-spacing:-.012em;
+           margin:0 0 5mm 0; color:#fff;}
+.tp-sub{ font-family:'SourceSerif'; font-style:italic; font-size:12pt; color:#b9d2d1; max-width:150mm;
+         line-height:1.4;}
+.tp-body{ position:absolute; top:126mm; left:24mm; right:24mm;}
+.tp-scope{ margin-bottom:9mm; border-top:1.5px solid var(--ink); padding-top:3.5mm;}
+.tp-scope .row{ display:block; border-bottom:1px solid var(--rule-2); padding:2.3mm 0;}
+.tp-scope .row:last-child{border-bottom:1px solid var(--rule)}
+.tp-scope .n{ display:inline-block; width:20mm; font-family:'Inter'; font-size:7.2pt; font-weight:700;
+              color:var(--teal); letter-spacing:.14em; vertical-align:middle;}
+.tp-scope .t{ display:inline-block; font-family:'SourceSerif'; font-size:10.6pt; font-weight:600;
+              color:var(--ink); vertical-align:middle;}
+.tp-srchead{ font-family:'Inter'; font-size:7.8pt; font-weight:700; letter-spacing:.18em; text-transform:uppercase;
+             color:var(--ink-3); margin-bottom:4mm;}
+.tp-src{ border-left:2.5px solid var(--teal); padding-left:5mm; margin-bottom:4mm;}
+.tp-src .s1{ font-size:10pt; font-weight:600; color:var(--ink);}
+.tp-src .s2{ font-size:9pt; color:var(--ink-2); font-style:italic;}
+.tp-foot{ position:absolute; bottom:18mm; left:24mm; right:24mm; font-family:'Inter'; font-size:8pt;
+          color:var(--ink-3); border-top:1px solid var(--rule); padding-top:4mm; display:flex;
+          justify-content:space-between;}
+.tp-credit{color:var(--ink-2)}
+.tp-credit b{font-family:'Inter';font-weight:600;color:var(--ink);letter-spacing:.01em}
+
+/* ============ FRONT MATTER / TOC ============ */
+.fm{page:frontmatter}
+h1.fm-h{ font-family:'Inter'; font-size:15pt; font-weight:700; color:var(--ink);
+         margin:0 0 2mm 0; padding-bottom:3mm; border-bottom:2px solid var(--ink);}
+.toc{margin-top:6mm}
+.toc-part{ font-family:'Inter'; font-size:8pt; font-weight:700; letter-spacing:.16em; text-transform:uppercase;
+           color:var(--teal); margin:6.5mm 0 2.5mm 0; padding-bottom:1.6mm; border-bottom:1px solid var(--rule);}
+.toc-part:first-child{margin-top:2mm}
+.toc-row{ display:flex; align-items:baseline; font-size:9.6pt; margin-bottom:1.35mm; color:var(--ink);}
+.toc-row .num{ font-family:'Inter'; font-size:8.2pt; font-weight:600; color:var(--ink-3); width:13mm; flex:none;}
+.toc-row .lbl{ flex:none; max-width:150mm;}
+.toc-row .dots{ flex:1; border-bottom:1px dotted #b6c6c4; margin:0 2mm;}
+.toc-row .pg{ font-family:'Inter'; font-size:8.6pt; color:var(--ink-2); flex:none;}
+.toc-row .pg::after{ content:target-counter(attr(href url), page);}
+
+/* ============ PART OPENER ============ */
+.part{ page-break-before:always; string-set:parttitle attr(data-part);}
+.part.cont{page-break-before:auto}
+.part-open{ page:part; padding-top:34mm; page-break-after:always; page-break-inside:avoid;}
+.part-rule{ height:6px; background:var(--teal); width:36mm; margin-bottom:9mm;}
+.part-eyebrow{ font-family:'Inter'; font-size:8.4pt; font-weight:700; letter-spacing:.26em;
+               text-transform:uppercase; color:var(--teal); margin-bottom:5mm;}
+.part-num{ font-family:'SourceSerif'; font-size:64pt; font-weight:700; line-height:.85; color:#dde9e8;
+           margin-bottom:-4mm; letter-spacing:-.03em;}
+.part-title{ font-family:'SourceSerif'; font-size:27pt; font-weight:700; line-height:1.12; color:var(--ink);
+             margin:0 0 6mm 0; letter-spacing:-.015em;}
+.part-blurb{ font-size:10.6pt; line-height:1.58; color:var(--ink-2); max-width:135mm;
+             border-top:1px solid var(--rule); padding-top:5mm;}
+.part-obj{ margin-top:9mm; background:var(--teal-bg); border-left:3px solid var(--teal); padding:5mm 6mm;}
+.part-obj h4{ font-family:'Inter'; font-size:7.8pt; font-weight:700; letter-spacing:.16em; text-transform:uppercase;
+              color:var(--teal-dk); margin:0 0 3mm 0;}
+.part-obj ul{ margin:0; padding-left:5mm; font-size:9.3pt; color:var(--ink-2);}
+.part-obj li{ margin-bottom:1.6mm;}
+
+/* ============ HEADINGS ============ */
+h2{ font-family:'Inter'; font-size:13.4pt; font-weight:700; letter-spacing:-.012em; color:var(--ink);
+    margin:8mm 0 3.2mm 0; padding-top:3mm; border-top:2px solid var(--ink);
+    page-break-after:avoid; string-set:sectitle content(text); text-align:left; clear:left;}
+h2 .sn{ color:var(--teal); font-weight:700; margin-right:2.5mm;}
+h3{ font-family:'Inter'; font-size:10.4pt; font-weight:600; color:var(--teal); margin:5.2mm 0 2.2mm 0;
+    page-break-after:avoid; text-align:left; letter-spacing:-.005em;}
+h4{ font-family:'Inter'; font-size:9pt; font-weight:600; color:var(--ink); margin:4mm 0 1.6mm 0;
+    page-break-after:avoid; text-align:left;}
+h5{ font-family:'Inter'; font-size:7.8pt; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--ink-3); margin:4mm 0 1.6mm 0; page-break-after:avoid; text-align:left;}
+
+/* ============ GRAM TAGS ============ */
+.gp,.gn,.ga{ font-family:'Inter'; font-size:6.8pt; font-weight:700; letter-spacing:.08em;
+             padding:.35mm 1.5mm; border-radius:1.6mm; vertical-align:.12em; white-space:nowrap;
+             margin-left:1.2mm; text-transform:uppercase;}
+.gp{ background:var(--violet); color:#fff;}
+.gn{ background:var(--pink); color:#fff;}
+.ga{ background:#b3541e; color:#fff;}   /* acid-fast */
+td .gp, td .gn, td .ga{margin-left:0}
+
+/* ============ DEFINITION ============ */
+.def{ background:var(--teal-bg); border:1px solid #c9e0df; border-left:3.5px solid var(--teal);
+      padding:3.6mm 5mm; margin:2.5mm 0 4mm 0; page-break-inside:avoid; clear:left;}
+.def .dt{ font-family:'Inter'; font-size:7.3pt; font-weight:700; letter-spacing:.18em; text-transform:uppercase;
+          color:var(--teal-dk); margin-bottom:1.6mm;}
+.def p{ margin:0; font-size:10pt; line-height:1.48;}
+.def .term{ font-weight:700; color:var(--teal-dk);}
+
+/* ============ LISTS ============ */
+ul,ol{ margin:.2em 0 .7em 0; padding-left:5.2mm;}
+li{ margin-bottom:.28em;}
+ul.dash{ list-style:none; padding-left:3.5mm;}
+ul.dash>li{ position:relative; padding-left:3.6mm;}
+ul.dash>li:before{ content:'—'; position:absolute; left:0; color:var(--teal); font-weight:600;}
+
+/* ============ MECHANISM CHAIN ============ */
+.mech{ border:1px solid #cfe0d4; background:var(--moss-bg); padding:4mm 5mm 3mm 5mm; margin:3.5mm 0 4.5mm 0;
+       clear:left;}
+.mech.keep{page-break-inside:avoid}
+.mech ol>li{page-break-inside:avoid}
+.mech>.mh{ font-family:'Inter'; font-size:7.4pt; font-weight:700; letter-spacing:.16em; text-transform:uppercase;
+           color:var(--moss); margin-bottom:3mm; display:flex; align-items:center;}
+.mech>.mh:before{ content:''; width:9px; height:9px; border:2.2px solid var(--moss); border-radius:50%;
+                  margin-right:2.4mm; display:inline-block;}
+.mech ol{ counter-reset:mstep; list-style:none; margin:0; padding:0;}
+.mech ol>li{ counter-increment:mstep; position:relative; padding-left:8.5mm; margin-bottom:2.3mm;
+             font-size:9.4pt; line-height:1.48;}
+.mech ol>li:before{ content:counter(mstep); position:absolute; left:0; top:.1em; width:5.6mm; height:5.6mm;
+                    background:var(--moss); color:#fff; border-radius:50%; font-family:'Inter'; font-size:7.4pt;
+                    font-weight:700; text-align:center; line-height:5.6mm;}
+.mech .why{ display:block; font-style:italic; color:#40634a; font-size:8.9pt; margin-top:.5mm;}
+.mech .why:before{ content:'Why: '; font-style:normal; font-family:'Inter'; font-size:7.2pt; font-weight:700;
+                   letter-spacing:.1em; text-transform:uppercase; color:var(--moss);}
+.mech .res{ margin-top:2.5mm; padding-top:2.5mm; border-top:1px dashed #b9d0bf; font-size:9.3pt;}
+.mech .res:before{ content:'Net result  '; font-family:'Inter'; font-size:7.2pt; font-weight:700;
+                   letter-spacing:.12em; text-transform:uppercase; color:var(--moss);}
+
+/* ============ CALLOUTS ============ */
+.box{ padding:3.4mm 4.6mm; margin:3.5mm 0; page-break-inside:avoid; border:1px solid; border-left-width:3.5px;
+      clear:left;}
+.box .bt{ font-family:'Inter'; font-size:7.3pt; font-weight:700; letter-spacing:.16em; text-transform:uppercase;
+          margin-bottom:1.8mm;}
+.box p:last-child{margin-bottom:0}
+.box ul{margin-bottom:0}
+.box.hy{ background:var(--teal-bg); border-color:#c2dcdb; border-left-color:var(--teal);}
+.box.hy .bt{color:var(--teal-dk)}
+.box.trap{ background:#fdf0f1; border-color:#e8ccd0; border-left-color:var(--crimson);}
+.box.trap .bt{color:var(--crimson)}
+.box.mnem{ background:var(--amber-bg); border-color:#ecdcbc; border-left-color:var(--amber);}
+.box.mnem .bt{color:var(--amber)}
+.box.clin{ background:var(--slate-bg); border-color:#ccdae4; border-left-color:var(--slate);}
+.box.clin .bt{color:var(--slate)}
+.box.lab{ background:var(--lab-bg); border-color:#ead9bb; border-left-color:var(--lab);}
+.box.lab .bt{color:var(--lab)}
+.box.hist{ background:#f6f4f0; border-color:#ddd8cf; border-left-color:#7a6a52;}
+.box.hist .bt{color:#7a6a52}
+.mnem .key{ font-family:'Inter'; font-weight:700; color:var(--amber); font-size:10pt; letter-spacing:.02em;}
+
+/* ============ TABLES ============ */
+.tbl-wrap{ margin:3.5mm 0 4.5mm 0; clear:left;}
+.tbl-wrap.keep{page-break-inside:avoid}
+thead{display:table-header-group}
+tr{page-break-inside:avoid}
+table{ width:100%; border-collapse:collapse; font-size:8.6pt; line-height:1.38;}
+caption{ caption-side:top; text-align:left; font-family:'Inter'; font-size:7.6pt; font-weight:700;
+         letter-spacing:.11em; text-transform:uppercase; color:var(--ink-3); padding-bottom:2mm;}
+caption .cn{ color:var(--teal);}
+thead th{ background:var(--teal-dk); color:#fff; font-family:'Inter'; font-size:7.7pt; font-weight:600;
+          text-align:left; padding:2.1mm 2.4mm; vertical-align:bottom;}
+tbody td,tbody th{ padding:2.1mm 2.4mm; border-bottom:1px solid var(--rule-2); vertical-align:top; text-align:left;}
+tbody th{ font-family:'Inter'; font-weight:600; font-size:8.3pt; color:var(--ink); background:#f4f8f8;
+          width:26%; border-right:1px solid var(--rule-2);}
+tbody tr:last-child td,tbody tr:last-child th{border-bottom:1.5px solid var(--ink)}
+table.zebra tbody tr:nth-child(even) td{background:#fafcfb}
+td .hl{color:var(--teal);font-weight:600}
+td .hl2{color:var(--amber);font-weight:600}
+th.vio{background:var(--violet) !important}
+th.pnk{background:var(--pink) !important}
+
+/* ============ FIGURES ============ */
+figure{ margin:0; page-break-inside:avoid;}
+figcaption{ font-family:'Inter'; font-size:7.5pt; line-height:1.4; color:var(--ink-3); margin-top:1.6mm;
+            text-align:left;}
+figcaption .fn{ font-weight:700; color:var(--teal); letter-spacing:.03em;}
+figure img{ width:100%; display:block; border:1px solid var(--rule); background:#fff;}
+.fig-r{ float:right; width:47mm; margin:1mm 0 3mm 5mm; page-break-inside:avoid;}
+.fig-r.w60{width:60mm} .fig-r.w70{width:70mm}
+.fig-l{ float:left; width:47mm; margin:1mm 5mm 4mm 0; page-break-inside:avoid;}
+.fig-l.w60{width:60mm}
+.fig-full{ margin:4mm 0; clear:both;}
+.fig-row{ display:flex; gap:3.5mm; margin:4mm 0; clear:both; page-break-inside:avoid;}
+.fig-row figure{flex:1}
+.fig-row.g3 figure{width:32%}
+.clearfix{clear:both}
+
+/* ============ SVG DIAGRAMS ============ */
+.dia{ margin:4mm 0; clear:left; page-break-inside:avoid; text-align:center;}
+.dia svg{ width:100%; height:auto; display:block;}
+.dia .cap{ font-family:'Inter'; font-size:7.5pt; line-height:1.4; color:var(--ink-3); margin-top:1.6mm;
+           text-align:left;}
+.dia .cap .fn{ font-weight:700; color:var(--teal);}
+
+/* ============ FLOWCHART ============ */
+.flow{ border:1px solid var(--rule); background:#fbfdfd; padding:5mm; margin:4mm 0; clear:left;
+       page-break-inside:avoid;}
+.flow .fh{ font-family:'Inter'; font-size:7.4pt; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+           color:var(--teal-dk); margin-bottom:3.5mm;}
+.flow .node{ font-family:'Inter'; font-size:8.4pt; font-weight:600; background:var(--teal-dk); color:#fff;
+             padding:1.4mm 3mm; display:inline-block; border-radius:1mm;}
+.flow .test{ font-family:'Inter'; font-size:8pt; font-weight:600; background:#fff; color:var(--ink);
+             border:1.4px solid var(--teal); padding:1.2mm 2.6mm; display:inline-block; border-radius:1mm;}
+.flow .leaf{ font-family:'SourceSerif'; font-size:8.6pt; font-style:italic; font-weight:600; color:var(--ink);}
+.flow ul{ list-style:none; margin:2mm 0 0 0; padding-left:4mm; border-left:1.5px solid var(--rule);}
+.flow ul li{ position:relative; padding-left:4mm; margin-bottom:2.2mm; font-size:8.8pt;}
+.flow ul li:before{ content:''; position:absolute; left:0; top:.62em; width:3mm; height:1.4px;
+                    background:var(--rule);}
+.flow .yes{ font-family:'Inter'; font-size:7pt; font-weight:700; color:var(--moss); letter-spacing:.06em;}
+.flow .no{ font-family:'Inter'; font-size:7pt; font-weight:700; color:var(--crimson); letter-spacing:.06em;}
+
+/* ============ QUESTIONS ============ */
+.q{ margin:0 0 4.4mm 0; page-break-inside:avoid;}
+.q .qn{ font-family:'Inter'; font-size:8.2pt; font-weight:700; color:#fff; background:var(--teal-dk);
+        padding:.5mm 1.9mm; margin-right:2mm;}
+.q .qtag{ font-family:'Inter'; font-size:6.9pt; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
+          color:var(--ink-3); border:1px solid var(--rule); padding:.4mm 1.6mm;}
+.q .stem{ margin:1.8mm 0 1.6mm 0; font-size:9.4pt; line-height:1.48;}
+.q ol.ch{ list-style:none; margin:0; padding:0; counter-reset:ch;}
+.q ol.ch li{ counter-increment:ch; position:relative; padding-left:6.6mm; margin-bottom:.9mm; font-size:9.2pt;}
+.q ol.ch li:before{ content:counter(ch,upper-alpha)'.'; position:absolute; left:0; font-family:'Inter';
+                    font-weight:600; font-size:8.4pt; color:var(--ink-2);}
+.ans{ margin:0 0 3.6mm 0; page-break-inside:avoid; font-size:9.1pt; line-height:1.46;}
+.ans .key{ font-family:'Inter'; font-size:8.6pt; font-weight:700; color:#fff; background:var(--teal);
+           padding:.3mm 1.8mm; margin-right:2mm;}
+.ans .dist{ display:block; margin-top:1mm; font-size:8.5pt; color:var(--ink-2); padding-left:3mm;
+            border-left:2px solid var(--rule);}
+
+/* ============ GLOSSARY ============ */
+.gloss{ column-count:2; column-gap:7mm; column-rule:1px solid var(--rule-2); font-size:8.7pt; line-height:1.42;}
+.gloss dl{margin:0}
+.gloss dt{ font-family:'Inter'; font-weight:600; font-size:8.5pt; color:var(--teal); margin-top:2.4mm;
+           break-after:avoid;}
+.gloss dd{ margin:.3mm 0 0 0; color:var(--ink-2); text-align:left;}
+
+/* ============ MISC ============ */
+.rule{height:1px;background:var(--rule);margin:5mm 0}
+.pgbreak{page-break-before:always}
+.chain{ font-family:'Inter'; font-size:8.6pt; font-weight:500; background:#f4f8f8; border:1px solid var(--rule);
+        padding:2.8mm 4mm; margin:3mm 0; text-align:center; line-height:1.7; color:var(--ink); clear:left;}
+.chain b{color:var(--teal)}
+.chain .ar{color:var(--ink-3); margin:0 1.2mm; font-weight:400}
+
+/* ===== PDF BOOKMARKS ===== */
+h1.tp-title, h1.part-title, h1.fm-h{ bookmark-level:1; bookmark-label:attr(data-bm);}
+h2{ bookmark-level:2;}
+h3{ bookmark-level:3; bookmark-state:closed;}
+.fa-block{ bookmark-level:none;}
