@@ -1,7 +1,7 @@
 # Medical Microbiology — Session 1: Foundations (generator)
 
-Sources for `output/microbiology-session1-english.pdf` (72 pp) and
-`output/microbiology-session1-bilingual.pdf` (124 pp).
+Sources for `output/microbiology-session1-english.pdf` (88 pp) and
+`output/microbiology-session1-bilingual.pdf` (145 pp).
 
 Covers Autumn Week 1: *Medical Microbiology — a brief introduction* and
 *Bacterial cell structure*.
@@ -58,18 +58,29 @@ its translation in the same place, and both PDFs stay correct.
   step → *why* mechanism chains.
 - **Flowcharts.** `.flow` with `.node` / `.test` / `.leaf`, used for the three
   laboratory identification trees in Part 5. Pure CSS, no images.
-- **Hand-drawn SVG.** Figures 3.3 (peptidoglycan), 3.4 (Gram+ vs Gram−
-  envelope), 3.5 (Gram stain) and 4.1 (sporulation) are inline SVG, because
-  the Lecture 2 slides were not available.
+- **Hand-drawn SVG.** Four diagrams are inline SVG rather than images:
+  peptidoglycan architecture, the Gram+ vs Gram− envelope comparison, the
+  four-step Gram stain, and five-stage sporulation. They sit alongside the
+  course's own figures rather than replacing them.
+- **Course figures.** Figures named `img/l2_*.jpg` are extracted from the
+  Lecture 2 deck. They are JPEG rather than PNG: WeasyPrint passes JPEG
+  through unchanged, which keeps the English PDF near 5 MB instead of 12 MB.
 
 ## A note on sources
 
-The Lecture 2 slide deck (*Bacterial cell structure*) was not available when
-this guide was written. Parts 3–5 were reconstructed from that lecture's
-in-class MCQ set — which tells us exactly which points the lecturer examined
-— together with Jawetz and Lippincott. Every point the MCQs touch is covered
-in full. This is flagged for the reader in an Exam-Trap box on the
-"How to Use This Guide" page.
+Built from both lecture decks in full (Lecture 1, 59 slides; Lecture 2, 60
+slides), their in-class MCQ sets, and the textbooks the slides themselves
+cite — Jawetz Ch. 1–2, Lippincott, Brock and First Aid.
+
+Where the lecture gives a number, the lecture's number is used. Two of them
+differ from figures quoted in some textbooks and are called out for the
+reader on the title-page source note:
+
+- Gram-positive wall: **20–80 nm thick, 15–50 peptidoglycan layers**
+- Gram-negative wall: **10–15 nm, 1–2 layers**
+
+Thickness and layer count are different quantities; conflating them is the
+commonest error on this topic.
 
 ## Rebuilding
 
