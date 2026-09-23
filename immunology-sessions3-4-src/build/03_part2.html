@@ -1,0 +1,179 @@
+<div class="part" data-part="Part 2 · The Three Signals — How a T Cell Is Switched On">
+<div class="part-open">
+  <div class="part-rule"></div>
+  <div class="part-eyebrow">Part Two<fa>بخش دوم</fa></div>
+  <div class="part-num">02</div>
+  <h1 class="part-title">The Three Signals — How<br>a T Cell Is Switched On<fa>سه سیگنال — سلول <span class="lat">T</span> چگونه روشن می‌شود</fa></h1>
+  <div class="part-blurb">A T cell that meets its antigen does not necessarily respond to it. It may respond, it may do nothing, or it may be <b>permanently disabled by the encounter</b> — and which of the three happens is decided not by the antigen but by a second molecule on the other cell. That is the most important idea in this Part, and it is the reason your immune system does not attack you.<fa>سلول <span class="lat">T</span>ای که آنتی‌ژن خود را می‌بیند، لزوماً به آن پاسخ نمی‌دهد. ممکن است پاسخ دهد، ممکن است هیچ نکند، یا ممکن است <b>با همان برخورد برای همیشه از کار بیفتد</b> — و اینکه کدام‌یک رخ دهد نه با آنتی‌ژن بلکه با مولکول دومی روی سلول مقابل تعیین می‌شود. این مهم‌ترین ایدهٔ این بخش است و دلیل آنکه سامانهٔ ایمنی شما به خودتان حمله نمی‌کند.</fa></div>
+  <div class="part-obj">
+    <h4>By the end of this Part you should be able to<fa>در پایان این بخش باید بتوانید</fa></h4>
+    <ul>
+      <li>Name the molecule that provides each of the three signals, and the cell it sits on.<fa>مولکول فراهم‌کنندهٔ هر یک از سه سیگنال و سلولی که رویش نشسته را نام ببرید.</fa></li>
+      <li>Explain what happens to a T cell that receives signal 1 without signal 2 — and why that is useful.<fa>توضیح دهید بر سر سلول <span class="lat">T</span>ای که سیگنال ۱ را بدون سیگنال ۲ بگیرد چه می‌آید — و چرا این سودمند است.</fa></li>
+      <li>Distinguish CD28 from CTLA-4 by structure, timing, affinity and effect.<fa><span class="lat">CD28</span> را از <span class="lat">CTLA-4</span> بر پایهٔ ساختار، زمان‌بندی، میل ترکیبی و اثر تمیز دهید.</fa></li>
+      <li>Trace the TCR signal from ITAM to transcription factor, and name the drug that blocks it.<fa>پیام <span class="lat">TCR</span> را از <span class="lat">ITAM</span> تا عامل رونویسی دنبال کنید و دارویی را که مسدودش می‌کند نام ببرید.</fa></li>
+    </ul>
+  </div>
+</div>
+
+<h2 id="s2-1"><span class="sn">2.1</span>Signal 1 — the TCR Sees Peptide–MHC<fa>سیگنال ۱ — <span class="lat">TCR</span> پپتید–<span class="lat">MHC</span> را می‌بیند</fa></h2>
+
+<figure class="fig-r w70">
+  <img src="../img/car_three_signals.jpg" alt="The lecturer's car metaphor for the three signals">
+  <figcaption><span class="fn">Fig 2.1</span> Your lecturer's picture. <b>Key start = signal 1</b> (the TCR): without it nothing happens at all. <b>Gas pedal = signal 2</b> (costimulation): the key alone leaves the car standing. <b>Steering = signal 3</b> (cytokines): it does not start the car, it decides where it goes.<fa>تصویر مدرّس شما. <b>سوئیچ استارت = سیگنال ۱</b> (<span class="lat">TCR</span>): بدون آن اصلاً هیچ نمی‌شود. <b>پدال گاز = سیگنال ۲</b> (هم‌تحریکی): سوئیچ به‌تنهایی خودرو را ایستاده رها می‌کند. <b>فرمان = سیگنال ۳</b> (سایتوکاین‌ها): خودرو را روشن نمی‌کند، تعیین می‌کند کجا برود.</fa></figcaption>
+</figure>
+
+<p class="lead">Signal 1 is the <b>specific</b> signal: the T-cell receptor recognising a peptide held in the groove of an MHC molecule on another cell. Everything about how that peptide got into that groove is Part 3. What matters here is that signal 1 is <b>necessary and not sufficient</b>.<fa>سیگنال ۱ سیگنال <b>اختصاصی</b> است: شناسایی پپتیدی که در شیار مولکول <span class="lat">MHC</span> روی سلولی دیگر نگه داشته شده، توسط گیرندهٔ سلول <span class="lat">T</span>. اینکه آن پپتید چگونه به آن شیار رسیده، موضوع بخش ۳ است. آنچه اینجا اهمیت دارد این است که سیگنال ۱ <b>لازم است اما کافی نیست</b>.</fa></p>
+
+<p>Three molecules deliver it together, and you met all three in §1.5:<fa>سه مولکول با هم آن را می‌رسانند و هر سه را در بخش ۱.۵ دیدید:</fa></p>
+<ul class="dash">
+<li>the <b>TCR αβ heterodimer</b> — recognises, cannot signal<fa>هتـرودایمر <b><span class="lat">TCR αβ</span></b> — می‌شناسد، نمی‌تواند پیام بدهد</fa></li>
+<li><b>CD3</b> <span class="sg1">S1</span> — signals, cannot recognise<fa><b><span class="lat">CD3</span></b> — پیام می‌دهد، نمی‌تواند بشناسد</fa></li>
+<li><b>CD4 or CD8</b> <span class="sg1">S1</span> — grips the non-polymorphic part of the MHC molecule and brings <b>Lck</b> to the party<fa><b><span class="lat">CD4</span> یا <span class="lat">CD8</span></b> — بخش غیرچندشکلی مولکول <span class="lat">MHC</span> را می‌گیرد و <b><span class="lat">Lck</span></b> را به میدان می‌آورد</fa></li>
+</ul>
+
+<figure class="fig-full">
+  <img src="../img/tcr_mhc_peptide.jpg" alt="TCR recognising peptide held by MHC" style="max-width:126mm;margin:0 auto">
+  <figcaption style="max-width:144mm;margin:1.6mm auto 0"><span class="fn">Fig 2.2</span> What signal 1 physically is. An antigen-presenting cell holds a <b>peptide</b> in the cleft of an <b>MHC class I</b> molecule (with its β₂-microglobulin); the <b>TCR α and β chains</b> reach up and read <i>both</i> the peptide and the walls of the cleft. The ribbon model on the right shows the same thing at atomic scale: the variable domains Vα and Vβ sit over the peptide exactly as VH and VL sit over an epitope in an antibody.<fa>سیگنال ۱ فیزیکی چیست. سلول عرضه‌کنندهٔ آنتی‌ژن یک <b>پپتید</b> را در شکاف مولکول <b><span class="lat">MHC</span> کلاس <span class="lat">I</span></b> (همراه بتا-۲-میکروگلوبولینش) نگه می‌دارد؛ <b>زنجیره‌های <span class="lat">α</span> و <span class="lat">β</span> در <span class="lat">TCR</span></b> بالا می‌آیند و <i>هم</i> پپتید <i>و هم</i> دیواره‌های شکاف را می‌خوانند. مدل نواری سمت راست همین را در مقیاس اتمی نشان می‌دهد: دومین‌های متغیر <span class="lat">Vα</span> و <span class="lat">Vβ</span> دقیقاً همان‌طور روی پپتید می‌نشینند که <span class="lat">VH</span> و <span class="lat">VL</span> روی اپی‌توپ در آنتی‌بادی.</fa></figcaption>
+</figure>
+
+<h2 id="s2-2"><span class="sn">2.2</span>Signal 2 — Costimulation, and the Brake<fa>سیگنال ۲ — هم‌تحریکی، و ترمز</fa></h2>
+
+<div class="pair">
+  <div class="ph"><span class="pn">Pair 4 of 4</span><span class="pt">CD28 ↔ B7-1 / B7-2<fa><span class="lat">CD28</span> ↔ <span class="lat">B7-1 / B7-2</span></fa></span></div>
+  <div class="pb">
+    <div class="side"><span class="cell">T cell <span class="onT">T</span></span><span class="mol2">CD28 <span class="sg2">S2</span><fa><span class="lat">CD28</span></fa></span><span class="alias">Ig superfamily; present on resting T cells<fa>اَبَرخانوادهٔ ایمونوگلوبولین؛ روی سلول <span class="lat">T</span> استراحتی حاضر</fa></span></div>
+    <div class="link">binds</div>
+    <div class="side"><span class="cell">APC <span class="onA">APC</span></span><span class="mol2">CD80 (B7-1) · CD86 (B7-2)<fa><span class="lat">CD80 (B7-1)</span> · <span class="lat">CD86 (B7-2)</span></fa></span><span class="alias">Up-regulated only when the APC has itself been activated — by a PRR, by a PAMP<fa>فقط وقتی افزایش می‌یابد که خودِ سلول عرضه‌کننده فعال شده باشد — با یک گیرندهٔ شناساگر الگو، با یک <span class="lat">PAMP</span></fa></span></div>
+  </div>
+  <div class="pr"><b>Result:</b> the T cell receives permission and commits — proliferation, differentiation, effector function, and production of <b>IL-2</b>. <b>The deep point is where B7 comes from:</b> the APC only displays it after <i>its own</i> innate sensors have detected something dangerous. Signal 2 is therefore innate immunity's veto over adaptive immunity — it is the molecular answer to “is this antigen actually a threat?”.<fa><b>نتیجه:</b> سلول <span class="lat">T</span> اجازه می‌گیرد و متعهد می‌شود — تکثیر، تمایز، عملکرد اجرایی، و تولید <b><span class="lat">IL-2</span></b>. <b>نکتهٔ عمیق این است که <span class="lat">B7</span> از کجا می‌آید:</b> سلول عرضه‌کننده تنها پس از آنکه حسگرهای ذاتیِ <i>خودش</i> چیز خطرناکی را تشخیص دادند آن را نشان می‌دهد. پس سیگنال ۲ حق وتوی ایمنی ذاتی بر ایمنی اکتسابی است — پاسخ مولکولی به پرسش «آیا این آنتی‌ژن واقعاً تهدید است؟».</fa></div>
+</div>
+
+<h3>What happens with signal 1 alone<fa>با سیگنال ۱ به‌تنهایی چه می‌شود</fa></h3>
+
+<div class="def">
+  <div class="dt">Anergy<fa>آنرژی</fa></div>
+  <p><span class="term">Anergy</span> is the state of a lymphocyte that has received signal 1 without signal 2. It is <b>not</b> simply “no response”: the cell survives but becomes <b>functionally inactivated</b> — unresponsive to that antigen even if it is later presented properly with full costimulation. The lecture calls this <b>abortive T-cell activation</b>.<fa><span class="term">آنرژی</span> حالت لنفوسیتی است که سیگنال ۱ را بدون سیگنال ۲ گرفته است. <b>صرفاً</b> «بی‌پاسخی» نیست: سلول زنده می‌ماند اما <b>از نظر کارکردی غیرفعال</b> می‌شود — حتی اگر بعداً همان آنتی‌ژن با هم‌تحریکی کامل عرضه شود، پاسخ نمی‌دهد. درس آن را <b>فعال‌سازی ناتمام سلول <span class="lat">T</span></b> می‌نامد.</fa></p>
+</div>
+
+<div class="box hy">
+<div class="bt">Why the system is built this way<fa>چرا سامانه این‌گونه ساخته شده</fa></div>
+<p>Your own tissues present your own peptides on MHC constantly, and a resting tissue cell carries <b>no B7</b>. So a self-reactive T cell that escaped thymic selection will meet its self-antigen on a cell that cannot costimulate — and it is <b>silenced by that meeting rather than activated by it</b>. The requirement for two signals is not an inefficiency; it is <b>peripheral tolerance</b>, and it is the answer to the question the lecturer poses on his slide: <i>“Why is it important to restrict T cell activation?”</i><fa>بافت‌های خود شما پیوسته پپتیدهای خودی را روی <span class="lat">MHC</span> عرضه می‌کنند، و سلول بافتیِ در حال استراحت <b>هیچ <span class="lat">B7</span></b> ندارد. پس سلول <span class="lat">T</span>ای که خودواکنش‌گر است و از گزینش تیموسی گریخته، آنتی‌ژن خودی‌اش را روی سلولی می‌بیند که نمی‌تواند هم‌تحریکی کند — و <b>با همان دیدار خاموش می‌شود نه فعال</b>. نیاز به دو سیگنال ناکارآمدی نیست؛ <b>تحمل محیطی</b> است، و پاسخ همان پرسشی است که مدرّس روی اسلایدش می‌گذارد: <i>«چرا مهم است که فعال‌سازی سلول <span class="lat">T</span> محدود شود؟»</i></fa></p>
+</div>
+
+<h3>CTLA-4 — the brake that looks like the accelerator<fa><span class="lat">CTLA-4</span> — ترمزی که شبیه پدال گاز است</fa></h3>
+
+<figure class="fig-full">
+  <img src="../img/cd28_ctla4_outcomes.jpg" alt="Three outcomes of T cell engagement" style="max-width:126mm;margin:0 auto">
+  <figcaption style="max-width:146mm;margin:1.6mm auto 0"><span class="fn">Fig 2.3</span> The three outcomes, side by side. <b>Left — MHC/TCR only:</b> apoptosis or anergy. <b>Middle — plus CD28 on CD80/86:</b> proliferation, differentiation, effector function. <b>Right — plus CTLA-4 on the same CD80/86:</b> cell-cycle arrest. Note that the middle and right pictures differ by <i>one molecule on the T cell</i>, and the APC is identical in both.<fa>سه نتیجه، کنار هم. <b>چپ — فقط <span class="lat">MHC/TCR</span>:</b> آپوپتوز یا آنرژی. <b>وسط — به‌علاوهٔ <span class="lat">CD28</span> روی <span class="lat">CD80/86</span>:</b> تکثیر، تمایز، عملکرد اجرایی. <b>راست — به‌علاوهٔ <span class="lat">CTLA-4</span> روی همان <span class="lat">CD80/86</span>:</b> توقف چرخهٔ سلولی. توجه کنید تصویر وسط و راست تنها در <i>یک مولکول روی سلول <span class="lat">T</span></i> فرق دارند و سلول عرضه‌کننده در هر دو یکسان است.</fa></figcaption>
+</figure>
+
+<div class="tbl-wrap keep">
+<table class="zebra">
+<caption><span class="cn">Table 2.1</span> &nbsp; CD28 versus CTLA-4 — same ligand, opposite job<fa>جدول ۲.۱ — <span class="lat">CD28</span> در برابر <span class="lat">CTLA-4</span> — لیگاند یکسان، کار متضاد</fa></caption>
+<thead><tr><th style="width:20%"></th><th class="sg2h">CD28 — the accelerator<fa><span class="lat">CD28</span> — پدال گاز</fa></th><th>CTLA-4 (CD152) — the brake<fa><span class="lat">CTLA-4 (CD152)</span> — ترمز</fa></th></tr></thead>
+<tbody>
+<tr><th>Structure<fa>ساختار</fa></th><td>Ig superfamily homodimer<fa>هومودایمر اَبَرخانوادهٔ ایمونوگلوبولین</fa></td><td><b>Structurally related to CD28</b> — which is why both bind the same ligand<fa><b>از نظر ساختاری خویشاوند <span class="lat">CD28</span></b> — و به همین سبب هر دو به یک لیگاند می‌چسبند</fa></td></tr>
+<tr><th>When present<fa>کی حاضر است</fa></th><td><b>Constitutive</b> — already on the resting T cell, waiting<fa><b>دائمی</b> — پیشاپیش روی سلول <span class="lat">T</span> استراحتی، منتظر</fa></td><td><b>Induced</b> — appears on the surface only <i>after</i> TCR stimulation<fa><b>القایی</b> — تنها <i>پس از</i> تحریک <span class="lat">TCR</span> روی سطح پدیدار می‌شود</fa></td></tr>
+<tr><th>Ligand<fa>لیگاند</fa></th><td colspan="2" style="text-align:center"><b>The same: B7-1 (CD80) and B7-2 (CD86) on the APC.</b> CTLA-4 binds them with <b>much higher affinity</b>, so once it appears it outcompetes CD28 for the same molecules<fa><b>یکسان: <span class="lat">B7-1 (CD80)</span> و <span class="lat">B7-2 (CD86)</span> روی سلول عرضه‌کننده.</b> <span class="lat">CTLA-4</span> با <b>میل بسیار بالاتر</b> به آن‌ها می‌چسبد، پس همین که پدیدار شود در رقابت بر سر همان مولکول‌ها از <span class="lat">CD28</span> پیشی می‌گیرد</fa></td></tr>
+<tr><th>Effect<fa>اثر</fa></th><td><b>Promotes</b> activation — proliferation, differentiation, IL-2<fa>فعال‌سازی را <b>تقویت می‌کند</b> — تکثیر، تمایز، <span class="lat">IL-2</span></fa></td><td><b>Restricts</b> activation — cell-cycle arrest, reduced IL-2<fa>فعال‌سازی را <b>محدود می‌کند</b> — توقف چرخهٔ سلولی، کاهش <span class="lat">IL-2</span></fa></td></tr>
+<tr><th>Logic<fa>منطق</fa></th><td colspan="2" style="text-align:center">A <b>self-limiting</b> design: the act of switching a T cell on also switches on the molecule that will switch it off. The response is built to end<fa>طراحی <b>خودمحدودکننده</b>: عملِ روشن‌کردن سلول <span class="lat">T</span>، مولکولی را هم روشن می‌کند که بعداً آن را خاموش خواهد کرد. پاسخ ساخته شده تا تمام شود</fa></td></tr>
+</tbody></table>
+</div>
+
+<div class="box absent">
+<div class="bt">Absence proves function — CTLA-4 deficiency<fa>نبودش کارش را ثابت می‌کند — کمبود <span class="lat">CTLA-4</span></fa></div>
+<p>Mice lacking CTLA-4 do not have a mild phenotype. They develop <b>massive lymphoproliferation with multi-organ lymphocytic infiltration and die within three to four weeks of birth</b>. In humans, heterozygous loss-of-function mutations cause <b>CTLA-4 haploinsufficiency</b>: lymphoproliferation, autoimmune cytopenias, enteropathy and hypogammaglobulinaemia. Removing one brake from a system with an intact accelerator is fatal — which tells you how continuously that brake is being applied in a normal person.<fa>موش‌های فاقد <span class="lat">CTLA-4</span> فنوتیپ خفیفی ندارند. دچار <b>تکثیر لنفوسیتی عظیم با ارتشاح لنفوسیتی چنداندامی می‌شوند و ظرف سه تا چهار هفته پس از تولد می‌میرند</b>. در انسان، جهش‌های هتروزیگوت از‌دست‌دهندهٔ عملکرد، <b>هاپلواینسافیشنسی <span class="lat">CTLA-4</span></b> می‌دهند: تکثیر لنفوسیتی، سیتوپنی خودایمن، انتروپاتی و هیپوگاماگلوبولینمی. برداشتن یک ترمز از سامانه‌ای که پدال گازش سالم است، کشنده است — و همین می‌گوید آن ترمز در فرد سالم چقدر پیوسته فشرده می‌شود.</fa></p>
+</div>
+
+<div class="box clin">
+<div class="bt">Clinical Correlation — releasing the brake on purpose<fa>ارتباط بالینی — رهاکردن عمدی ترمز</fa></div>
+<p>If CTLA-4 stops T cells attacking, then blocking CTLA-4 should let them attack — including attacking a tumour. <b>Ipilimumab</b>, an anti-CTLA-4 monoclonal, does exactly that in melanoma, and <b>James P. Allison</b> shared the <b>2018 Nobel Prize</b> for the idea. You met the naming rules and the Nobel in Session 2 §4.2; now you have the molecule. The same logic explains the toxicity: a patient on checkpoint blockade develops <b>autoimmune colitis, thyroiditis, hepatitis and dermatitis</b>, because you have removed a mechanism of peripheral tolerance from the entire body, not just from the tumour. <b>The side-effect profile is the proof that the mechanism is right.</b><fa>اگر <span class="lat">CTLA-4</span> مانع حملهٔ سلول‌های <span class="lat">T</span> می‌شود، مسدودکردن آن باید بگذارد حمله کنند — از جمله به تومور. <b>ایپیلیموماب</b>، مونوکلونال ضد <span class="lat">CTLA-4</span>، دقیقاً همین را در ملانوم انجام می‌دهد، و <b>جیمز پی. آلیسون</b> برای این ایده در <b>نوبل ۲۰۱۸</b> شریک شد. قواعد نام‌گذاری و آن نوبل را در جلسهٔ ۲ بخش ۴.۲ دیدید؛ حالا مولکولش را دارید. همین منطق سمّیت را هم توضیح می‌دهد: بیمار تحت مسدودسازی ایست‌بازرسی دچار <b>کولیت، تیروئیدیت، هپاتیت و درماتیت خودایمن</b> می‌شود، چون سازوکاری از تحمل محیطی را از کل بدن برداشته‌اید، نه فقط از تومور. <b>نیمرخ عوارض، مدرکِ درستی سازوکار است.</b></fa></p>
+</div>
+
+<figure class="fig-full">
+  <img src="../img/costim_coinhib.jpg" alt="Costimulatory and co-inhibitory pairs" style="max-width:120mm;margin:0 auto">
+  <figcaption style="max-width:142mm;margin:1.6mm auto 0"><span class="fn">Fig 2.4</span> CD28/B7 is one pair among many. The upper half lists <b>co-stimulatory</b> pairs (B7–CD28, ICOSL–ICOS, OX40L–OX40, CD40–CD40L), the lower half <b>co-inhibitory</b> pairs (PD-L1–PD-1, B7–CTLA-4). The T cell adds up everything it is receiving, and the sum decides <b>response</b> or <b>tolerance</b>. This is why checkpoint blockade has more than one drug target.<fa><span class="lat">CD28/B7</span> یکی از جفت‌های پرشمار است. نیمهٔ بالا جفت‌های <b>هم‌تحریکی</b> را فهرست می‌کند (<span class="lat">B7–CD28</span>، <span class="lat">ICOSL–ICOS</span>، <span class="lat">OX40L–OX40</span>، <span class="lat">CD40–CD40L</span>) و نیمهٔ پایین جفت‌های <b>هم‌مهاری</b> را (<span class="lat">PD-L1–PD-1</span>، <span class="lat">B7–CTLA-4</span>). سلول <span class="lat">T</span> هر چه دریافت می‌کند را جمع می‌بندد و حاصل جمع، <b>پاسخ</b> یا <b>تحمل</b> را تعیین می‌کند. به همین سبب مسدودسازی ایست‌بازرسی بیش از یک هدف دارویی دارد.</fa></figcaption>
+</figure>
+
+<h2 id="s2-3"><span class="sn">2.3</span>Inside the Cell: from TCR to Transcription Factor<fa>درون سلول: از <span class="lat">TCR</span> تا عامل رونویسی</fa></h2>
+
+<div class="casc">
+<svg viewBox="0 0 700 132" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif">
+  <defs><marker id="arT" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+    <path d="M0,0 L6,3 L0,6 z" fill="#1b4f8a"/></marker></defs>
+  <g font-size="9.4" fill="#16171f">
+    <rect x="2"   y="26" width="104" height="50" rx="4" fill="#eef3f9" stroke="#1b4f8a" stroke-width="1.3"/>
+    <text x="54"  y="44" text-anchor="middle" font-weight="700" font-size="9.8">peptide–MHC</text>
+    <text x="54"  y="57" text-anchor="middle" font-size="8.4" fill="#414459">TCR + CD3</text>
+    <text x="54"  y="68" text-anchor="middle" font-size="8.4" fill="#414459">+ CD4 / CD8</text>
+
+    <rect x="122" y="26" width="104" height="50" rx="4" fill="#eef3f9" stroke="#1b4f8a" stroke-width="1.3"/>
+    <text x="174" y="44" text-anchor="middle" font-weight="700" font-size="9.8">Lck</text>
+    <text x="174" y="57" text-anchor="middle" font-size="8.4" fill="#414459">phosphorylates</text>
+    <text x="174" y="68" text-anchor="middle" font-size="8.4" fill="#414459">the CD3 ITAMs</text>
+
+    <rect x="242" y="26" width="104" height="50" rx="4" fill="#eef3f9" stroke="#1b4f8a" stroke-width="1.3"/>
+    <text x="294" y="44" text-anchor="middle" font-weight="700" font-size="9.8">ZAP-70</text>
+    <text x="294" y="57" text-anchor="middle" font-size="8.4" fill="#414459">docks on the</text>
+    <text x="294" y="68" text-anchor="middle" font-size="8.4" fill="#414459">phospho-ITAMs</text>
+
+    <rect x="362" y="26" width="104" height="50" rx="4" fill="#eef3f9" stroke="#1b4f8a" stroke-width="1.3"/>
+    <text x="414" y="42" text-anchor="middle" font-weight="700" font-size="9.4">PLCγ1</text>
+    <text x="414" y="55" text-anchor="middle" font-size="8.4" fill="#414459">IP₃ → Ca²⁺ · DAG</text>
+    <text x="414" y="67" text-anchor="middle" font-size="8.4" fill="#414459">Ras / Rac → GTP</text>
+
+    <rect x="482" y="26" width="104" height="50" rx="4" fill="#eef3f9" stroke="#1b4f8a" stroke-width="1.3"/>
+    <text x="534" y="42" text-anchor="middle" font-weight="700" font-size="9.4">calcineurin</text>
+    <text x="534" y="55" text-anchor="middle" font-size="8.4" fill="#414459">PKC</text>
+    <text x="534" y="67" text-anchor="middle" font-size="8.4" fill="#414459">ERK · JNK</text>
+
+    <rect x="602" y="18" width="96" height="66" rx="4" fill="#e3ecf5" stroke="#1b4f8a" stroke-width="2"/>
+    <text x="650" y="36" text-anchor="middle" font-weight="700" font-size="9.8" fill="#1b4f8a">NFAT</text>
+    <text x="650" y="50" text-anchor="middle" font-weight="700" font-size="9.8" fill="#1b4f8a">NF-κB</text>
+    <text x="650" y="64" text-anchor="middle" font-weight="700" font-size="9.8" fill="#1b4f8a">AP-1</text>
+    <text x="650" y="78" text-anchor="middle" font-size="8.2" fill="#414459">→ IL-2 gene</text>
+  </g>
+  <g stroke="#1b4f8a" stroke-width="1.6" marker-end="url(#arT)" fill="none">
+    <line x1="108" y1="51" x2="118" y2="51"/>
+    <line x1="228" y1="51" x2="238" y2="51"/>
+    <line x1="348" y1="51" x2="358" y2="51"/>
+    <line x1="468" y1="51" x2="478" y2="51"/>
+    <line x1="588" y1="51" x2="598" y2="51"/>
+  </g>
+  <g stroke="#8b1a2b" stroke-width="1.5" fill="none">
+    <line x1="534" y1="92" x2="534" y2="80"/>
+    <line x1="522" y1="92" x2="546" y2="92"/>
+  </g>
+  <text x="534" y="104" text-anchor="middle" font-size="8.4" font-weight="700" fill="#8b1a2b">ciclosporin · tacrolimus</text>
+  <text x="534" y="115" text-anchor="middle" font-size="7.8" fill="#8b1a2b">block calcineurin → no NFAT → no IL-2</text>
+</svg>
+<div class="cap"><span class="fn">Fig 2.5</span> The TCR chain end to end, on the same template as every other signalling strip in this guide. Note where the transplant drugs act — <b>calcineurin is the target of ciclosporin and tacrolimus</b>, and blocking it is how we prevent graft rejection.<fa>زنجیرهٔ <span class="lat">TCR</span> از آغاز تا پایان، روی همان قالبی که همهٔ نوارهای پیام‌رسانی این جزوه دارند. توجه کنید داروهای پیوند کجا اثر می‌کنند — <b>کلسینورین هدف سیکلوسپورین و تاکرولیموس است</b> و مسدودکردنش راهی است که با آن از رد پیوند جلوگیری می‌کنیم.</fa></div>
+</div>
+
+<figure class="fig-full">
+  <img src="../img/tcr_signalling.jpg" alt="TCR signalling in detail" style="max-width:126mm;margin:0 auto">
+  <figcaption style="max-width:146mm;margin:1.6mm auto 0"><span class="fn">Fig 2.6</span> The same chain as the textbook draws it. Compare it with Fig 1.5 — the B-cell version — box by box. <b>They are the same diagram with different names</b>: Lck for Lyn, ZAP-70 for Syk, PLCγ1 for PLCγ2. The destination is identical: NFAT, NF-κB, AP-1. Learn one and you have learned both.<fa>همان زنجیره، آن‌گونه که کتاب درسی می‌کشد. آن را با شکل ۱.۵ — نسخهٔ سلول <span class="lat">B</span> — جعبه‌به‌جعبه مقایسه کنید. <b>یک نمودارند با نام‌های متفاوت</b>: <span class="lat">Lck</span> به‌جای <span class="lat">Lyn</span>، <span class="lat">ZAP-70</span> به‌جای <span class="lat">Syk</span>، <span class="lat">PLCγ1</span> به‌جای <span class="lat">PLCγ2</span>. مقصد یکسان است: <span class="lat">NFAT</span>، <span class="lat">NF-κB</span>، <span class="lat">AP-1</span>. یکی را بیاموزید، هر دو را آموخته‌اید.</fa></figcaption>
+</figure>
+
+<div class="box hy">
+<div class="bt">The output of all this is one cytokine<fa>خروجی همهٔ این‌ها یک سایتوکاین است</fa></div>
+<p>The consequence of T-cell activation is the production of cytokines, and the first and most important is <b>IL-2</b>. It is a <b>trophic</b> cytokine — it sustains the survival and proliferation of the very cell that made it, an <b>autocrine</b> loop. Notice what that means for the three-signal model: <b>signal 3 is partly self-administered</b>. A T cell that has received signals 1 and 2 writes its own prescription for signal 3, which is why IL-2 appears again in §4.3 as the model cytokine receptor and in §5.4 as the survival factor of clonal expansion.<fa>پیامد فعال‌سازی سلول <span class="lat">T</span>، تولید سایتوکاین است و نخستین و مهم‌ترینشان <b><span class="lat">IL-2</span></b> است. سایتوکاینی <b>تروفیک</b> است — بقا و تکثیر همان سلولی را که ساخته‌اش پشتیبانی می‌کند، یک حلقهٔ <b>اتوکرین</b>. توجه کنید این برای مدل سه‌سیگنالی چه معنایی دارد: <b>سیگنال ۳ تا حدی خودتجویز است</b>. سلول <span class="lat">T</span>ای که سیگنال‌های ۱ و ۲ را گرفته، نسخهٔ سیگنال ۳ خودش را می‌نویسد، و به همین سبب <span class="lat">IL-2</span> دوباره در بخش ۴.۳ به‌عنوان گیرندهٔ سایتوکاینی الگو و در بخش ۵.۴ به‌عنوان عامل بقای گسترش کلونال ظاهر می‌شود.</fa></p>
+</div>
+
+<figure class="fig-full">
+  <img src="../img/anergy_vs_activation.jpg" alt="Resting APC causes anergy; activated APC causes activation" style="max-width:118mm;margin:0 auto">
+  <figcaption style="max-width:140mm;margin:1.6mm auto 0"><span class="fn">Fig 2.7</span> The whole of Part 2 in one figure. <b>Top:</b> a resting, costimulator-deficient APC presents antigen to a naïve T cell &rarr; <b>no response, or functional inactivation (anergy)</b>. <b>Bottom:</b> microbes and innate immunity activate the APC, which now expresses B7 and secretes cytokines &rarr; CD28 is engaged, IL-12 is released, and the T cell <b>proliferates and differentiates</b>. Same T cell, same antigen, opposite outcome.<fa>تمام بخش ۲ در یک شکل. <b>بالا:</b> سلول عرضه‌کنندهٔ استراحتی و فاقد هم‌تحریک، آنتی‌ژن را به سلول <span class="lat">T</span> ساده عرضه می‌کند &larr; <b>بی‌پاسخی، یا غیرفعال‌سازی کارکردی (آنرژی)</b>. <b>پایین:</b> میکروب‌ها و ایمنی ذاتی سلول عرضه‌کننده را فعال می‌کنند، که اکنون <span class="lat">B7</span> بیان می‌کند و سایتوکاین ترشح می‌کند &larr; <span class="lat">CD28</span> درگیر می‌شود، <span class="lat">IL-12</span> آزاد می‌شود و سلول <span class="lat">T</span> <b>تکثیر و تمایز می‌یابد</b>. همان سلول <span class="lat">T</span>، همان آنتی‌ژن، نتیجهٔ متضاد.</fa></figcaption>
+</figure>
+
+<h2 id="s2-4"><span class="sn">2.4</span>Signal 3 — Cytokines Steer the Outcome<fa>سیگنال ۳ — سایتوکاین‌ها نتیجه را هدایت می‌کنند</fa></h2>
+
+<p>Signals 1 and 2 decide <b>whether</b> the T cell responds. They say nothing about <b>what kind</b> of response it mounts — and the kind matters enormously, because the response that clears a virus is useless against a worm and disastrous against a harmless pollen grain.<fa>سیگنال‌های ۱ و ۲ تعیین می‌کنند <b>آیا</b> سلول <span class="lat">T</span> پاسخ می‌دهد. چیزی دربارهٔ <b>نوع</b> پاسخ نمی‌گویند — و نوع، بسیار مهم است، چون پاسخی که ویروس را پاک می‌کند در برابر کرم بی‌فایده و در برابر دانهٔ گردهٔ بی‌آزار فاجعه‌بار است.</fa></p>
+
+<div class="box mnem">
+<div class="bt">Remember it as<fa>این‌طور به‌خاطر بسپارید</fa></div>
+<p><span class="key">Key, pedal, wheel.</span> <b>Signal 1 starts the engine; signal 2 makes it move; signal 3 decides the destination.</b> A car with the key turned and no accelerator is not neutral — in a T cell, standing still means being scrapped. And a car moving with no steering ends up somewhere you did not want it.<fa><span class="key">سوئیچ، پدال، فرمان.</span> <b>سیگنال ۱ موتور را روشن می‌کند؛ سیگنال ۲ به حرکتش درمی‌آورد؛ سیگنال ۳ مقصد را تعیین می‌کند.</b> خودرویی که سوئیچش چرخیده و پدالی ندارد خنثی نیست — در سلول <span class="lat">T</span>، ایستادن یعنی اوراق‌شدن. و خودرویی که بدون فرمان می‌رود، جایی می‌رسد که نمی‌خواستید.</fa></p>
+</div>
+
+<p>Which cytokines do the steering, which transcription factors they switch on, and which effector cell results, is the whole of §5.1. The three cytokines to carry forward from here are the ones the APC releases at the same moment it displays B7: <b>IL-12</b> (drives Th1), <b>IL-4</b> (drives Th2) and <b>IL-6 with TGF-β</b> (drives Th17). Signal 2 and signal 3 usually arrive from the same cell, in the same encounter, and that is not a coincidence — the innate system that judged the antigen dangerous also judges <i>what kind</i> of danger it is.<fa>اینکه کدام سایتوکاین‌ها فرمان می‌دهند، کدام عوامل رونویسی را روشن می‌کنند و کدام سلول اجرایی حاصل می‌شود، تمام بخش ۵.۱ است. سه سایتوکاینی که از اینجا باید با خود ببرید همان‌هایی‌اند که سلول عرضه‌کننده در همان لحظهٔ نمایش <span class="lat">B7</span> آزاد می‌کند: <b><span class="lat">IL-12</span></b> (<span class="lat">Th1</span> را می‌راند)، <b><span class="lat">IL-4</span></b> (<span class="lat">Th2</span>) و <b><span class="lat">IL-6</span> با <span class="lat">TGF-β</span></b> (<span class="lat">Th17</span>). سیگنال ۲ و سیگنال ۳ معمولاً از یک سلول و در یک برخورد می‌رسند، و این تصادفی نیست — همان سامانهٔ ذاتی‌ای که آنتی‌ژن را خطرناک تشخیص داد، <i>نوع</i> خطر را هم تشخیص می‌دهد.</fa></p>
+</div>

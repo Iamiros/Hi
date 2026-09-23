@@ -1,0 +1,276 @@
+<div class="part" data-part="Part 7 · The Inflammasome — Two Signals Again">
+<div class="part-open">
+  <div class="part-rule"></div>
+  <div class="part-eyebrow">Part Seven<fa>بخش هفتم</fa></div>
+  <div class="part-num">07</div>
+  <h1 class="part-title">The Inflammasome —<br>Two Signals Again<fa>اینفلاماسوم — باز هم دو سیگنال</fa></h1>
+  <div class="part-blurb">The most powerful inflammatory cytokine you make cannot get out of the cell that makes it, and is inactive even if it does. That is not a design flaw — it is a <b>second safety catch</b> on a molecule dangerous enough to cause shock. The machine that releases it is the inflammasome, and it works on exactly the logic you already know from Part 2: <b>one signal to prepare, a second to commit</b>.<fa>قدرتمندترین سایتوکاین التهابی‌ای که می‌سازید نمی‌تواند از سلول سازنده‌اش بیرون بیاید، و اگر هم بیاید غیرفعال است. این نقص طراحی نیست — <b>ضامن ایمنی دوم</b> است روی مولکولی که آن‌قدر خطرناک است که می‌تواند شوک بسازد. ماشینی که آزادش می‌کند اینفلاماسوم است و دقیقاً با منطقی کار می‌کند که از بخش ۲ می‌شناسید: <b>یک سیگنال برای آماده‌سازی، دومی برای تعهد</b>.</fa></div>
+  <div class="part-obj">
+    <h4>By the end of this Part you should be able to<fa>در پایان این بخش باید بتوانید</fa></h4>
+    <ul>
+      <li>Explain why IL-1β needs a mechanism no other cytokine needs.<fa>توضیح دهید چرا <span class="lat">IL-1β</span> به سازوکاری نیاز دارد که هیچ سایتوکاین دیگری ندارد.</fa></li>
+      <li>Name what signal 1 and signal 2 each produce in the inflammasome pathway.<fa>بگویید سیگنال ۱ و سیگنال ۲ در مسیر اینفلاماسوم هر یک چه می‌سازند.</fa></li>
+      <li>Name the three components of the NLRP3 inflammasome and the domain each contributes.<fa>سه جزء اینفلاماسوم <span class="lat">NLRP3</span> و دومینی را که هر یک می‌آورد نام ببرید.</fa></li>
+      <li>Give six chemically unrelated NLRP3 activators and the one event most of them share.<fa>شش فعال‌کنندهٔ <span class="lat">NLRP3</span> که شیمیایی بی‌ارتباط‌اند و رویداد مشترک بیشترشان را بگویید.</fa></li>
+      <li>Distinguish the canonical from the non-canonical pathway, and say which caspases are human.<fa>مسیر کانونی را از غیرکانونی تمیز دهید و بگویید کدام کاسپازها انسانی‌اند.</fa></li>
+      <li>Explain how IL-1β physically leaves the cell.<fa>توضیح دهید <span class="lat">IL-1β</span> فیزیکی چگونه از سلول بیرون می‌رود.</fa></li>
+    </ul>
+  </div>
+</div>
+
+<h2 id="s7-1"><span class="sn">7.1</span>The Problem: IL-1β Has No Signal Peptide<fa>مسئله: <span class="lat">IL-1β</span> پپتید سیگنال ندارد</fa></h2>
+
+<figure class="fig-r w70">
+  <img src="../img/secretion_er_golgi.jpg" alt="Conventional cytokine secretion through ER and Golgi">
+  <figcaption><span class="fn">Fig 7.1</span> How <b>ordinary</b> cytokines leave. Anything with a <b>signal peptide</b> enters the endoplasmic reticulum, passes through the Golgi and is released by one of three routes: <b>direct from the trans-Golgi network</b> (IL-10), <b>via the recycling endosome</b> (TNF, IL-6, IL-10), or <b>routed to the phagocytic cup during phagocytosis</b> (TNF) so that it is delivered exactly where the microbe is.<fa>سایتوکاین‌های <b>معمولی</b> چگونه بیرون می‌روند. هر چه <b>پپتید سیگنال</b> دارد وارد شبکهٔ آندوپلاسمی می‌شود، از گلژی می‌گذرد و از یکی از سه راه آزاد می‌شود: <b>مستقیم از شبکهٔ ترانس‌گلژی</b> (<span class="lat">IL-10</span>)، <b>از راه اندوزوم بازیافتی</b> (<span class="lat">TNF</span>، <span class="lat">IL-6</span>، <span class="lat">IL-10</span>)، یا <b>هدایت‌شده به جام فاگوسیتی حین فاگوسیتوز</b> (<span class="lat">TNF</span>) تا دقیقاً همان‌جا که میکروب است تحویل داده شود.</fa></figcaption>
+</figure>
+
+<p class="lead">Every protein destined for secretion carries an N-terminal <b>signal peptide</b> that directs it into the endoplasmic reticulum. <b>The IL-1 superfamily does not have one.</b> It is made on free ribosomes in the cytosol and stays there.<fa>هر پروتئینی که برای ترشح ساخته می‌شود، <b>پپتید سیگنالی</b> در انتهای <span class="lat">N</span> دارد که آن را به شبکهٔ آندوپلاسمی هدایت می‌کند. <b>اَبَرخانوادهٔ <span class="lat">IL-1</span> چنین چیزی ندارد.</b> روی ریبوزوم‌های آزاد در سیتوزول ساخته می‌شود و همان‌جا می‌ماند.</fa></p>
+
+<p>There is a second problem on top of the first. It is made as <b>pro-IL-1β</b>, a 31 kDa precursor that is <b>biologically inactive</b>. Even if it escaped, it would do nothing. So a cell that has detected a pathogen and switched on NF-κB ends up holding a stockpile of an inert cytokine it cannot release — and that is exactly the state the system intends.<fa>مشکل دومی هم روی اولی هست. به‌شکل <b>پیش‌سازِ <span class="lat">IL-1β</span></b> ساخته می‌شود، پیش‌سازی ۳۱ کیلودالتونی که <b>از نظر زیستی غیرفعال</b> است. حتی اگر فرار می‌کرد، هیچ نمی‌کرد. پس سلولی که پاتوژنی را تشخیص داده و <span class="lat">NF-κB</span> را روشن کرده، در نهایت انباری از سایتوکاینی بی‌اثر در دست دارد که نمی‌تواند آزادش کند — و دقیقاً همان حالتی است که سامانه می‌خواهد.</fa></p>
+
+<figure class="fig-full">
+  <img src="../img/il1_family_tree.jpg" alt="Dendrogram of the IL-1 superfamily" style="max-width:96mm;margin:0 auto">
+  <figcaption style="max-width:126mm;margin:1.6mm auto 0"><span class="fn">Fig 7.2</span> The IL-1 superfamily by sequence relatedness: <b>three subfamilies</b> — the <b>IL-1 family</b> (IL-1α, IL-1β, IL-1ra), the <b>IL-18 family</b> and the <b>IL-33 family</b> — with <b>more than ten members</b> in all. Note <b>IL-1ra</b> on the tree: a naturally occurring receptor antagonist, a member of the family whose job is to block it. That molecule became the drug <b>anakinra</b> (§8.4).<fa>اَبَرخانوادهٔ <span class="lat">IL-1</span> بر پایهٔ خویشاوندی توالی: <b>سه زیرخانواده</b> — خانوادهٔ <b><span class="lat">IL-1</span></b> (<span class="lat">IL-1α</span>، <span class="lat">IL-1β</span>، <span class="lat">IL-1ra</span>)، خانوادهٔ <b><span class="lat">IL-18</span></b> و خانوادهٔ <b><span class="lat">IL-33</span></b> — در مجموع با <b>بیش از ده عضو</b>. به <b><span class="lat">IL-1ra</span></b> روی درخت توجه کنید: آنتاگونیستی طبیعی برای گیرنده، عضوی از خانواده که کارش مسدودکردن همان خانواده است. آن مولکول به داروی <b>آناکینرا</b> بدل شد (بخش ۸.۴).</fa></figcaption>
+</figure>
+
+<h2 id="s7-2"><span class="sn">7.2</span>Signal 1 and Signal 2, Again<fa>سیگنال ۱ و سیگنال ۲، دوباره</fa></h2>
+
+<div class="sig">
+  <div class="one"><span class="n">Signal 1 — priming</span><span class="t">Write the parts<fa>قطعات را بنویس</fa></span>
+    <p>A <b>PRR</b> — a TLR seeing LPS, or TNFR, or IL-1R — activates <b>NF-κB</b>, which transcribes <b>pro-IL-1β</b>, <b>pro-IL-18</b> and <b>NLRP3 itself</b>. Nothing is released. The cell is now <b>primed</b> and nothing more.<fa>یک <b>گیرندهٔ شناساگر الگو</b> — <span class="lat">TLR</span>ی که <span class="lat">LPS</span> می‌بیند، یا <span class="lat">TNFR</span>، یا گیرندهٔ <span class="lat">IL-1</span> — <b><span class="lat">NF-κB</span></b> را فعال می‌کند که <b>پیش‌ساز <span class="lat">IL-1β</span></b>، <b>پیش‌ساز <span class="lat">IL-18</span></b> و <b>خودِ <span class="lat">NLRP3</span></b> را رونویسی می‌کند. چیزی آزاد نمی‌شود. سلول اکنون فقط <b>آماده‌سازی‌شده</b> است.</fa></p></div>
+  <div class="two"><span class="n">Signal 2 — activation</span><span class="t">Assemble and cut<fa>مونتاژ کن و ببر</fa></span>
+    <p>A second, independent stimulus — <b>ATP, a pore-forming toxin, a crystal</b> — triggers <b>assembly of the inflammasome</b>. Caspase-1 is activated, pro-IL-1β is cleaved to its mature 17 kDa form, and GSDMD opens the door.<fa>محرکی دوم و مستقل — <b><span class="lat">ATP</span>، سم منفذساز، کریستال</b> — <b>مونتاژ اینفلاماسوم</b> را می‌اندازد. کاسپاز ۱ فعال می‌شود، پیش‌ساز <span class="lat">IL-1β</span> به شکل بالغ ۱۷ کیلودالتونی بریده می‌شود و <span class="lat">GSDMD</span> در را باز می‌کند.</fa></p></div>
+  <div class="three"><span class="n">Why two</span><span class="t">The same reason as anergy<fa>همان دلیل آنرژی</fa></span>
+    <p>Mature IL-1β causes fever, hypotension and, in quantity, shock. A cell must not be able to release it on the strength of a single, possibly mistaken, signal. <b>Requiring two independent inputs makes an accident improbable.</b><fa><span class="lat">IL-1β</span> بالغ تب، افت فشار و به مقدار زیاد شوک می‌سازد. سلول نباید بتواند آن را با تکیه بر یک سیگنالِ شاید اشتباه آزاد کند. <b>نیاز به دو ورودی مستقل، احتمال حادثه را ناچیز می‌کند.</b></fa></p></div>
+</div>
+
+<figure class="fig-full">
+  <img src="../img/inflammasome_two_signals.jpg" alt="Signal 1 and signal 2 of the inflammasome" style="max-width:124mm;margin:0 auto">
+  <figcaption style="max-width:148mm;margin:1.6mm auto 0"><span class="fn">Fig 7.3</span> The two signals in one cell. <b>Signal 1 (left, red label):</b> PAMPs engage a TLR &rarr; MyD88 &rarr; IκB degraded &rarr; <b>p50/p65 NF-κB</b> into the nucleus &rarr; transcription of <b>pro-IL-1β</b> and <b>pro-IL-18</b>. <b>Signal 2 (right, red label):</b> crystals, or ATP acting on <b>P2X₇</b> and pannexin-1, cause <b>K⁺ efflux, ROS and lysosomal damage</b> &rarr; the <b>NLRP3 / ASC / pro-caspase-1</b> complex assembles &rarr; caspase-1 cleaves the pro-forms &rarr; <b>mature IL-1β and IL-18</b> leave the cell.<fa>دو سیگنال در یک سلول. <b>سیگنال ۱ (چپ، برچسب قرمز):</b> <span class="lat">PAMP</span>ها <span class="lat">TLR</span> را درگیر می‌کنند &larr; <span class="lat">MyD88</span> &larr; تجزیهٔ <span class="lat">IκB</span> &larr; <b><span class="lat">p50/p65</span> <span class="lat">NF-κB</span></b> به هسته &larr; رونویسی <b>پیش‌ساز <span class="lat">IL-1β</span></b> و <b>پیش‌ساز <span class="lat">IL-18</span></b>. <b>سیگنال ۲ (راست، برچسب قرمز):</b> کریستال‌ها، یا <span class="lat">ATP</span> که روی <b><span class="lat">P2X₇</span></b> و پانکسین-۱ اثر می‌کند، <b>خروج پتاسیم، <span class="lat">ROS</span> و آسیب لیزوزومی</b> می‌سازند &larr; کمپلکس <b><span class="lat">NLRP3</span> / <span class="lat">ASC</span> / پیش‌کاسپاز ۱</b> مونتاژ می‌شود &larr; کاسپاز ۱ پیش‌سازها را می‌برد &larr; <b><span class="lat">IL-1β</span> و <span class="lat">IL-18</span> بالغ</b> سلول را ترک می‌کنند.</fa></figcaption>
+</figure>
+
+<div class="box hy">
+<div class="bt">The parallel you should say out loud<fa>موازی‌ای که باید بلند بگویید</fa></div>
+<p>Put the two systems side by side and they are the same design:<fa>دو سامانه را کنار هم بگذارید، یک طرح‌اند:</fa></p>
+<ul class="dash">
+<li><b>T cell:</b> signal 1 = TCR sees peptide–MHC (specific). Signal 2 = CD28 sees B7 (permission). <b>One alone &rarr; anergy.</b><fa><b>سلول <span class="lat">T</span>:</b> سیگنال ۱ = <span class="lat">TCR</span> پپتید–<span class="lat">MHC</span> را می‌بیند (اختصاصی). سیگنال ۲ = <span class="lat">CD28</span> <span class="lat">B7</span> را می‌بیند (اجازه). <b>یکی به‌تنهایی &larr; آنرژی.</b></fa></li>
+<li><b>Macrophage:</b> signal 1 = PRR sees PAMP (specific). Signal 2 = a danger event — ATP, crystal, toxin (permission). <b>One alone &rarr; a primed cell that releases nothing.</b><fa><b>ماکروفاژ:</b> سیگنال ۱ = گیرندهٔ شناساگر الگو <span class="lat">PAMP</span> را می‌بیند (اختصاصی). سیگنال ۲ = رویدادی خطرناک — <span class="lat">ATP</span>، کریستال، سم (اجازه). <b>یکی به‌تنهایی &larr; سلولی آماده‌شده که چیزی آزاد نمی‌کند.</b></fa></li>
+</ul>
+<p>In both cases the first signal says <b>“something is here”</b> and the second says <b>“and it is actually dangerous”</b>. In both cases the irreversible, expensive, potentially self-destructive response is withheld until both have arrived. <b>This is not a coincidence of teaching; it is how the immune system avoids being its own worst enemy.</b><fa>در هر دو مورد، سیگنال نخست می‌گوید <b>«چیزی اینجاست»</b> و دومی می‌گوید <b>«و واقعاً خطرناک است»</b>. در هر دو مورد، پاسخ برگشت‌ناپذیر، پرهزینه و بالقوه خودویرانگر تا رسیدن هر دو نگه داشته می‌شود. <b>این تصادف آموزشی نیست؛ راهی است که سامانهٔ ایمنی با آن از بدترین دشمن خود شدن پرهیز می‌کند.</b></fa></p>
+</div>
+
+<figure class="fig-full">
+  <img src="../img/nlrp3_priming_activation.jpg" alt="NLRP3 priming and activation in full detail" style="max-width:140mm;margin:0 auto">
+  <figcaption style="max-width:150mm;margin:1.6mm auto 0"><span class="fn">Fig 7.4</span> The same two signals at research resolution. <b>Left half — signal 1, priming:</b> LPS, TNF or IL-1β &rarr; NF-κB &rarr; transcription of <i>IL1B</i>, <i>IL18</i> and <i>NLRP3</i>. <b>Right half — signal 2, activation:</b> RNA virus, pore-forming toxins, ATP via P2X₇, and particulates such as silica and β-amyloid, converging on <b>K⁺ efflux</b>, mitochondrial ROS, oxidised mitochondrial DNA, cardiolipin and lysosomal cathepsins &rarr; <b>NLRP3 oligomerisation</b> &rarr; caspase-1 &rarr; <b>inflammatory cytokine release and pyroptosis</b> through the GSDMD pore.<fa>همان دو سیگنال با تفکیک پژوهشی. <b>نیمهٔ چپ — سیگنال ۱، آماده‌سازی:</b> <span class="lat">LPS</span>، <span class="lat">TNF</span> یا <span class="lat">IL-1β</span> &larr; <span class="lat">NF-κB</span> &larr; رونویسی <i><span class="lat">IL1B</span></i>، <i><span class="lat">IL18</span></i> و <i><span class="lat">NLRP3</span></i>. <b>نیمهٔ راست — سیگنال ۲، فعال‌سازی:</b> ویروس <span class="lat">RNA</span>دار، سم‌های منفذساز، <span class="lat">ATP</span> از راه <span class="lat">P2X₇</span>، و ذرات مانند سیلیس و بتا-آمیلوئید، که همه به <b>خروج پتاسیم</b>، <span class="lat">ROS</span> میتوکندریایی، <span class="lat">DNA</span> میتوکندریاییِ اکسیدشده، کاردیولیپین و کاتپسین‌های لیزوزومی می‌رسند &larr; <b>الیگومریزاسیون <span class="lat">NLRP3</span></b> &larr; کاسپاز ۱ &larr; <b>آزادشدن سایتوکاین التهابی و پیروپتوز</b> از راه منفذ <span class="lat">GSDMD</span>.</fa></figcaption>
+</figure>
+
+<h2 id="s7-3"><span class="sn">7.3</span>The Complex: Sensor, ASC, Caspase-1<fa>کمپلکس: حسگر، <span class="lat">ASC</span>، کاسپاز ۱</fa></h2>
+
+<div class="def">
+  <div class="dt">Definition<fa>تعریف</fa></div>
+  <p>The <span class="term">inflammasome</span> is a <b>multiprotein oligomer responsible for the activation of inflammatory responses</b>. The consequence of its assembly is <b>caspase-1 activation, by auto-processing</b>. Active caspase-1 then drives the <b>maturation and secretion of IL-1β and IL-18</b>.<fa><span class="term">اینفلاماسوم</span> یک <b>الیگومر چندپروتئینی است که مسئول فعال‌سازی پاسخ‌های التهابی است</b>. پیامد مونتاژش، <b>فعال‌شدن کاسپاز ۱ به‌صورت خودپردازشی</b> است. سپس کاسپاز ۱ فعال، <b>بلوغ و ترشح <span class="lat">IL-1β</span> و <span class="lat">IL-18</span></b> را می‌راند.</fa></p>
+</div>
+
+<div class="mol">
+  <div class="sh">
+    <span class="sid">Complex card &nbsp;·&nbsp; <span class="sg2">S2</span> <span class="onM">MΦ</span></span>
+    <span class="stitle">The NLRP3 inflammasome<fa>اینفلاماسوم <span class="lat">NLRP3</span></fa></span>
+  </div>
+  <div class="sb">
+    <div class="row"><span class="rl">Three parts, three jobs<fa>سه جزء، سه کار</fa></span>
+      <ul class="see">
+        <li><b>The sensor — NLRP3.</b> Domains: <b>LRR</b> (leucine-rich repeat, the sensing end), <b>NACHT/NBD</b> (the nucleotide-binding domain that drives oligomerisation) and <b>PYD</b> (pyrin domain, which recruits ASC).<fa><b>حسگر — <span class="lat">NLRP3</span>.</b> دومین‌ها: <b><span class="lat">LRR</span></b> (تکرار غنی از لوسین، سرِ حس‌کننده)، <b><span class="lat">NACHT/NBD</span></b> (دومین متصل‌شونده به نوکلئوتید که الیگومریزاسیون را می‌راند) و <b><span class="lat">PYD</span></b> (دومین پایرین که <span class="lat">ASC</span> را فرا می‌خواند).</fa></li>
+        <li><b>The adaptor — ASC.</b> Two domains and nothing else: a <b>PYD</b> that binds NLRP3's PYD, and a <b>CARD</b> that binds caspase-1's CARD. It is a pure connector.<fa><b>آداپتور — <span class="lat">ASC</span>.</b> دو دومین و بس: یک <b><span class="lat">PYD</span></b> که به <span class="lat">PYD</span> <span class="lat">NLRP3</span> می‌چسبد و یک <b><span class="lat">CARD</span></b> که به <span class="lat">CARD</span> کاسپاز ۱ می‌چسبد. صرفاً یک رابط است.</fa></li>
+        <li><b>The executioner — pro-caspase-1.</b> A <b>CARD</b> plus the catalytic subunits <b>p20</b> and <b>p10</b>.<fa><b>جلاد — پیش‌کاسپاز ۱.</b> یک <b><span class="lat">CARD</span></b> به‌علاوهٔ زیرواحدهای کاتالیتیک <b><span class="lat">p20</span></b> و <b><span class="lat">p10</span></b>.</fa></li>
+      </ul>
+    </div>
+    <div class="row"><span class="rl">How it switches on<fa>چگونه روشن می‌شود</fa></span>
+      <p>NLRP3 oligomerises; its PYDs nucleate an <b>ASC filament</b>; the ASC CARDs in turn nucleate <b>caspase-1 filaments</b>.<span class="why2">The consequence is <b>proximity-induced activation</b>. Pro-caspase-1 has weak intrinsic activity; forced into a dense filament, the molecules cleave <i>each other</i>. This is why the lecture says caspase-1 is activated “by auto-processing”, and why the whole thing is called a <b>signalling by polymerisation</b> mechanism — the complex is not a switch, it is a nucleation seed.</span><fa><span class="lat">NLRP3</span> الیگومریزه می‌شود؛ <span class="lat">PYD</span>هایش یک <b>رشتهٔ <span class="lat">ASC</span></b> را هسته‌گذاری می‌کنند؛ <span class="lat">CARD</span>های <span class="lat">ASC</span> نیز به‌نوبت <b>رشته‌های کاسپاز ۱</b> را هسته‌گذاری می‌کنند.<span class="why2">پیامدش <b>فعال‌سازی ناشی از مجاورت</b> است. پیش‌کاسپاز ۱ فعالیت ذاتی ضعیفی دارد؛ وقتی به‌زور در رشته‌ای متراکم قرار گیرد، مولکول‌ها <i>یکدیگر</i> را می‌برند. به همین سبب درس می‌گوید کاسپاز ۱ «با خودپردازشی» فعال می‌شود، و به همین سبب کل ماجرا سازوکار <b>پیام‌رسانی با پلیمریزاسیون</b> نامیده می‌شود — کمپلکس یک کلید نیست، بذر هسته‌گذاری است.</span></fa></p>
+    </div>
+    <div class="row dx"><span class="rl">What you see down a microscope<fa>زیر میکروسکوپ چه می‌بینید</fa></span>
+      <p>A single, large, perinuclear <b>ASC speck</b> — one per cell. Its appearance is the visual readout that the inflammasome has fired, and it is used as an assay.<fa>یک <b>اسپِکِ <span class="lat">ASC</span></b> بزرگ و اطراف‌هسته‌ای — یکی در هر سلول. پدیدارشدنش، خوانش دیداریِ شلیک اینفلاماسوم است و به‌عنوان آزمون به‌کار می‌رود.</fa></p>
+    </div>
+  </div>
+</div>
+
+<div class="fig-row g3">
+  <figure>
+    <img src="../img/domain_key.jpg" alt="Key to inflammasome protein domains">
+    <figcaption><span class="fn">Fig 7.5</span> The domain alphabet. <b>HIN</b> (DNA-binding), <b>PYD</b> (pyrin), <b>NBD</b> (nucleotide-binding), <b>LRR</b> (leucine-rich repeat), <b>BIR</b>, <b>CARD</b> (caspase recruitment) and the <b>caspase</b> domain itself. Every inflammasome in the next figure is a different arrangement of these seven pieces.<fa>الفبای دومین‌ها. <b><span class="lat">HIN</span></b> (متصل به <span class="lat">DNA</span>)، <b><span class="lat">PYD</span></b> (پایرین)، <b><span class="lat">NBD</span></b> (متصل به نوکلئوتید)، <b><span class="lat">LRR</span></b> (تکرار غنی از لوسین)، <b><span class="lat">BIR</span></b>، <b><span class="lat">CARD</span></b> (فراخوانی کاسپاز) و خودِ دومین <b>کاسپاز</b>. هر اینفلاماسوم در شکل بعد، آرایش متفاوتی از همین هفت قطعه است.</fa></figcaption>
+  </figure>
+  <figure>
+    <img src="../img/nlrp3_cartoon.jpg" alt="NLRP3 inflammasome components">
+    <figcaption><span class="fn">Fig 7.6</span> <b>NLRP3</b> — activated by <b>K⁺ efflux</b> among many things. Sensor (PYD-NBD-LRR) &rarr; ASC (PYD-CARD) &rarr; caspase-1. The three-layer arrangement to learn.<fa><b><span class="lat">NLRP3</span></b> — که از جمله با <b>خروج پتاسیم</b> فعال می‌شود. حسگر (<span class="lat">PYD-NBD-LRR</span>) &larr; <span class="lat">ASC</span> (<span class="lat">PYD-CARD</span>) &larr; کاسپاز ۱. همان آرایش سه‌لایه‌ای که باید بیاموزید.</fa></figcaption>
+  </figure>
+  <figure>
+    <img src="../img/aim2.jpg" alt="AIM2 inflammasome">
+    <figcaption><span class="fn">Fig 7.7</span> <b>AIM2</b> — the same architecture with a different sensor. Its <b>HIN</b> domain binds <b>cytosolic double-stranded DNA</b> directly, so AIM2 is the inflammasome for DNA viruses and for intracellular bacteria that leak DNA into the cytosol.<fa><b><span class="lat">AIM2</span></b> — همان معماری با حسگری متفاوت. دومین <b><span class="lat">HIN</span></b>ش مستقیماً به <b><span class="lat">DNA</span> دورشته‌ای سیتوزولی</b> می‌چسبد، پس <span class="lat">AIM2</span> اینفلاماسومِ ویروس‌های <span class="lat">DNA</span>دار و باکتری‌های درون‌سلولی‌ای است که <span class="lat">DNA</span> به سیتوزول نشت می‌دهند.</fa></figcaption>
+  </figure>
+</div>
+
+<div class="fig-row">
+  <figure>
+    <img src="../img/naip_nlrc4.jpg" alt="NAIP/NLRC4 inflammasome sensing flagellin">
+    <figcaption><span class="fn">Fig 7.8</span> <b>NAIP/NLRC4</b> — the inflammasome for <b>cytosolic flagellin</b> and bacterial type-III secretion-system components. Note the logic: TLR5 detects flagellin <i>outside</i> the cell, NAIP detects it <i>inside</i>. Outside means “a bacterium is nearby”; inside means “a bacterium is injecting things into me”, which is a far more urgent message.<fa><b><span class="lat">NAIP/NLRC4</span></b> — اینفلاماسومِ <b>فلاژلین سیتوزولی</b> و اجزای سامانهٔ ترشحی نوع <span class="lat">III</span> باکتری. به منطقش توجه کنید: <span class="lat">TLR5</span> فلاژلین را <i>بیرون</i> سلول تشخیص می‌دهد، <span class="lat">NAIP</span> آن را <i>درون</i> سلول. بیرون یعنی «باکتری‌ای نزدیک است»؛ درون یعنی «باکتری‌ای دارد چیزهایی به من تزریق می‌کند»، که پیامی به‌مراتب فوری‌تر است.</fa></figcaption>
+  </figure>
+  <figure>
+    <img src="../img/inflammasome_domains_panel.jpg" alt="Domain organisation of four inflammasomes">
+    <figcaption><span class="fn">Fig 7.9</span> Four inflammasomes as domain diagrams. <b>NLRP1</b> and <b>IPAF/NLRC4</b> have their own CARD and can engage caspase-1 <b>without ASC</b>; <b>NLRP3</b> and <b>AIM2</b> have only a PYD and therefore <b>must</b> use ASC as the adaptor. This is the single structural fact that predicts which sensors need ASC.<fa>چهار اینفلاماسوم به‌شکل نمودار دومین. <b><span class="lat">NLRP1</span></b> و <b><span class="lat">IPAF/NLRC4</span></b> <span class="lat">CARD</span> خودشان را دارند و می‌توانند <b>بدون <span class="lat">ASC</span></b> کاسپاز ۱ را درگیر کنند؛ <b><span class="lat">NLRP3</span></b> و <b><span class="lat">AIM2</span></b> فقط <span class="lat">PYD</span> دارند و بنابراین <b>ناگزیرند</b> <span class="lat">ASC</span> را به‌عنوان آداپتور به‌کار برند. این تنها واقعیت ساختاری است که پیش‌بینی می‌کند کدام حسگرها به <span class="lat">ASC</span> نیاز دارند.</fa></figcaption>
+  </figure>
+</div>
+
+<div class="fig-row">
+  <figure>
+    <img src="../img/asc_speck_model.jpg" alt="Structural model of the ASC speck">
+    <figcaption><span class="fn">Fig 7.10</span> The structural model: <b>NLRP3 nucleates ASC filaments, which nucleate caspase-1 filaments</b>. A star-shaped polymer, not a tidy stoichiometric complex — which is how a handful of sensor molecules activate thousands of caspase molecules.<fa>مدل ساختاری: <b><span class="lat">NLRP3</span> رشته‌های <span class="lat">ASC</span> را هسته‌گذاری می‌کند که رشته‌های کاسپاز ۱ را هسته‌گذاری می‌کنند</b>. پلیمری ستاره‌ای، نه کمپلکسی مرتب با نسبت ثابت — و این‌گونه است که مشتی مولکول حسگر، هزاران مولکول کاسپاز را فعال می‌کنند.</fa></figcaption>
+  </figure>
+  <figure>
+    <img src="../img/asc_speck_live.jpg" alt="Time-lapse of ASC speck formation">
+    <figcaption><span class="fn">Fig 7.11</span> The same event in a living cell, four frames over 22 minutes. Diffuse green ASC in the cytoplasm suddenly condenses into <b>one bright speck</b>. Inflammasome activation is not gradual — it is a <b>phase transition</b>, all-or-none, per cell.<fa>همان رویداد در سلول زنده، چهار فریم طی ۲۲ دقیقه. <span class="lat">ASC</span> سبزِ پخش‌شده در سیتوپلاسم ناگهان در <b>یک اسپِک درخشان</b> متراکم می‌شود. فعال‌سازی اینفلاماسوم تدریجی نیست — یک <b>گذار فاز</b> است، همه‌یا‌هیچ، در هر سلول.</fa></figcaption>
+  </figure>
+</div>
+
+<h3>Caspase-1: the executioner<fa>کاسپاز ۱: جلاد</fa></h3>
+
+<div class="tbl-wrap keep">
+<table class="zebra">
+<caption><span class="cn">Table 7.1</span> &nbsp; The caspases you need to separate<fa>جدول ۷.۱ — کاسپازهایی که باید از هم جدا کنید</fa></caption>
+<thead><tr><th style="width:26%">Group<fa>گروه</fa></th><th style="width:26%">Members<fa>اعضا</fa></th><th>What they do<fa>چه می‌کنند</fa></th></tr></thead>
+<tbody>
+<tr><th><b>Inflammatory caspases</b><fa><b>کاسپازهای التهابی</b></fa></th><td><b>Caspase-1, 4, 5</b> (human)<br><b>Caspase-1, 11</b> (mouse)<fa><b>کاسپازهای ۱، ۴، ۵</b> (انسان)<br><b>کاسپازهای ۱ و ۱۱</b> (موش)</fa></td><td>Cleave <b>pro-IL-1β</b> and <b>pro-IL-18</b> to the mature cytokines, and cleave <b>gasdermin D</b><fa><b>پیش‌ساز <span class="lat">IL-1β</span></b> و <b>پیش‌ساز <span class="lat">IL-18</span></b> را به سایتوکاین بالغ می‌برند، و <b>گاسدرمین <span class="lat">D</span></b> را هم می‌برند</fa></td></tr>
+<tr><th><b>Apoptotic caspases</b><fa><b>کاسپازهای آپوپتوزی</b></fa></th><td>Initiators: <b>caspase-8</b> (extrinsic), <b>caspase-9</b> (intrinsic)<br>Executioners: <b>caspase-3, 6, 7</b><fa>آغازگرها: <b>کاسپاز ۸</b> (برون‌زاد)، <b>کاسپاز ۹</b> (درون‌زاد)<br>مجریان: <b>کاسپازهای ۳، ۶، ۷</b></fa></td><td><b>Mediate cell death</b> — quiet, non-inflammatory, membrane-intact apoptosis<fa><b>واسطهٔ مرگ سلولی‌اند</b> — آپوپتوز خاموش، غیرالتهابی و با غشای سالم</fa></td></tr>
+</tbody></table>
+</div>
+
+<div class="box trap">
+<div class="bt">Exam Trap — caspase-11 is a mouse gene<fa>دام امتحانی — کاسپاز ۱۱ ژنی موشی است</fa></div>
+<p>The literature on the non-canonical inflammasome is almost all mouse work, so <b>caspase-11</b> appears everywhere. <b>Humans do not have caspase-11.</b> Its functional equivalents are <b>caspase-4 and caspase-5</b>. If a question names caspase-11, it is describing a mouse experiment; if it asks what senses intracellular LPS in a human cell, the answer is <b>caspase-4 and caspase-5</b>.<fa>ادبیات اینفلاماسوم غیرکانونی تقریباً همه کار موشی است، پس <b>کاسپاز ۱۱</b> همه‌جا ظاهر می‌شود. <b>انسان کاسپاز ۱۱ ندارد.</b> معادل‌های کارکردی‌اش <b>کاسپاز ۴ و کاسپاز ۵</b> هستند. اگر سؤالی کاسپاز ۱۱ را نام ببرد، آزمایشی موشی را توصیف می‌کند؛ اگر بپرسد چه چیزی <span class="lat">LPS</span> درون‌سلولی را در سلول انسانی حس می‌کند، پاسخ <b>کاسپاز ۴ و کاسپاز ۵</b> است.</fa></p>
+</div>
+
+<div class="fig-row g3">
+  <figure>
+    <img src="../img/caspase1_paper.jpg" alt="Thornberry 1992 Nature paper on caspase-1">
+    <figcaption><span class="fn">Fig 7.12</span> The 1992 <i>Nature</i> paper. The title is the whole discovery: <i>“A novel heterodimeric cysteine protease is required for interleukin-1β processing in monocytes.”</i> The enzyme was named <b>interleukin-1β converting enzyme (ICE)</b> and later renamed <b>caspase-1</b>.<fa>مقالهٔ <i>نیچر</i> ۱۹۹۲. عنوان، تمام کشف است: <i>«یک سیستئین‌پروتئاز هتـرودایمری تازه برای پردازش اینترلوکین ۱ بتا در مونوسیت‌ها لازم است.»</i> آنزیم را <b>آنزیم تبدیل‌کنندهٔ اینترلوکین ۱ بتا (<span class="lat">ICE</span>)</b> نامیدند و بعدها <b>کاسپاز ۱</b> نامش دادند.</fa></figcaption>
+  </figure>
+  <figure>
+    <img src="../img/casp1_ko_il1b.jpg" alt="IL-1beta release in wild-type versus caspase-1 knockout">
+    <figcaption><span class="fn">Fig 7.13</span> The proof, in one bar chart. Wild-type cells (grey) release a great deal of IL-1β when given <b>LPS plus a second stimulus</b>; <b>Casp1⁻/⁻</b> cells (black) release essentially none under any condition. Note also that LPS <i>alone</i> gives almost nothing even in wild-type — <b>that is signal 1 without signal 2</b>.<fa>مدرک، در یک نمودار میله‌ای. سلول‌های وحشی‌تیپ (خاکستری) وقتی <b><span class="lat">LPS</span> به‌علاوهٔ محرک دوم</b> می‌گیرند مقدار زیادی <span class="lat">IL-1β</span> آزاد می‌کنند؛ سلول‌های <b>فاقد کاسپاز ۱</b> (سیاه) در هیچ شرایطی عملاً هیچ. همچنین توجه کنید <span class="lat">LPS</span> <i>به‌تنهایی</i> حتی در وحشی‌تیپ تقریباً هیچ نمی‌دهد — <b>این سیگنال ۱ بدون سیگنال ۲ است</b>.</fa></figcaption>
+  </figure>
+  <figure>
+    <img src="../img/tschopp.jpg" alt="Jürg Tschopp">
+    <figcaption><span class="fn">Fig 7.14</span> <b>Jürg Tschopp</b> (1951–2011), whose group at Lausanne — with Fabio Martinon and Kimberly Burns — described and named the inflammasome in 2002.<fa><b>یورگ چوپ</b> (۱۹۵۱–۲۰۱۱)، که گروهش در لوزان — با فابیو مارتینون و کیمبرلی برنز — اینفلاماسوم را در ۲۰۰۲ توصیف و نام‌گذاری کرد.</fa></figcaption>
+  </figure>
+</div>
+
+<h2 id="s7-4"><span class="sn">7.4</span>What Activates NLRP3<fa>چه چیزی <span class="lat">NLRP3</span> را فعال می‌کند</fa></h2>
+
+<div class="tbl-wrap keep">
+<table class="zebra">
+<caption><span class="cn">Table 7.2</span> &nbsp; NLRP3 activators — and what each one means clinically<fa>جدول ۷.۲ — فعال‌کننده‌های <span class="lat">NLRP3</span> — و معنای بالینی هر یک</fa></caption>
+<thead><tr><th style="width:30%">Activator<fa>فعال‌کننده</fa></th><th>Where you meet it<fa>کجا با آن روبه‌رو می‌شوید</fa></th></tr></thead>
+<tbody>
+<tr><th><b>ATP</b><fa><b><span class="lat">ATP</span></b></fa></th><td>Released by dying cells; acts on the <b>P2X₇</b> receptor. The canonical laboratory signal 2, and a genuine DAMP in any tissue injury<fa>از سلول‌های در حال مرگ آزاد می‌شود؛ روی گیرندهٔ <b><span class="lat">P2X₇</span></b> اثر می‌کند. سیگنال ۲ کلاسیک آزمایشگاهی، و یک <span class="lat">DAMP</span> واقعی در هر آسیب بافتی</fa></td></tr>
+<tr><th><b>Pore-forming toxins</b><fa><b>سم‌های منفذساز</b></fa></th><td>Nigericin (experimental), and bacterial toxins such as streptolysin and α-haemolysin<fa>نایجریسین (آزمایشگاهی)، و سم‌های باکتریایی مانند استرپتولیزین و آلفا-همولیزین</fa></td></tr>
+<tr><th><b>Alum</b><fa><b>آلوم</b></fa></th><td>The adjuvant in many vaccines. <b>This is how alum works</b> — an answer that was unknown for seventy years<fa>ادجوانت بسیاری از واکسن‌ها. <b>آلوم این‌گونه کار می‌کند</b> — پاسخی که هفتاد سال ناشناخته بود</fa></td></tr>
+<tr><th><b>MSU — monosodium urate</b><fa><b>مونوسدیم اورات</b></fa></th><td><b>Gout.</b> The crystal is phagocytosed, ruptures the lysosome, and the resulting IL-1β is the pain and swelling of an acute attack<fa><b>نقرس.</b> کریستال فاگوسیتوز می‌شود، لیزوزوم را پاره می‌کند و <span class="lat">IL-1β</span> حاصل، همان درد و تورم حملهٔ حاد است</fa></td></tr>
+<tr><th><b>Cholesterol crystals, oxLDL</b><fa><b>کریستال کلسترول، <span class="lat">oxLDL</span></b></fa></th><td><b>Atherosclerosis.</b> The plaque macrophage is running an inflammasome<fa><b>آترواسکلروز.</b> ماکروفاژ پلاک، یک اینفلاماسوم روشن دارد</fa></td></tr>
+<tr><th><b>Glucose, palmitate (LCFA), ceramide</b><fa><b>گلوکز، پالمیتات، سرامید</b></fa></th><td><b>Type 2 diabetes and metabolic syndrome</b> — the molecular link between obesity and chronic low-grade inflammation<fa><b>دیابت نوع ۲ و سندرم متابولیک</b> — پیوند مولکولی چاقی و التهاب مزمن خفیف</fa></td></tr>
+<tr><th><b>Islet amyloid polypeptide</b><fa><b>پلی‌پپتید آمیلوئید جزایر</b></fa></th><td>Deposited in the pancreatic islet in type 2 diabetes; also β-amyloid in Alzheimer's disease<fa>در جزایر پانکراس در دیابت نوع ۲ رسوب می‌کند؛ همچنین بتا-آمیلوئید در آلزایمر</fa></td></tr>
+<tr><th><b>Silica, asbestos</b><fa><b>سیلیس، آزبست</b></fa></th><td>Silicosis and asbestosis — inhaled particles that a macrophage cannot digest<fa>سیلیکوز و آزبستوز — ذرات استنشاقی که ماکروفاژ نمی‌تواند هضمشان کند</fa></td></tr>
+</tbody></table>
+</div>
+
+<div class="box hy">
+<div class="bt">One receptor, chemically unrelated ligands — how?<fa>یک گیرنده، لیگاندهای شیمیایی بی‌ارتباط — چگونه؟</fa></div>
+<p>Look at that list. ATP, a crystal of uric acid, a fatty acid, a bacterial toxin and a mineral fibre have nothing chemically in common, and no single binding site could accommodate them all. <b>NLRP3 therefore does not sense them directly.</b> It senses a <b>cellular consequence</b> they all produce.<fa>به آن فهرست نگاه کنید. <span class="lat">ATP</span>، کریستال اوریک اسید، یک اسید چرب، یک سم باکتریایی و یک الیاف معدنی هیچ وجه شیمیایی مشترکی ندارند و هیچ جایگاه اتصال واحدی نمی‌تواند همه‌شان را جا دهد. <b>پس <span class="lat">NLRP3</span> آن‌ها را مستقیماً حس نمی‌کند.</b> یک <b>پیامد سلولی</b> را حس می‌کند که همه‌شان می‌سازند.</fa></p>
+<p>The dominant one is <b>potassium efflux</b>. A drop in intracellular K⁺ is the common denominator of pore formation, P2X₇ opening and membrane damage — and it is sufficient on its own to trigger NLRP3. There are also <b>K⁺-efflux-independent</b> routes: <b>lysosomal rupture</b> releasing cathepsin B (the crystal route), <b>mitochondrial ROS and oxidised mitochondrial DNA</b>, <b>Ca²⁺ influx</b>, and <b>NEK7</b>, a kinase that binds NLRP3 and licenses its oligomerisation.<fa>غالب‌ترینشان <b>خروج پتاسیم</b> است. افت پتاسیم درون‌سلولی، مخرج مشترک منفذسازی، بازشدن <span class="lat">P2X₇</span> و آسیب غشاست — و به‌تنهایی برای انداختن <span class="lat">NLRP3</span> کافی است. مسیرهای <b>مستقل از خروج پتاسیم</b> هم هستند: <b>پارگی لیزوزوم</b> که کاتپسین <span class="lat">B</span> آزاد می‌کند (مسیر کریستال)، <b><span class="lat">ROS</span> میتوکندریایی و <span class="lat">DNA</span> میتوکندریاییِ اکسیدشده</b>، <b>ورود کلسیم</b>، و <b><span class="lat">NEK7</span></b> که کینازی است و با چسبیدن به <span class="lat">NLRP3</span> اجازهٔ الیگومریزاسیونش را می‌دهد.</fa></p>
+<p><b>The design principle:</b> NLRP3 is not a receptor for a molecule; it is a <b>detector of cellular distress</b>. That is why it appears in so many diseases that have nothing to do with infection.<fa><b>اصل طراحی:</b> <span class="lat">NLRP3</span> گیرندهٔ یک مولکول نیست؛ <b>آشکارساز پریشانی سلولی</b> است. به همین سبب در بیماری‌های بسیاری ظاهر می‌شود که هیچ ربطی به عفونت ندارند.</fa></p>
+</div>
+
+<div class="fig-row">
+  <figure>
+    <img src="../img/nlrp3_mechanisms.jpg" alt="Mechanisms converging on NLRP3">
+    <figcaption><span class="fn">Fig 7.15</span> Everything converging on one box. DAMPs, crystals, particulates, ATP through <b>P2X₇</b> and <b>pannexin-1</b>, pore-forming toxins, liposomes and <b>TRPM2</b>-mediated Ca²⁺ influx all funnel into <b>K⁺ efflux</b>; lysosomal rupture supplies <b>cathepsin B</b>; damaged mitochondria supply <b>mtROS, mtDNA and cardiolipin</b>. Output: caspase-1, IL-1β, IL-18 and <b>pyroptosis</b>. Note <b>mitophagy</b> at the right, inhibiting the pathway by clearing the damaged mitochondria.<fa>همه‌چیز به یک جعبه می‌رسد. <span class="lat">DAMP</span>ها، کریستال‌ها، ذرات، <span class="lat">ATP</span> از راه <b><span class="lat">P2X₇</span></b> و <b>پانکسین-۱</b>، سم‌های منفذساز، لیپوزوم‌ها و ورود کلسیم با واسطهٔ <b><span class="lat">TRPM2</span></b> همه به <b>خروج پتاسیم</b> می‌ریزند؛ پارگی لیزوزوم <b>کاتپسین <span class="lat">B</span></b> می‌دهد؛ میتوکندری آسیب‌دیده <b><span class="lat">ROS</span> و <span class="lat">DNA</span> میتوکندریایی و کاردیولیپین</b> می‌دهد. خروجی: کاسپاز ۱، <span class="lat">IL-1β</span>، <span class="lat">IL-18</span> و <b>پیروپتوز</b>. به <b>میتوفاژی</b> در سمت راست توجه کنید که با پاک‌کردن میتوکندری آسیب‌دیده مسیر را مهار می‌کند.</fa></figcaption>
+  </figure>
+  <figure>
+    <img src="../img/imiquimod_nek7.jpg" alt="Imiquimod acting on NQO2 and mitochondrial complex I">
+    <figcaption><span class="fn">Fig 7.16</span> A worked example of a <b>K⁺-efflux-independent</b> activator. <b>Imiquimod</b> inhibits NQO2 and mitochondrial complex I, generating <b>ROS</b>, which licenses the <b>NEK7–NLRP3</b> interaction and assembles the complex with a crossed-out K⁺ efflux. Imiquimod is a real drug — a topical treatment for genital warts and basal cell carcinoma — and this is part of how it works.<fa>مثالی حل‌شده از فعال‌کنندهٔ <b>مستقل از خروج پتاسیم</b>. <b>ایمی‌کوئیمود</b> <span class="lat">NQO2</span> و کمپلکس <span class="lat">I</span> میتوکندریایی را مهار می‌کند و <b><span class="lat">ROS</span></b> می‌سازد که برهم‌کنش <b><span class="lat">NEK7–NLRP3</span></b> را مجاز می‌کند و کمپلکس را با خروج پتاسیمِ خط‌خورده مونتاژ می‌کند. ایمی‌کوئیمود دارویی واقعی است — درمان موضعی زگیل تناسلی و کارسینوم سلول بازال — و بخشی از سازوکارش همین است.</fa></figcaption>
+  </figure>
+</div>
+
+<h2 id="s7-5"><span class="sn">7.5</span>The Non-canonical Route: Caspase-11, 4 and 5<fa>مسیر غیرکانونی: کاسپازهای ۱۱، ۴ و ۵</fa></h2>
+
+<p class="lead">The lecturer asks: <i>what happens when cells are infected with intracellular bacteria?</i> TLR4 is on the cell surface and in endosomes. A bacterium that has escaped into the cytosol is carrying LPS <b>on the wrong side of every membrane TLR4 can see</b>.<fa>مدرّس می‌پرسد: <i>وقتی سلول‌ها به باکتری درون‌سلولی آلوده شوند چه می‌شود؟</i> <span class="lat">TLR4</span> روی سطح سلول و در اندوزوم است. باکتری‌ای که به سیتوزول گریخته، <span class="lat">LPS</span> را <b>در سمت اشتباهِ هر غشایی که <span class="lat">TLR4</span> می‌تواند ببیند</b> حمل می‌کند.</fa></p>
+
+<div class="tbl-wrap keep">
+<table class="zebra">
+<caption><span class="cn">Table 7.3</span> &nbsp; Canonical versus non-canonical<fa>جدول ۷.۳ — کانونی در برابر غیرکانونی</fa></caption>
+<thead><tr><th style="width:22%"></th><th>Canonical NLRP3<fa><span class="lat">NLRP3</span> کانونی</fa></th><th>Non-canonical<fa>غیرکانونی</fa></th></tr></thead>
+<tbody>
+<tr><th>Trigger<fa>محرک</fa></th><td><b>PAMPs and DAMPs</b> — the Table 7.2 list<fa><b><span class="lat">PAMP</span> و <span class="lat">DAMP</span></b> — فهرست جدول ۷.۲</fa></td><td><b>LPS free in the cytosol</b>, from Gram-negative bacteria that have escaped the vacuole<fa><b><span class="lat">LPS</span> آزاد در سیتوزول</b>، از باکتری‌های گرم‌منفی‌ای که از واکوئل گریخته‌اند</fa></td></tr>
+<tr><th>Sensor<fa>حسگر</fa></th><td><b>NLRP3</b> + <b>NEK7</b>, then ASC<fa><b><span class="lat">NLRP3</span></b> + <b><span class="lat">NEK7</span></b>، سپس <span class="lat">ASC</span></fa></td><td><b>The caspase itself.</b> Pro-caspase-11 (mouse) or pro-caspase-4/5 (human) binds LPS <b>directly</b> through its CARD — <b>no separate receptor at all</b><fa><b>خودِ کاسپاز.</b> پیش‌کاسپاز ۱۱ (موش) یا ۴/۵ (انسان) از راه <span class="lat">CARD</span>ش <b>مستقیماً</b> به <span class="lat">LPS</span> می‌چسبد — <b>اصلاً گیرندهٔ جداگانه‌ای نیست</b></fa></td></tr>
+<tr><th>Caspase<fa>کاسپاز</fa></th><td><b>Caspase-1</b><fa><b>کاسپاز ۱</b></fa></td><td><b>Caspase-11</b> (mouse) · <b>Caspase-4, -5</b> (human)<fa><b>کاسپاز ۱۱</b> (موش) · <b>کاسپازهای ۴ و ۵</b> (انسان)</fa></td></tr>
+<tr><th>Direct products<fa>فرآورده‌های مستقیم</fa></th><td><b>IL-1β, IL-18</b> and cleaved GSDMD<fa><b><span class="lat">IL-1β</span>، <span class="lat">IL-18</span></b> و <span class="lat">GSDMD</span> بریده‌شده</fa></td><td><b>Cleaved GSDMD only.</b> These caspases <b>cannot</b> process pro-IL-1β<fa><b>فقط <span class="lat">GSDMD</span> بریده‌شده.</b> این کاسپازها <b>نمی‌توانند</b> پیش‌ساز <span class="lat">IL-1β</span> را پردازش کنند</fa></td></tr>
+<tr><th>How IL-1β still gets made<fa>پس <span class="lat">IL-1β</span> چگونه ساخته می‌شود</fa></th><td>Directly<fa>مستقیم</fa></td><td><b>Indirectly.</b> GSDMD pores cause <b>K⁺ efflux</b>, which activates <b>NLRP3 and caspase-1</b> in the same cell. The non-canonical pathway switches the canonical one on<fa><b>غیرمستقیم.</b> منفذهای <span class="lat">GSDMD</span> <b>خروج پتاسیم</b> می‌سازند که <b><span class="lat">NLRP3</span> و کاسپاز ۱</b> را در همان سلول فعال می‌کند. مسیر غیرکانونی، کانونی را روشن می‌کند</fa></td></tr>
+</tbody></table>
+</div>
+
+<figure class="fig-full">
+  <img src="../img/canonical_vs_noncanonical.jpg" alt="Canonical and non-canonical inflammasome pathways side by side" style="max-width:138mm;margin:0 auto">
+  <figcaption style="max-width:150mm;margin:1.6mm auto 0"><span class="fn">Fig 7.17</span> The two pathways side by side. <b>Left, canonical:</b> PAMPs/DAMPs &rarr; NLRP3 with <b>Nek7</b> and ASC &rarr; caspase-1 &rarr; both gasdermin D and the cytokines. <b>Right, non-canonical:</b> cytosolic LPS &rarr; pro-caspase-11 directly &rarr; gasdermin D &rarr; <b>pyroptosis</b>, and — via the resulting membrane damage — NLRP3, caspase-1 and the cytokines after all. Follow the arrow that loops back: <b>the two pathways are not alternatives, they are in series.</b><fa>دو مسیر کنار هم. <b>چپ، کانونی:</b> <span class="lat">PAMP</span>/<span class="lat">DAMP</span> &larr; <span class="lat">NLRP3</span> با <b><span class="lat">Nek7</span></b> و <span class="lat">ASC</span> &larr; کاسپاز ۱ &larr; هم گاسدرمین <span class="lat">D</span> هم سایتوکاین‌ها. <b>راست، غیرکانونی:</b> <span class="lat">LPS</span> سیتوزولی &larr; مستقیماً پیش‌کاسپاز ۱۱ &larr; گاسدرمین <span class="lat">D</span> &larr; <b>پیروپتوز</b>، و — از راه آسیب غشاییِ حاصل — <span class="lat">NLRP3</span>، کاسپاز ۱ و در نهایت سایتوکاین‌ها. پیکانی را که برمی‌گردد دنبال کنید: <b>دو مسیر جایگزین هم نیستند، پشت سر هم‌اند.</b></fa></figcaption>
+</figure>
+
+<h2 id="s7-6"><span class="sn">7.6</span>Gasdermin D, the Pore and Pyroptosis<fa>گاسدرمین <span class="lat">D</span>، منفذ و پیروپتوز</fa></h2>
+
+<div class="mech">
+<div class="mh">Mechanism — how IL-1β actually leaves the cell<fa>مکانیسم — <span class="lat">IL-1β</span> واقعاً چگونه از سلول بیرون می‌رود</fa></div>
+<ol>
+<li><b>Gasdermin D sits inert in the cytosol</b>, its pore-forming N-terminal domain held shut by an autoinhibitory C-terminal domain.<fa><b>گاسدرمین <span class="lat">D</span> بی‌اثر در سیتوزول می‌نشیند</b>، و دومین منفذسازِ انتهای <span class="lat">N</span>ش را دومین خودمهارکنندهٔ انتهای <span class="lat">C</span> بسته نگه داشته.</fa></li>
+<li>An <b>inflammatory caspase cuts between the two domains</b>, releasing the N-terminal fragment.<span class="why">Note which enzymes can do this: caspase-1, 4, 5 and 11. The apoptotic caspases cannot — which is precisely why apoptosis is silent and pyroptosis is not.</span><fa><b>کاسپاز التهابی میان دو دومین را می‌بُرد</b> و قطعهٔ انتهای <span class="lat">N</span> را آزاد می‌کند.<span class="why">توجه کنید کدام آنزیم‌ها می‌توانند: کاسپازهای ۱، ۴، ۵ و ۱۱. کاسپازهای آپوپتوزی نمی‌توانند — و دقیقاً به همین سبب آپوپتوز خاموش است و پیروپتوز نیست.</span></fa></li>
+<li>The freed <b>N-terminal fragments oligomerise in the plasma membrane</b> and form a <b>ring-shaped pore</b>.<span class="why">The structure is remarkable: a <b>27-fold</b> ring built from <b>108 β-strands</b>, with an inner diameter of about <b>180 Å</b> — enormous by the standards of a membrane channel, and comfortably wide enough for a 17 kDa cytokine to pass.</span><fa>قطعات آزادشدهٔ انتهای <span class="lat">N</span> <b>در غشای پلاسمایی الیگومریزه می‌شوند</b> و <b>منفذی حلقه‌ای</b> می‌سازند.<span class="why">ساختار قابل‌توجه است: حلقه‌ای <b>۲۷‌تایی</b> ساخته‌شده از <b>۱۰۸ رشتهٔ بتا</b>، با قطر داخلی حدود <b>۱۸۰ آنگستروم</b> — به‌معیار کانال‌های غشایی بسیار بزرگ، و به‌راحتی آن‌قدر پهن که سایتوکاینی ۱۷ کیلودالتونی از آن بگذرد.</span></fa></li>
+<li><b>Mature IL-1β and IL-18 pass out through the pore.</b> This is the door that the missing signal peptide made necessary.<fa><b><span class="lat">IL-1β</span> و <span class="lat">IL-18</span> بالغ از منفذ بیرون می‌روند.</b> این همان دری است که نبودِ پپتید سیگنال ضروری‌اش کرد.</fa></li>
+<li>If enough pores form, the cell can no longer hold its osmotic balance. It swells and bursts: <b>pyroptosis</b>.<span class="why">Contrast with apoptosis. Apoptosis keeps the membrane intact and packages the contents tidily, so it is <b>immunologically silent</b>. Pyroptosis ruptures the cell and spills every DAMP it contains into the tissue, so it is <b>maximally inflammatory</b> — it recruits the neighbours. It is the right answer to an intracellular pathogen: destroy its niche and raise the alarm at the same time.</span><fa>اگر منفذ کافی ساخته شود، سلول دیگر نمی‌تواند تعادل اسمزی‌اش را نگه دارد. متورم می‌شود و می‌ترکد: <b>پیروپتوز</b>.<span class="why">با آپوپتوز مقایسه کنید. آپوپتوز غشا را سالم نگه می‌دارد و محتویات را مرتب بسته‌بندی می‌کند، پس <b>از نظر ایمنی خاموش</b> است. پیروپتوز سلول را پاره می‌کند و هر <span class="lat">DAMP</span>ی را که دارد در بافت می‌ریزد، پس <b>حداکثر التهابی</b> است — همسایه‌ها را فرا می‌خواند. پاسخ درست به پاتوژن درون‌سلولی همین است: لانه‌اش را نابود کن و هم‌زمان آژیر بکش.</span></fa></li>
+</ol>
+</div>
+
+<div class="fig-row">
+  <figure>
+    <img src="../img/gsdmd_pore_structure.jpg" alt="Cryo-EM structure of the gasdermin D pore">
+    <figcaption><span class="fn">Fig 7.18</span> The pore, solved structurally: a <b>27-fold</b> ring of <b>108 β-strands</b>, inner diameter <b>180 Å</b>, outer <b>280 Å</b>, with a globular domain above and a <b>β-barrel</b> of about <b>70 Å</b> crossing the membrane. Seen from the side below.<fa>منفذ، با ساختار حل‌شده: حلقه‌ای <b>۲۷‌تایی</b> از <b>۱۰۸ رشتهٔ بتا</b>، قطر داخلی <b>۱۸۰</b> و بیرونی <b>۲۸۰ آنگستروم</b>، با دومینی کروی در بالا و <b>بشکهٔ بتا</b>ی حدود <b>۷۰ آنگستروم</b> که از غشا می‌گذرد. پایین، نمای جانبی.</fa></figcaption>
+  </figure>
+  <figure>
+    <img src="../img/gsdmd_pyroptosis.jpg" alt="Gasdermin D cleavage and pore formation leading to pyroptosis">
+    <figcaption><span class="fn">Fig 7.19</span> The mechanism in one picture: <b>inflammatory caspases</b> cleave gasdermin D, the <b>N-terminal fragment</b> inserts into the plasma membrane, and the <b>gasdermin-D pore</b> opens — with an atomic-force micrograph of a real pore inset. Arrow upwards: <b>pyroptosis</b>.<fa>سازوکار در یک تصویر: <b>کاسپازهای التهابی</b> گاسدرمین <span class="lat">D</span> را می‌برند، <b>قطعهٔ انتهای <span class="lat">N</span></b> در غشای پلاسمایی فرو می‌رود و <b>منفذ گاسدرمین <span class="lat">D</span></b> باز می‌شود — با میکروگراف نیروی اتمی از یک منفذ واقعی در گوشه. پیکان رو به بالا: <b>پیروپتوز</b>.</fa></figcaption>
+  </figure>
+</div>
+
+<div class="fig-row g3">
+  <figure>
+    <img src="../img/feng_shao.jpg" alt="Feng Shao">
+    <figcaption><span class="fn">Fig 7.20</span> <b>Feng Shao</b> (邵峰), Beijing — identified gasdermin D as the substrate that executes pyroptosis.<fa><b>فنگ شائو</b>، پکن — گاسدرمین <span class="lat">D</span> را به‌عنوان بستری که پیروپتوز را اجرا می‌کند شناسایی کرد.</fa></figcaption>
+  </figure>
+  <figure>
+    <img src="../img/dixit.jpg" alt="Vishva M. Dixit">
+    <figcaption><span class="fn">Fig 7.21</span> <b>Vishva M. Dixit</b> — whose group independently identified gasdermin D and much of the non-canonical pathway.<fa><b>ویشوا دیکسیت</b> — گروهش مستقلاً گاسدرمین <span class="lat">D</span> و بخش عمدهٔ مسیر غیرکانونی را شناسایی کرد.</fa></figcaption>
+  </figure>
+  <figure>
+    <img src="../img/hao_wu.jpg" alt="Hao Wu">
+    <figcaption><span class="fn">Fig 7.22</span> <b>Hao Wu</b> — structural biologist who solved the filament and pore architectures that make the polymerisation mechanism visible.<fa><b>هائو وو</b> — زیست‌شناس ساختاری که معماری رشته‌ها و منفذها را حل کرد و سازوکار پلیمریزاسیون را دیدنی ساخت.</fa></figcaption>
+  </figure>
+</div>
+
+<figure class="fig-full">
+  <img src="../img/apoptosis_caspases.jpg" alt="The apoptotic caspase pathways for comparison" style="max-width:112mm;margin:0 auto">
+  <figcaption style="max-width:138mm;margin:1.6mm auto 0"><span class="fn">Fig 7.23</span> For contrast, the <b>apoptotic</b> caspases. <b>Extrinsic:</b> death ligands &rarr; death receptors &rarr; FADD &rarr; <b>caspase-8</b>. <b>Intrinsic:</b> a death stimulus &rarr; BH3-only proteins &rarr; Bax/Bak &rarr; mitochondrial cytochrome c &rarr; Apaf-1 &rarr; <b>caspase-9</b>. Both converge on <b>caspase-3</b>. None of these enzymes cleaves gasdermin D, and none releases IL-1β. <b>Same protein family, opposite immunological meaning.</b><fa>برای مقایسه، کاسپازهای <b>آپوپتوزی</b>. <b>برون‌زاد:</b> لیگاندهای مرگ &larr; گیرنده‌های مرگ &larr; <span class="lat">FADD</span> &larr; <b>کاسپاز ۸</b>. <b>درون‌زاد:</b> محرک مرگ &larr; پروتئین‌های تنها-<span class="lat">BH3</span> &larr; <span class="lat">Bax/Bak</span> &larr; سیتوکروم <span class="lat">c</span> میتوکندریایی &larr; <span class="lat">Apaf-1</span> &larr; <b>کاسپاز ۹</b>. هر دو به <b>کاسپاز ۳</b> می‌رسند. هیچ‌یک از این آنزیم‌ها گاسدرمین <span class="lat">D</span> را نمی‌برد و هیچ‌یک <span class="lat">IL-1β</span> آزاد نمی‌کند. <b>همان خانوادهٔ پروتئینی، معنای ایمنی متضاد.</b></fa></figcaption>
+</figure>
+
+<h2 id="s7-7"><span class="sn">7.7</span>Pathogens Fight Back<fa>پاتوژن‌ها مقابله می‌کنند</fa></h2>
+
+<figure class="fig-r w70">
+  <img src="../img/shigella_gsdmd.jpg" alt="Shigella IpaH7.8 degrades gasdermin D">
+  <figcaption><span class="fn">Fig 7.24</span> <b><i>Shigella</i></b> injects <b>IpaH7.8</b>, a bacterial <b>ubiquitin ligase</b>, which tags <b>gasdermin D</b> for proteasomal destruction. No gasdermin, no pore, no pyroptosis — and the bacterium keeps the cell it is living in. The effect is <b>species-specific</b>: IpaH7.8 targets human gasdermin D but not the rodent protein, which contributes to <i>Shigella</i> causing severe gastroenteritis in humans but not in rodents.<fa><b><span class="sp">شیگلا</span></b> <b><span class="lat">IpaH7.8</span></b> را تزریق می‌کند، یک <b>لیگاز یوبیکوئیتین</b> باکتریایی که <b>گاسدرمین <span class="lat">D</span></b> را برای نابودی در پروتئازوم برچسب می‌زند. نه گاسدرمینی، نه منفذی، نه پیروپتوزی — و باکتری سلولی را که در آن زندگی می‌کند نگه می‌دارد. اثرش <b>گونه‌ویژه</b> است: <span class="lat">IpaH7.8</span> گاسدرمین <span class="lat">D</span>ی انسانی را هدف می‌گیرد نه پروتئین جوندگان را، و همین در ایجاد گاستروانتریت شدید <span class="sp">شیگلا</span> در انسان و نه در جوندگان نقش دارد.</fa></figcaption>
+</figure>
+
+<p>The pattern is the one you met at the end of Part 5. A host defence mechanism is confirmed as important by the fact that <b>pathogens spend genes on disabling it</b>. Poxviruses encode decoy cytokine receptors; <i>Shigella</i> encodes a ligase that destroys gasdermin D. <b>If you want to know which parts of immunology matter, read the list of what microbes have evolved to switch off.</b><fa>الگو همان است که در پایان بخش ۵ دیدید. اهمیت یک سازوکار دفاعی میزبان با این واقعیت تأیید می‌شود که <b>پاتوژن‌ها ژن خرج از‌کار‌انداختنش می‌کنند</b>. پاکس‌ویروس‌ها گیرندهٔ دیکوی سایتوکاینی رمزگذاری می‌کنند؛ <span class="sp">شیگلا</span> لیگازی رمزگذاری می‌کند که گاسدرمین <span class="lat">D</span> را نابود می‌کند. <b>اگر می‌خواهید بدانید کدام بخش‌های ایمونولوژی اهمیت دارند، فهرست آنچه را میکروب‌ها برای خاموش‌کردنش تکامل یافته‌اند بخوانید.</b></fa></p>
+</div>
