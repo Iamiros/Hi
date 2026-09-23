@@ -1,0 +1,154 @@
+/* ===== BILINGUAL OVERLAY ===== */
+.fa-block{
+  font-family:'Vazir',sans-serif; direction:rtl; text-align:right; unicode-bidi:isolate;
+  font-size:8.9pt; line-height:1.95; color:#31404f;
+  border-right:2px solid #c9d3dd; padding:1.2mm 3.4mm 1.2mm 0; margin:1.2mm 0 2.6mm 0;
+  background:#fafbfc;
+}
+.fa-block p{margin:0 0 .35em 0; text-align:right}
+.fa-block p:last-child{margin-bottom:0}
+.fa-block .lat{font-family:'SourceSerif',serif; direction:ltr; unicode-bidi:isolate; font-size:8.6pt}
+
+/* headings */
+.fa-h1{font-size:15pt;font-weight:700;color:#141d27;border-right:none;background:none;padding:0;margin:0 0 3mm 0;line-height:1.7}
+.fa-h2{ font-size:12.2pt; font-weight:700; color:#141d27; border-right:none; background:none;
+        padding:0 0 2mm 0; margin:-1.5mm 0 3mm 0; line-height:1.75; border-bottom:1px solid var(--rule-2);}
+.fa-h3{ font-size:10.2pt; font-weight:700; color:var(--crimson); border-right:none; background:none;
+        padding:0; margin:-1mm 0 2mm 0; line-height:1.7;}
+.fa-h4{ font-size:9.4pt; font-weight:700; color:var(--ink); border-right:none; background:none;
+        padding:0; margin:-0.6mm 0 1.6mm 0; line-height:1.7;}
+.fa-h5{ font-size:8.4pt; font-weight:700; color:var(--ink-3); border-right:none; background:none;
+        padding:0; margin:-0.6mm 0 1.6mm 0; line-height:1.7;}
+
+/* list items: nested inside li */
+.fa-li{ border-right:2px solid #dde3e9; background:none; padding:.6mm 2.6mm .6mm 0; margin:.8mm 0 1.6mm 0;
+        font-size:8.7pt; line-height:1.9;}
+
+/* inside coloured callouts / mech: inherit tint, no grey bg */
+.box .fa-block{ background:rgba(255,255,255,.55); border-right-color:rgba(0,0,0,.14);}
+.mech .fa-block{ background:rgba(255,255,255,.6); border-right-color:#b9d0bf;}
+.def .fa-block{ background:#fff; border-right-color:#b9c4cf; font-size:9.2pt;}
+.mech ol>li .fa-block{ background:rgba(255,255,255,.55); margin:1mm 0 0 0;}
+.part-obj .fa-block{background:#fff}
+
+/* figure captions */
+figcaption .fa-block{ font-size:7.9pt; line-height:1.85; border-right:2px solid var(--rule); background:none;
+                      padding:.6mm 2.2mm .6mm 0; margin:1.2mm 0 0 0; color:var(--ink-3);}
+
+/* table cells */
+.fa-cell{ font-family:'Vazir',sans-serif; direction:rtl; text-align:right; unicode-bidi:isolate;
+          font-size:8pt; line-height:1.85; color:#4a5764; margin-top:1.2mm; padding-top:1.2mm;
+          border-top:1px dotted #c8d2db;}
+thead .fa-cell{ color:#c8d3de; border-top-color:rgba(255,255,255,.28); font-size:7.5pt;}
+tbody th .fa-cell{color:#3d4b5a}
+caption .fa-cell{ border-top:none; padding-top:0; margin-top:1.2mm; color:var(--ink-3); font-size:7.8pt;}
+
+/* part opener */
+.part-title .fa-block{ font-size:19pt; font-weight:700; color:var(--ink); border-right:none; background:none;
+                       padding:0; margin:2mm 0 0 0; line-height:1.55;}
+.part-blurb .fa-block{ font-size:9.6pt; line-height:2; background:none; }
+.part-eyebrow .fa-block{ font-size:8.6pt; border-right:none; background:none; padding:0; margin:1.5mm 0 0 0;
+                         color:var(--crimson); font-weight:700; letter-spacing:0;}
+
+/* question bank */
+.q .stem .fa-block{font-size:8.7pt;line-height:1.9}
+.q ol.ch li .fa-block{ font-size:8.4pt; line-height:1.85; margin:.6mm 0 1.4mm 0; padding:.4mm 2.4mm .4mm 0;
+                       background:none; border-right:2px solid #dde3e9;}
+.ans .fa-block{font-size:8.5pt;line-height:1.88}
+
+/* toc */
+.toc-row .fa-block{display:none}
+.toc-fa{ font-family:'Vazir',sans-serif; direction:rtl; text-align:right; font-size:8.3pt; color:var(--ink-3);
+         margin:-0.6mm 0 1.9mm 13mm;}
+
+/* glossary */
+.gloss dd .fa-block{ font-size:8.2pt; line-height:1.85; margin:.6mm 0 0 0; padding:.4mm 2.2mm .4mm 0;
+                     background:none;}
+.gloss{column-gap:6mm}
+
+/* title page */
+.titlepage .fa-block{border-right:none;background:none;padding:0}
+.tp-title .fa-block{ font-size:20pt; font-weight:700; color:#fff; margin:4mm 0 0 0; line-height:1.5;}
+.tp-sub .fa-block{ font-size:10.5pt; color:#c3ced9; margin:2mm 0 0 0; line-height:1.7;}
+.tp-scope .t .fa-block{font-size:9pt;color:var(--ink-2);margin:.8mm 0 0 0;line-height:1.7}
+.tp-src .s1 .fa-block{font-size:8.8pt;margin:.8mm 0 0 0;line-height:1.7}
+
+/* --- fixes --- */
+.fa-block{ letter-spacing:normal !important; text-transform:none !important; font-style:normal;}
+.mech>.mh{ flex-wrap:wrap; align-items:flex-start;}
+.mech>.mh .fa-block{ flex:0 0 100%; width:100%; margin:2.2mm 0 0 0; background:none;
+                     border-right:2px solid #b9d0bf; font-size:9.2pt;}
+.box .bt .fa-block{ margin:1.4mm 0 0 0; background:none; border-right-width:2px; font-size:8.4pt;}
+.def .dt .fa-block{ margin:1.2mm 0 0 0; background:none; font-size:8.2pt;}
+.fa-block .why{ font-style:normal;}
+.fa-block .why:before{ content:'چرا: '; font-family:'Vazir'; font-size:8.4pt; font-weight:700;
+                       color:var(--moss); letter-spacing:normal;}
+.mech ol>li .fa-block{ padding:1mm 3mm 1mm 0;}
+caption .fa-cell{ text-transform:none; letter-spacing:normal;}
+h2 .fa-block, h3 .fa-block, h4 .fa-block, h5 .fa-block{ text-align:right;}
+.kicker .fa-block{ background:none; border-right:none; padding:0; margin:1.2mm 0 0 0; text-align:right;}
+.chain .fa-block{ text-align:right; background:none; border-right:2px solid var(--rule);}
+.note .fa-block{ font-style:normal;}
+.q .qtag .fa-block{display:none}
+
+/* --- title page (bilingual heights) --- */
+.tp-band{height:122mm}
+.tp-body{top:136mm}
+.tp-title .fa-block{ color:#fff !important; border-right:none; background:none; padding:0;
+                     font-size:19pt; font-weight:700; margin:4mm 0 0 0; line-height:1.5;}
+.tp-sub .fa-block{ color:#c3ced9 !important; border-right:none; background:none; padding:0;
+                   font-size:10.2pt; margin:2mm 0 0 0; line-height:1.7;}
+.tp-scope{margin-bottom:9mm; padding-top:3mm}
+.tp-scope .row{padding:1.9mm 0}
+.tp-scope .t .fa-block{ border-right:none; background:none; padding:0; margin:.6mm 0 0 0;
+                        font-size:8.8pt; color:var(--ink-2); line-height:1.7; text-align:right;}
+.tp-src{margin-bottom:3.6mm}
+.tp-src .s1 .fa-block{ border-right:none; background:none; padding:0; margin:.6mm 0 0 0;
+                       font-size:8.6pt; line-height:1.7; text-align:right;}
+.tp-foot{bottom:14mm}
+.part-title .fa-block{ border-right:none; background:none; padding:0; font-size:18pt; font-weight:700;
+                       color:var(--ink); margin:3mm 0 0 0; line-height:1.55; text-align:right;}
+.res > .fa-block:before{ content:'نتیجهٔ نهایی: '; font-family:'Vazir'; font-weight:700; font-size:8.4pt;
+                         color:var(--moss);}
+.toc-row .dots{transform:none}
+.toc-fa{margin-top:-1.2mm;margin-bottom:2.2mm}
+.tp-scope .t .fa-block{ display:inline-block; margin:0 0 0 5mm; vertical-align:baseline;
+                        color:var(--ink-3); font-size:8.6pt;}
+.tp-scope .row{padding:2.4mm 0}
+.tp-body{top:129mm}
+.tp-scope{margin-bottom:7mm}
+.tp-src{margin-bottom:3mm}
+.tp-foot{bottom:12mm}
+
+/* Part openers carry twice the text in the bilingual edition — reclaim the top
+   margin and tighten the objectives list so the whole opener stays on one page. */
+.part-open{ padding-top:8mm; }
+.part-rule{ margin-bottom:6mm; }
+.part-eyebrow{ margin-bottom:3.5mm; }
+.part-open .part-num{ font-size:46pt; margin-bottom:-3mm; }
+.part-title{ font-size:23pt; margin-bottom:4.5mm; }
+.part-blurb{ font-size:9.8pt; line-height:1.5; padding-top:4mm; }
+.part-blurb .fa-block{ font-size:9pt; line-height:1.8; }
+.part-obj{ margin-top:6mm; padding:4mm 5mm; }
+.part-obj ul{ font-size:8.8pt; }
+.part-obj li{ margin-bottom:1.2mm; }
+.part-obj .fa-block{ font-size:8.4pt; line-height:1.75; margin-top:.5mm; }
+
+/* ---- specimen card & description template, bilingual ---- */
+.spec .stitle .fa-block{ font-size:10pt; font-weight:700; color:var(--ink); background:none;
+                         border-right:none; padding:0; margin-top:.8mm;}
+.spec ul.see>li .fa-block{ margin-top:.6mm;}
+.spec .why2 .fa-block:before{ content:'چون: '; font-weight:700; }
+.spec .report .fa-block{ background:#fff; }
+.tmpl .cue .fa-block:before{ content:'بپرسید: '; font-weight:700; }
+.q2 .fa-block{ text-indent:0; padding-left:0; margin-top:.8mm; }
+.a2 .fa-block{ background:#fff; }
+
+/* ---- molecule card, decoder & cascade, bilingual ---- */
+.mol .stitle .fa-block{ font-size:10pt; font-weight:700; color:var(--ink); background:none;
+                        border-right:none; padding:0; margin-top:.8mm;}
+.mol ul.see>li .fa-block{ margin-top:.6mm;}
+.mol .why2 .fa-block:before{ content:'چون: '; font-weight:700; }
+.mol .report .fa-block{ background:#fff; }
+.decode td .fa-block{ background:#fff; margin-top:.6mm; }
+.decode .worked .fa-block{ background:#fff; }
