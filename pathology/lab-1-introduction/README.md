@@ -1,7 +1,7 @@
-# Pathology Laboratory — Session 1: Introduction (generator)
+# Pathology Laboratory — Session 1: Introduction
 
-Sources for `output/pathology-lab1-english.pdf` (39 pp) and
-`output/pathology-lab1-bilingual.pdf` (67 pp).
+Sources for `pathology-lab1-english.pdf` (39 pp) and
+`pathology-lab1-bilingual.pdf` (67 pp).
 
 Covers the laboratory session of 16 September: laboratory method, the normal
 heart, lung and kidney, and the adaptations — atrophy, hypertrophy,
@@ -11,12 +11,12 @@ hyperplasia and metaplasia — with a card for every specimen on the list.
 
 | Path | Contents |
 |---|---|
-| `build/*.html` | Content, in reading order. One master copy serves both editions. |
-| `build/base.css` | Page setup, typography, callouts, tables, specimen cards, PDF bookmarks. |
-| `build/bilingual.css`| Overlay applied only to the bilingual edition (RTL blocks, Persian type). |
-| `img/` | Figures extracted from the lecture deck. |
-| `fonts/` | Source Serif 4, Inter, Vazirmatn (all OFL). |
-| `build.py` | Assembles the parts and renders both PDFs with WeasyPrint. |
+| `src/build/*.html` | Content, in reading order. One master copy serves both editions. |
+| `src/build/base.css` | Page setup, typography, callouts, tables, specimen cards, PDF bookmarks. |
+| `src/build/bilingual.css` | Overlay applied only to the bilingual edition (RTL blocks, Persian type). |
+| `src/img/` | Figures extracted from the lecture deck. |
+| `src/fonts/` | Source Serif 4, Inter, Vazirmatn (all OFL). |
+| `src/build.py` | Assembles the parts and renders both PDFs with WeasyPrint. |
 
 Parts, in `build.py`'s `PARTS` order:
 
@@ -78,8 +78,9 @@ which keeps the English PDF near 3 MB.
 ## Rebuilding
 
 ```bash
+cd src
 pip install weasyprint beautifulsoup4 pymupdf
-python3 build.py both ../output      # or: en / bi
+python3 build.py both ..             # or: en / bi
 ```
 
 Rendering takes about 10 seconds per edition.

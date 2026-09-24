@@ -1,7 +1,7 @@
-# Medical Immunology — Sessions 3 & 4: Immune Molecules and Innate Immunity (generator)
+# Medical Immunology — Sessions 3 & 4: Immune Molecules and Innate Immunity
 
-Sources for `output/immunology-sessions3-4-english.pdf` (93 pp) and
-`output/immunology-sessions3-4-bilingual.pdf` (152 pp).
+Sources for `immunology-sessions3-4-english.pdf` (93 pp) and
+`immunology-sessions3-4-bilingual.pdf` (152 pp).
 
 One guide covering **two** lectures, because they overlap heavily: cytokines
 appear in both, one slide (the viral cytokine decoys) is identical in both
@@ -17,12 +17,12 @@ Both by Francis Kaming Chan, PhD, Liangzhu Laboratory, ZJU School of Medicine.
 
 | Path | Contents |
 |---|---|
-| `build/*.html` | Content, in reading order. One master copy serves both editions. |
-| `build/base.css` | Page setup, typography, callouts, tables, partner cards, signal strips, PDF bookmarks. |
-| `build/bilingual.css`| Overlay applied only to the bilingual edition (RTL blocks, Persian type). |
-| `img/` | Figures extracted from the two lecture PDFs. |
-| `fonts/` | Source Serif 4, Inter, Vazirmatn (all OFL). |
-| `build.py` | Assembles the parts and renders both PDFs with WeasyPrint. |
+| `src/build/*.html` | Content, in reading order. One master copy serves both editions. |
+| `src/build/base.css` | Page setup, typography, callouts, tables, partner cards, signal strips, PDF bookmarks. |
+| `src/build/bilingual.css` | Overlay applied only to the bilingual edition (RTL blocks, Persian type). |
+| `src/img/` | Figures extracted from the two lecture PDFs. |
+| `src/fonts/` | Source Serif 4, Inter, Vazirmatn (all OFL). |
+| `src/build.py` | Assembles the parts and renders both PDFs with WeasyPrint. |
 
 Parts, in `build.py`'s `PARTS` order:
 
@@ -109,8 +109,9 @@ unchanged but re-encodes PNG, and the cap keeps the English PDF under 8 MB.
 ## Rebuilding
 
 ```bash
+cd src
 pip install weasyprint beautifulsoup4 pymupdf
-python3 build.py both ../output      # or: en / bi
+python3 build.py both ..             # or: en / bi
 ```
 
 Rendering takes about 20 seconds per edition.

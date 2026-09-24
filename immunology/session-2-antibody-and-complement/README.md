@@ -1,7 +1,7 @@
-# Medical Immunology — Session 2: Antibody and Complement (generator)
+# Medical Immunology — Session 2: Antibody and Complement
 
-Sources for `output/immunology-session2-english.pdf` (72 pp) and
-`output/immunology-session2-bilingual.pdf` (117 pp).
+Sources for `immunology-session2-english.pdf` (72 pp) and
+`immunology-session2-bilingual.pdf` (117 pp).
 
 Covers Lecture 2 of the Medical Immunology course: the structure of the
 antibody molecule, where its diversity comes from, the five classes and their
@@ -13,12 +13,12 @@ the six biological functions, and complement disease.
 
 | Path | Contents |
 |---|---|
-| `build/*.html` | Content, in reading order. One master copy serves both editions. |
-| `build/base.css` | Page setup, typography, callouts, tables, molecule cards, cascade strips, PDF bookmarks. |
-| `build/bilingual.css`| Overlay applied only to the bilingual edition (RTL blocks, Persian type). |
-| `img/` | Figures extracted from the lecture deck. |
-| `fonts/` | Source Serif 4, Inter, Vazirmatn (all OFL). |
-| `build.py` | Assembles the parts and renders both PDFs with WeasyPrint. |
+| `src/build/*.html` | Content, in reading order. One master copy serves both editions. |
+| `src/build/base.css` | Page setup, typography, callouts, tables, molecule cards, cascade strips, PDF bookmarks. |
+| `src/build/bilingual.css` | Overlay applied only to the bilingual edition (RTL blocks, Persian type). |
+| `src/img/` | Figures extracted from the lecture deck. |
+| `src/fonts/` | Source Serif 4, Inter, Vazirmatn (all OFL). |
+| `src/build.py` | Assembles the parts and renders both PDFs with WeasyPrint. |
 
 Parts, in `build.py`'s `PARTS` order:
 
@@ -94,8 +94,9 @@ re-encodes PNG, which keeps the English PDF under 5 MB.
 ## Rebuilding
 
 ```bash
+cd src
 pip install weasyprint beautifulsoup4 pymupdf
-python3 build.py both ../output      # or: en / bi
+python3 build.py both ..             # or: en / bi
 ```
 
 Rendering takes about 15 seconds per edition.

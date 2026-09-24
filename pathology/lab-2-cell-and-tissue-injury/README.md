@@ -1,7 +1,7 @@
-# Pathology Laboratory — Session 2: Cell and Tissue Injury (generator)
+# Pathology Laboratory — Session 2: Cell and Tissue Injury
 
-Sources for `output/pathology-lab2-english.pdf` (41 pp) and
-`output/pathology-lab2-bilingual.pdf` (68 pp).
+Sources for `pathology-lab2-english.pdf` (41 pp) and
+`pathology-lab2-bilingual.pdf` (68 pp).
 
 Covers reversible cell and tissue injury: cellular swelling, fatty change,
 hyaline degeneration, mucoid change and pathological calcification, with the
@@ -12,12 +12,12 @@ specimen and slide on the session's list.
 
 | Path | Contents |
 |---|---|
-| `build/*.html` | Content, in reading order. One master copy serves both editions. |
-| `build/base.css` | Page setup, typography, callouts, tables, specimen cards, PDF bookmarks. |
-| `build/bilingual.css`| Overlay applied only to the bilingual edition (RTL blocks, Persian type). |
-| `img/` | Figures cropped from the lecture deck. |
-| `fonts/` | Source Serif 4, Inter, Vazirmatn (all OFL). |
-| `build.py` | Assembles the parts and renders both PDFs with WeasyPrint. |
+| `src/build/*.html` | Content, in reading order. One master copy serves both editions. |
+| `src/build/base.css` | Page setup, typography, callouts, tables, specimen cards, PDF bookmarks. |
+| `src/build/bilingual.css` | Overlay applied only to the bilingual edition (RTL blocks, Persian type). |
+| `src/img/` | Figures cropped from the lecture deck. |
+| `src/fonts/` | Source Serif 4, Inter, Vazirmatn (all OFL). |
+| `src/build.py` | Assembles the parts and renders both PDFs with WeasyPrint. |
 
 Parts, in `build.py`'s `PARTS` order:
 
@@ -59,8 +59,9 @@ which keeps the English PDF near 3.5 MB.
 ## Rebuilding
 
 ```bash
+cd src
 pip install weasyprint beautifulsoup4 pymupdf
-python3 build.py both ../output      # or: en / bi
+python3 build.py both ..             # or: en / bi
 ```
 
 Rendering takes about 10 seconds per edition.

@@ -1,18 +1,17 @@
-# Session 3 — Disorders of Vascular Flow (generator)
+# Pathology — Session 3: Disorders of Vascular Flow
 
-Sources for `output/pathology-session3-english.pdf` and
-`output/pathology-session3-bilingual.pdf`.
+`pathology-session3-english.pdf` (91 pp) and `pathology-session3-bilingual.pdf` (159 pp).
 
 ## Layout
 
 | Path | Contents |
 |---|---|
-| `build/*.html` | Content, in reading order. One master copy serves both editions. |
-| `build/base.css` | Page setup, typography, callouts, tables, figures, PDF bookmarks. |
-| `build/bilingual.css`| Overlay applied only to the bilingual edition (RTL blocks, Persian type). |
-| `img/` | Figures extracted from the source PDFs. |
-| `fonts/` | Source Serif 4, Inter, Vazirmatn (all OFL). |
-| `build.py` | Assembles the parts and renders both PDFs with WeasyPrint. |
+| `src/build/*.html` | Content, in reading order. One master copy serves both editions. |
+| `src/build/base.css` | Page setup, typography, callouts, tables, figures, PDF bookmarks. |
+| `src/build/bilingual.css` | Overlay applied only to the bilingual edition (RTL blocks, Persian type). |
+| `src/img/` | Figures extracted from the source PDFs. |
+| `src/fonts/` | Source Serif 4, Inter, Vazirmatn (all OFL). |
+| `src/build.py` | Assembles the parts and renders both PDFs with WeasyPrint. |
 
 ## The `<fa>` convention
 
@@ -36,8 +35,9 @@ its translation in the same place, and both PDFs stay correct.
 ## Rebuilding
 
 ```bash
+cd src
 pip install weasyprint beautifulsoup4 pymupdf
-python3 build.py both ../output      # or: en / bi
+python3 build.py both ..             # or: en / bi
 ```
 
 Rendering takes about a minute per edition.

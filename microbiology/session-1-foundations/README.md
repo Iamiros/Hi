@@ -1,7 +1,7 @@
-# Medical Microbiology — Session 1: Foundations (generator)
+# Medical Microbiology — Session 1: Foundations
 
-Sources for `output/microbiology-session1-english.pdf` (88 pp) and
-`output/microbiology-session1-bilingual.pdf` (145 pp).
+Sources for `microbiology-session1-english.pdf` (88 pp) and
+`microbiology-session1-bilingual.pdf` (145 pp).
 
 Covers Autumn Week 1: *Medical Microbiology — a brief introduction* and
 *Bacterial cell structure*.
@@ -10,12 +10,12 @@ Covers Autumn Week 1: *Medical Microbiology — a brief introduction* and
 
 | Path | Contents |
 |---|---|
-| `build/*.html` | Content, in reading order. One master copy serves both editions. |
-| `build/base.css` | Page setup, typography, callouts, tables, flowcharts, figures, PDF bookmarks. |
-| `build/bilingual.css`| Overlay applied only to the bilingual edition (RTL blocks, Persian type). |
-| `img/` | Figures extracted from the lecture-1 slides. |
-| `fonts/` | Source Serif 4, Inter, Vazirmatn (all OFL). |
-| `build.py` | Assembles the parts and renders both PDFs with WeasyPrint. |
+| `src/build/*.html` | Content, in reading order. One master copy serves both editions. |
+| `src/build/base.css` | Page setup, typography, callouts, tables, flowcharts, figures, PDF bookmarks. |
+| `src/build/bilingual.css` | Overlay applied only to the bilingual edition (RTL blocks, Persian type). |
+| `src/img/` | Figures extracted from the lecture-1 slides. |
+| `src/fonts/` | Source Serif 4, Inter, Vazirmatn (all OFL). |
+| `src/build.py` | Assembles the parts and renders both PDFs with WeasyPrint. |
 
 Parts, in `build.py`'s `PARTS` order:
 
@@ -85,8 +85,9 @@ commonest error on this topic.
 ## Rebuilding
 
 ```bash
+cd src
 pip install weasyprint beautifulsoup4 pymupdf
-python3 build.py both ../output      # or: en / bi
+python3 build.py both ..             # or: en / bi
 ```
 
 Rendering takes about 15 seconds per edition.
