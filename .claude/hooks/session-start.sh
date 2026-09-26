@@ -41,7 +41,7 @@ if command -v claude >/dev/null 2>&1; then
 fi
 
 # Slow system and Python tools install in the background so the session starts immediately.
-setsid nohup bash -c '
+setsid nohup flock -n /tmp/session-setup.lock bash -c '
   if ! command -v pdftoppm >/dev/null || ! command -v ffmpeg >/dev/null || ! fc-list | grep -qi "noto.*cjk"; then
     apt-get update -qq && DEBIAN_FRONTEND=noninteractive apt-get install -y -qq poppler-utils ffmpeg fonts-noto-cjk
   fi
