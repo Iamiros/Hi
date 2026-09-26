@@ -5,7 +5,7 @@ You are building study materials for my MBBS courses (Zhejiang University School
 Courses: Pathology, Pathology Lab, Immunology, Microbiology, Histology, Anatomy.
 
 ## 0. Session setup (automatic)
-`.claude/settings.json` declares the plugin marketplaces and `.claude/hooks/session-start.sh` installs them, plus the PDF build tools (pymupdf, playwright, weasyprint, beautifulsoup4), at the start of every web session. Plugins: document-skills, taste-skill, caveman, ponytail, pubmed (official NLM PubMed MCP), storybook. Project skills in `.claude/skills/`: pubmed-database, literature-review, token-budget-advisor, context-budget (copied from ecc, MIT). ecc itself is deliberately NOT installed: it costs ~41,500 tokens per chat.
+`.claude/settings.json` declares the plugin marketplaces and `.claude/hooks/session-start.sh` installs them, plus the PDF build tools (pymupdf, playwright, weasyprint, beautifulsoup4), at the start of every web session. Plugins: document-skills, taste-skill, caveman, ponytail, pubmed (official NLM PubMed MCP). Project skills in `.claude/skills/`: medical-image-search (Openverse, Wikimedia Commons, NIH Open-i), plus pubmed-database, literature-review, token-budget-advisor, context-budget (copied from ecc, MIT). ecc itself is deliberately NOT installed: it costs ~41,500 tokens per chat.
 1. Confirm with `claude plugin list`. If anything is missing, run `CLAUDE_CODE_REMOTE=true .claude/hooks/session-start.sh` and continue; newly installed skills load in the next session, so meanwhile read their SKILL.md directly from `~/.claude/plugins/cache/`.
 2. Read the course's THEME.md (section 3) and the README of the latest guide for that course.
 3. If any part of the job would be done better by a plugin or MCP server that is not installed (image search, image generation, figure/diagram tools, PubMed/citation lookup, OCR), find it (SearchPlugins / SearchMcpRegistry) and install or suggest it. Use the best tool for each part, never a weaker default. If it should be permanent, add it to `.claude/settings.json` and the hook.
@@ -21,7 +21,7 @@ Courses: Pathology, Pathology Lab, Immunology, Microbiology, Histology, Anatomy.
 
 ## 2. Images and figures (full freedom, any source, any plugin)
 1. Extract the real figures from my lecture file first (PyMuPDF), because they match what the lecturer teaches.
-2. Open-licence sources via web search/fetch: Wikimedia Commons, OpenStax, NIH/CDC/PHIL, public pathology and histology image banks. Use real micrographs, gross specimens, radiology and anatomy plates wherever they teach.
+2. Open-licence sources through the medical-image-search skill (Openverse, Wikimedia Commons, NIH Open-i), then web search/fetch for OpenStax, CDC PHIL and public pathology/histology banks. Record every image's licence and author in `src/img/CREDITS.md`. Use real micrographs, gross specimens, radiology and anatomy plates wherever they teach.
 3. Use image generation, if available, for concept illustrations only, never for micrographs or specimens that must be real.
 4. Build your own diagrams, flowcharts, charts and comparison graphics wherever they teach better than a photo.
 Every image gets a teaching caption saying what to look at. No decorative images.
