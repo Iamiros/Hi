@@ -12,7 +12,6 @@ MARKETPLACES=(
   "JuliusBrussee/caveman"
   "DietrichGebert/ponytail"
   "anthropics/life-sciences"
-  "storybookjs/storybook"
 )
 PLUGINS=(
   "document-skills@anthropic-agent-skills"
@@ -20,7 +19,6 @@ PLUGINS=(
   "caveman@caveman"
   "ponytail@ponytail"
   "pubmed@life-sciences"
-  "storybook@storybook"
 )
 
 if command -v claude >/dev/null 2>&1; then

@@ -17,7 +17,6 @@
     "taste-skill@taste-skill": true,
     "caveman@caveman": true,
     "ponytail@ponytail": true,
-    "storybook@storybook": true,
     "pubmed@life-sciences": true
   },
   "extraKnownMarketplaces": {
@@ -43,12 +42,6 @@
       "source": {
         "source": "github",
         "repo": "DietrichGebert/ponytail"
-      }
-    },
-    "storybook": {
-      "source": {
-        "source": "github",
-        "repo": "storybookjs/storybook"
       }
     },
     "life-sciences": {
