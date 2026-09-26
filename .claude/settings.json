@@ -17,8 +17,8 @@
     "taste-skill@taste-skill": true,
     "caveman@caveman": true,
     "ponytail@ponytail": true,
-    "ecc@ecc": true,
-    "storybook@storybook": true
+    "storybook@storybook": true,
+    "pubmed@life-sciences": true
   },
   "extraKnownMarketplaces": {
     "anthropic-agent-skills": {
@@ -45,16 +45,16 @@
         "repo": "DietrichGebert/ponytail"
       }
     },
-    "ecc": {
-      "source": {
-        "source": "github",
-        "repo": "affaan-m/everything-claude-code"
-      }
-    },
     "storybook": {
       "source": {
         "source": "github",
         "repo": "storybookjs/storybook"
+      }
+    },
+    "life-sciences": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/life-sciences"
       }
     }
   }
