@@ -1,0 +1,61 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/session-start.sh",
+            "timeout": 600
+          }
+        ]
+      }
+    ]
+  },
+  "enabledPlugins": {
+    "document-skills@anthropic-agent-skills": true,
+    "taste-skill@taste-skill": true,
+    "caveman@caveman": true,
+    "ponytail@ponytail": true,
+    "ecc@ecc": true,
+    "storybook@storybook": true
+  },
+  "extraKnownMarketplaces": {
+    "anthropic-agent-skills": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/skills"
+      }
+    },
+    "taste-skill": {
+      "source": {
+        "source": "github",
+        "repo": "Leonxlnx/taste-skill"
+      }
+    },
+    "caveman": {
+      "source": {
+        "source": "github",
+        "repo": "JuliusBrussee/caveman"
+      }
+    },
+    "ponytail": {
+      "source": {
+        "source": "github",
+        "repo": "DietrichGebert/ponytail"
+      }
+    },
+    "ecc": {
+      "source": {
+        "source": "github",
+        "repo": "affaan-m/everything-claude-code"
+      }
+    },
+    "storybook": {
+      "source": {
+        "source": "github",
+        "repo": "storybookjs/storybook"
+      }
+    }
+  }
+}
