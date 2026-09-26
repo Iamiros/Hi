@@ -17,7 +17,11 @@
     "taste-skill@taste-skill": true,
     "caveman@caveman": true,
     "ponytail@ponytail": true,
-    "pubmed@life-sciences": true
+    "pubmed@life-sciences": true,
+    "ppt-master@ppt-master": true,
+    "ui-ux-pro-max@ui-ux-pro-max-skill": true,
+    "humanizer@humanizer": true,
+    "watch@claude-video": true
   },
   "extraKnownMarketplaces": {
     "anthropic-agent-skills": {
@@ -48,6 +52,30 @@
       "source": {
         "source": "github",
         "repo": "anthropics/life-sciences"
+      }
+    },
+    "ppt-master": {
+      "source": {
+        "source": "github",
+        "repo": "hugohe3/ppt-master"
+      }
+    },
+    "ui-ux-pro-max-skill": {
+      "source": {
+        "source": "github",
+        "repo": "nextlevelbuilder/ui-ux-pro-max-skill"
+      }
+    },
+    "humanizer": {
+      "source": {
+        "source": "github",
+        "repo": "blader/humanizer"
+      }
+    },
+    "claude-video": {
+      "source": {
+        "source": "github",
+        "repo": "bradautomates/claude-video"
       }
     }
   }

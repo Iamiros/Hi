@@ -1,5 +1,5 @@
 #!/bin/bash
-# Installs the plugin set and PDF build tools in every Claude Code on the web session.
+# Installs the plugin set and document build tools in every Claude Code on the web session.
 set -uo pipefail
 
 if [ "${CLAUDE_CODE_REMOTE:-}" != "true" ]; then
@@ -12,6 +12,10 @@ MARKETPLACES=(
   "JuliusBrussee/caveman"
   "DietrichGebert/ponytail"
   "anthropics/life-sciences"
+  "hugohe3/ppt-master"
+  "nextlevelbuilder/ui-ux-pro-max-skill"
+  "blader/humanizer"
+  "bradautomates/claude-video"
 )
 PLUGINS=(
   "document-skills@anthropic-agent-skills"
@@ -19,6 +23,10 @@ PLUGINS=(
   "caveman@caveman"
   "ponytail@ponytail"
   "pubmed@life-sciences"
+  "ppt-master@ppt-master"
+  "ui-ux-pro-max@ui-ux-pro-max-skill"
+  "humanizer@humanizer"
+  "watch@claude-video"
 )
 
 if command -v claude >/dev/null 2>&1; then
@@ -32,7 +40,14 @@ if command -v claude >/dev/null 2>&1; then
   done
 fi
 
-pip install -q --disable-pip-version-check pymupdf playwright weasyprint beautifulsoup4 >/dev/null 2>&1 \
-  || echo "pip install of PDF build tools failed" >&2
+# Slow system and Python tools install in the background so the session starts immediately.
+setsid nohup bash -c '
+  if ! command -v pdftoppm >/dev/null || ! command -v ffmpeg >/dev/null || ! fc-list | grep -qi "noto.*cjk"; then
+    apt-get update -qq && DEBIAN_FRONTEND=noninteractive apt-get install -y -qq poppler-utils ffmpeg fonts-noto-cjk
+  fi
+  pip install -q --disable-pip-version-check pymupdf playwright weasyprint beautifulsoup4 \
+    python-pptx PyYAML "markitdown[pptx]" defusedxml lxml Pillow reportlab yt-dlp
+  echo done > /tmp/session-setup.done
+' >/tmp/session-setup.log 2>&1 < /dev/null &
 
 exit 0
