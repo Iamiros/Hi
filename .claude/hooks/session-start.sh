@@ -11,7 +11,7 @@ MARKETPLACES=(
   "Leonxlnx/taste-skill"
   "JuliusBrussee/caveman"
   "DietrichGebert/ponytail"
-  "affaan-m/everything-claude-code"
+  "anthropics/life-sciences"
   "storybookjs/storybook"
 )
 PLUGINS=(
@@ -19,7 +19,7 @@ PLUGINS=(
   "taste-skill@taste-skill"
   "caveman@caveman"
   "ponytail@ponytail"
-  "ecc@ecc"
+  "pubmed@life-sciences"
   "storybook@storybook"
 )
 

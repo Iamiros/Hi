@@ -5,7 +5,7 @@ You are building study materials for my MBBS courses (Zhejiang University School
 Courses: Pathology, Pathology Lab, Immunology, Microbiology, Histology, Anatomy.
 
 ## 0. Session setup (automatic)
-`.claude/settings.json` declares the plugin marketplaces and `.claude/hooks/session-start.sh` installs them, plus the PDF build tools (pymupdf, playwright, weasyprint, beautifulsoup4), at the start of every web session. Plugins: document-skills, taste-skill, caveman, ponytail, ecc, storybook.
+`.claude/settings.json` declares the plugin marketplaces and `.claude/hooks/session-start.sh` installs them, plus the PDF build tools (pymupdf, playwright, weasyprint, beautifulsoup4), at the start of every web session. Plugins: document-skills, taste-skill, caveman, ponytail, pubmed (official NLM PubMed MCP), storybook. Project skills in `.claude/skills/`: pubmed-database, literature-review, token-budget-advisor, context-budget (copied from ecc, MIT). ecc itself is deliberately NOT installed: it costs ~41,500 tokens per chat.
 1. Confirm with `claude plugin list`. If anything is missing, run `CLAUDE_CODE_REMOTE=true .claude/hooks/session-start.sh` and continue; newly installed skills load in the next session, so meanwhile read their SKILL.md directly from `~/.claude/plugins/cache/`.
 2. Read the course's THEME.md (section 3) and the README of the latest guide for that course.
 3. If any part of the job would be done better by a plugin or MCP server that is not installed (image search, image generation, figure/diagram tools, PubMed/citation lookup, OCR), find it (SearchPlugins / SearchMcpRegistry) and install or suggest it. Use the best tool for each part, never a weaker default. If it should be permanent, add it to `.claude/settings.json` and the hook.
@@ -16,7 +16,8 @@ Courses: Pathology, Pathology Lab, Immunology, Microbiology, Histology, Anatomy.
 - dataviz for every chart, graph, heatmap, stat tile or numeric table.
 - artifact-diagramming know-how for mechanism diagrams, drawn as clean SVG that shows the real mechanism.
 - taste-skill:output-skill so nothing is truncated or left as a placeholder.
-- Token saving in every chat: caveman and ponytail are installed for this, and ecc's context-budget / token-budget-advisor skills are available. Also work efficiently: extract source text once to the scratchpad, read only the pages needed, delegate bulk reading to subagents, render review PNGs at low DPI. Keep user-facing replies short; never let token saving reduce the quality or completeness of the study files themselves.
+- Research and fact-checking: use the PubMed MCP (search_articles, get_article_metadata, get_full_text_article) to verify facts, numbers and recent guidelines during review pass A, and cite a PMID where a claim goes beyond the lecture. Fall back to the pubmed-database skill (NCBI E-utilities via curl) if the MCP is unavailable. Use literature-review when a topic needs several sources weighed.
+- Token saving in every chat: caveman (terse replies, auto-on) and ponytail (minimal code) are installed; use token-budget-advisor and context-budget when context grows, and compact at natural phase boundaries (after extraction, after build, after review). Also work efficiently: extract source text once to the scratchpad, read only the pages needed, delegate bulk reading to subagents, render review PNGs at low DPI. Keep user-facing replies short; never let token saving reduce the quality or completeness of the study files themselves.
 
 ## 2. Images and figures (full freedom, any source, any plugin)
 1. Extract the real figures from my lecture file first (PyMuPDF), because they match what the lecturer teaches.
