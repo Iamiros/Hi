@@ -1,6 +1,6 @@
 ---
 name: medical-image-search
-description: Find and download real, openly licensed medical images (gross specimens, histology and pathology micrographs, radiology, anatomy plates, microbiology cultures) from Openverse, Wikimedia Commons and NIH Open-i, with licence and attribution captured. Use whenever a study guide needs a real image the lecture file does not already contain.
+description: Find and download real, openly licensed medical images (gross specimens, histology and pathology micrographs, radiology, anatomy plates, microbiology cultures) from Openverse, Wikimedia Commons and NIH Open-i, and scientific illustration icons (cells, receptors, microbes, organs; Bioicons incl. Servier Medical Art) for BioRender-style diagrams, with licence and attribution captured. Use whenever a study guide needs a real image or an illustrated diagram.
 ---
 
 # Medical image search
@@ -40,6 +40,20 @@ curl -s -A "$UA" 'https://openi.nlm.nih.gov/api/search?query=caseating+granuloma
  | python3 -c "import json,sys;d=json.load(sys.stdin);[print(x.get('uid'),'|',x.get('title','')[:60],'|','https://openi.nlm.nih.gov'+x.get('imgLarge',''),'|',x.get('pmcid')) for x in d.get('list',[])]"
 ```
 `it=` image type filter: `g` graphics/photos, `x` x-ray, `c` CT, `m` MRI, `u` ultrasound, `mc` microscopy. Open-i figures are from PMC open-access articles; the API gives no licence field, so open `https://www.ncbi.nlm.nih.gov/pmc/articles/<pmcid>/` (or the PubMed MCP) and confirm the article licence before use; keep the PMCID for attribution.
+
+## 4. Illustration icons for BioRender-style diagrams (Bioicons, includes Servier Medical Art)
+
+2,767 SVG icons: Blood_Immunology, Human_physiology, Microbiology, Tissues, Cell_membrane, Receptors_channels, Intracellular_components, Parasites, Genetics, Lab_apparatus. Licence is the first path segment (cc-0, cc-by-3.0, cc-by-4.0, mit); the author is the third.
+
+```bash
+# one-time index (no file contents downloaded)
+[ -d /tmp/bioicons ] || git clone -q --depth 1 --filter=blob:none --sparse https://github.com/duerrsimon/bioicons.git /tmp/bioicons
+git -C /tmp/bioicons ls-tree -r --name-only HEAD | grep -iE '\.svg$' | grep -iE 'macrophage|neutrophil|mast'
+# fetch one icon
+curl -s -o src/img/icons/macrophage.svg https://raw.githubusercontent.com/duerrsimon/bioicons/main/static/icons/cc-by-3.0/Blood_Immunology/Servier/macrophage.svg
+```
+
+Compose diagrams yourself: place the icons inside your own inline SVG (arrows, labels, membranes, compartments), recolour fills to the course THEME.md palette, keep one icon style per figure (do not mix Servier's shaded style with flat icons in the same diagram). Credit line: "Icons: Servier Medical Art (CC BY 3.0) via Bioicons" or the listed author and licence.
 
 ## Rules
 
