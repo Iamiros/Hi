@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Talking Between Cells</title>
+<link rel="stylesheet" href="fonts/fonts.local.css">
+<style>
+@page { size: A4; margin: 0; }
+:root{
+  --paper:#FAFAF8; --ink:#15171C; --ink2:#454A53; --ink3:#747A84;
+  --line:#DADCE0; --tint:#F0F1F2; --acc:#C43B25; --acc-tint:#FAE9E5;
+  --r:3px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--paper)}
+body{font-family:"IBM Plex Sans",sans-serif;color:var(--ink);font-size:9pt;line-height:1.5;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact;font-feature-settings:"kern","liga"}
+.page{width:210mm;height:297mm;padding:15mm 16mm 12mm;position:relative;overflow:hidden;
+  page-break-after:always;break-after:page;background:var(--paper);display:flex;flex-direction:column}
+.page:last-child{page-break-after:auto;break-after:auto}
+.foot{position:absolute;left:16mm;right:16mm;bottom:8mm;display:flex;justify-content:space-between;
+  font-family:"IBM Plex Mono",monospace;font-size:6.5pt;color:var(--ink3);border-top:1px solid var(--line);padding-top:2.2mm}
+.mono{font-family:"IBM Plex Mono",monospace}
+b,strong{font-weight:600}
+h1{text-wrap:balance;font-size:25pt;line-height:1.08;font-weight:600;letter-spacing:-.022em;max-width:150mm}
+h2{font-size:11.5pt;line-height:1.25;font-weight:600;letter-spacing:-.01em;margin-bottom:2mm}
+h3{font-size:9.5pt;font-weight:600;margin-bottom:1mm}
+.lede{text-wrap:pretty;font-size:11pt;line-height:1.45;color:var(--ink2);max-width:140mm;margin-top:3mm}
+p+p{margin-top:2mm}
+.muted{color:var(--ink2)}
+.nb{white-space:nowrap}
+.small{font-size:7.6pt;line-height:1.45;color:var(--ink3)}
+img.fig{display:block;width:100%;mix-blend-mode:multiply;border-radius:var(--r)}
+.cap{font-size:7.2pt;line-height:1.4;color:var(--ink3);margin-top:1.5mm}
+.cap b{color:var(--ink2)}
+
+/* signal chips */
+.s{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:6.6pt;font-weight:600;line-height:1;
+  padding:1.6px 4px 1.4px;border-radius:var(--r);vertical-align:1px;letter-spacing:.02em}
+.s1{background:var(--ink);color:var(--paper)}
+.s2{background:var(--acc);color:#fff}
+.s3{box-shadow:inset 0 0 0 1px var(--ink);color:var(--ink)}
+
+/* ---------- COVER ---------- */
+.cover .top{display:flex;justify-content:space-between;font-family:"IBM Plex Mono",monospace;font-size:7pt;color:var(--ink3)}
+.cover .title{font-size:58pt;line-height:.98;font-weight:600;letter-spacing:-.035em;margin-top:13mm}
+.cover .title span{color:var(--acc)}
+.cover .sub{font-size:12.5pt;color:var(--ink2);margin-top:5mm;max-width:120mm;line-height:1.4}
+.cover .band{display:grid;grid-template-columns:1fr 84mm;gap:10mm;margin-top:9mm;align-items:end}
+.cover .idea{padding-bottom:2mm}
+.cover .idea .big{font-size:24pt;line-height:1.12;font-weight:600;letter-spacing:-.02em}
+.cover .idea p{margin-top:3.5mm;color:var(--ink2);font-size:9.2pt}
+.cover .pore{position:relative}
+.cover .pore img{width:100%}
+.matrix{width:100%;border-collapse:collapse;margin-top:8mm}
+.matrix th,.matrix td{text-align:left;vertical-align:top;padding:2.2mm 3mm 2.2mm 0;font-size:8.4pt;line-height:1.4}
+.matrix thead th{padding-bottom:2.5mm;border-bottom:1.5px solid var(--ink)}
+.matrix thead th .qh{display:block;font-size:10.5pt;font-weight:600;margin-top:1.6mm;letter-spacing:-.01em}
+.matrix tbody th{font-weight:500;color:var(--ink3);font-size:7.6pt;width:24mm;padding-top:2.6mm}
+.matrix tbody tr+tr td,.matrix tbody tr+tr th{border-top:1px solid var(--line)}
+.cover .contents{display:grid;grid-template-columns:repeat(4,1fr);gap:5mm;margin-top:auto;margin-bottom:10mm}
+.cover .contents div{border-top:1.5px solid var(--ink);padding-top:2mm;font-size:8.4pt;line-height:1.35;font-weight:500}
+.cover .contents .n{font-family:"IBM Plex Mono",monospace;font-size:7pt;color:var(--acc);display:block;margin-bottom:1mm}
+
+/* ---------- PAGE 2 ---------- */
+.diagram{margin-top:6mm}
+.diagram svg{display:block;width:100%;height:auto;overflow:visible}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:9mm}
+.callout{border-left:2.5px solid var(--acc);padding:1mm 0 1mm 4mm}
+.callout .term{font-size:15pt;font-weight:600;letter-spacing:-.02em;line-height:1.1;margin-bottom:1.5mm}
+.cmp{width:100%;border-collapse:collapse;font-size:8.2pt;line-height:1.4}
+.cmp th,.cmp td{text-align:left;vertical-align:top;padding:1.9mm 2.5mm 1.9mm 0}
+.cmp thead th{font-size:9pt;font-weight:600;border-bottom:1.5px solid var(--ink);padding-bottom:2mm}
+.cmp thead th small{display:block;font-weight:400;color:var(--ink3);font-size:7.4pt}
+.cmp tbody th{font-weight:500;color:var(--ink3);font-size:7.5pt;width:21mm}
+.cmp tbody tr+tr > *{border-top:1px solid var(--line)}
+.cmp .full td{color:var(--ink2);font-style:italic}
+.strip{margin-top:auto;margin-bottom:8mm;background:var(--tint);border-radius:var(--r);padding:4mm 5mm;display:grid;
+  grid-template-columns:40mm 1fr;gap:6mm;align-items:start}
+.strip .k{font-size:10pt;font-weight:600;line-height:1.25;letter-spacing:-.01em}
+.strip p{font-size:8.4pt;color:var(--ink2)}
+
+/* ---------- PAGE 3 ---------- */
+.mhc{display:grid;grid-template-columns:1fr 1fr;gap:0 9mm;margin-top:7mm}
+.mhc .ph{height:37mm;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.mhc .ph img{max-height:37mm;border-radius:var(--r);width:auto;max-width:100%;mix-blend-mode:multiply}
+.mhc .cls{display:flex;align-items:baseline;justify-content:space-between;border-bottom:1.5px solid var(--ink);padding:3mm 0 1.8mm}
+.mhc .cls .name{font-size:14pt;font-weight:600;letter-spacing:-.015em}
+.mhc .cls .hla{font-family:"IBM Plex Mono",monospace;font-size:7.4pt;color:var(--ink3)}
+.mhc .num{display:flex;align-items:baseline;gap:2.5mm;padding:3mm 0 2.5mm}
+.mhc .num .v{white-space:nowrap;font-size:30pt;font-weight:600;letter-spacing:-.03em;line-height:1}
+.mhc .num .u{font-size:8.2pt;color:var(--ink2);line-height:1.3}
+.mhc dl{display:grid;grid-template-columns:22mm 1fr;font-size:8.3pt;line-height:1.4}
+.mhc dt,.mhc dd{padding:1.8mm 0;border-top:1px solid var(--line)}
+.mhc dt{color:var(--ink3);font-size:7.5pt;padding-top:2mm}
+.mnemo{margin-top:6mm;display:grid;grid-template-columns:1fr 58mm;gap:8mm;align-items:center;
+  border-top:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink);padding:5mm 0}
+.mnemo .say{font-size:24pt;font-weight:600;letter-spacing:-.03em;line-height:1.05}
+.mnemo .say em{font-style:italic;color:var(--acc);font-weight:600}
+.mnemo p{font-size:8.4pt;color:var(--ink2)}
+.eight{font-family:"IBM Plex Mono",monospace;font-size:10pt;line-height:1.7}
+.eight b{color:var(--acc)}
+.alleles{display:grid;grid-template-columns:1fr 1fr;gap:0 9mm;margin-top:3mm}
+.alleles div{display:grid;grid-template-columns:27mm 1fr;padding:1.9mm 0;border-top:1px solid var(--line);font-size:8.2pt;line-height:1.4}
+.alleles .a{font-family:"IBM Plex Mono",monospace;font-weight:500;font-size:7.9pt}
+
+/* ---------- PAGE 4 ---------- */
+.parts{display:grid;grid-template-columns:46mm 1fr;gap:5mm;align-items:start}
+.part{padding:2mm 0;border-top:1px solid var(--line)}
+.part:first-child{border-top:1.5px solid var(--ink)}
+.part .role{font-size:7.4pt;color:var(--ink3)}
+.part .mol{font-size:10pt;font-weight:600;letter-spacing:-.01em}
+.dom{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:6.6pt;padding:1px 4px;border-radius:var(--r);
+  box-shadow:inset 0 0 0 1px var(--line);background:#fff;margin:1mm 1mm 0 0;color:var(--ink2)}
+.steps{counter-reset:st;list-style:none}
+.steps li{counter-increment:st;display:grid;grid-template-columns:6mm 1fr;padding:1.7mm 0;border-top:1px solid var(--line);font-size:8.3pt;line-height:1.4}
+.steps li::before{content:counter(st);font-family:"IBM Plex Mono",monospace;font-weight:600;color:var(--acc);font-size:8pt}
+.parallel{width:100%;border-collapse:collapse;font-size:8.3pt;line-height:1.4}
+.parallel th,.parallel td{text-align:left;vertical-align:top;padding:2mm 3mm 2mm 0}
+.parallel thead th{border-bottom:1.5px solid var(--ink);font-size:8.8pt}
+.parallel tbody th{font-weight:500;color:var(--ink3);font-size:7.5pt;width:22mm}
+.parallel tbody tr+tr > *{border-top:1px solid var(--line)}
+
+/* ---------- PAGE 5 ---------- */
+.pairs{display:grid;grid-template-columns:1fr 1fr;gap:0 9mm;margin-top:6mm}
+.pair{padding:2.6mm 0;border-top:1px solid var(--line);display:grid;grid-template-columns:34mm 1fr;gap:3mm;font-size:8.3pt;line-height:1.42}
+.pair .vs{font-weight:600;font-size:8.8pt;line-height:1.3;letter-spacing:-.005em}
+.pair .vs i{font-style:normal;color:var(--acc);font-weight:500;font-size:7.6pt;display:block}
+.pairs .pair:nth-child(-n+2){border-top:1.5px solid var(--ink)}
+.qa{margin-top:3mm}
+.q{display:grid;grid-template-columns:10mm 1fr;gap:2mm;padding:3mm 0;border-top:1px solid var(--line)}
+.q:first-child{border-top:1.5px solid var(--ink)}
+.q .qn{font-family:"IBM Plex Mono",monospace;font-size:8pt;font-weight:600;color:var(--acc)}
+.q .qq{font-size:9.3pt;font-weight:600;line-height:1.35;letter-spacing:-.005em}
+.q .qa-a{font-size:8.3pt;color:var(--ink2);margin-top:1.2mm;line-height:1.45}
+.last{margin-top:auto;margin-bottom:9mm;background:var(--tint);color:var(--ink);border-left:2.5px solid var(--acc);border-radius:var(--r);padding:6mm 7mm;
+  display:grid;grid-template-columns:34mm 1fr;gap:6mm}
+.last .h{font-size:13pt;font-weight:600;letter-spacing:-.015em;line-height:1.15}
+.last ol{list-style:none;counter-reset:l}
+.last li{counter-increment:l;display:grid;grid-template-columns:6mm 1fr;font-size:9pt;line-height:1.45;padding:1.4mm 0;color:var(--ink2)}
+.last li::before{content:counter(l);font-family:"IBM Plex Mono",monospace;color:var(--acc);font-weight:600;font-size:8pt}
+.last li b{color:var(--ink)}
+</style>
+</head>
+<body>
+
+<!-- ======================= PAGE 1 : COVER ======================= -->
+<section class="page cover">
+  <div class="top"><span>Medical Immunology · Zhejiang University School of Medicine</span><span>Lectures 3 and 4</span></div>
+
+  <div class="title">Talking<br>Between <span>Cells</span></div>
+  <div class="sub">CD molecules, MHC, cytokines, pattern-recognition receptors and the inflammasome, read as one conversation.</div>
+
+  <div class="band">
+    <div class="idea">
+      <div class="big">Nothing commits on one signal.</div>
+      <p>This is the observation that ties Lecture 3 to Lecture 4. A T cell and a macrophage face the same risk: acting on a single, possibly mistaken, signal. Both solve it the same way.</p>
+    </div>
+    <div class="pore">
+      <img class="fig" src="img/p72_0_737x749.png" alt="Cryo-EM model of the gasdermin D pore, a 27-fold ring 180 Å across">
+      <div class="cap"><b>The gasdermin D pore.</b> A ring of 108 β-strands, 180 Å across. It is the door IL-1β leaves by, and it opens only after two signals. See page 4.</div>
+    </div>
+  </div>
+
+  <table class="matrix">
+    <thead><tr>
+      <th></th>
+      <th><span class="s s1">SIGNAL 1</span><span class="qh">Is it there?</span></th>
+      <th><span class="s s2">SIGNAL 2</span><span class="qh">Is it dangerous?</span></th>
+      <th><span class="s s3">SIGNAL 3</span><span class="qh">What kind of response?</span></th>
+    </tr></thead>
+    <tbody>
+      <tr><th>In a T cell</th><td>TCR sees peptide on MHC</td><td>CD28 meets B7 on an activated APC</td><td>Cytokines steer it to Th1, Th2, Th17 or Treg</td></tr>
+      <tr><th>In a macrophage</th><td>A PRR sees a PAMP, NF-κB writes pro-IL-1β</td><td>ATP, a crystal or a toxin assembles NLRP3</td><td>IL-1β and IL-18 recruit and instruct the neighbours</td></tr>
+      <tr><th>One alone</th><td colspan="2">T cell: anergy, permanently switched off. Macrophage: primed, releases nothing.</td><td>Not needed to commit, only to steer</td></tr>
+    </tbody>
+  </table>
+
+  <div class="contents">
+    <div><span class="n">p. 2</span>The three signals: how a T cell is switched on</div>
+    <div><span class="n">p. 3</span>MHC: the display case, hot dog and pita</div>
+    <div><span class="n">p. 4</span>The inflammasome: two signals, again</div>
+    <div><span class="n">p. 5</span>Tell them apart, and test yourself</div>
+  </div>
+
+  <div class="foot"><span>Synthesized from lectures by Francis Kaming Chan, PhD, Liangzhu Laboratory · Created by Amirhossein Dehghan</span><span>Design demo, 5 pages</span></div>
+</section>
+
+<!-- ======================= PAGE 2 : THREE SIGNALS ======================= -->
+<section class="page">
+  <h1>A T cell needs a key, a pedal and a wheel.</h1>
+  <p class="lede">Meeting its antigen does not decide what a T cell does. A second molecule on the other cell decides whether it responds, does nothing, or is disabled for good.</p>
+
+  <div class="diagram">
+    <svg viewBox="0 0 673 238" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans" font-size="10">
+      <defs>
+        <marker id="ar" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#15171C"/></marker>
+        <marker id="arA" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#C43B25"/></marker>
+      </defs>
+      <!-- APC -->
+      <rect x="0" y="6" width="176" height="226" rx="22" fill="#F0F1F2" stroke="#15171C" stroke-width="1.4"/>
+      <text x="18" y="34" font-size="12" font-weight="600" fill="#15171C">Antigen-presenting</text>
+      <text x="18" y="50" font-size="12" font-weight="600" fill="#15171C">cell</text>
+      <text x="18" y="200" font-size="8.6" fill="#454A53">Shows B7 only after its own</text>
+      <text x="18" y="213" font-size="8.6" fill="#454A53">sensors have seen a PAMP</text>
+      <!-- T cell -->
+      <rect x="497" y="6" width="176" height="226" rx="22" fill="#FAFAF8" stroke="#15171C" stroke-width="1.4"/>
+      <text x="569" y="34" font-size="12" font-weight="600" fill="#15171C">Naïve T cell</text>
+      <text x="569" y="187" font-size="8.6" fill="#454A53">1 + 2 → proliferation,</text>
+      <text x="569" y="200" font-size="8.6" fill="#454A53">differentiation, IL-2</text>
+      <text x="569" y="213" font-size="8.6" fill="#454A53">3 → Th1, Th2 or Th17</text>
+
+      <!-- Row S1 -->
+      <rect x="120" y="66" width="104" height="26" rx="3" fill="#15171C"/>
+      <text x="172" y="83" text-anchor="middle" fill="#FAFAF8" font-size="9" font-weight="500">peptide on MHC</text>
+      <rect x="449" y="66" width="104" height="26" rx="3" fill="#15171C"/>
+      <text x="501" y="83" text-anchor="middle" fill="#FAFAF8" font-size="9" font-weight="500">TCR · CD3 · CD4/8</text>
+      <line x1="224" y1="79" x2="449" y2="79" stroke="#15171C" stroke-width="1.4"/>
+      <rect x="306" y="71" width="61" height="16" rx="3" fill="#15171C"/>
+      <text x="336.5" y="82.5" text-anchor="middle" fill="#FAFAF8" font-family="IBM Plex Mono" font-size="8" font-weight="600">SIGNAL 1</text>
+      <text x="336.5" y="63" text-anchor="middle" font-size="9.4" font-weight="600" fill="#15171C">Key: specific</text>
+
+      <!-- Row S2 -->
+      <rect x="120" y="120" width="104" height="26" rx="3" fill="#C43B25"/>
+      <text x="172" y="137" text-anchor="middle" fill="#fff" font-size="9" font-weight="500">B7 (CD80 / CD86)</text>
+      <rect x="449" y="120" width="104" height="26" rx="3" fill="#C43B25"/>
+      <text x="501" y="137" text-anchor="middle" fill="#fff" font-size="9" font-weight="500">CD28</text>
+      <line x1="224" y1="133" x2="449" y2="133" stroke="#C43B25" stroke-width="1.4"/>
+      <rect x="306" y="125" width="61" height="16" rx="3" fill="#C43B25"/>
+      <text x="336.5" y="136.5" text-anchor="middle" fill="#fff" font-family="IBM Plex Mono" font-size="8" font-weight="600">SIGNAL 2</text>
+      <text x="336.5" y="117" text-anchor="middle" font-size="9.4" font-weight="600" fill="#C43B25">Pedal: permission</text>
+
+      <!-- Row S3 -->
+      <circle cx="150" cy="167" r="5" fill="none" stroke="#15171C" stroke-width="1.2"/>
+      <circle cx="166" cy="176" r="5" fill="none" stroke="#15171C" stroke-width="1.2"/>
+      <circle cx="182" cy="166" r="5" fill="none" stroke="#15171C" stroke-width="1.2"/>
+      <circle cx="198" cy="174" r="5" fill="none" stroke="#15171C" stroke-width="1.2"/>
+      <path d="M212 171 C 300 171, 380 171, 480 171" fill="none" stroke="#15171C" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#ar)"/>
+      <rect x="306" y="163" width="61" height="16" rx="3" fill="#FAFAF8" stroke="#15171C" stroke-width="1"/>
+      <text x="336.5" y="174.5" text-anchor="middle" fill="#15171C" font-family="IBM Plex Mono" font-size="8" font-weight="600">SIGNAL 3</text>
+      <text x="336.5" y="197" text-anchor="middle" font-size="9.4" font-weight="600" fill="#15171C">Wheel: IL-12, IL-4, IL-6 + TGF-β</text>
+    </svg>
+  </div>
+
+  <div class="two" style="margin-top:7mm">
+    <div>
+      <div class="callout">
+        <div class="term">Anergy</div>
+        <p>Signal 1 without signal 2. The cell survives but is <b>functionally inactivated</b>, unresponsive to that antigen even if it is later presented with full costimulation.</p>
+      </div>
+      <p style="margin-top:4mm" class="muted">Resting tissue cells show self-peptides all day and carry no B7. A self-reactive T cell that escaped the thymus is silenced by that meeting, not activated by it. The two-signal rule is <b style="color:var(--ink)">peripheral tolerance</b>.</p>
+      <img class="fig" src="img/p20_0_600x449.png" alt="Three outcomes: MHC and TCR only gives apoptosis or anergy; plus CD28 gives proliferation; plus CTLA-4 gives cell-cycle arrest" style="margin-top:4mm;width:88%">
+      <div class="cap"><b>Same APC, three outcomes.</b> TCR only: anergy. Plus CD28: proliferation. Plus CTLA-4: cell-cycle arrest.</div>
+    </div>
+    <div>
+      <h2>CD28 and CTLA-4: same ligand, opposite job</h2>
+      <table class="cmp">
+        <thead><tr><th></th><th>CD28<small>the accelerator</small></th><th>CTLA-4 (CD152)<small>the brake</small></th></tr></thead>
+        <tbody>
+          <tr><th>Present</th><td>Constitutive, already on the resting T cell</td><td>Induced, only after TCR stimulation</td></tr>
+          <tr><th>Binds B7</th><td>Lower affinity</td><td>Much higher affinity, outcompetes CD28</td></tr>
+          <tr><th>Effect</th><td>Proliferation, differentiation, <span class="nb">IL-2</span></td><td>Cell-cycle arrest, reduced <span class="nb">IL-2</span></td></tr>
+          <tr><th>If lost</th><td>No costimulation</td><td>Mice die of lymphoproliferation within 3-4 weeks</td></tr>
+          <tr class="full"><th>Logic</th><td colspan="2">Switching a T cell on also switches on the molecule that will switch it off. The response is built to end.</td></tr>
+        </tbody>
+      </table>
+      <p class="small" style="margin-top:3mm">The TCR signal runs Lck → ZAP-70 → PLCγ1 → calcineurin → NFAT → IL-2 gene. Ciclosporin and tacrolimus block calcineurin, which is how graft rejection is prevented.</p>
+    </div>
+  </div>
+
+  <div class="strip">
+    <div class="k">Releasing the brake on purpose</div>
+    <p><b style="color:var(--ink)">Ipilimumab</b>, an anti-CTLA-4 antibody, lets T cells attack melanoma; James P. Allison shared the 2018 Nobel Prize for the idea. Its side effects (colitis, thyroiditis, hepatitis, dermatitis) are the proof: you have removed peripheral tolerance from the whole body, not only from the tumour.</p>
+  </div>
+
+  <div class="foot"><span>Part 2 · The three signals</span><span>2</span></div>
+</section>
+
+<!-- ======================= PAGE 3 : MHC ======================= -->
+<section class="page">
+  <h1>Class I is a hot dog.<br>Class II is a pita.</h1>
+  <p class="lede">An MHC molecule is a display case. Ask where its peptide came from, and the class, the co-receptor and the T cell that reads it all follow.</p>
+
+  <div class="mhc">
+    <div>
+      <div class="ph"><img src="img/p29_0_912x508.png" alt="A hot dog: the bun is closed at both ends"></div>
+      <div class="cls"><span class="name">MHC class I</span><span class="hla">HLA-A, -B, -C</span></div>
+      <div class="num"><span class="v">8-10</span><span class="u">amino acids.<br>Bun closed at both ends, so the sausage is cut to fit.</span></div>
+      <dl>
+        <dt>Cleft walls</dt><dd>α1 + α2, one chain</dd>
+        <dt>Peptide from</dt><dd><b>Inside</b> the cell: cytosolic proteins cut by the proteasome, pumped into the ER by TAP</dd>
+        <dt>Found on</dt><dd>Every nucleated cell. The message: here is what I am making</dd>
+        <dt>Read by</dt><dd><b>CD8</b> cytotoxic T cells; CD8 grips α3</dd>
+      </dl>
+    </div>
+    <div>
+      <div class="ph"><img src="img/p29_1_508x330.png" alt="An open pita: the filling hangs out of both ends"></div>
+      <div class="cls"><span class="name">MHC class II</span><span class="hla">HLA-DR, -DQ, -DP</span></div>
+      <div class="num"><span class="v">13-25</span><span class="u">amino acids.<br>Open at both ends, so the filling hangs out.</span></div>
+      <dl>
+        <dt>Cleft walls</dt><dd>α1 + β1, two chains</dd>
+        <dt>Peptide from</dt><dd><b>Outside</b>: endocytosed proteins chewed by cathepsins in the acidified endosome</dd>
+        <dt>Found on</dt><dd>B cells, dendritic cells, macrophages. The message: here is what I found</dd>
+        <dt>Read by</dt><dd><b>CD4</b> helper T cells; CD4 grips β2</dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="mnemo">
+    <div>
+      <div class="say">Inside, <em>eight</em>.<br>Outside, <em>four</em>.</div>
+      <p style="margin-top:3mm">Class I shows what is made inside the cell, to CD8. Class II shows what came from outside, to CD4. The shapes are not arbitrary: the proteasome supplies size-matched peptides, so a closed pocket works; cathepsins leave ragged lengths, so only an open groove can hold them.</p>
+    </div>
+    <div class="eight">
+      The rule of eight<br>
+      CD8 × class I = <b>8</b><br>
+      CD4 × class II = <b>8</b>
+      <p class="small" style="margin-top:2mm;font-family:'IBM Plex Sans'">Two arithmetic facts rebuild the whole table.</p>
+    </div>
+  </div>
+
+  <h2 style="margin-top:5.5mm">HLA alleles you may be asked to test for</h2>
+  <div class="alleles">
+    <div><span class="a">HLA-B27</span><span>Ankylosing spondylitis, reactive arthritis, anterior uveitis. A risk allele, not a diagnosis</span></div>
+    <div><span class="a">HLA-B*57:01</span><span>Abacavir hypersensitivity. Testing before prescribing is mandatory in HIV care</span></div>
+    <div><span class="a">HLA-DQ2 / DQ8</span><span>Coeliac disease. Their absence essentially rules it out</span></div>
+    <div><span class="a">HLA-B*15:02</span><span>Carbamazepine-induced Stevens-Johnson syndrome in Han Chinese</span></div>
+    <div><span class="a">HLA-DR3 / DR4</span><span>Type 1 diabetes</span></div>
+    <div><span class="a">HLA-DR15</span><span>Multiple sclerosis</span></div>
+  </div>
+
+  <p class="small" style="margin-top:4mm"><b style="color:var(--ink2)">Exam trap.</b> β2-microglobulin is not an MHC gene. It sits on chromosome 15, is invariant, and never causes transplant mismatch.</p>
+
+  <div class="foot"><span>Part 3 · MHC and HLA, the display case</span><span>3</span></div>
+</section>
+
+<!-- ======================= PAGE 4 : INFLAMMASOME ======================= -->
+<section class="page">
+  <h1>The inflammasome: two signals, again.</h1>
+  <p class="lede">IL-1β can cause fever and shock. It has no signal peptide and is made inactive, so a macrophage must hear two independent signals before it can release a single molecule.</p>
+
+  <div class="diagram">
+    <svg viewBox="0 0 673 212" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans" font-size="9">
+      <defs>
+        <marker id="k" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6.5" markerHeight="6.5" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#15171C"/></marker>
+        <marker id="a" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6.5" markerHeight="6.5" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#C43B25"/></marker>
+      </defs>
+      <rect x="0.7" y="0.7" width="671.6" height="210.6" rx="20" fill="none" stroke="#15171C" stroke-width="1.4"/>
+      <text x="16" y="22" font-size="9" fill="#747A84">Macrophage</text>
+
+      <!-- lane 1 -->
+      <rect x="16" y="36" width="61" height="16" rx="3" fill="#15171C"/>
+      <text x="46.5" y="47.5" text-anchor="middle" fill="#FAFAF8" font-family="IBM Plex Mono" font-size="8" font-weight="600">SIGNAL 1</text>
+      <text x="84" y="48" font-size="9.5" font-weight="600" fill="#15171C">Priming: write the parts</text>
+      <g font-size="9" fill="#15171C">
+        <rect x="16" y="60" width="104" height="36" rx="3" fill="#F0F1F2"/>
+        <text x="68" y="75" text-anchor="middle" font-weight="600">PAMP on TLR</text><text x="68" y="88" text-anchor="middle" fill="#454A53">(e.g. LPS on TLR4)</text>
+        <rect x="146" y="60" width="92" height="36" rx="3" fill="#F0F1F2"/>
+        <text x="192" y="75" text-anchor="middle" font-weight="600">NF-κB</text><text x="192" y="88" text-anchor="middle" fill="#454A53">into the nucleus</text>
+        <rect x="264" y="60" width="162" height="36" rx="3" fill="#F0F1F2"/>
+        <text x="345" y="75" text-anchor="middle" font-weight="600">pro-IL-1β, pro-IL-18, NLRP3</text><text x="345" y="88" text-anchor="middle" fill="#454A53">transcribed, held in cytosol</text>
+        <rect x="452" y="60" width="205" height="36" rx="3" fill="none" stroke="#15171C" stroke-dasharray="3 3"/>
+        <text x="554.5" y="75" text-anchor="middle" font-weight="600">Primed. Nothing released.</text><text x="554.5" y="88" text-anchor="middle" fill="#454A53">pro-IL-1β is 31 kDa and inert</text>
+      </g>
+      <line x1="120" y1="78" x2="143" y2="78" stroke="#15171C" stroke-width="1.2" marker-end="url(#k)"/>
+      <line x1="238" y1="78" x2="261" y2="78" stroke="#15171C" stroke-width="1.2" marker-end="url(#k)"/>
+      <line x1="426" y1="78" x2="449" y2="78" stroke="#15171C" stroke-width="1.2" marker-end="url(#k)"/>
+
+      <!-- lane 2 -->
+      <rect x="16" y="116" width="61" height="16" rx="3" fill="#C43B25"/>
+      <text x="46.5" y="127.5" text-anchor="middle" fill="#fff" font-family="IBM Plex Mono" font-size="8" font-weight="600">SIGNAL 2</text>
+      <text x="84" y="128" font-size="9.5" font-weight="600" fill="#C43B25">Activation: assemble and cut</text>
+      <g font-size="9" fill="#15171C">
+        <rect x="16" y="140" width="104" height="54" rx="3" fill="#FAE9E5"/>
+        <text x="68" y="158" text-anchor="middle" font-weight="600">ATP, uric acid</text><text x="68" y="171" text-anchor="middle" font-weight="600">crystals, toxins</text><text x="68" y="184" text-anchor="middle" fill="#454A53">nothing in common</text>
+        <rect x="146" y="140" width="92" height="54" rx="3" fill="#FAE9E5"/>
+        <text x="192" y="158" text-anchor="middle" font-weight="600">K⁺ efflux</text><text x="192" y="171" text-anchor="middle" fill="#454A53">the shared</text><text x="192" y="184" text-anchor="middle" fill="#454A53">consequence</text>
+        <rect x="264" y="140" width="162" height="54" rx="3" fill="#FAE9E5"/>
+        <text x="345" y="158" text-anchor="middle" font-weight="600">NLRP3 → ASC → caspase-1</text><text x="345" y="171" text-anchor="middle" fill="#454A53">polymerise; caspase-1</text><text x="345" y="184" text-anchor="middle" fill="#454A53">activates by proximity</text>
+        <rect x="452" y="140" width="98" height="54" rx="3" fill="#C43B25"/>
+        <text x="501" y="158" text-anchor="middle" font-weight="600" fill="#fff">Cuts pro-IL-1β</text><text x="501" y="171" text-anchor="middle" fill="#fff">to mature</text><text x="501" y="184" text-anchor="middle" fill="#fff">17 kDa IL-1β</text>
+        <rect x="559" y="140" width="98" height="54" rx="3" fill="#C43B25"/>
+        <text x="608" y="158" text-anchor="middle" font-weight="600" fill="#fff">Cuts GSDMD</text><text x="608" y="171" text-anchor="middle" fill="#fff">pore opens,</text><text x="608" y="184" text-anchor="middle" fill="#fff">IL-1β walks out</text>
+      </g>
+      <line x1="120" y1="167" x2="143" y2="167" stroke="#C43B25" stroke-width="1.2" marker-end="url(#a)"/>
+      <line x1="238" y1="167" x2="261" y2="167" stroke="#C43B25" stroke-width="1.2" marker-end="url(#a)"/>
+      <line x1="426" y1="167" x2="449" y2="167" stroke="#C43B25" stroke-width="1.2" marker-end="url(#a)"/>
+      <!-- lane 1 NLRP3 feeds lane 2 -->
+      <path d="M345 96 L345 136" stroke="#15171C" stroke-width="1.2" stroke-dasharray="3 3" marker-end="url(#k)"/>
+    </svg>
+  </div>
+
+  <div class="two" style="margin-top:7mm;grid-template-columns:1fr 1.05fr">
+    <div>
+      <h2>Three parts, three jobs</h2>
+      <div class="parts">
+        <div>
+          <div class="part"><div class="role">Sensor</div><div class="mol">NLRP3</div><span class="dom">LRR</span><span class="dom">NACHT</span><span class="dom">PYD</span></div>
+          <div class="part"><div class="role">Adaptor, a pure connector</div><div class="mol">ASC</div><span class="dom">PYD</span><span class="dom">CARD</span></div>
+          <div class="part"><div class="role">Executioner</div><div class="mol">pro-caspase-1</div><span class="dom">CARD</span><span class="dom">p20</span><span class="dom">p10</span></div>
+        </div>
+        <div>
+          <img class="fig" src="img/p66_1_640x618.png" alt="NLRP3 inflammasome: NLRP3 sensor, ASC adaptor, caspase-1">
+          <div class="cap">Seen down a microscope as one large perinuclear <b>ASC speck</b> per cell, the readout that it has fired.</div>
+        </div>
+      </div>
+      <p class="small" style="margin-top:3mm">NLRP3 does not bind its activators. It detects a state they all cause, mostly potassium loss. It is a sensor of cellular distress, which is why it shows up in gout, atherosclerosis and type 2 diabetes.</p>
+    </div>
+    <div>
+      <h2>How IL-1β actually leaves: gasdermin D</h2>
+      <img class="fig" src="img/p72_1_588x409.png" alt="Inflammatory caspases cleave gasdermin D; the N-terminal fragment forms a pore; pyroptosis" style="width:82%;margin-bottom:2mm">
+      <ol class="steps">
+        <li><span>Caspase-1, 4, 5 or 11 cuts GSDMD, freeing its N-terminal fragment. Apoptotic caspases cannot.</span></li>
+        <li><span>The fragments form a 27-fold ring pore in the plasma membrane, about 180 Å wide.</span></li>
+        <li><span>Mature IL-1β and IL-18 pass out through it.</span></li>
+        <li><span>Enough pores and the cell bursts: <b>pyroptosis</b>, loud where apoptosis is silent.</span></li>
+      </ol>
+    </div>
+  </div>
+
+  <h2 style="margin-top:6mm">The parallel to say out loud</h2>
+  <table class="parallel">
+    <thead><tr><th></th><th>T cell (Part 2)</th><th>Macrophage (Part 7)</th></tr></thead>
+    <tbody>
+      <tr><th><span class="s s1">SIGNAL 1</span></th><td>TCR sees peptide on MHC. Specific</td><td>PRR sees a PAMP. Specific</td></tr>
+      <tr><th><span class="s s2">SIGNAL 2</span></th><td>CD28 sees B7. Permission</td><td>ATP, crystal or toxin. Permission</td></tr>
+      <tr><th>One alone</th><td>Anergy</td><td>A primed cell that releases nothing</td></tr>
+    </tbody>
+  </table>
+
+  <div class="foot"><span>Part 7 · The inflammasome</span><span>4</span></div>
+</section>
+
+<!-- ======================= PAGE 5 : TELL APART + SELF-TEST ======================= -->
+<section class="page">
+  <h1>Tell them apart, then test yourself.</h1>
+  <p class="lede">Most lost marks come from look-alikes. Each pair below is separated by one fact.</p>
+
+  <div class="pairs">
+    <div class="pair"><div class="vs">CD28<i>versus</i>CTLA-4</div><div>Same ligand, B7. CD28 is constitutive and stimulatory; <span class="nb">CTLA-4</span> is induced, higher-affinity and inhibitory</div></div>
+    <div class="pair"><div class="vs">MHC I<i>versus</i>MHC II</div><div>Inside, eight; outside, four. CD8 × I = CD4 × II = 8</div></div>
+    <div class="pair"><div class="vs">β2-microglobulin<i>versus</i>class II β chain</div><div>β2m is on chromosome 15 and invariant. The class II β chain is an MHC gene and polymorphic</div></div>
+    <div class="pair"><div class="vs">γc<i>versus</i>JAK3</div><div>The receptor chain versus the kinase it carries. Either loss gives SCID, but γc is X-linked and JAK3 autosomal recessive</div></div>
+    <div class="pair"><div class="vs">PAMP<i>versus</i>DAMP</div><div>Microbial molecule versus host molecule in the wrong place. Same receptors, same cytokines</div></div>
+    <div class="pair"><div class="vs">MyD88<i>versus</i>TRIF</div><div>MyD88 serves every TLR except TLR3. TLR3 uses TRIF</div></div>
+    <div class="pair"><div class="vs">Caspase-1<i>versus</i>caspase-3</div><div>Inflammatory, cuts IL-1β and GSDMD, versus apoptotic. Same family, opposite meaning</div></div>
+    <div class="pair"><div class="vs">Apoptosis<i>versus</i>pyroptosis</div><div>Membrane intact and silent, versus membrane ruptured by GSDMD pores and maximally inflammatory</div></div>
+  </div>
+
+  <h2 style="margin-top:8mm">Self-test</h2>
+  <p class="small" style="margin-bottom:2mm">Answer out loud before reading on. An answer you can recognise but not produce is not learned.</p>
+  <div class="qa">
+    <div class="q"><div class="qn">Q7</div><div>
+      <div class="qq">A T cell meets its antigen on a resting tissue cell. What happens, and why is that useful?</div>
+      <div class="qa-a">It receives signal 1 without signal 2 and becomes anergic, permanently unresponsive to that antigen. Resting cells carry no B7, so a self-reactive T cell is silenced by meeting its self-antigen. The two-signal rule is peripheral tolerance.</div>
+    </div></div>
+    <div class="q"><div class="qn">Q12</div><div>
+      <div class="qq">Why can class II hold a peptide of 20 residues when class I cannot?</div>
+      <div class="qa-a">The class I cleft is closed at both ends and grips the peptide's termini, so only 8-10 residues fit. The class II cleft is open and grips the middle. The proteasome cuts to a standard size; cathepsins do not.</div>
+    </div></div>
+    <div class="q"><div class="qn">Q28</div><div>
+      <div class="qq">Why does IL-1β need the inflammasome when TNF does not?</div>
+      <div class="qa-a">IL-1β has no signal peptide and is made as an inactive 31 kDa pro-form. Signal 1 writes the pro-form and stops. Signal 2 assembles the inflammasome, caspase-1 cuts it to 17 kDa and opens the GSDMD pore. TNF has a signal peptide and needs none of this.</div>
+    </div></div>
+  </div>
+
+  <div class="last">
+    <div class="h">Three sentences carry both lectures.</div>
+    <ol>
+      <li><span>A CD molecule is <b>half of a pair</b>. Name the partner and the cell it sits on, and you have named the fact.</span></li>
+      <li><span>An MHC molecule is <b>a display case</b>. Ask where the peptide came from, and the class, co-receptor and T cell follow.</span></li>
+      <li><span>A cytokine is <b>an instruction</b>, and no cell obeys it until a second, independent signal confirms the danger is real.</span></li>
+    </ol>
+  </div>
+
+  <div class="foot"><span>Part 9 · Look-alikes and self-test</span><span>5</span></div>
+</section>
+
+</body>
+</html>
