@@ -76,7 +76,7 @@ The first time a course is built, write `<course>/THEME.md` (stitch-skill DESIGN
 
 ## 5. Mandatory review: TWO full passes after building, before delivering
 Do the whole check twice: build, review, fix, re-render, review again, fix. Only then deliver.
-A. Scientific accuracy: check every fact, number, unit, drug, gene/CD/cytokine name, Greek letter, eponym, classification and species name (italicised) against the lecture and the standard textbook. No invented numbers. The Persian must say exactly what the English says, with correct Persian medical terminology.
+A. Scientific accuracy: check every fact, number, unit, drug, gene/CD/cytokine name, Greek letter, eponym, classification and species name (italicised) against the lecture and the standard textbook. No invented numbers. Every cited PMID is checked with the PubMed MCP (get_article_metadata): the paper exists, the citation details match, and the claim it supports is actually in its abstract or full text. The Persian must say exactly what the English says, with correct Persian medical terminology.
 B. Design: render every page to PNG and inspect it. Check for overflow, clipped text, orphaned headings, broken tables, widows, image resolution, theme consistency (colour, type, radius, components per THEME.md), and the taste-skill pre-flight list (zero em/en dashes).
 C. Bilingual: check RTL/LTR mixing (Latin terms, numbers, units and formulas inside Persian must be bidi-isolated and in the right order), Persian punctuation and line-height, missing glyphs or tofu boxes, Persian in tables, captions and callouts, and Persian blocks splitting badly across pages. The dark theme (Pathology Lab) needs its own contrast check for Persian text.
 Report briefly what each pass found and fixed.
