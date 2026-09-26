@@ -23,7 +23,7 @@ Courses: Pathology, Pathology Lab, Immunology, Microbiology, Histology, Anatomy.
 1. Extract the real figures from my lecture file first (PyMuPDF), because they match what the lecturer teaches.
 2. Open-licence sources through the medical-image-search skill (Openverse, Wikimedia Commons, NIH Open-i), then web search/fetch for OpenStax, CDC PHIL and public pathology/histology banks. Record every image's licence and author in `src/img/CREDITS.md`. Use real micrographs, gross specimens, radiology and anatomy plates wherever they teach.
 3. Use image generation, if available, for concept illustrations only, never for micrographs or specimens that must be real.
-4. Build your own diagrams, flowcharts, charts and comparison graphics wherever they teach better than a photo.
+4. Build your own diagrams, flowcharts, charts and comparison graphics wherever they teach better than a photo. For BioRender-style illustrated figures (cells, receptors, microbes, organs), compose them from Bioicons / Servier Medical Art SVG icons (medical-image-search skill, section 4) recoloured to the course theme. BioRender itself is not used: it needs an account and adds nothing these libraries plus your own SVG cannot do.
 Every image gets a teaching caption saying what to look at. No decorative images.
 
 ## 3. Course themes (designed with taste-skill; one per course, locked across all its sessions)
