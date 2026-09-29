@@ -1,0 +1,294 @@
+/* ============ FONTS ============ */
+@import url('../fonts/fonts-generated.css');
+@font-face{font-family:'Vazir';src:url(../fonts/Vazirmatn-Regular.ttf);font-weight:400}
+@font-face{font-family:'Vazir';src:url(../fonts/Vazirmatn-Medium.ttf);font-weight:500}
+@font-face{font-family:'Vazir';src:url(../fonts/Vazirmatn-Bold.ttf);font-weight:700}
+
+/* ============ TOKENS ============ */
+:root{
+  --paper:#F5F6F7;
+  --ink:#16181D;
+  --ink-2:#42474F;
+  --ink-3:#6E7580;
+  --rule:#D8DCE1;
+  --rule-2:#E9ECEF;
+  --eosin:#B8336A;        /* primary accent: section heads, GROSS tag, high-yield */
+  --eosin-bg:#FAEEF3;
+  --haem:#3E3A8C;         /* MICRO tag only */
+  --haem-bg:#EEEDF8;
+  --amber:#8A5200;        /* exam traps */
+  --amber-bg:#FDF6EA;
+  --slate:#2D4A6B;        /* clinical correlation */
+  --slate-bg:#F1F5F9;
+  --teal:#0D6E5C;         /* mnemonics */
+  --teal-bg:#EAF6F2;
+}
+
+/* ============ PAGE ============ */
+@page{
+  size:A4; margin:20mm 18mm 18mm 18mm;
+  @top-left{ content:string(parttitle); font-family:'PlexMono'; font-size:7.4pt; letter-spacing:.08em;
+             text-transform:uppercase; color:#8d96a1; vertical-align:bottom; padding-bottom:3mm;}
+  @top-right{ content:string(sectitle); font-family:'PlexMono'; font-size:7.4pt;
+              color:#8d96a1; vertical-align:bottom; padding-bottom:3mm;}
+  @bottom-center{ content:counter(page); font-family:'PlexMono'; font-size:8pt; color:#7d8590;
+                  vertical-align:top; padding-top:4mm;}
+}
+@page:first{ margin:0; @top-left{content:none} @top-right{content:none} @bottom-center{content:none} }
+@page part{ @top-left{content:none} @top-right{content:none} }
+@page frontmatter{ @top-left{content:none} @top-right{content:none}
+  @bottom-center{ content:counter(page,lower-roman); font-family:'PlexMono'; font-size:8pt; color:#7d8590; vertical-align:top; padding-top:4mm;} }
+
+/* ============ BASE TYPE ============ */
+*{box-sizing:border-box}
+body{ font-family:'Commissioner',sans-serif; font-size:9.8pt; line-height:1.54; color:var(--ink);
+      background:var(--paper); margin:0; padding:0; text-align:justify; text-align-last:left; hyphens:auto;}
+p{margin:0 0 .52em 0}
+strong,b{font-weight:700;color:#0a0c10}
+em,i{font-style:italic}
+sub,sup{font-size:.7em;line-height:0}
+a{color:inherit;text-decoration:none}
+.mono{font-family:'PlexMono',monospace}
+.tight{margin-bottom:.15em}
+.lead{font-size:10.6pt;line-height:1.56;color:var(--ink-2)}
+
+/* ============ TITLE PAGE ============ */
+.titlepage{ page:first; height:297mm; width:210mm; position:relative; page-break-after:always;
+            background:var(--paper); overflow:hidden; text-align:left; hyphens:none;}
+.tp-band{ position:absolute; top:0; left:0; right:0; height:103mm; background:var(--ink);}
+.tp-band:after{ content:''; position:absolute; bottom:0; left:0; right:0; height:5mm; background:var(--eosin);}
+.tp-inner{ position:absolute; top:0; left:0; right:0; padding:26mm 24mm 0 24mm; color:#fff;}
+.tp-kicker{ font-family:'PlexMono'; font-size:8.4pt; letter-spacing:.22em; text-transform:uppercase;
+            color:#b9c4cf; margin-bottom:9mm;}
+.tp-session{ font-family:'PlexMono'; font-size:9.6pt; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
+             color:#eba9c0; margin-bottom:4mm;}
+.tp-title{ font-family:'Commissioner'; font-size:33pt; font-weight:700; line-height:1.08; letter-spacing:-.012em;
+           margin:0 0 5mm 0; color:#fff;}
+.tp-sub{ font-family:'Commissioner'; font-style:italic; font-size:12pt; color:#c3ced9; max-width:150mm; line-height:1.4;}
+.tp-body{ position:relative; margin-top:118mm; padding:0 24mm;}
+.tp-scope{ margin-bottom:12mm; border-top:1.5px solid var(--ink); padding-top:3.5mm;}
+.tp-scope .row{ display:block; border-bottom:1px solid var(--rule-2); padding:2.3mm 0;}
+.tp-scope .row:last-child{border-bottom:1px solid var(--rule)}
+.tp-scope .n{ display:inline-block; width:20mm; font-family:'PlexMono'; font-size:7.2pt; font-weight:700;
+              color:var(--eosin); letter-spacing:.12em; vertical-align:middle;}
+.tp-scope .t{ display:inline-block; font-family:'Commissioner'; font-size:10.6pt; font-weight:600;
+              color:var(--ink); vertical-align:middle;}
+.tp-srchead{ font-family:'PlexMono'; font-size:7.6pt; font-weight:700; letter-spacing:.16em; text-transform:uppercase;
+             color:var(--ink-3); margin-bottom:4mm;}
+.tp-src{ border-left:2.5px solid var(--eosin); padding-left:5mm; margin-bottom:4.4mm;}
+.tp-src .s1{ font-size:10pt; font-weight:600; color:var(--ink);}
+.tp-src .s2{ font-size:9pt; color:var(--ink-2); font-style:italic;}
+.tp-foot{ position:relative; margin-top:10mm; font-family:'PlexMono'; font-size:7.8pt;
+          color:var(--ink-3); border-top:1px solid var(--rule); padding-top:4mm; display:flex;
+          justify-content:space-between;}
+.tp-credit b{ font-family:'PlexMono'; font-weight:600; color:var(--ink); letter-spacing:.01em;}
+
+/* ============ FRONT MATTER ============ */
+.fm{page:frontmatter}
+h1.fm-h{ font-family:'Commissioner'; font-size:15pt; font-weight:700; letter-spacing:-.01em; color:var(--ink);
+         margin:0 0 2mm 0; padding-bottom:3mm; border-bottom:2px solid var(--ink);}
+
+/* TOC */
+.toc{margin-top:6mm}
+.toc-part{ font-family:'PlexMono'; font-size:7.8pt; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+           color:var(--eosin); margin:6.5mm 0 2.5mm 0; padding-bottom:1.6mm; border-bottom:1px solid var(--rule);}
+.toc-part:first-child{margin-top:2mm}
+.toc-row{ display:flex; align-items:baseline; font-size:9.8pt; margin-bottom:1.35mm; color:var(--ink);}
+.toc-row .num{ font-family:'PlexMono'; font-size:8pt; font-weight:600; color:var(--ink-3); width:13mm; flex:none;}
+.toc-row .lbl{ flex:none; max-width:150mm;}
+.toc-row .dots{ flex:1; border-bottom:1px dotted #bcc2c9; margin:0 2mm; transform:translateY(-2px);}
+.toc-row .pg{ font-family:'PlexMono'; font-size:8.4pt; color:var(--ink-2); flex:none;}
+.toc-row .pg::after{ content:target-counter(attr(href), page);}
+
+/* ============ PART OPENER ============ */
+.part{ page-break-before:always; string-set:parttitle attr(data-part); }
+.part-open{ page:part; padding-top:34mm; page-break-after:avoid;}
+.part-rule{ height:6px; background:var(--eosin); width:36mm; margin-bottom:9mm;}
+.part-eyebrow{ font-family:'PlexMono'; font-size:8.2pt; font-weight:700; letter-spacing:.24em;
+               text-transform:uppercase; color:var(--eosin); margin-bottom:5mm;}
+.part-num{ font-family:'Commissioner'; font-size:64pt; font-weight:700; line-height:.85; color:#e4e6e9;
+           margin-bottom:-4mm; letter-spacing:-.03em;}
+.part-title{ font-family:'Commissioner'; font-size:27pt; font-weight:700; line-height:1.12; color:var(--ink);
+             margin:0 0 6mm 0; letter-spacing:-.015em;}
+.part-blurb{ font-size:10.8pt; line-height:1.6; color:var(--ink-2); max-width:135mm;
+             border-top:1px solid var(--rule); padding-top:5mm;}
+.part-obj{ margin-top:9mm; background:#eef0f2; border-left:3px solid var(--ink); padding:5mm 6mm;}
+.part-obj h4{ font-family:'PlexMono'; font-size:7.6pt; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+              color:var(--ink); margin:0 0 3mm 0;}
+.part-obj ul{ margin:0; padding-left:5mm; font-size:9.4pt; color:var(--ink-2);}
+.part-obj li{ margin-bottom:1.6mm;}
+.part.cont{page-break-before:auto}
+
+/* ============ PROCESS RAIL (signature device) ============ */
+.prail{ display:flex; align-items:center; flex-wrap:wrap; gap:0; margin:5mm 0 6mm 0;
+        page-break-inside:avoid; font-family:'PlexMono';}
+.prail .stg{ background:var(--ink); color:#fff; font-size:7.6pt; font-weight:600; letter-spacing:.05em;
+             padding:2.1mm 3.4mm; text-transform:uppercase; white-space:nowrap;}
+.prail .stg.on{background:var(--eosin)}
+.prail .ar{ color:var(--ink-3); margin:0 1.6mm; font-size:9pt;}
+
+/* ============ HEADINGS ============ */
+h2{ font-family:'Commissioner'; font-size:14pt; font-weight:700; letter-spacing:-.01em; color:var(--ink);
+    margin:8mm 0 3.2mm 0; padding-top:3mm; border-top:2px solid var(--ink);
+    page-break-after:avoid; string-set:sectitle content(text); text-align:left;}
+h2 .sn{ color:var(--eosin); font-weight:700; margin-right:2.5mm; font-family:'PlexMono'; font-size:.75em;}
+h3{ font-family:'Commissioner'; font-size:11pt; font-weight:700; color:var(--eosin); margin:5.2mm 0 2.2mm 0;
+    page-break-after:avoid; text-align:left; letter-spacing:-.003em;}
+h4{ font-family:'Commissioner'; font-size:9.6pt; font-weight:700; color:var(--ink); margin:4mm 0 1.6mm 0;
+    page-break-after:avoid; text-align:left;}
+h5{ font-family:'PlexMono'; font-size:7.6pt; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--ink-3); margin:4mm 0 1.6mm 0; page-break-after:avoid; text-align:left;}
+
+/* ============ DEFINITION ============ */
+.def{ background:#eef0f2; border:1px solid var(--rule); border-left:3.5px solid var(--ink);
+      padding:3.6mm 5mm; margin:2.5mm 0 4mm 0; page-break-inside:avoid;}
+.def .dt{ font-family:'PlexMono'; font-size:7.2pt; font-weight:700; letter-spacing:.16em; text-transform:uppercase;
+          color:var(--ink-3); margin-bottom:1.6mm;}
+.def p{ margin:0; font-size:10.1pt; line-height:1.48;}
+.def .term{ font-weight:700; color:var(--eosin);}
+
+/* ============ MARGIN-RAIL SIDENOTES ============ */
+.note-r{ float:right; width:38mm; margin:.3mm 0 3mm 5mm; font-family:'PlexMono'; font-size:7.6pt;
+         line-height:1.44; color:var(--ink-2); border-top:1.5px solid var(--eosin); padding-top:1.8mm;
+         page-break-inside:avoid;}
+.note-r .nt{ display:block; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--ink);
+             margin-bottom:.8mm; font-size:7.2pt;}
+.note-r i{font-style:italic}
+
+/* ============ LISTS ============ */
+ul,ol{ margin:.2em 0 .7em 0; padding-left:5.2mm;}
+li{ margin-bottom:.28em;}
+ul.dash{ list-style:none; padding-left:3.5mm;}
+ul.dash>li{ position:relative; padding-left:3.6mm;}
+ul.dash>li:before{ content:'\2013'; position:absolute; left:0; color:var(--eosin); font-weight:600;}
+
+/* ============ MECHANISM CHAIN (cascade diagrams in text form) ============ */
+.mech{ border:1px solid #cfe0d4; background:var(--teal-bg); padding:4mm 5mm 3mm 5mm; margin:3.5mm 0 4.5mm 0;}
+.mech.keep{page-break-inside:avoid}
+.mech ol>li{page-break-inside:avoid}
+.mech>.mh{ font-family:'PlexMono'; font-size:7.3pt; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+           color:var(--teal); margin-bottom:3mm; display:flex; align-items:center;}
+.mech>.mh:before{ content:''; width:9px; height:9px; border:2.2px solid var(--teal); border-radius:50%;
+                  margin-right:2.4mm; display:inline-block;}
+.mech ol{ counter-reset:mstep; list-style:none; margin:0; padding:0;}
+.mech ol>li{ counter-increment:mstep; position:relative; padding-left:8.5mm; margin-bottom:2.3mm;
+             font-size:9.5pt; line-height:1.48;}
+.mech ol>li:before{ content:counter(mstep); position:absolute; left:0; top:.1em; width:5.6mm; height:5.6mm;
+                    background:var(--teal); color:#fff; border-radius:50%; font-family:'PlexMono'; font-size:7.3pt;
+                    font-weight:700; text-align:center; line-height:5.6mm;}
+.mech ol>li:last-child{margin-bottom:1mm}
+.mech .why{ display:block; font-style:italic; color:#2f5849; font-size:8.9pt; margin-top:.5mm;}
+.mech .why:before{ content:'Why: '; font-style:normal; font-family:'PlexMono'; font-size:7.1pt; font-weight:700;
+                   letter-spacing:.08em; text-transform:uppercase; color:var(--teal);}
+.mech .res{ margin-top:2.5mm; padding-top:2.5mm; border-top:1px dashed #b9d0c8; font-size:9.4pt;}
+.mech .res:before{ content:'Net result  '; font-family:'PlexMono'; font-size:7.1pt; font-weight:700;
+                   letter-spacing:.1em; text-transform:uppercase; color:var(--teal);}
+
+/* ============ CALLOUTS ============ */
+.box{ padding:3.4mm 4.6mm; margin:3.5mm 0; page-break-inside:avoid; border:1px solid; border-left-width:3.5px;}
+.box .bt{ font-family:'PlexMono'; font-size:7.2pt; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+          margin-bottom:1.8mm;}
+.box p:last-child{margin-bottom:0}
+.box ul{margin-bottom:0}
+.box.hy{ background:var(--eosin-bg); border-color:#e6c3d3; border-left-color:var(--eosin);}
+.box.hy .bt{color:var(--eosin)}
+.box.trap{ background:var(--amber-bg); border-color:#ecd9b4; border-left-color:var(--amber);}
+.box.trap .bt{color:var(--amber)}
+.box.mnem{ background:var(--teal-bg); border-color:#bcdcd0; border-left-color:var(--teal);}
+.box.mnem .bt{color:var(--teal)}
+.box.clin{ background:var(--slate-bg); border-color:#cfd9e4; border-left-color:var(--slate);}
+.box.clin .bt{color:var(--slate)}
+.box.case{ background:#fff; border-color:var(--rule); border-left-color:var(--slate); border-left-width:4px;}
+.box.case .bt{color:var(--slate)}
+.mnem .key{ font-family:'PlexMono'; font-weight:700; color:var(--teal); font-size:10pt; letter-spacing:.02em;}
+
+/* ============ TABLES ============ */
+.tbl-wrap{ margin:3.5mm 0 4.5mm 0;}
+.tbl-wrap.keep{page-break-inside:avoid}
+thead{display:table-header-group}
+tr{page-break-inside:avoid}
+table{ width:100%; border-collapse:collapse; font-size:8.7pt; line-height:1.4;}
+caption{ caption-side:top; text-align:left; font-family:'PlexMono'; font-size:7.4pt; font-weight:700;
+         letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3); padding-bottom:2mm;}
+caption .cn{ color:var(--eosin);}
+thead th{ background:var(--ink); color:#fff; font-family:'PlexMono'; font-size:7.6pt; font-weight:600;
+          text-align:left; padding:2.1mm 2.4mm; letter-spacing:.02em; vertical-align:bottom;}
+tbody td,tbody th{ padding:2.1mm 2.4mm; border-bottom:1px solid var(--rule-2); vertical-align:top; text-align:left;}
+tbody th{ font-family:'Commissioner'; font-weight:700; font-size:8.6pt; color:var(--ink); background:#eef0f2;
+          width:24%; border-right:1px solid var(--rule-2);}
+tbody tr:last-child td,tbody tr:last-child th{border-bottom:1.5px solid var(--ink)}
+table.zebra tbody tr:nth-child(even) td{background:#f9f9fa}
+td .hl{color:var(--eosin);font-weight:600}
+td .hl2{color:var(--teal);font-weight:600}
+thead tr.split th{background:#2b2d33; font-size:7.3pt; letter-spacing:.08em; text-transform:uppercase}
+
+/* ============ FIGURES ============ */
+figure{ margin:0; page-break-inside:avoid;}
+figcaption{ font-family:'PlexMono'; font-size:7.4pt; line-height:1.42; color:var(--ink-3); margin-top:1.6mm;
+            text-align:left; padding-left:0;}
+figcaption .fn{ font-weight:700; color:var(--eosin); letter-spacing:.02em;}
+figcaption .tag{ display:inline-block; font-weight:700; letter-spacing:.08em; padding:.2mm 1.4mm; margin-right:1.4mm;
+                 color:#fff; font-size:.92em;}
+figcaption .tag.gross{background:var(--eosin)}
+figcaption .tag.micro{background:var(--haem)}
+figure img{ width:100%; display:block; border:1px solid var(--rule); background:#fff;}
+.fig-r{ float:right; width:47mm; margin:1mm 0 3mm 5mm; page-break-inside:avoid;}
+.fig-r.w60{width:60mm}
+.fig-r.w70{width:70mm}
+.fig-l{ float:left; width:47mm; margin:1mm 5mm 3mm 0; page-break-inside:avoid;}
+.fig-l.w60{width:60mm}
+.fig-full{ margin:4mm 0; clear:both;}
+.fig-row{ display:flex; gap:3.5mm; margin:4mm 0; clear:both; page-break-inside:avoid;}
+.fig-row figure{flex:1}
+.fig-row.g3 figure{width:32%}
+.clearfix{clear:both}
+
+/* ============ QUESTION BANK ============ */
+.q{ margin:0 0 4.4mm 0; page-break-inside:avoid;}
+.q .qn{ font-family:'PlexMono'; font-size:8.2pt; font-weight:700; color:#fff; background:var(--ink);
+        padding:.5mm 1.9mm; margin-right:2mm; letter-spacing:.02em;}
+.q .qtag{ font-family:'PlexMono'; font-size:6.8pt; font-weight:600; letter-spacing:.1em; text-transform:uppercase;
+          color:var(--ink-3); border:1px solid var(--rule); padding:.4mm 1.6mm;}
+.q .stem{ margin:1.8mm 0 1.6mm 0; font-size:9.6pt; line-height:1.48;}
+.q ol.ch{ list-style:none; margin:0; padding:0; counter-reset:ch;}
+.q ol.ch li{ counter-increment:ch; position:relative; padding-left:6.6mm; margin-bottom:.9mm; font-size:9.3pt;}
+.q ol.ch li:before{ content:counter(ch,upper-alpha)'.'; position:absolute; left:0; font-family:'PlexMono';
+                    font-weight:600; font-size:8.4pt; color:var(--ink-2);}
+.ans{ margin:0 0 3.6mm 0; padding-left:0; page-break-inside:avoid; font-size:9.2pt; line-height:1.46;}
+.ans .an{ font-family:'PlexMono'; font-size:8pt; font-weight:700; color:var(--ink); margin-right:1.6mm;}
+.ans .key{ font-family:'PlexMono'; font-size:8.6pt; font-weight:700; color:#fff; background:var(--eosin);
+           padding:.3mm 1.8mm; margin-right:2mm;}
+.ans .dist{ display:block; margin-top:1mm; font-size:8.6pt; color:var(--ink-2); padding-left:3mm;
+            border-left:2px solid var(--rule);}
+
+/* ============ GLOSSARY ============ */
+.gloss{ column-count:2; column-gap:7mm; column-rule:1px solid var(--rule-2); font-size:8.8pt; line-height:1.44;}
+.gloss dl{margin:0}
+.gloss dt{ font-family:'Commissioner'; font-weight:700; font-size:8.7pt; color:var(--eosin); margin-top:2.4mm;
+           break-after:avoid;}
+.gloss dd{ margin:.3mm 0 0 0; color:var(--ink-2); text-align:left;}
+.gloss .fa-block{column-span:none}
+
+/* ============ MISC ============ */
+.rule{height:1px;background:var(--rule);margin:5mm 0}
+.kicker{ font-family:'PlexMono'; font-size:7.3pt; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+         color:var(--ink-3); margin:5mm 0 2mm 0;}
+.pgbreak{page-break-before:always}
+.avoid{page-break-inside:avoid}
+.chain{ font-family:'PlexMono'; font-size:8.6pt; font-weight:500; background:#eef0f2; border:1px solid var(--rule);
+        padding:2.8mm 4mm; margin:3mm 0; text-align:center; line-height:1.7; color:var(--ink);}
+.chain b{color:var(--eosin)}
+.chain .ar{color:var(--ink-3); margin:0 1.2mm; font-weight:400}
+.note{font-size:8.7pt;color:var(--ink-3);font-style:italic}
+
+.box,.mech,.def,.chain,.tbl-wrap,.fig-row,h2{clear:left}
+.fig-l{margin-bottom:4mm}
+.note-r{clear:right}
+
+/* ===== PDF BOOKMARKS ===== */
+h1.fm-h{ bookmark-level:1;}
+h1.part-title{ bookmark-level:1;}
+h2{ bookmark-level:2;}
+h3{ bookmark-level:3; bookmark-state:closed;}
+.fa-block{ bookmark-level:none;}
+h1.tp-title, h1.part-title, h1.fm-h{ bookmark-level:1; bookmark-label:attr(data-bm);}
