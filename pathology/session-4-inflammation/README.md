@@ -1,10 +1,14 @@
 # Pathology, Session 4: Inflammation, Part One
 
-`pathology-session4-english.pdf` (26 pp) and `pathology-session4-bilingual.pdf` (44 pp).
+`pathology-session4-english.pdf` (30 pp) and `pathology-session4-bilingual.pdf` (43 pp).
 
 First guide built under the Pathology "Clinical Case File" theme (`../THEME.md`): Commissioner +
 IBM Plex Mono, eosin/haematoxylin accent system, two-column-editorial layout with a margin rail for
-sidenotes, process-rail device, and purpose-built cascade diagrams instead of reused textbook scans.
+sidenotes, and the process-rail device. Nine real figures extracted from the lecture slides carry
+every mechanism (Starling forces, the adhesion cascade, arachidonic-acid metabolism, the
+complement/kinin/coagulation cross-talk, giant-cell morphology); two custom SVGs cover the two
+steps the slides show only as unlabeled cartoons (the caliber-change stages, the three permeability
+mechanisms).
 
 ## Scope
 
@@ -33,11 +37,12 @@ itself raises).
 ## Method
 
 Text and 74 embedded images extracted once from the 95-slide PDF with PyMuPDF, plus the 22-point
-learning-objectives docx, both to the scratchpad. Two real H&E micrographs (macrophage/giant-cell
-morphology) were kept from the lecture slides and are credited in `src/img/CREDITS.md`; every
-schematic or mechanism figure in the lecture (vessel structure, Starling forces, the adhesion
-cascade, arachidonic-acid metabolism, the complement/kinin/coagulation cross-talk) was redrawn as
-an original inline-SVG diagram in the course theme rather than reused as a scan.
+learning-objectives docx, both to the scratchpad. Nine of those images are used directly, credited
+in `src/img/CREDITS.md`: two real H&E micrographs (macrophage/giant-cell morphology) and seven
+Robbins-style teaching figures the lecture itself projects (Starling forces, the adhesion cascade,
+arachidonic-acid metabolism, the Hageman-factor cross-talk, mediator sources, the components of the
+inflammatory response, the giant-cell survey chart). Two custom inline-SVG diagrams fill the only
+gaps the slides leave (the caliber-change stages, the three permeability mechanisms).
 
 Rendered with **Playwright Chromium** driving **paged.js** (vendored in `src/vendor/`) for true
 CSS Paged Media support (running headers, named pages, `target-counter` page numbers in the TOC),
@@ -75,3 +80,14 @@ of the two kept micrographs.
 large blank gap on the bilingual title page; changed to `margin-top`. RTL/LTR mixing, Persian
 punctuation, table cells, figure captions, and the two-column glossary all checked page by page;
 no tofu glyphs, no Persian-in-tables misalignment.
+
+**Second pass, after user review**, the reader found the design weak, especially the bilingual
+edition, and no real lecture images in use. Fixed by replacing five hand-drawn SVG diagrams with
+the actual Robbins-style figures the lecture projects (see Method), adding three more real figures
+that had no diagram equivalent, and rebuilding `bilingual.css`: every `.fa-block` had carried its
+own bordered box (a border-right rule plus a tinted background) on every paragraph, list item,
+table cell, and caption, which read as cluttered at document scale. Redesigned around a single
+hairline between an English idea and its Persian translation, once per section, rather than a box
+around every sentence; a tall (535 × 1453 px) source image stretched under `fig-full`'s
+`width: 100%` was also found overflowing across pages during this pass and constrained with a new
+`.fig-tall` rule (`max-height`, auto width).

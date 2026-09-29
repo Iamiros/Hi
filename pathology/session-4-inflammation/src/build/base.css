@@ -232,6 +232,7 @@ figcaption .tag{ display:inline-block; font-weight:700; letter-spacing:.08em; pa
 figcaption .tag.gross{background:var(--eosin)}
 figcaption .tag.micro{background:var(--haem)}
 figure img{ width:100%; display:block; border:1px solid var(--rule); background:#fff;}
+.fig-tall img{ width:auto; max-width:100%; max-height:235mm; margin:0 auto;}
 .fig-r{ float:right; width:47mm; margin:1mm 0 3mm 5mm; page-break-inside:avoid;}
 .fig-r.w60{width:60mm}
 .fig-r.w70{width:70mm}
