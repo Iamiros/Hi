@@ -1,4 +1,4 @@
-# Pathology — Session 4: Inflammation, Part One
+# Pathology, Session 4: Inflammation, Part One
 
 `pathology-session4-english.pdf` (26 pp) and `pathology-session4-bilingual.pdf` (44 pp).
 
@@ -10,7 +10,7 @@ sidenotes, process-rail device, and purpose-built cascade diagrams instead of re
 
 Covers exactly what the lecture ("Inflammation, part one," Prof. Zhou Ren) teaches:
 
-- **I–II** Definitions and general features; the alteration/exudation/proliferation trilogy
+- **I-II** Definitions and general features; the alteration/exudation/proliferation trilogy
 - **III** Blood-vessel reaction: vascular caliber and hyperemia, the three mechanisms of increased
   permeability
 - **IV** Exudation: Starling forces and transudate vs. exudate; the full leukocyte recruitment
@@ -20,7 +20,7 @@ Covers exactly what the lecture ("Inflammation, part one," Prof. Zhou Ren) teach
   cytokines, PAF, nitric oxide) and plasma-derived (complement, kinin, coagulation, all triggered
   by Factor XII/Hageman factor)
 
-The docx learning-objectives outline runs further (morphologic subtypes — serous, fibrinous,
+The docx learning-objectives outline runs further (morphologic subtypes, serous, fibrinous,
 suppurative, granulomatous; systemic manifestations; the clinical vocabulary of abscess, sinus,
 fistula, bacteremia). None of that is in the Part 1 slide deck, so none of it is in this guide;
 it belongs to Part 2, not yet supplied.
@@ -56,13 +56,13 @@ python3 build.py both ..      # or: en / bi
 
 ## Review passes
 
-**Pass A, accuracy** — every mechanism, molecule name, and number checked against the lecture
+**Pass A, accuracy**, every mechanism, molecule name, and number checked against the lecture
 transcript and Robbins 11e (Starling-force values, the NADPH-oxidase/MPO equations, the
 selectin/integrin/Ig-superfamily pairings, the complement convergence). No invented numbers. The
 one PMID cited was checked with the PubMed MCP (`get_article_metadata`): the paper exists, the
 citation details match, and its abstract supports the claim.
 
-**Pass B, design** — both editions rendered to PNG at 110 dpi and every page inspected. Found and
+**Pass B, design**, both editions rendered to PNG at 110 dpi and every page inspected. Found and
 fixed: a title-page footer overlapping the source list (absolute positioning that assumed one exact
 content length; changed to normal flow), a Chromium/paged.js quirk that fully justified short
 single-line paragraphs and captions instead of left-aligning the last line (fixed with
@@ -70,7 +70,7 @@ single-line paragraphs and captions instead of left-aligning the last line (fixe
 adhesion cascade, the arachidonic-acid pathway), and a baked-in textbook caption cropped out of one
 of the two kept micrographs.
 
-**Pass C, bilingual** — the same title-page fix carried a stray `position: absolute` leftover in
+**Pass C, bilingual**, the same title-page fix carried a stray `position: absolute` leftover in
 `bilingual.css` (a `top` offset stacking on top of the new flow-based spacing) that produced a
 large blank gap on the bilingual title page; changed to `margin-top`. RTL/LTR mixing, Persian
 punctuation, table cells, figure captions, and the two-column glossary all checked page by page;
