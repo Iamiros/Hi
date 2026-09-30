@@ -45,7 +45,10 @@
 *{box-sizing:border-box}
 html{background:var(--bg)}
 body{ font-family:'SpaceGrotesk',sans-serif; font-size:9.8pt; line-height:1.56; color:var(--text);
-      background:var(--bg); margin:0; padding:0; text-align:justify; text-align-last:left; hyphens:auto;}
+      background:
+        radial-gradient(rgba(255,255,255,.028) .5px, transparent .5px) 0 0/3.2mm 3.2mm,
+        var(--bg);
+      margin:0; padding:0; text-align:justify; text-align-last:left; hyphens:auto;}
 p{margin:0 0 .52em 0}
 strong,b{font-weight:700;color:#fff}
 em,i{font-style:italic}
@@ -148,15 +151,24 @@ ul.dash>li{ position:relative; padding-left:3.6mm;}
 ul.dash>li:before{ content:'\2013'; position:absolute; left:0; color:var(--accent); font-weight:600;}
 
 /* ============ SPECIMEN CARD ============ */
-.spec{ margin:4mm 0 7mm 0; page-break-inside:avoid; background:var(--surface); border:1px solid var(--rule);}
+.spec{ position:relative; margin:4mm 0 7mm 0; page-break-inside:avoid; background:var(--surface);
+       border:1px solid var(--rule);}
+.spec:before,.spec:after,.spec-img:before,.spec-img:after{ content:''; position:absolute; width:3.4mm; height:3.4mm;
+       border-color:var(--accent); z-index:2; opacity:.85;}
+.spec:before{ top:-1px; left:-1px; border-top:1.6px solid; border-left:1.6px solid;}
+.spec:after{ top:-1px; right:-1px; border-top:1.6px solid; border-right:1.6px solid;}
+.spec-img{position:relative}
+.spec-img:before{ bottom:-1px; left:-1px; border-bottom:1.6px solid; border-left:1.6px solid;}
+.spec-img:after{ bottom:-1px; right:-1px; border-bottom:1.6px solid; border-right:1.6px solid;}
 .spec-hd{ display:flex; align-items:center; justify-content:space-between; padding:3mm 4.5mm;
           background:var(--surface-2); border-bottom:1px solid var(--rule);}
 .spec-hd .num{ font-family:'JetBrainsMono'; font-size:11pt; font-weight:700; color:var(--accent); letter-spacing:.02em;}
 .spec-hd .ty{ font-family:'SpaceGrotesk'; font-size:11.5pt; font-weight:700; color:#fff; margin-left:3mm;}
 .spec-hd .st{ margin-left:auto; font-family:'JetBrainsMono'; font-size:7.6pt; letter-spacing:.1em; text-transform:uppercase;
               color:var(--text-3);}
-.spec-img{ padding:0; background:#000;}
-.spec-img img{ width:auto; max-width:100%; max-height:145mm; margin:0 auto; display:block;}
+.spec-img{ padding:0; background:radial-gradient(ellipse at center, #1a1a1a 0%, #000 78%);}
+.spec-img img{ width:auto; max-width:100%; max-height:145mm; margin:0 auto; display:block;
+               filter:drop-shadow(0 0 7mm rgba(232,197,71,.06));}
 .spec-body{ padding:4mm 5mm;}
 .spec-body .organ{ font-family:'JetBrainsMono'; font-size:8pt; letter-spacing:.06em; text-transform:uppercase;
                     color:var(--text-3); margin-bottom:1.5mm;}
@@ -239,6 +251,34 @@ figure img{ width:100%; display:block; background:#000;}
 .fig-row{ display:flex; gap:3.5mm; margin:4mm 0; clear:both; page-break-inside:avoid;}
 .fig-row figure{flex:1}
 .clearfix{clear:both}
+
+/* ============ NORMAL-FOR-COMPARISON FIGURE ============ */
+/* Fixed-height letterboxed panel: any source aspect ratio is safe. Deliberately NOT a float:
+   paged.js mishandles two competing floats attached to the same block (the existing fig-r
+   close-up plus this one), silently dropping content; a plain clear:both block is reliable. */
+.cmp-fig{ clear:both; width:78mm; margin:3.5mm auto 4.5mm auto; page-break-inside:avoid; background:#000;
+          border:1px solid var(--rule);}
+.cmp-fig .cmp-tag{ display:block; font-family:'JetBrainsMono'; font-size:6.6pt; font-weight:700;
+                    letter-spacing:.12em; text-transform:uppercase; color:var(--clin);
+                    background:var(--clin-bg); padding:1mm 2.2mm; border-bottom:1px solid #2c3a45;}
+.cmp-fig img{ width:100%; height:64mm; object-fit:contain; display:block; background:#000;}
+.cmp-fig figcaption{ padding:1.8mm 2.2mm 2.2mm 2.2mm; font-size:6.9pt; line-height:1.4;}
+.cmp-fig figcaption .cr{ display:block; margin-top:1mm; color:#5C6169; font-style:italic;}
+
+/* ============ ANNOTATED IMAGE (numbered pointer circles over a real photo) ============ */
+.annot-wrap{ position:relative; display:block; line-height:0; background:#000;}
+.annot-wrap img{ width:auto; max-width:100%; max-height:145mm; margin:0 auto; display:block;}
+.annot-svg{ position:absolute; inset:0; width:100%; height:100%; pointer-events:none;}
+.annot-svg circle.a-ring{ fill:rgba(232,197,71,.08); stroke:var(--accent); stroke-width:9;}
+.annot-svg circle.a-badge{ fill:var(--accent); stroke:#0d1720; stroke-width:2;}
+.annot-svg text.a-num{ fill:#0d1720; font-family:'JetBrainsMono',monospace; font-weight:700;
+                        text-anchor:middle; dominant-baseline:central;}
+.annot-legend{ margin-top:2mm; padding-top:2mm; border-top:1px dashed var(--rule);}
+.annot-legend .al{ display:flex; align-items:baseline; gap:2mm; margin-bottom:1mm; font-size:8.6pt;
+                    color:var(--text-2); line-height:1.4; page-break-inside:avoid;}
+.annot-legend .al b{ flex:none; display:inline-flex; align-items:center; justify-content:center;
+                      width:4.6mm; height:4.6mm; border-radius:50%; background:var(--accent);
+                      color:#0d1720; font-family:'JetBrainsMono'; font-size:7.4pt; font-weight:700;}
 
 /* zoom pair */
 .zoom{ display:flex; gap:3mm; align-items:flex-start; margin:4mm 0; page-break-inside:avoid;}

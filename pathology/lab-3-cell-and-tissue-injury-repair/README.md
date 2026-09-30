@@ -1,6 +1,6 @@
 # Pathology Laboratory, Session 3: Cell and Tissue Injury and Repair (3)
 
-`pathology-lab3-english.pdf` (33 pp) and `pathology-lab3-bilingual.pdf` (44 pp).
+`pathology-lab3-english.pdf` (40 pp) and `pathology-lab3-bilingual.pdf` (53 pp).
 
 First guide built under the Pathology Laboratory "Specimen Lightbox" theme
 (`../THEME-lab.md`): dark background throughout so the real gross photos and
@@ -41,8 +41,14 @@ slide relationships. Every image's UI chrome, the specimen-viewer's video
 player bar, its "specimen information" popup, its sidebar icons, was cropped
 out; two images with Chinese-only on-slide labels (the annotated skin
 histology plates) were kept and their labels translated in the caption
-rather than redrawn. All nine credited image sources and notes are in
-`src/img/CREDITS.md`.
+rather than redrawn. All image sources and notes are in `src/img/CREDITS.md`.
+
+A second pass (below) added a real, openly licensed image of the **normal**
+version of every organ in Part Three, beside its pathological specimen, plus
+numbered pointer-circle annotations on every gross photo and micrograph that
+did not already carry the lab's own red circle, and substantially more
+teaching text under each image explaining what the circles mark and why it
+matters. See "Second review round" below for what that pass found and fixed.
 
 Same pipeline as the lecture guides: **Playwright Chromium** driving
 **paged.js** (vendored in `src/vendor/`) for CSS Paged Media support (running
@@ -88,3 +94,54 @@ Persian body text sits at `#C7CCD2` against the `#111316` page background
 both comfortably above WCAG AA for body text. RTL/LTR mixing (CD/organism
 names, measurements), Persian punctuation, table cells, and captions
 checked page by page; no tofu glyphs.
+
+## Second review round
+
+Follow-up pass after specific feedback: some pages still felt sparse, every
+specimen needed a real normal-organ image beside it, the theme needed more
+visual weight, and images needed more teaching text and pointer annotation.
+
+**Found and fixed**:
+- One image, `f10_foot_dry_gangrene_detail.png`, had shipped as an
+  uncropped screenshot with the specimen-viewer's video-player UI still
+  visible over part of the foot, missed by the first crop pass. Re-cropped
+  clean and re-circled.
+- Six new real, openly licensed images of the **normal** organ were sourced
+  (Openverse, Wikimedia Commons: lung, liver, appendix, small intestine,
+  long bone, lymph node) and placed beside every specimen that needed one;
+  spleen and skin reuse their existing Part Two figures. Licences and
+  authors are in `src/img/CREDITS.md`. No equally reliable normal-foot photo
+  turned up in the time available; that one specimen's own close-up already
+  shows a wide margin of normal, viable skin beside the necrotic zone, and
+  the text says so rather than manufacturing a weaker substitute image.
+- Added numbered gold pointer-circles (matching the deck's own red-circle
+  convention) to every gross photo and micrograph that did not already carry
+  one, with a legend explaining each circled region, and a new paragraph of
+  teaching text per specimen tying the normal and pathological images
+  together.
+- Enriched the "Specimen Lightbox" theme: a faint dot-grid page texture,
+  bracket corner-ticks on every specimen card, and a soft gold glow behind
+  each photo, without spending the accent colour on anything but its
+  original job.
+- **A genuine pagination bug, found and fixed twice in this round**: the
+  first attempt floated the new normal-comparison figure beside the
+  existing close-up figure. Paged.js cannot reliably fragment two competing
+  floats attached to the same block and silently dropped both from the
+  page entirely; fixed by making the comparison figure a plain
+  non-floating block instead. A second, related bug then surfaced only in
+  the bilingual edition: a two-item pointer-circle legend nested inside a
+  specimen card's own page-break-inside:avoid box lost its second item
+  outright wherever the card's combined English-plus-Persian text made the
+  whole card taller than one page. Fixed by moving every such legend
+  outside the specimen card, as its own block, so it paginates normally
+  instead of fighting a forced single-page fragment. Confirmed by
+  re-rendering every changed page to PNG and by grepping the extracted PDF
+  text of both editions for every legend's key phrase.
+- Re-checked for the whitespace complaint itself: an automated scan for
+  large blank vertical bands, and a page-by-page visual read of both
+  editions, found no page left mostly empty by a rendering fault. The
+  moderate blank space that remains under a few section headings is the
+  ordinary, unavoidable cost of never letting a specimen card split across
+  a page break, the same rule that fixed the original pagination bug.
+
+Page counts: 33 to 40 (English), 44 to 53 (bilingual).
