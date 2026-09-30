@@ -27,8 +27,9 @@ needed to rebuild it.
 | [Session 2](pathology/session-2-cell-injury-necrosis-and-repair) | Cell Injury, Necrosis and Repair | — / 60 |
 | [Session 3](pathology/session-3-disorders-of-vascular-flow) | Disorders of Vascular Flow | 91 / 159 |
 | [Session 4](pathology/session-4-inflammation) | Inflammation, Part One | 30 / 43 |
-| [Lab 1](pathology/lab-1-introduction) | Laboratory — Introduction | 39 / 67 |
-| [Lab 2](pathology/lab-2-cell-and-tissue-injury) | Laboratory — Cell and Tissue Injury | 41 / 68 |
+| [Lab 1](pathology/lab-1-introduction) | Laboratory, Introduction | 39 / 67 |
+| [Lab 2](pathology/lab-2-cell-and-tissue-injury) | Laboratory, Cell and Tissue Injury | 41 / 68 |
+| [Lab 3](pathology/lab-3-cell-and-tissue-injury-repair) | Laboratory, Cell and Tissue Injury and Repair (3) | 33 / 44 |
 
 ## How each folder is arranged
 
@@ -61,7 +62,7 @@ python3 build.py both ..      # or: en / bi
 ```
 
 Each guide has its own design system and its own set of teaching devices,
-chosen for the subject — specimen cards and description templates for the
+chosen for the subject: specimen cards and description templates for the
 pathology labs, bug cards and Gram tags for microbiology, molecule cards and
 pathway tags for immunology. The per-session README explains the method that
 guide uses.

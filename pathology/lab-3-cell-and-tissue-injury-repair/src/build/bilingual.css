@@ -1,0 +1,104 @@
+/* ===== BILINGUAL OVERLAY (dark theme) ===== */
+/* Same calm rule as the lecture guides: no border-box per sentence. English
+   and Persian read as one voice, distinguished by type, direction, and a
+   slightly dimmer ink. A hairline appears once per section, not once per
+   paragraph/cell/caption. Contrast checked against the dark background:
+   Persian text sits at #C7CCD2 (≈9.7:1 against #111316, ≈6.9:1 against the
+   #1B1E22 card surface), comfortably above WCAG AA for body text. */
+.fa-block{
+  font-family:'Vazir',sans-serif; direction:rtl; text-align:right; unicode-bidi:isolate;
+  font-size:9.3pt; line-height:1.98; color:#C7CCD2;
+  margin:1mm 0 2.8mm 0;
+}
+.fa-block p{margin:0 0 .35em 0; text-align:right}
+.fa-block p:last-child{margin-bottom:0}
+.fa-block .lat{font-family:'SpaceGrotesk',serif; direction:ltr; unicode-bidi:isolate; font-size:9pt}
+
+/* headings */
+.fa-h1{font-size:15pt;font-weight:700;color:#fff;margin:0 0 3mm 0;line-height:1.7}
+.fa-h2{ font-size:12.2pt; font-weight:700; color:#fff; margin:-1.5mm 0 3mm 0; line-height:1.75;
+        border-bottom:1px solid var(--rule-2); padding-bottom:2mm;}
+.fa-h3{ font-size:10.4pt; font-weight:700; color:var(--accent); margin:-1mm 0 2mm 0; line-height:1.7;}
+.fa-h4{ font-size:9.6pt; font-weight:700; color:var(--text); margin:-0.6mm 0 1.6mm 0; line-height:1.7;}
+.fa-h5{ font-size:8.6pt; font-weight:700; color:var(--text-3); margin:-0.6mm 0 1.6mm 0; line-height:1.7;}
+
+.fa-li{ margin:.5mm 0 1.6mm 0; font-size:9pt; line-height:1.92;}
+
+.box .fa-block{ color:#C7CCD2;}
+.mech .fa-block{ color:#C7CCD2;}
+.def .fa-block{ font-size:9.4pt;}
+.mech ol>li .fa-block{ margin:.8mm 0 0 0;}
+.part-obj .fa-block{color:#C7CCD2}
+
+figcaption .fa-block{ font-size:8.1pt; line-height:1.88; margin:.8mm 0 0 0; color:var(--text-3);}
+.spec-body .fa-block{ color:#C7CCD2; font-size:9pt;}
+
+/* table cells */
+.fa-cell{ font-family:'Vazir',sans-serif; direction:rtl; text-align:right; unicode-bidi:isolate;
+          font-size:8.3pt; line-height:1.86; color:#C7CCD2; margin-top:.9mm;}
+thead .fa-cell{ color:#3a3e44; font-size:7.6pt;}
+tbody th .fa-cell{color:#C7CCD2}
+caption .fa-cell{ margin-top:1.2mm; color:var(--text-3); font-size:7.9pt;}
+
+/* part opener */
+.part-title .fa-block{ font-size:18pt; font-weight:700; color:#fff; margin:2mm 0 0 0; line-height:1.55;}
+.part-blurb .fa-block{ font-size:9.8pt; line-height:2;}
+.part-eyebrow .fa-block{ font-size:8.6pt; margin:1.5mm 0 0 0; color:var(--accent); font-weight:700; letter-spacing:0;}
+
+/* question bank */
+.q .stem .fa-block{font-size:9pt;line-height:1.92}
+.ans .fa-block{font-size:8.8pt;line-height:1.9; color:#C7CCD2}
+
+/* toc */
+.toc-row .fa-block{display:none}
+.toc-fa{ font-family:'Vazir',sans-serif; direction:rtl; text-align:right; font-size:8.4pt; color:var(--text-3);
+         margin:-0.6mm 0 1.9mm 13mm;}
+
+/* glossary */
+.gloss dd .fa-block{ font-size:8.5pt; line-height:1.88; margin:.6mm 0 0 0;}
+.gloss{column-gap:6mm}
+
+/* title page */
+.tp-title .fa-block{ font-size:19pt; font-weight:700; color:#fff; margin:4mm 0 0 0; line-height:1.5;}
+.tp-sub .fa-block{ font-size:10.5pt; color:var(--text-2); margin:2mm 0 0 0; line-height:1.7;}
+.tp-scope .t .fa-block{font-size:9pt;color:#C7CCD2;margin:.8mm 0 0 0;line-height:1.7}
+.tp-src .s1 .fa-block{font-size:8.8pt;margin:.8mm 0 0 0;line-height:1.7;color:#C7CCD2}
+
+/* --- fixes --- */
+.fa-block{ letter-spacing:normal !important; text-transform:none !important; font-style:normal;}
+.mech>.mh{ flex-wrap:wrap; align-items:flex-start;}
+.mech>.mh .fa-block{ flex:0 0 100%; width:100%; margin:2.2mm 0 0 0; font-size:9.4pt; color:var(--clin);}
+.box .bt .fa-block{ margin:1.4mm 0 0 0; font-size:8.6pt;}
+.def .dt .fa-block{ margin:1.2mm 0 0 0; font-size:8.4pt;}
+.fa-block .why{ font-style:normal;}
+.fa-block .why:before{ content:'چرا: '; font-family:'Vazir'; font-size:8.6pt; font-weight:700;
+                       color:var(--clin); letter-spacing:normal;}
+caption .fa-cell{ text-transform:none; letter-spacing:normal;}
+h2 .fa-block, h3 .fa-block, h4 .fa-block, h5 .fa-block{ text-align:right;}
+.kicker .fa-block{ margin:1.2mm 0 0 0; text-align:right;}
+.note .fa-block{ font-style:normal;}
+
+/* section-level separator, once per idea */
+section > .fa-block, .part-blurb + .fa-block{
+  border-top:1px solid var(--rule-2); padding-top:1.6mm;
+}
+
+/* title page (bilingual heights) */
+.tp-band{height:118mm}
+.tp-body{margin-top:129mm}
+.tp-title .fa-block{ color:#fff !important; font-size:19pt; font-weight:700; margin:4mm 0 0 0; line-height:1.5;}
+.tp-sub .fa-block{ color:var(--text-2) !important; font-size:10.2pt; margin:2mm 0 0 0; line-height:1.7;}
+.tp-scope{margin-bottom:7mm; padding-top:3mm}
+.tp-scope .row{padding:2.4mm 0}
+.tp-scope .t .fa-block{ display:inline-block; margin:0 0 0 5mm; vertical-align:baseline;
+                        color:#C7CCD2; font-size:8.6pt;}
+.tp-src{margin-bottom:3mm}
+.tp-src .s1 .fa-block{ margin:.6mm 0 0 0; font-size:8.6pt; line-height:1.7; text-align:right;}
+.tp-foot{margin-top:6mm}
+.part-title .fa-block{ font-size:18pt; font-weight:700; color:#fff; margin:3mm 0 0 0; line-height:1.55; text-align:right;}
+.res > .fa-block:before{ content:'نتیجهٔ نهایی: '; font-family:'Vazir'; font-weight:700; font-size:8.6pt;
+                         color:var(--clin);}
+.toc-row .dots{transform:none}
+.toc-fa{margin-top:-1.2mm;margin-bottom:2.2mm}
+.tp-credit .fa-block{ display:inline-block; vertical-align:baseline; margin:0 0 0 3mm;
+                      font-size:8pt; color:var(--text-3);}
