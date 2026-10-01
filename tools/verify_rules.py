@@ -15,7 +15,7 @@ with sync_playwright() as p:
         if(hasL!==k.includes('workout')||hasL!==k.includes('salt')) bad.push('workout/salt '+i);
         if(hasL===k.includes('gtg')) bad.push('gtg '+i);
         if(f.dow===1&&f.week>=3){ if(f.type!=='refeed'||kc!==2500) bad.push('refeed '+i)}
-        else if(hasL){ if(f.type!=='train'||kc!==2100) bad.push('train '+i)}
+        else if(hasL){ if(f.type!=='train'||kc!==1900) bad.push('train '+i)}
         else { if(f.type!=='walk'||kc!==1900) bad.push('walk '+i)}
         if(f.refeed!==(f.dow===1&&f.week>=3)) bad.push('refeedflag '+i);
         if((f.dow===6)!==k.includes('checkin')) bad.push('checkin '+i);

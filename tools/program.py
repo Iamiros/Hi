@@ -361,7 +361,7 @@ MUSCLE_FA = dict(back="پشت و لت", chest="سینه", delt="شانه", bi="�
                  quad="چهارسر", ham="همسترینگ", glute="باسن", calf="ساق", core="مرکز بدن", grip="گریپ")
 
 NUTRITION = {
- "train":  dict(kcal=2100, p=200, f=60, c=190),
+ "train":  dict(kcal=1900, p=200, f=60, c=140),
  "walk":   dict(kcal=1900, p=200, f=60, c=140),
  "refeed": dict(kcal=2500, p=180, f=55, c=320),
 }

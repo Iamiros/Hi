@@ -52,3 +52,8 @@ Your answers: strict pull-up max 4-5, parallel dips under 8, squat and deadlift 
 - **Friday E** counts as a training day (2100 kcal, 4 L water, salt before training). GTG only on Mon and Wed (non-lifting days).
 - **Weekly check-in** and the **mid and end tests** are on Friday (end of week). Day 1 test is Saturday before Workout A. Pull-up Test Day stays on Friday of week 8. D2 in week 8 is a light 3x5 so the test is fresh.
 - **Removed** the Curl + Overhead Triceps superset from Workout D (arms now trained in E) to limit biceps and triceps volume. Delts and core are now above 10 hard sets (18-19 and 10); this is shown in the guide table. Say if you want E shorter.
+
+## Edit 4: 1900 kcal on training days
+- Training days changed from 2100 to **1900 kcal (P200, F60, C140)**, same as walk days. Refeed Sunday from week 3 stays 2500.
+- Average intake: weeks 1-2 = 1900, weeks 3-8 = about 1986. Estimated deficit about 1000-1080 kcal/day, about 0.9-1.0 kg/week, projected about 81.5-82 kg at week 8. This is above the 0.5-1% bodyweight/week guideline (Helms 2014); the existing adjustment rule (+150 kcal if loss > 1.2 kg/week or strength drops twice) is the safeguard.
+- Sample day adjusted: rice 150 g, potato 200 g, total about 1930 kcal.
