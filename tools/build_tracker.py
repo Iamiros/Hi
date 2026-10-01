@@ -4,6 +4,7 @@ lib = {e["id"]: {"en": e["en"], "yt": e["yt"]} for e in P.LIB}
 prog = dict(schemes=P.SCHEMES, phases=P.PHASES, warmup=P.WARMUP, nutrition=P.NUTRITION, lib=lib,
             workouts={k: dict(fa=v["fa"], ex=v["ex"]) for k, v in P.WORKOUTS.items()})
 t = (root / "tools/tracker.template.html").read_text()
+t = t.replace("/*__LOGIC__*/", (root / "tools/tracker.logic.js").read_text())
 import base64
 def font_css():
     f=root/"tools/fonts"; css=""
@@ -21,7 +22,7 @@ import re as _re
 art = base.replace("__GUIDE__", "null")
 title = _re.search(r"<title>.*?</title>", art, _re.S).group(0)
 style = _re.search(r"<style>.*?</style>", art, _re.S).group(0)
-style = style.replace("padding:env(safe-area-inset-top) env(safe-area-inset-right) calc(76px + env(safe-area-inset-bottom)) env(safe-area-inset-left)", "padding:0 0 calc(76px + env(safe-area-inset-bottom)) 0")
+style = style.replace("padding:env(safe-area-inset-top) env(safe-area-inset-right) calc(96px + env(safe-area-inset-bottom)) env(safe-area-inset-left)", "padding:0 0 calc(96px + env(safe-area-inset-bottom)) 0")
 body = _re.search(r"<body>(.*)</body>", art, _re.S).group(1)
 (root / "tracker/artifact.html").write_text(title + "\n" + style + "\n" + body)
 (root / "tracker/manifest.webmanifest").write_text(json.dumps({

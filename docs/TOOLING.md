@@ -6,7 +6,7 @@ Collected at session start with `claude plugin list`, the skills listing, the ag
 | Plugin | Used | For what / why skipped |
 |---|---|---|
 | taste-skill (taste-skill, minimalist-skill, soft-skill, brutalist-skill, redesign-skill, stitch-skill, brandkit, output-skill, image skills) | **taste-skill:taste-skill read in full** | Anti-slop rules applied to the product UI: one accent, one radius system (10 px), no gradients, no em or en dashes, no eyebrow labels, light and dark tokens, reduced motion, one hero element. Marketing-page rules (hero stack, logo walls) do not apply to a tracker and were not used. Others skipped: they target landing pages or image generation. |
-| ui-ux-pro-max | Skipped | Palette and font choice were fixed by the brief (chalk grey, slate, steel blue, gold, Vazirmatn, Barlow Condensed). Its data search adds nothing to a spec this precise. |
+| ui-ux-pro-max | **Used (redesign)** | `--design-system` search for a fitness tracker; kept its Barlow Condensed numerals and UX checklist (44 px targets, focus, reduced motion), rejected its orange and green palette. |
 | document-skills (pdf, docx, pptx, xlsx) | pdf approach only | The guide PDF is produced by Chromium print (Playwright) from the same HTML, so the Persian shaping and fonts match the screen version. docx, pptx, xlsx not requested. |
 | humanizer | Skipped | Persian prose written directly; the plugin targets English AI-isms. |
 | pubmed (MCP) | **Used** | Verified every citation (title, year, journal, PMID, DOI) and checked creatine and caffeine claims against abstracts and full text. See DECISIONS.md. |

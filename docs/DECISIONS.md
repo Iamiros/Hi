@@ -57,3 +57,8 @@ Your answers: strict pull-up max 4-5, parallel dips under 8, squat and deadlift 
 - Training days changed from 2100 to **1900 kcal (P200, F60, C140)**, same as walk days. Refeed Sunday from week 3 stays 2500.
 - Average intake: weeks 1-2 = 1900, weeks 3-8 = about 1986. Estimated deficit about 1000-1080 kcal/day, about 0.9-1.0 kg/week, projected about 81.5-82 kg at week 8. This is above the 0.5-1% bodyweight/week guideline (Helms 2014); the existing adjustment rule (+150 kcal if loss > 1.2 kg/week or strength drops twice) is the safeguard.
 - Sample day adjusted: rice 150 g, potato 200 g, total about 1930 kcal.
+
+## Edit 5: tracker redesign
+- Rebuilt the tracker UI from scratch (taste-skill, redesign-skill, ui-ux-pro-max design-system search, dataviz). Data model and program logic unchanged (moved to `tools/tracker.logic.js`); old saved data loads as before.
+- New: dark-first graphite and cobalt palette with a light theme, gold reserved for "today" and achievements; week strip with per-day progress rings and swipe between days; completion ring hero; set-by-set session tracking (tap a set, rest timer starts with the exercise's rest time, beep/vibration at 0, +30 s and skip); workout auto-completes when every set is done; bottom-sheet lift logging with steppers prefilled from the last session; grouped checklist (training, food, recovery) with pips for counters; water tank; macro split bar; floating tab bar; scrub tooltip on the weight chart; iOS-style settings list.
+- ui-ux-pro-max suggested orange + green with Barlow; the palette was not used (generic sports default), the Barlow Condensed numerals were kept.
