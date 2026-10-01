@@ -4,7 +4,7 @@
 SCHEMES = {
     "heavy":    ["4×5 @RPE7", "4×5 @RPE7.5", "5×5 @RPE8", "3×3 @RPE6", "5×3 @RPE8", "5×3 @RPE8.5", "6×2-3 @RPE8.5", "3×2 light"],
     "pu":       ["5×3", "6×3", "5×4", "3×3", "5×4", "5×5", "4×5-6", "3×3"],
-    "assist":   ["4×6", "4×6", "5×6", "3×5", "4×8", "4×8", "5×8", "test"],
+    "assist":   ["4×6", "4×6", "5×6", "3×5", "4×8", "4×8", "5×8", "3×5 light"],
     "highpull": ["5×3", "5×3", "6×3", "3×2", "6×2", "6×2", "6×2", "3×2"],
     "negative": ["3×2", "3×2", "4×2", "2×1", "4×2", "4×2", "5×2", "2×1"],
     "hangs":    ["3×15s", "3×20s", "3×25s", "2×20s", "3×30s", "3×35s", "3×40s", "2×30s"],
@@ -173,11 +173,6 @@ LIB = [
    ["پای دیگر جلو", "کنترل فرود روی جعبه", "زانو هم‌راستای پنجه"],
    ["افتادن روی جعبه", "جمع شدن زانو به داخل"], "جعبه‌ی بلندتر", "جعبه‌ی کوتاه‌تر یا وزنه",
    "box pistol squat progression"),
- E("curltri", "EZ-bar/Dumbbell Curl + Overhead Triceps Extension (superset)",
-   "ابرست جلو بازو و پشت بازو؛ شکل بازو.",
-   ["آرنج‌ها ثابت", "کنترل در پایین", "پشت بازو: آرنج بالا نزدیک سر"],
-   ["تاب خوردن", "دامنه‌ی ناقص"], "وزنه‌ی سبک‌تر", "ست یا وزنه‌ی بیشتر",
-   "ez bar curl overhead triceps extension superset"),
  E("hollow", "Hollow Body Hold",
    "نگه داشتن حالت هلو (کمر چسبیده به زمین، دست و پا دراز)؛ ثبات تنه برای Pull-up تمیز بدون تاب.",
    ["کمر پایین چسبیده به زمین", "دنده‌ها پایین", "پاها و دست‌ها صاف"],
@@ -235,6 +230,50 @@ LIB = [
    ["گریپ به عرض شانه", "چانه بالای میله", "پایین آمدن کامل"],
    ["نیم‌حرکت", "تاب خوردن"], "Assisted Chin-up یا Negative", "تکرار بیشتر؛ بعد از ۱۰ تکرار وزنه",
    "chin up form"),
+ E("cablelat", "Cable Lateral Raise",
+   "نشر جانب با کابل (باشگاه)؛ کشش ثابت روی سر میانی شانه. نسخه خانگی: Band Lateral Raise.",
+   ["آرنج کمی خم", "تا سطح شانه", "پایین آمدن آهسته"], ["تاب دادن بدن", "شراگ کردن شانه‌ها"],
+   "وزنه‌ی سبک‌تر", "مکث ۱ ثانیه بالا", "cable lateral raise form"),
+ E("bandlat", "Band Lateral Raise",
+   "نشر جانب با کش (خانه).",
+   ["کش زیر پا", "آرنج کمی خم", "تا سطح شانه"], ["تاب دادن", "شراگ"], "کش ضعیف‌تر", "کش سفت‌تر",
+   "band lateral raise"),
+ E("reardelt", "Rear Delt Fly",
+   "باز کردن دست به طرفین برای پشت شانه (Reverse Pec Deck یا دمبل خم). برای تعادل شانه و فرم عقب.",
+   ["تنه ثابت", "آرنج کمی خم", "کتف‌ها را فشار نده، پشت شانه را حس کن"], ["استفاده از کمر", "وزنه‌ی زیاد"],
+   "وزنه‌ی سبک‌تر", "مکث ۱ ثانیه", "rear delt fly reverse pec deck"),
+ E("bandrear", "Band Reverse Fly",
+   "نسخه خانگی Rear Delt Fly با کش.",
+   ["کش در سطح سینه", "آرنج کمی خم", "پشت شانه"], ["شراگ", "کمر قوس"], "کش ضعیف‌تر", "کش سفت‌تر",
+   "band reverse fly rear delt"),
+ E("inccurl", "Incline Dumbbell Curl",
+   "جلو بازو روی نیمکت شیب‌دار؛ کشش کامل جلو بازو.",
+   ["آرنج‌ها زیر شانه", "پایین کامل با کنترل", "بدون تاب"], ["تاب خوردن", "حرکت آرنج به جلو"],
+   "وزنه‌ی سبک‌تر", "مکث ۱ ثانیه بالا", "incline dumbbell curl form"),
+ E("bandcurl", "Band Curl",
+   "جلو بازو با کش یا دمبل (خانه).",
+   ["آرنج‌ها کنار بدن", "پایین آهسته"], ["تاب خوردن"], "کش ضعیف‌تر", "کش سفت‌تر یا مکث",
+   "band curl"),
+ E("pushdown", "Triceps Rope Pushdown",
+   "پشت بازو با طناب روی کابل؛ در پایین طناب را باز کن.",
+   ["آرنج‌ها کنار بدن", "تا باز شدن کامل", "بالا آمدن کنترل‌شده"], ["حرکت آرنج", "تنه تکان دادن"],
+   "وزنه‌ی سبک‌تر", "مکث ۱ ثانیه پایین", "triceps rope pushdown form"),
+ E("bandtri", "Band Triceps Pushdown",
+   "نسخه خانگی Pushdown با کش بسته‌شده بالای در یا میله.",
+   ["آرنج‌ها کنار بدن", "تا باز شدن کامل"], ["حرکت آرنج"], "کش ضعیف‌تر", "کش سفت‌تر",
+   "band triceps pushdown"),
+ E("cablecrunch", "Cable Crunch",
+   "کرانچ با کابل برای شکم؛ ستون فقرات گرد می‌شود، نه خم شدن از ران.",
+   ["لگن ثابت", "دنده‌ها به سمت لگن", "پایین آمدن کنترل‌شده"], ["کشیدن با دست", "وزنه‌ی زیاد"],
+   "وزنه‌ی سبک‌تر", "مکث ۱ ثانیه پایین", "cable crunch form"),
+ E("bpcrunch", "Backpack Crunch",
+   "کرانچ با کوله‌پشتی روی سینه (خانه).",
+   ["پاها صاف روی زمین", "گردن راحت", "بالا آمدن کنترل‌شده"], ["کشیدن گردن"], "بدون وزنه", "کوله‌پشتی سنگین‌تر",
+   "weighted crunch"),
+ E("pallof", "Pallof Press",
+   "پرس ضدچرخش با کابل یا کش؛ مرکز بدن و ثبات.",
+   ["کتف‌ها ثابت", "دست‌ها را از سینه صاف کن", "بدن نچرخد"], ["چرخش تنه", "کش خیلی سنگین"],
+   "مقاومت کمتر", "مکث ۲ ثانیه با دست صاف", "pallof press form"),
 ]
 LIBD = {e["id"]: e for e in LIB}
 
@@ -248,7 +287,7 @@ def X(id, gym, home, dose, rest, m, h=1, main=0, fa="", dose_home=None):
                 dose_home=dose_home)
 
 WORKOUTS = {
- "A": dict(name="Workout A", fa="تمرین A: قدرت بالاتنه", day="Mon", ex=[
+ "A": dict(name="Workout A", fa="تمرین A: قدرت بالاتنه", day="Sat", ex=[
    X("a1", "pullup", "pullup", "pu", "3 min", dict(back=1, bi=.5), 1, 1,
      "وزن بدن. هر ست ۲ تکرار کمتر از حداکثر؛ وقتی همه ست‌ها تمیز بود، هفته بعد تکرار اضافه کن."),
    X("a2", "bench", "dip", "heavy", "3 min", dict(chest=1, tri=.5, delt=.5), 1, 1,
@@ -261,7 +300,7 @@ WORKOUTS = {
    X("a5", "deadhang", "deadhang", "hangs", "60-90 s", dict(grip=1), 0, 0,
      "آویز با شانه‌های فعال."),
  ]),
- "B": dict(name="Workout B", fa="تمرین B: قدرت پایین‌تنه", day="Tue", ex=[
+ "B": dict(name="Workout B", fa="تمرین B: قدرت پایین‌تنه", day="Sun", ex=[
    X("b1", "squat", "bss", "heavy", "3 min", dict(quad=1, glute=.5), 1, 1,
      "باشگاه: Back Squat (شروع حدود ۱۲۰-۱۳۰ kg برای ۵ تکرار با RPE7، بر اساس ۱۵۰×۴). خانه: Weighted Bulgarian Split Squat."),
    X("b2", "rdl", "slrdl", ["3×6", "2×6"], "60-90 s", dict(ham=1, glute=.5), 1, 1,
@@ -275,7 +314,7 @@ WORKOUTS = {
    X("b6", "rollout", "rollout", ["3×8", "2×6"], "60-90 s", dict(core=1), 1, 0,
      "کمر نیفتد؛ دامنه را کم کن اگر لازم است."),
  ]),
- "C": dict(name="Workout C", fa="تمرین C: شکل بالاتنه و حجم Pull-up", day="Thu", ex=[
+ "C": dict(name="Workout C", fa="تمرین C: شکل بالاتنه و حجم Pull-up", day="Tue", ex=[
    X("c1", "highpull", "highpull", "highpull", "2-3 min", dict(back=1, bi=.5), 0, 0,
      "Band-Assisted High Pull-up تا زیر سینه، آرنج به سمت لگن."),
    X("c2", "pun", "pun", "negative", "2-3 min", dict(back=.5, bi=.5), 0, 0,
@@ -291,28 +330,32 @@ WORKOUTS = {
    X("c7", "hlr", "hlr", ["3×10", "2×8"], "60-90 s", dict(core=1), 1, 0,
      "بدون تاب."),
  ]),
- "D": dict(name="Workout D", fa="تمرین D: قدرت کل بدن", day="Fri", ex=[
+ "D": dict(name="Workout D", fa="تمرین D: قدرت کل بدن", day="Thu", ex=[
    X("d1", "dl", "pistol", ["3×3 @80-85% 1RM", "2×3 light"], "3 min", dict(ham=1, glute=1, back=.5, quad=.5), 1, 1,
      "باشگاه: Deadlift (بر اساس ۱۵۰×۴ حدود ۱۳۵-۱۴۵ kg برای ۳ تکرار؛ روز ۱ بسنج). خانه: Box Pistol Squat (۴×۵ برای هر پا).",
      dose_home=["4×5 per leg", "2×3 light"]),
    X("d2", "apu", "bapu", "assist", "3 min", dict(back=1, bi=.5), 1, 0,
-     "باشگاه: Assisted Pull-up. خانه: Band-Assisted Pull-up. کمک را هر هفته کم کن. هفته ۸ جمعه = تست Pull-up."),
+     "باشگاه: Assisted Pull-up. خانه: Band-Assisted Pull-up. کمک را هر هفته کم کن. تست Pull-up جمعه است."),
    X("d3", "adip", "tdip", ["3×6-8", "2×6"], "60-90 s", dict(chest=1, tri=.5, delt=.5), 1, 0,
      "فرود ۳ ثانیه‌ای. باشگاه: Assisted Dip. خانه: Tempo Dip (۳×۴-۶، دیلود ۲×۴).",
      dose_home=["3×4-6", "2×4"]),
-   X("d4", "curltri", "curltri", ["2×8-10", "1×8"], "60-90 s", dict(bi=1, tri=1), 1, 0,
-     "ابرست."),
-   X("d5", "hollow", "hollow", "hollow", "60-90 s", dict(core=1), 0, 0,
+   X("d4", "hollow", "hollow", "hollow", "60-90 s", dict(core=1), 0, 0,
      "کمر چسبیده به زمین."),
-   X("d6", "farmer", "farmer", ["3×40 m", "-"], "60-90 s", dict(grip=1, core=.5), 0, 0,
+   X("d5", "farmer", "farmer", ["3×40 m", "-"], "60-90 s", dict(grip=1, core=.5), 0, 0,
      "در هفته‌ی دیلود حذف می‌شود. خانه: کوله‌پشتی یا کیسه‌ی سنگین."),
+ ]),
+ "E": dict(name="Workout E", fa="تمرین E: سبک، شانه و بازو و مرکز بدن", day="Fri", ex=[
+   X("e1", "cablelat", "bandlat", ["3×15-20", "2×15"], "60 s", dict(delt=1), 1, 0, "پمپ سبک؛ ۲ تکرار ذخیره."),
+   X("e2", "reardelt", "bandrear", ["3×12-15", "2×12"], "60 s", dict(delt=.5, back=.5), 1, 0, "باشگاه: Reverse Pec Deck. خانه: Band Reverse Fly."),
+   X("e3", "inccurl", "bandcurl", ["3×10-12", "2×10"], "60 s", dict(bi=1), 1, 0, "باشگاه: Incline Dumbbell Curl. خانه: Band Curl."),
+   X("e4", "pushdown", "bandtri", ["3×10-12", "2×10"], "60 s", dict(tri=1), 1, 0, "باشگاه: Triceps Rope Pushdown. خانه: Band Triceps Pushdown."),
+   X("e5", "cablecrunch", "bpcrunch", ["3×12-15", "2×12"], "60 s", dict(core=1), 1, 0, "باشگاه: Cable Crunch. خانه: Backpack Crunch."),
+   X("e6", "pallof", "pallof", ["3×10 per side", "2×8 per side"], "60 s", dict(core=.5), 1, 0, "کابل یا کش."),
  ]),
 }
 
-DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
-DAY_PLAN = {  # weekday index 0..6 -> workout letter or None
-    0: "A", 1: "B", 2: None, 3: "C", 4: "D", 5: None, 6: None,
-}
+DAYS = ["Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"]
+DAY_PLAN = {0: "A", 1: "B", 2: None, 3: "C", 4: None, 5: "D", 6: "E"}  # Sat..Fri
 
 MUSCLE_FA = dict(back="پشت و لت", chest="سینه", delt="شانه", bi="جلو بازو", tri="پشت بازو",
                  quad="چهارسر", ham="همسترینگ", glute="باسن", calf="ساق", core="مرکز بدن", grip="گریپ")

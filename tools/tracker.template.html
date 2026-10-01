@@ -196,9 +196,9 @@ dialog::backdrop{background:rgba(10,14,18,.55)}
 "use strict";
 const PROGRAM = __PROGRAM__;
 const KEY = "amir-cut-v1";
-const DEFAULT_START = "2026-10-05";
+const DEFAULT_START = "2026-10-03";
 const TARGET_W = 83, START_W = 89;
-const DAYFA = ["دوشنبه","سه‌شنبه","چهارشنبه","پنجشنبه","جمعه","شنبه","یکشنبه"];
+const DAYFA = ["شنبه","یکشنبه","دوشنبه","سه‌شنبه","چهارشنبه","پنجشنبه","جمعه"];
 const FD = "۰۱۲۳۴۵۶۷۸۹";
 
 /* ---------- helpers ---------- */
@@ -224,7 +224,7 @@ const dflt = () => ({ v: 1, start: DEFAULT_START, days: {}, tests: {}, prefs: { 
 const isObj = o => o && typeof o === "object" && !Array.isArray(o);
 const numOr = (x, lo, hi) => { const n = Number(x); return isFinite(n) && x !== "" && x !== null && n >= lo && n <= hi ? n : null; };
 function normalize(o) {
-  if (!isObj(o) || typeof o.start !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(o.start) || parseISO(o.start).getDay() !== 1 || !isObj(o.days)) return null;
+  if (!isObj(o) || typeof o.start !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(o.start) || parseISO(o.start).getDay() !== 6 || !isObj(o.days)) return null;
   const R = dflt(); R.start = o.start;
   Object.keys(o.days).forEach(k => {
     if (!/^\d{4}-\d{2}-\d{2}$/.test(k) || !isObj(o.days[k])) return;
@@ -273,14 +273,14 @@ function todayIdx() {
 }
 function info(i) {
   const week = Math.floor(i / 7) + 1, dow = i % 7;
-  const letter = ({0:"A",1:"B",3:"C",4:"D"})[dow] || null;
-  const refeed = dow === 5 && week >= 3;
-  const type = letter ? "train" : (refeed ? "refeed" : "walk");
+  const letter = ({0:"A",1:"B",3:"C",5:"D",6:"E"})[dow] || null;
+  const refeed = dow === 1 && week >= 3;
+  const type = refeed ? "refeed" : (letter ? "train" : "walk");
   const ph = PROGRAM.phases.find(p => p[0].includes(week));
   return {
-    i, date: dateOf(i), week, dow, letter, type, refeed, weekend: dow >= 5,
+    i, date: dateOf(i), week, dow, letter, type, refeed, weekend: dow <= 1,
     phase: ph[1], phaseFa: ph[2], phaseEn: ph[3],
-    deload: week === 4, test: i === 0 || (dow === 4 && (week === 4 || week === 8)), mu: week === 8 && dow === 4,
+    deload: week === 4, test: i === 0 || (dow === 6 && (week === 4 || week === 8)), mu: week === 8 && dow === 6,
   };
 }
 function doseOf(ex, week, home) {
@@ -289,7 +289,7 @@ function doseOf(ex, week, home) {
   if (typeof d === "string") return PROGRAM.schemes[d][week - 1];
   return (week === 4 || week === 8) ? d[1] : d[0];
 }
-function waterTarget(inf) { return inf.type === "train" ? 4000 : 3500; }
+function waterTarget(inf) { return inf.letter ? 4000 : 3500; }
 
 function items(inf) {
   const n = PROGRAM.nutrition[inf.type];
@@ -433,7 +433,7 @@ function viewToday() {
   out += `<div class="row" style="justify-content:center"><button class="btn ghost" data-act="today" ${isToday ? "disabled" : ""}>برو به امروز</button></div>`;
 
   out += `<section class="blk"><div class="row"><h2>هفته ${fa(inf.week)}</h2><span class="chip steel">${esc(inf.phaseFa)}</span>
-    <span class="chip">${inf.type === "train" ? "روز تمرین " + en(inf.letter) : inf.type === "refeed" ? "روز ریفید" : "روز پیاده‌روی"}</span></div>
+    <span class="chip">${inf.letter ? "روز تمرین " + en(inf.letter) : "روز پیاده‌روی"}</span>${inf.refeed ? '<span class="chip grip">ریفید</span>' : ""}<span></span></div>
     <div class="macro num"><div><b>${fa(n.kcal)}</b><span class="small muted">کیلوکالری</span></div><div><b>${fa(n.p)}</b><span class="small muted">پروتئین g</span></div>
     <div><b>${fa(n.f)}</b><span class="small muted">چربی g</span></div><div><b>${fa(n.c)}</b><span class="small muted">کربوهیدرات g</span></div></div>`;
   if (inf.deload) out += `<div class="banner"><strong>هفته دیلود</strong>نصف ست‌ها و وزنه‌ی سبک‌تر. جمعه تست میانی.</div>`;
@@ -488,7 +488,7 @@ function workoutBlock(inf, dd) {
     return r + `</div>`;
   }).join("");
   const body = exs;
-  if (inf.mu) h += `<details data-d="mu" ${openD.has("mu") ? "open" : ""}><summary>تمرین D (سبک، فقط بعد از تست‌ها اگر تازه‌ای)</summary>${body}</details>`;
+  if (inf.mu) h += `<details data-d="mu" ${openD.has("mu") ? "open" : ""}><summary>تمرین ${inf.letter} (سبک، فقط بعد از تست‌ها اگر تازه‌ای)</summary>${body}</details>`;
   else h += body;
   return h + `</section>`;
 }
@@ -530,7 +530,7 @@ function inputsBlock(inf, dd) {
      <textarea id="nt" data-act="field" data-f="note">${esc(dd.note || "")}</textarea></div></section>`;
 }
 
-const SHORT = ["د", "س", "چ", "پ", "ج", "ش", "ی"];
+const SHORT = ["ش", "ی", "د", "س", "چ", "پ", "ج"];
 function viewMap() {
   const cur = todayIdx();
   let h = `<section class="blk" style="border-top:0"><h2>نقشه ۵۶ روز</h2><p class="muted small">رنگ هر روز نشان‌دهنده درصد انجام چک‌لیست است. روی هر روز بزن تا باز شود.</p><div class="hm">`;
@@ -539,7 +539,7 @@ function viewMap() {
     h += `<span class="wl">هفته ${fa(w + 1)} (${ph[2]})</span>`;
     for (let d = 0; d < 7; d++) {
       const i = w * 7 + d, inf = info(i), p = pct(i), future = i > cur;
-      const tag = inf.letter ? inf.letter : (inf.refeed ? "R" : "W");
+      const tag = inf.letter ? inf.letter + (inf.refeed ? "+R" : "") : "W";
       h += `<button class="cell ${future ? "future" : "l" + lvl(p)} ${i === cur ? "today" : ""} ${i === sel ? "sel" : ""}"
         data-act="open" data-i="${i}" aria-label="روز ${fa(i + 1)}، ${DAYFA[d]}، ${fa(Math.round(p * 100))} درصد"><b class="num">${fa(i + 1)}</b><span class="en" lang="en">${tag}</span><span class="vh">${SHORT[d]}</span></button>`;
     }
@@ -547,7 +547,7 @@ function viewMap() {
   h += `</div><div class="legend"><span>کم</span>` +
     [0, 1, 2, 3, 4].map(v => `<i style="background:var(--h${v})"></i>`).join("") +
     `<span>زیاد</span></div>
-    <p class="small muted">${en("A")} تا ${en("D")}: تمرین. ${en("W")}: پیاده‌روی. ${en("R")}: ریفید. حلقه طلایی: امروز. ستون‌ها از راست: دوشنبه تا یکشنبه.</p></section>`;
+    <p class="small muted">${en("A")} تا ${en("E")}: تمرین (E سبک). ${en("R")} کنار حرف: ریفید. ${en("W")}: پیاده‌روی. حلقه طلایی: امروز. ستون‌ها از راست: شنبه تا جمعه.</p></section>`;
   return h;
 }
 
@@ -665,7 +665,7 @@ function viewStats() {
 function viewSettings() {
   const th = S.prefs.theme;
   return `<section class="blk" style="border-top:0"><h2>تنظیمات</h2>
-   <div class="fld"><label class="f" for="sd">تاریخ شروع (باید دوشنبه باشد)</label>
+   <div class="fld"><label class="f" for="sd">تاریخ شروع (باید شنبه باشد)</label>
      <input id="sd" type="date" value="${esc(S.start)}" data-act="start"><p class="small muted">پیش‌فرض: ${fa(DEFAULT_START)}. داده‌های ثبت‌شده به تاریخ وصل هستند و با تغییر شروع، حذف نمی‌شوند.</p></div>
    <div class="fld"><label class="f" for="th">پوسته</label>
      <select id="th" data-act="theme"><option value="system" ${th === "system" ? "selected" : ""}>مثل سیستم</option><option value="light" ${th === "light" ? "selected" : ""}>روشن</option><option value="dark" ${th === "dark" ? "selected" : ""}>تیره</option></select></div></section>
@@ -774,7 +774,7 @@ document.addEventListener("change", e => {
   if (a === "theme") { S.prefs.theme = el.value; save(); applyTheme(); return render(); }
   if (a === "start") {
     if (!el.value) return;
-    if (parseISO(el.value).getDay() !== 1) { toast("تاریخ شروع باید دوشنبه باشد."); el.value = S.start; return; }
+    if (parseISO(el.value).getDay() !== 6) { toast("تاریخ شروع باید شنبه باشد."); el.value = S.start; return; }
     S.start = el.value; save(); sel = clamp(todayIdx(), 0, 55); return render();
   }
   if (a === "import") {

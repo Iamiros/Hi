@@ -44,3 +44,11 @@ Your answers: strict pull-up max 4-5, parallel dips under 8, squat and deadlift 
 - **Removed Lat Pulldown/Explosive slot** in Workout A to keep back volume under control (back 18-19 hard sets). Workout A now has 5 exercises.
 - **Squat and Deadlift** keep the specified dosing; the notes give start loads from 150 x 4 (about 170 kg estimated 1RM): squat 120-130 kg for 5 at RPE 7, deadlift 135-145 kg for 3. Confirm with the day 1 test.
 - Tracker: PR lists now show Pull-up, Chin-up, Dip and Bench; Weighted Pull-up 3RM and False Grip tests were replaced by Max Strict Chin-ups.
+
+## Edit 3: week from Saturday, five training days
+- **Start Saturday 2026-10-03.** Week runs Saturday to Friday. The start date must be a Saturday (tracker rejects other days; the old Monday start no longer imports).
+- **Layout:** Sat A, Sun B, Mon walk + GTG, Tue C, Wed walk + GTG, Thu D, Fri E (new, light: cable lateral raise, rear delt fly, incline curl, rope pushdown, cable crunch, Pallof press). Weekend (Sat, Sun) walk is 90-120 min, other days 60-90 min.
+- **Refeed** moved to Sunday (leg day) from week 3, 2500 kcal. Sunday weeks 1-2 = 2100 (training day). Average intake weeks 3-8 = 2100 kcal, weeks 1-2 about 2043. Estimated average deficit about 880 kcal (weeks 3-8), still inside the 800-900 target.
+- **Friday E** counts as a training day (2100 kcal, 4 L water, salt before training). GTG only on Mon and Wed (non-lifting days).
+- **Weekly check-in** and the **mid and end tests** are on Friday (end of week). Day 1 test is Saturday before Workout A. Pull-up Test Day stays on Friday of week 8. D2 in week 8 is a light 3x5 so the test is fresh.
+- **Removed** the Curl + Overhead Triceps superset from Workout D (arms now trained in E) to limit biceps and triceps volume. Delts and core are now above 10 hard sets (18-19 and 10); this is shown in the guide table. Say if you want E shorter.
