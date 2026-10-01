@@ -1,6 +1,6 @@
 # Pathology Laboratory, Session 3: Cell and Tissue Injury and Repair (3)
 
-`pathology-lab3-english.pdf` (40 pp) and `pathology-lab3-bilingual.pdf` (53 pp).
+`pathology-lab3-english.pdf` (38 pp) and `pathology-lab3-bilingual.pdf` (49 pp).
 
 First guide built under the Pathology Laboratory "Specimen Lightbox" theme
 (`../THEME-lab.md`): dark background throughout so the real gross photos and
@@ -145,3 +145,32 @@ visual weight, and images needed more teaching text and pointer annotation.
   a page break, the same rule that fixed the original pagination bug.
 
 Page counts: 33 to 40 (English), 44 to 53 (bilingual).
+
+## Third review round: the actual cause of the recurring whitespace
+
+The user pointed at the delivered files directly and said the blank space was still there.
+Checking by eye confirmed it: several pages (the necrosis-patterns intro, the gangrene-table
+page, others) ran content for less than half the page, then sat empty.
+
+Root cause: every specimen card (heading + photo header + a near-full-page image + body text)
+was kept `page-break-inside:avoid` as one unit. A unit that size (up to ~180mm) regularly did not
+fit in whatever space was left on the current page, so paged.js pushed the *entire* card to a
+fresh page, leaving the page before it mostly blank. An intermediate fix shrank the atomic unit to
+just heading+header+image (page-break-inside measured against the earlier full-card version),
+which helped but still left large gaps wherever even that smaller block did not fit.
+
+Fix that actually worked: dropped the atomic grouping entirely. Only the image itself
+(`.spec-img`) is still kept from being sliced mid-photo; the heading keeps itself off a page alone
+(`page-break-after:avoid`, already standard for every heading), but is no longer forced to stay
+with the image that follows it. In the worst case, a specimen's heading and header bar now sit at
+the foot of one page with its photo continuing cleanly at the top of the next, same bordered card,
+no repeated header, instead of a half-empty page. Verified page by page (both editions, re-rendered
+to PNG) and by grepping the extracted PDF text of both editions for the full text of every specimen
+diagnosis line and every annotation legend item, to confirm nothing was lost in the process this
+time. Page counts dropped again, 40 to 38 (English) and 53 to 49 (bilingual): the fix did not just
+move the blank space around, it reclaimed it.
+
+While restructuring the specimen-card markup for this fix, found and fixed four stray duplicate
+closing `</div>` tags left over from an earlier editing pass (one each on specimens No.16, No.17,
+No.18, No.6*, No.86, No.23, No.20*), confirmed with an HTML parser that both files are now fully
+tag-balanced.

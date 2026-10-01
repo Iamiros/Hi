@@ -151,13 +151,22 @@ ul.dash>li{ position:relative; padding-left:3.6mm;}
 ul.dash>li:before{ content:'\2013'; position:absolute; left:0; color:var(--accent); font-weight:600;}
 
 /* ============ SPECIMEN CARD ============ */
-.spec{ position:relative; margin:4mm 0 7mm 0; page-break-inside:avoid; background:var(--surface);
-       border:1px solid var(--rule);}
+/* A whole card (heading + header + a near-full-page image + body), or even just heading+header+
+   image kept together, regularly did not fit whatever space was left on the current page: with a
+   photo up to 120mm tall, that atomic unit is bigger than the remaining space on most partly-full
+   pages, so paged.js pushed the entire thing to a fresh page and the page before it sat mostly
+   blank. .spec-lead carries no break constraint of its own: the heading keeps itself off a page
+   by itself (page-break-after:avoid, below), and only the image itself (.spec-img) is kept from
+   being sliced mid-photo. A heading-plus-header-bar left alone at the foot of a page, with its
+   photo continuing on the next, is a small, ordinary cost; it is never a half-empty page. */
+.spec-lead{}
+.spec{ position:relative; margin:4mm 0 0 0; background:var(--surface);
+       border:1px solid var(--rule); border-bottom:none;}
 .spec:before,.spec:after,.spec-img:before,.spec-img:after{ content:''; position:absolute; width:3.4mm; height:3.4mm;
        border-color:var(--accent); z-index:2; opacity:.85;}
 .spec:before{ top:-1px; left:-1px; border-top:1.6px solid; border-left:1.6px solid;}
 .spec:after{ top:-1px; right:-1px; border-top:1.6px solid; border-right:1.6px solid;}
-.spec-img{position:relative}
+.spec-img{position:relative; page-break-inside:avoid;}
 .spec-img:before{ bottom:-1px; left:-1px; border-bottom:1.6px solid; border-left:1.6px solid;}
 .spec-img:after{ bottom:-1px; right:-1px; border-bottom:1.6px solid; border-right:1.6px solid;}
 .spec-hd{ display:flex; align-items:center; justify-content:space-between; padding:3mm 4.5mm;
@@ -167,9 +176,10 @@ ul.dash>li:before{ content:'\2013'; position:absolute; left:0; color:var(--accen
 .spec-hd .st{ margin-left:auto; font-family:'JetBrainsMono'; font-size:7.6pt; letter-spacing:.1em; text-transform:uppercase;
               color:var(--text-3);}
 .spec-img{ padding:0; background:radial-gradient(ellipse at center, #1a1a1a 0%, #000 78%);}
-.spec-img img{ width:auto; max-width:100%; max-height:145mm; margin:0 auto; display:block;
+.spec-img img{ width:auto; max-width:100%; max-height:120mm; margin:0 auto; display:block;
                filter:drop-shadow(0 0 7mm rgba(232,197,71,.06));}
-.spec-body{ padding:4mm 5mm;}
+.spec-body{ background:var(--surface); border:1px solid var(--rule); border-top:none;
+            margin:0 0 7mm 0; padding:4mm 5mm;}
 .spec-body .organ{ font-family:'JetBrainsMono'; font-size:8pt; letter-spacing:.06em; text-transform:uppercase;
                     color:var(--text-3); margin-bottom:1.5mm;}
 .spec-body .diag{ font-family:'SpaceGrotesk'; font-size:11pt; font-weight:700; color:var(--accent); margin-top:2mm;}

@@ -29,7 +29,7 @@ needed to rebuild it.
 | [Session 4](pathology/session-4-inflammation) | Inflammation, Part One | 30 / 43 |
 | [Lab 1](pathology/lab-1-introduction) | Laboratory, Introduction | 39 / 67 |
 | [Lab 2](pathology/lab-2-cell-and-tissue-injury) | Laboratory, Cell and Tissue Injury | 41 / 68 |
-| [Lab 3](pathology/lab-3-cell-and-tissue-injury-repair) | Laboratory, Cell and Tissue Injury and Repair (3) | 40 / 53 |
+| [Lab 3](pathology/lab-3-cell-and-tissue-injury-repair) | Laboratory, Cell and Tissue Injury and Repair (3) | 38 / 49 |
 
 ## How each folder is arranged
 
