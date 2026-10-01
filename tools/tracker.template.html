@@ -1,0 +1,802 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ترکر برش ۸ هفته‌ای</title>
+<meta name="description" content="ترکر تعاملی ۸ هفته: حفظ عضله، قدرت کل بدن، لاغری و Muscle-Up">
+<meta name="theme-color" content="#E9ECEF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#11161C" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Cut 8W">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-180.png">
+<style>
+__FONTS__
+:root{
+  --bg:#E9ECEF; --surface:#F6F7F8; --surface2:#DDE2E7; --ink:#1B2430; --ink2:#465362; --line:#C6CDD5;
+  --steel:#3A6A94; --steel-ink:#2D5578; --on-steel:#FFFFFF; --grip:#C99A36; --grip-ink:#6E4F0E;
+  --ok:#2B7652; --warn:#9A5A14; --bad:#A8352D; --focus:#1F5FA8;
+  --r:10px; --gap:16px;
+  --h0:#DDE2E7;--h1:#C3D3E2;--h2:#9DBBD6;--h3:#3A6A94;--h4:#274E73;--t01:#1B2430;--t23:#1B2430;--t34:#FFFFFF;
+  --font-fa:'Vazirmatn','Tahoma','Segoe UI',system-ui,sans-serif;
+  --font-en:'Barlow Condensed','Arial Narrow','Roboto Condensed','Helvetica Neue',Arial,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#11161C; --surface:#19212A; --surface2:#222C37; --ink:#E6EAEE; --ink2:#A2AEBB; --line:#2E3946;
+    --steel:#7EB0DC; --steel-ink:#9CC4E8; --on-steel:#0E1A26; --grip:#D9A94A; --grip-ink:#E3BE6E;
+    --ok:#5DBB8D; --warn:#E0A055; --bad:#E57A71; --focus:#8EC0F0; color-scheme:dark;
+    --h0:#222C37;--h1:#2F4357;--h2:#46678A;--h3:#7EB0DC;--h4:#A8CCEC;--t01:#E6EAEE;--t23:#E6EAEE;--t34:#0E1A26;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#11161C; --surface:#19212A; --surface2:#222C37; --ink:#E6EAEE; --ink2:#A2AEBB; --line:#2E3946;
+  --steel:#7EB0DC; --steel-ink:#9CC4E8; --on-steel:#0E1A26; --grip:#D9A94A; --grip-ink:#E3BE6E;
+  --ok:#5DBB8D; --warn:#E0A055; --bad:#E57A71; --focus:#8EC0F0; color-scheme:dark;
+  --h0:#222C37;--h1:#2F4357;--h2:#46678A;--h3:#7EB0DC;--h4:#A8CCEC;--t01:#E6EAEE;--t23:#E6EAEE;--t34:#0E1A26;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-fa);font-size:16px;line-height:1.7;
+  padding:env(safe-area-inset-top) env(safe-area-inset-right) calc(76px + env(safe-area-inset-bottom)) env(safe-area-inset-left)}
+h1,h2,h3{margin:0;line-height:1.35;font-weight:700}
+h2{font-size:1.15rem} h3{font-size:1rem}
+p{margin:.25rem 0}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:6px}
+.en{font-family:var(--font-en);direction:ltr;unicode-bidi:isolate;letter-spacing:.01em;font-weight:600}
+.num{font-variant-numeric:tabular-nums}
+.muted{color:var(--ink2)}
+.small{font-size:.85rem}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px}
+@media (min-width:960px){.wrap{max-width:1120px}.cols{display:grid;grid-template-columns:1.25fr 1fr;gap:32px;align-items:start}}
+header.top{padding:20px 0 8px}
+.brand{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.brand h1{font-size:1.3rem}
+.brand .en{font-size:1.1rem;color:var(--ink2)}
+/* hero bar */
+.hero{margin:6px 0 4px}
+.hero{max-width:760px}
+.hero svg{width:100%;height:auto;display:block}
+.hero .cap{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.big{font-family:var(--font-en);font-size:2.4rem;font-weight:700;line-height:1;direction:ltr}
+/* controls */
+.btn{min-height:44px;min-width:44px;padding:8px 16px;border:1px solid var(--line);background:var(--surface);border-radius:var(--r);
+  transition:transform .12s ease,background .12s ease}
+.btn:active{transform:scale(.98)}
+.btn.primary{background:var(--steel);border-color:var(--steel);color:var(--on-steel);font-weight:700}
+.btn.ghost{background:transparent}
+.btn.danger{color:var(--bad);border-color:var(--bad);background:transparent}
+.btn[aria-pressed="true"]{background:var(--steel);color:var(--on-steel);border-color:var(--steel)}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.spread{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:12px 0}
+.nav .mid{text-align:center;flex:1;min-width:0}
+.nav .mid strong{display:block;font-size:1.1rem}
+/* sections */
+section.blk{margin:20px 0;padding-top:16px;border-top:1px solid var(--line)}
+section.blk>h2{margin-bottom:8px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px}
+.chip{display:inline-block;padding:2px 10px;border-radius:var(--r);background:var(--surface2);font-size:.85rem;line-height:1.6}
+.chip.steel{background:var(--steel);color:var(--on-steel)}
+.chip.grip{background:var(--grip);color:#241A05}
+.banner{border-inline-start:4px solid var(--grip);background:var(--surface);padding:10px 14px;border-radius:var(--r);margin:10px 0}
+.banner.mu{border-color:var(--grip);background:var(--surface);box-shadow:inset 0 0 0 2px var(--grip)}
+.banner strong{display:block}
+.macro{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px}
+.macro div{text-align:center;border-top:2px solid var(--steel);padding-top:4px}
+.macro b{font-family:var(--font-en);font-size:1.5rem;display:block;line-height:1.2;direction:ltr}
+/* checklist */
+.item{display:flex;align-items:center;gap:12px;min-height:52px;padding:6px 0;border-bottom:1px solid var(--line)}
+.item:last-child{border-bottom:0}
+.item .lbl{flex:1;min-width:0}
+.tick{flex:none;width:44px;height:44px;border-radius:var(--r);border:2px solid var(--ink2);background:transparent;display:grid;place-items:center;font-size:1.3rem;font-weight:700}
+.tick[aria-pressed="true"]{background:var(--steel);border-color:var(--steel);color:var(--on-steel)}
+.cnt{display:flex;align-items:center;gap:4px;flex:none}
+.cnt button{width:44px;height:44px;border:1px solid var(--line);background:var(--surface);border-radius:var(--r);font-size:1.2rem}
+.cnt span{min-width:48px;text-align:center;font-weight:700}
+.item.done .lbl{color:var(--ink2)}
+/* water */
+.water-top{display:flex;justify-content:space-between;align-items:baseline}
+.bar{height:10px;border-radius:5px;background:var(--surface2);overflow:hidden;margin:8px 0}
+.bar i{display:block;height:100%;background:var(--steel);border-radius:5px;transition:width .3s ease}
+.glasses{display:flex;gap:4px;flex-wrap:wrap;margin:6px 0}
+.glasses i{width:14px;height:22px;border:2px solid var(--steel);border-radius:3px 3px 6px 6px}
+.glasses i.f{background:var(--steel)}
+/* workout */
+.wk-head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.seg{display:inline-flex;gap:6px}
+.ex{padding:12px 0;border-bottom:1px solid var(--line)}
+.ex:last-child{border-bottom:0}
+.ex .t{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.ex .name{font-size:1.25rem}
+.ex .dose{font-size:1.35rem;color:var(--steel-ink);white-space:nowrap}
+.ex .meta{font-size:.88rem;color:var(--ink2)}
+.ex a{color:var(--steel-ink)}
+.logp{margin-top:8px;display:grid;gap:6px}
+.logrow{display:grid;grid-template-columns:30px 1fr 1fr 44px;gap:6px;align-items:center}
+input[type=number],input[type=date],input[type=text],select,textarea{width:100%;min-height:44px;padding:8px 10px;background:var(--surface);border:1px solid var(--ink2);border-radius:var(--r)}
+textarea{min-height:88px;resize:vertical}
+label.f{display:block;font-weight:500;margin-bottom:4px}
+.fld{margin:10px 0}
+details>summary{cursor:pointer;min-height:44px;display:flex;align-items:center;font-weight:700}
+.wu li{display:flex;justify-content:space-between;gap:8px;padding:2px 0}
+.wu{list-style:none;padding:0;margin:0}
+/* heatmap */
+.hm{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;align-items:stretch}
+.hm .wl{grid-column:1/-1;font-size:.8rem;color:var(--ink2);margin-top:8px}
+.hm .dl{text-align:center;font-size:.78rem;color:var(--ink2)}
+.cell{min-height:48px;border-radius:8px;border:1px solid var(--line);background:var(--surface2);padding:2px;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.2;color:var(--ink)}
+.cell .en{font-size:.85rem}
+.cell.future{background:transparent;border-style:dashed}
+.cell.today{outline:3px solid var(--grip);outline-offset:1px}
+.cell.sel{box-shadow:0 0 0 2px var(--ink)}
+.cell.l0,.cell.l1,.cell.l2{color:var(--t01)}.cell.l3,.cell.l4{color:var(--t34)}
+.cell.l0{background:var(--h0)}.cell.l1{background:var(--h1)}.cell.l2{background:var(--h2)}.cell.l3{background:var(--h3)}.cell.l4{background:var(--h4)}
+.cell.l1,.cell.l2{color:var(--t23)}
+.legend{display:flex;gap:6px;align-items:center;margin-top:8px;font-size:.82rem;color:var(--ink2)}
+.legend i{width:22px;height:14px;border-radius:4px;border:1px solid var(--line)}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* stats */
+.kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:16px 12px}
+@media (min-width:640px){.kpis{grid-template-columns:repeat(4,1fr)}}
+.kpi b{display:block;font-family:var(--font-en);font-size:2rem;line-height:1.1;direction:ltr;text-align:right}
+.kpi span{font-size:.85rem;color:var(--ink2)}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+th,td{padding:6px 6px;text-align:start;vertical-align:middle}
+thead th{border-bottom:2px solid var(--ink2);font-weight:700}
+tbody tr+tr td{border-top:1px solid var(--line)}
+td input{min-height:44px;padding:4px 6px;text-align:center;direction:ltr;min-width:56px}
+tbody td:first-child{min-width:130px}
+.tblwrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.rule{padding:10px 14px;border-radius:var(--r);background:var(--surface);border-inline-start:4px solid var(--ink2);margin:8px 0}
+.rule.ok{border-color:var(--ok)} .rule.warn{border-color:var(--warn)} .rule.bad{border-color:var(--bad)}
+.chart{width:100%;height:auto;display:block}
+.chart text{fill:var(--ink2);font-family:var(--font-fa);font-size:19px}
+.chart .grid{stroke:var(--line);stroke-width:1}
+.readout{min-height:1.7em;font-size:.9rem}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:12px 16px}
+@media (min-width:640px){.cmp{grid-template-columns:repeat(3,1fr)}}
+.cmp h3{font-size:.9rem;margin-bottom:2px}
+.cmp svg{width:100%;height:auto;display:block}
+.cmp text{fill:var(--ink);font-family:var(--font-en);font-size:15px;font-weight:600}
+/* tab bar */
+nav.tabs{position:fixed;inset-inline:0;bottom:0;background:var(--surface);border-top:1px solid var(--line);
+  display:flex;justify-content:center;padding:6px 8px calc(6px + env(safe-area-inset-bottom));z-index:10}
+nav.tabs .in{display:flex;gap:6px;width:100%;max-width:760px}
+nav.tabs button{flex:1;min-height:48px;border:0;background:transparent;border-radius:var(--r);font-weight:500;color:var(--ink2)}
+nav.tabs button[aria-current="page"]{background:var(--steel);color:var(--on-steel);font-weight:700}
+dialog{border:1px solid var(--line);border-radius:var(--r);background:var(--surface);color:var(--ink);max-width:min(420px,92vw);padding:18px}
+dialog::backdrop{background:rgba(10,14,18,.55)}
+.toast{position:fixed;inset-inline:16px;bottom:calc(90px + env(safe-area-inset-bottom));max-width:420px;margin-inline:auto;background:var(--ink);color:var(--bg);padding:10px 14px;border-radius:var(--r);z-index:20;text-align:center}
+.empty{padding:16px;text-align:center;color:var(--ink2);border:1px dashed var(--line);border-radius:var(--r)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+@media print{nav.tabs{display:none}body{padding:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand"><h1>برش ۸ هفته‌ای</h1><span class="en">8-Week Cut</span></div>
+  </header>
+  <main id="view"></main>
+</div>
+<nav class="tabs" aria-label="بخش‌ها"><div class="in" id="tabs"></div></nav>
+<dialog id="dlg" aria-labelledby="dt"></dialog>
+<div id="toast" class="toast" hidden role="status" aria-live="polite"></div>
+<noscript><p class="wrap">برای استفاده از ترکر جاوااسکریپت لازم است.</p></noscript>
+
+<script>
+"use strict";
+const PROGRAM = __PROGRAM__;
+const KEY = "amir-cut-v1";
+const DEFAULT_START = "2026-10-05";
+const TARGET_W = 83, START_W = 89;
+const DAYFA = ["دوشنبه","سه‌شنبه","چهارشنبه","پنجشنبه","جمعه","شنبه","یکشنبه"];
+const FD = "۰۱۲۳۴۵۶۷۸۹";
+
+/* ---------- helpers ---------- */
+const fa = s => String(s).replace(/\d/g, d => FD[d]).replace(/\./g, "٫");
+const faN = (x, d = 0) => (x == null || isNaN(x)) ? "-" : fa(Number(x).toFixed(d));
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const en = s => `<bdi class="en" dir="ltr" lang="en">${esc(s)}</bdi>`;
+const toEn = s => String(s).replace(/[۰-۹]/g, d => FD.indexOf(d)).replace(/[٫,]/g, ".").trim();
+const parseNum = (s, lo, hi) => { const t = toEn(s); if (t === "") return null; const n = Number(t); return isFinite(n) && n >= lo && n <= hi ? n : undefined; };
+const $ = (s, r = document) => r.querySelector(s);
+const parseISO = s => { const [y, m, d] = s.split("-").map(Number); return new Date(y, m - 1, d, 12); };
+const iso = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+const addDays = (d, n) => { const x = new Date(d); x.setDate(x.getDate() + n); return x; };
+const todayISO = () => iso(new Date());
+const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
+const mean = a => a.length ? a.reduce((s, x) => s + x, 0) / a.length : null;
+const fmtJ = new Intl.DateTimeFormat("fa-IR", { month: "long", day: "numeric" });
+const fmtG = new Intl.DateTimeFormat("fa-IR-u-ca-gregory", { year: "numeric", month: "long", day: "numeric" });
+
+/* ---------- persistence ---------- */
+let mem = null;
+const dflt = () => ({ v: 1, start: DEFAULT_START, days: {}, tests: {}, prefs: { mode: "gym", theme: "system" } });
+const isObj = o => o && typeof o === "object" && !Array.isArray(o);
+const numOr = (x, lo, hi) => { const n = Number(x); return isFinite(n) && x !== "" && x !== null && n >= lo && n <= hi ? n : null; };
+function normalize(o) {
+  if (!isObj(o) || typeof o.start !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(o.start) || parseISO(o.start).getDay() !== 1 || !isObj(o.days)) return null;
+  const R = dflt(); R.start = o.start;
+  Object.keys(o.days).forEach(k => {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(k) || !isObj(o.days[k])) return;
+    const d = o.days[k], r = { done: {}, water: numOr(d.water, 0, 20000) || 0, lifts: {} };
+    if (isObj(d.done)) Object.keys(d.done).forEach(x => { const v = d.done[x]; r.done[x] = typeof v === "boolean" ? v : (numOr(v, 0, 10) || 0); });
+    if (isObj(d.lifts)) Object.keys(d.lifts).forEach(x => { if (Array.isArray(d.lifts[x])) r.lifts[x] = d.lifts[x].slice(0, 20).filter(isObj).map(s => ({ kg: numOr(s.kg, 0, 500) ?? "", reps: numOr(s.reps, 0, 200) ?? "", ex: typeof s.ex === "string" ? s.ex.slice(0, 20) : "" })); });
+    const w = numOr(d.weight, 30, 250), st = numOr(d.steps, 0, 100000);
+    if (w !== null) r.weight = w; if (st !== null) r.steps = st;
+    if (typeof d.note === "string") r.note = d.note.slice(0, 2000);
+    R.days[k] = r;
+  });
+  if (isObj(o.tests)) Object.keys(o.tests).forEach(p => { if (isObj(o.tests[p])) { R.tests[p] = {}; Object.keys(o.tests[p]).forEach(t => { const n = numOr(o.tests[p][t], 0, 1000); R.tests[p][t] = n === null ? "" : n; }); } });
+  if (isObj(o.prefs)) { if (["gym", "home"].includes(o.prefs.mode)) R.prefs.mode = o.prefs.mode; if (["system", "light", "dark"].includes(o.prefs.theme)) R.prefs.theme = o.prefs.theme; }
+  return R;
+}
+function load() {
+  let raw = null;
+  try { raw = localStorage.getItem(KEY); } catch (e) {}
+  if (raw) {
+    try { const n = normalize(JSON.parse(raw)); if (n) return n; } catch (e) {}
+    try { localStorage.setItem(KEY + "-corrupt", raw); } catch (e) {}
+  }
+  return mem || dflt();
+}
+let S = load();
+let saveWarned = false;
+function save() {
+  mem = S;
+  try { localStorage.setItem(KEY, JSON.stringify(S)); saveWarned = false; }
+  catch (e) { if (!saveWarned) { saveWarned = true; toast("ذخیره‌سازی مرورگر در دسترس نیست. از Export برای پشتیبان استفاده کن."); } }
+}
+function toast(msg) {
+  const t = $("#toast"); t.textContent = msg; t.hidden = false;
+  clearTimeout(toast.t); toast.t = setTimeout(() => t.hidden = true, 3200);
+}
+function D(date) { return S.days[date] || (S.days[date] = { done: {}, water: 0, lifts: {} }); }
+const BWLIFTS = ["wpu", "wpuh", "chin", "wdip"];
+function peek(date) { return S.days[date] || null; }
+
+/* ---------- program mapping ---------- */
+const startDate = () => parseISO(S.start);
+const dateOf = i => iso(addDays(startDate(), i));
+function todayIdx() {
+  const diff = Math.round((parseISO(todayISO()) - startDate()) / 864e5);
+  return diff;
+}
+function info(i) {
+  const week = Math.floor(i / 7) + 1, dow = i % 7;
+  const letter = ({0:"A",1:"B",3:"C",4:"D"})[dow] || null;
+  const refeed = dow === 5 && week >= 3;
+  const type = letter ? "train" : (refeed ? "refeed" : "walk");
+  const ph = PROGRAM.phases.find(p => p[0].includes(week));
+  return {
+    i, date: dateOf(i), week, dow, letter, type, refeed, weekend: dow >= 5,
+    phase: ph[1], phaseFa: ph[2], phaseEn: ph[3],
+    deload: week === 4, test: i === 0 || (dow === 4 && (week === 4 || week === 8)), mu: week === 8 && dow === 4,
+  };
+}
+function doseOf(ex, week, home) {
+  let d = ex.dose;
+  if (home && ex.dose_home) d = ex.dose_home;
+  if (typeof d === "string") return PROGRAM.schemes[d][week - 1];
+  return (week === 4 || week === 8) ? d[1] : d[0];
+}
+function waterTarget(inf) { return inf.type === "train" ? 4000 : 3500; }
+
+function items(inf) {
+  const n = PROGRAM.nutrition[inf.type];
+  const L = [];
+  if (inf.letter) L.push({ k: "workout", t: "b", l: `تمرین ${inf.letter} انجام شد` });
+  const walkRange = inf.weekend ? "۹۰ تا ۱۲۰" : "۶۰ تا ۹۰";
+  L.push({ k: "walk", t: "b", l: `پیاده‌روی ${walkRange} دقیقه (هدف ۱۲٬۰۰۰ قدم یا بیشتر)` });
+  L.push({ k: "kcal", t: "b", l: `کالری ${fa(n.kcal)}` + (inf.type === "refeed" ? " (ریفید)" : "") });
+  L.push({ k: "protein", t: "c", max: 4, l: `پروتئین ${fa(n.p)} گرم در ۴ وعده` });
+  L.push({ k: "water", t: "w", l: `آب حداقل ${fa(waterTarget(inf) / 1000)} لیتر` });
+  if (inf.letter) L.push({ k: "salt", t: "b", l: "آب با ¼ قاشق چایخوری نمک یا ساشه الکترولیت قبل از تمرین" });
+  L.push({ k: "creatine", t: "b", l: `${en("Creatine Monohydrate")} ${fa(5)} g` });
+  L.push({ k: "hang", t: "b", l: `${en("Dead Hang")} ${fa(3)} دقیقه` + (inf.week >= 3 ? " (نصف آن با False Grip)" : "") });
+  L.push({ k: "sleep", t: "b", l: "خواب حداقل ۷٫۵ ساعت" });
+  if (!inf.letter) L.push({ k: "gtg", t: "c", max: 5, l: `${en("Grease the Groove")}: ۵ ست Pull-up سخت‌گیرانه با ۴۰ تا ۵۰٪ حداکثر، فاصله ≥ ۶۰ دقیقه` });
+  if (inf.dow === 6) L.push({ k: "checkin", t: "b", l: "چک‌این هفتگی: عکس جلو/پشت/پهلو، دور شکم، کالیپر ۳ نقطه" });
+  if (inf.test) L.push({ k: "tests", t: "b", l: "تست‌ها ثبت شد (بخش آمار)" });
+  if (inf.mu) L.push({ k: "mu", t: "b", l: `${en("Muscle-Up Day")} انجام شد` });
+  return L;
+}
+function frac(it, dd, inf) {
+  const v = dd ? dd.done[it.k] : 0;
+  if (it.t === "b") return v ? 1 : 0;
+  if (it.t === "c") return clamp((v || 0) / it.max, 0, 1);
+  if (it.t === "w") return clamp(((dd && dd.water) || 0) / waterTarget(inf), 0, 1);
+  return 0;
+}
+function pct(i) {
+  const inf = info(i), dd = peek(inf.date);
+  if (!dd) return 0;
+  const L = items(inf);
+  return L.reduce((s, it) => s + frac(it, dd, inf), 0) / L.length;
+}
+
+/* ---------- stats ---------- */
+function weightOn(date) { const d = peek(date); return d && d.weight > 0 ? +d.weight : null; }
+function avg7(i) {
+  const a = [];
+  for (let k = Math.max(0, i - 6); k <= i; k++) { const w = weightOn(dateOf(k)); if (w) a.push(w); }
+  return mean(a);
+}
+function weekAvg(w) {
+  const a = [];
+  for (let k = (w - 1) * 7; k < w * 7; k++) { const x = weightOn(dateOf(k)); if (x) a.push(x); }
+  return a.length >= 3 ? mean(a) : null;
+}
+function weeklyRates(lastWeek) {
+  const out = [];
+  for (let w = 2; w <= lastWeek; w++) {
+    const a = weekAvg(w - 1), b = weekAvg(w);
+    out.push({ w, rate: a != null && b != null ? a - b : null });
+  }
+  return out;
+}
+function e1rm(lib, set) {
+  const bw = BWLIFTS.includes(lib) ? (latestWeight() || START_W) : 0;
+  const kg = +set.kg || 0, r = +set.reps || 0;
+  if (!r || (!kg && !bw)) return null;
+  return (bw + kg) * (1 + r / 30);
+}
+function latestWeight() {
+  for (let i = 55; i >= 0; i--) { const w = weightOn(dateOf(i)); if (w) return w; }
+  return null;
+}
+function strengthDrops() {
+  const bad = [];
+  ["a1","a2","b1","d1","d2","c5"].forEach(ex => {
+    const by = {};
+    for (let i = 0; i < 56; i++) {
+      const f = info(i); if (f.week === 4 || f.week === 8) continue;
+      const dd = peek(f.date); const sets = dd && dd.lifts && dd.lifts[ex];
+      if (!sets || !sets.length) continue;
+      const g = {};
+      sets.forEach(st => { const v = e1rm(st.ex, st); if (v) g[st.ex || ""] = Math.max(g[st.ex || ""] || 0, v); });
+      Object.keys(g).forEach(k => (by[k] = by[k] || []).push(g[k]));
+    }
+    Object.keys(by).forEach(k => { const q = by[k], n = q.length; if (n >= 3 && q[n - 1] < q[n - 2] && q[n - 2] < q[n - 3]) bad.push(ex); });
+  });
+  return bad.filter((x, i) => bad.indexOf(x) === i);
+}
+function streak(cur) {
+  let i = Math.min(cur, 55), n = 0;
+  if (i >= 0 && pct(i) < 0.7) i--;
+  for (; i >= 0; i--) { if (pct(i) >= 0.7) n++; else break; }
+  return n;
+}
+function stepStreak(cur) {
+  let i = Math.min(cur, 55), n = 0;
+  const ok = k => { const d = peek(dateOf(k)); return d && d.steps >= 12000; };
+  if (i >= 0 && !ok(i)) i--;
+  for (; i >= 0; i--) { if (ok(i)) n++; else break; }
+  return n;
+}
+
+/* ---------- state of UI ---------- */
+let tab = "today";
+let sel = clamp(todayIdx(), 0, 55);
+let openLog = null;
+const openD = new Set();
+function go(t) { tab = t; render(); window.scrollTo(0, 0); }
+function setSel(i) { sel = clamp(i, 0, 55); openLog = null; render(); window.scrollTo(0, 0); }
+function applyTheme() {
+  const t = S.prefs.theme;
+  if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+  else document.documentElement.removeAttribute("data-theme");
+}
+
+/* ---------- views ---------- */
+const lvl = p => p < 0.1 ? 0 : p < 0.3 ? 1 : p < 0.55 ? 2 : p < 0.8 ? 3 : 4;
+function heroBar(cur) {
+  const W = 600, H = 66, pad = 12, n = 56;
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="پیشرفت ۵۶ روز"><title>پیشرفت ۵۶ روز</title>`;
+  s += `<rect x="${pad - 6}" y="34" width="${W - 2 * pad + 12}" height="6" rx="3" fill="var(--steel)"/>`;
+  s += `<rect x="${W * 0.2}" y="31" width="46" height="12" rx="3" fill="var(--grip)"/>`;
+  s += `<rect x="${W * 0.8 - 46}" y="31" width="46" height="12" rx="3" fill="var(--grip)"/>`;
+  for (let i = 0; i < n; i++) {
+    const x = W - pad - i * (W - 2 * pad) / (n - 1);
+    const p = pct(i), past = i <= cur;
+    const h = i === cur ? 22 : 14;
+    const fill = i === cur ? "var(--grip)" : (past ? `var(--h${Math.max(1, lvl(p))})` : "var(--surface2)");
+    s += `<rect x="${(x - 3).toFixed(1)}" y="${44}" width="6" height="${h}" rx="2" fill="${fill}"/>`;
+    if (i % 7 === 0) s += `<text x="${x.toFixed(1)}" y="18" font-size="20" text-anchor="middle" fill="var(--ink2)">${fa(i / 7 + 1)}</text>`;
+  }
+  return s + "</svg>";
+}
+
+function viewToday() {
+  const inf = info(sel), dd = peek(inf.date) || { done: {}, water: 0, lifts: {} };
+  const cur = todayIdx(), n = PROGRAM.nutrition[inf.type];
+  const L = items(inf), p = pct(sel);
+  const jd = fmtJ.format(parseISO(inf.date)), gd = fmtG.format(parseISO(inf.date));
+  const isToday = sel === cur;
+  let out = "";
+  out += `<div class="hero"><div class="cap"><div><span class="big">${fa(sel + 1)}</span> <span class="muted">از ۵۶ روز</span></div>
+    <span class="muted small">تکمیل این روز: <b class="num">${fa(Math.round(p * 100))}٪</b></span></div>${heroBar(clamp(cur, -1, 55))}</div>`;
+  if (cur < 0) out += `<div class="banner"><strong>برنامه ${fa(-cur)} روز دیگر شروع می‌شود</strong>تاریخ شروع: ${fa(esc(S.start))}. می‌توانی از قبل روزها را ببینی.</div>`;
+  if (cur > 55) out += `<div class="banner"><strong>۸ هفته تمام شد</strong>نتیجه‌ها را در بخش آمار ببین.</div>`;
+  out += `<div class="nav"><button class="btn" data-act="prev" ${sel === 0 ? "disabled" : ""}>روز قبل</button>
+    <div class="mid"><strong>${esc(DAYFA[inf.dow])}، ${esc(jd)}</strong><span class="muted small">${esc(gd)}</span></div>
+    <button class="btn" data-act="next" ${sel === 55 ? "disabled" : ""}>روز بعد</button></div>`;
+  out += `<div class="row" style="justify-content:center"><button class="btn ghost" data-act="today" ${isToday ? "disabled" : ""}>برو به امروز</button></div>`;
+
+  out += `<section class="blk"><div class="row"><h2>هفته ${fa(inf.week)}</h2><span class="chip steel">${esc(inf.phaseFa)}</span>
+    <span class="chip">${inf.type === "train" ? "روز تمرین " + en(inf.letter) : inf.type === "refeed" ? "روز ریفید" : "روز پیاده‌روی"}</span></div>
+    <div class="macro num"><div><b>${fa(n.kcal)}</b><span class="small muted">کیلوکالری</span></div><div><b>${fa(n.p)}</b><span class="small muted">پروتئین g</span></div>
+    <div><b>${fa(n.f)}</b><span class="small muted">چربی g</span></div><div><b>${fa(n.c)}</b><span class="small muted">کربوهیدرات g</span></div></div>`;
+  if (inf.deload) out += `<div class="banner"><strong>هفته دیلود</strong>نصف ست‌ها و وزنه‌ی سبک‌تر. جمعه تست میانی.</div>`;
+  if (inf.week === 8 && !inf.mu) out += `<div class="banner"><strong>هفته اوج و تست</strong>حجم کم. جمعه ${en("Muscle-Up Day")}.</div>`;
+  if (inf.refeed) out += `<div class="banner"><strong>ریفید</strong>کربوهیدرات اضافه از برنج، ماکارونی، سیب‌زمینی و میوه، نه از چربی.</div>`;
+  if (inf.mu) out += `<div class="banner mu"><strong>${en("Muscle-Up Day")}</strong>گرم کردن کامل، ۳ ${en("Explosive Chest-to-Bar Pull-up")}، سپس تا ۵ تلاش ${en("Muscle-Up")} با ۳ دقیقه استراحت. اگر نشد، ۳ تکرار ${en("Band-Assisted")} و ثبت. اهداف دوم: ۱۲ ${en("Pull-up")} سخت‌گیرانه، ۱۵ ${en("Dip")}، ۳ ${en("Pull-up")} تا سطح جناغ.</div>`;
+  else if (inf.test) out += `<div class="banner"><strong>روز تست</strong>بعد از گرم کردن، بین هر تست ۳ تا ۵ دقیقه استراحت. نتایج را در بخش آمار ثبت کن.</div>`;
+  out += `</section>`;
+
+  const left = [], right = [];
+  if (inf.letter) left.push(workoutBlock(inf, dd));
+  left.push(inputsBlock(inf, dd));
+  right.push(checklistBlock(inf, dd, L));
+  right.push(waterBlock(inf, dd));
+  if (inf.letter) right.push(`<section class="blk"><h2>ایمنی</h2><ul class="small" style="margin:0;padding-inline-start:20px">
+    <li>تمرین سنگین ناشتا نه. ۱٫۵ تا ۲ ساعت بعد از وعده با کربوهیدرات و نمک تمرین کن.</li>
+    <li>اگر سرگیجه گرفتی فوراً بنشین یا دراز بکش و پاها را بالا بگیر. بین ست‌های پا آهسته راه برو، ثابت نایست.</li>
+    <li>غش حین تلاش، یا همراه با تپش قلب، درد قفسه سینه یا تنگی نفس غیرعادی: قبل از ادامه ${en("ECG")} بگیر.</li></ul></section>`);
+  out += `<div class="cols"><div>${left.join("")}</div><div>${right.join("")}</div></div>`;
+  return out;
+}
+
+function workoutBlock(inf, dd) {
+  const W = PROGRAM.workouts[inf.letter], home = S.prefs.mode === "home";
+  let h = `<section class="blk"><div class="wk-head"><h2>${esc(W.fa)}</h2>
+    <div class="seg" role="group" aria-label="نسخه تمرین"><button class="btn" data-act="mode" data-v="gym" aria-pressed="${!home}">${en("Gym")}</button>
+    <button class="btn" data-act="mode" data-v="home" aria-pressed="${home}">${en("Home")}</button></div></div>`;
+  h += `<details style="margin:6px 0" data-d="wu" ${openD.has("wu") ? "open" : ""}><summary>گرم کردن ۸ تا ۱۰ دقیقه</summary><ul class="wu">` +
+    PROGRAM.warmup.map(w => `<li>${en(w[0])}<span class="en">${esc(w[1])}</span></li>`).join("") + `</ul></details>`;
+  const exs = W.ex.map((ex, idx) => {
+    const lib = PROGRAM.lib, g = lib[ex.gym], hm = lib[ex.home];
+    const shown = home ? hm : g, other = home ? g : hm;
+    const dose = doseOf(ex, inf.week, home);
+    const sameName = g.en === hm.en;
+    const logs = (dd.lifts && dd.lifts[ex.id]) || [];
+    const isOpen = openLog === ex.id;
+    let r = `<div class="ex"><div class="t"><div style="min-width:0"><span class="muted small num">${fa(idx + 1)}.</span>
+      <a class="name en" href="../guide/index.html#ex-${esc(ex.home === ex.gym ? ex.gym : (home ? ex.home : ex.gym))}" target="_blank" rel="noopener">${esc(shown.en)}</a></div>
+      <span class="dose en">${esc(dose === "test" ? "Test 3RM" : dose)}</span></div>
+      <div class="meta">${sameName ? "باشگاه و خانه: همین حرکت" : `${home ? "باشگاه" : "خانه"}: ${en(other.en)}`} · استراحت ${en(ex.rest)}</div>
+      ${ex.fa ? `<div class="meta">${esc(ex.fa)}</div>` : ""}`;
+    if (ex.main) {
+      r += `<div><button class="btn ghost" data-act="log" data-id="${ex.id}" aria-expanded="${isOpen}">ثبت وزنه و تکرار${logs.length ? " (" + fa(logs.length) + ")" : ""}</button></div>`;
+      if (isOpen) {
+        r += `<div class="logp">` + logs.map((s, k) => `<div class="logrow"><span class="num small">${fa(k + 1)}</span>
+          <input type="text" inputmode="decimal" dir="ltr" aria-label="${esc(shown.en)} ست ${k + 1} وزنه kg" placeholder="kg" value="${esc(s.kg ?? "")}" data-act="lg" data-id="${ex.id}" data-k="${k}" data-f="kg">
+          <input type="text" inputmode="numeric" dir="ltr" aria-label="${esc(shown.en)} ست ${k + 1} تکرار" placeholder="reps" value="${esc(s.reps ?? "")}" data-act="lg" data-id="${ex.id}" data-k="${k}" data-f="reps">
+          <button class="btn" data-act="lgdel" data-id="${ex.id}" data-k="${k}" aria-label="حذف ست ${k + 1}">×</button></div>`).join("") +
+          `<button class="btn" data-act="lgadd" data-id="${ex.id}" data-lib="${home ? ex.home : ex.gym}">افزودن ست</button></div>`;
+      }
+    }
+    return r + `</div>`;
+  }).join("");
+  const body = exs;
+  if (inf.mu) h += `<details data-d="mu" ${openD.has("mu") ? "open" : ""}><summary>تمرین D (سبک، فقط بعد از تست‌ها اگر تازه‌ای)</summary>${body}</details>`;
+  else h += body;
+  return h + `</section>`;
+}
+
+function checklistBlock(inf, dd, L) {
+  let h = `<section class="blk"><h2>چک‌لیست</h2>`;
+  h += L.map(it => {
+    const v = dd.done[it.k], f = frac(it, dd, inf);
+    if (it.t === "b") return `<div class="item ${v ? "done" : ""}"><span class="lbl" id="l-${it.k}">${it.l}</span>
+      <button class="tick" data-act="tog" data-k="${it.k}" aria-pressed="${!!v}" aria-labelledby="l-${it.k}">${v ? "✓" : ""}</button></div>`;
+    if (it.t === "c") return `<div class="item ${f >= 1 ? "done" : ""}"><span class="lbl" id="l-${it.k}">${it.l}</span>
+      <div class="cnt" role="group" aria-labelledby="l-${it.k}"><button data-act="cnt" data-k="${it.k}" data-d="-1" data-max="${it.max}" aria-label="کم کن">−</button>
+      <span class="num">${fa(v || 0)}/${fa(it.max)}</span><button data-act="cnt" data-k="${it.k}" data-d="1" data-max="${it.max}" aria-label="زیاد کن">+</button></div></div>`;
+    return `<div class="item ${f >= 1 ? "done" : ""}"><span class="lbl">${it.l}</span><span class="num muted">${fa(Math.round(f * 100))}٪</span></div>`;
+  }).join("");
+  return h + `</section>`;
+}
+
+function waterBlock(inf, dd) {
+  const t = waterTarget(inf), ml = dd.water || 0, g = Math.ceil(t / 250);
+  const full = Math.floor(ml / 250);
+  let gl = ""; for (let k = 0; k < g; k++) gl += `<i class="${k < full ? "f" : ""}"></i>`;
+  return `<section class="blk"><div class="water-top"><h2>آب</h2><span class="num"><b>${fa(ml)}</b> از ${fa(t)} میلی‌لیتر</span></div>
+    <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="${t}" aria-valuenow="${Math.min(ml, t)}" aria-label="پیشرفت آب"><i style="width:${clamp(ml / t * 100, 0, 100)}%"></i></div>
+    <div class="glasses" aria-hidden="true">${gl}</div>
+    <p class="small muted num">${fa(full)} از ${fa(g)} لیوان (هر لیوان ۲۵۰ میلی‌لیتر). صبح بعد از بیدار شدن ۵۰۰ میلی‌لیتر بنوش.</p>
+    <div class="row"><button class="btn" data-act="water" data-v="-250" ${ml <= 0 ? "disabled" : ""}>−۲۵۰</button>
+    <button class="btn primary" data-act="water" data-v="250">+۲۵۰</button><button class="btn primary" data-act="water" data-v="500">+۵۰۰</button></div></section>`;
+}
+
+function inputsBlock(inf, dd) {
+  return `<section class="blk"><h2>ثبت روز</h2>
+   <div class="fld"><label class="f" for="w">وزن صبح (kg، ناشتا بعد از دستشویی)</label>
+     <input id="w" type="text" inputmode="decimal" dir="ltr" value="${esc(dd.weight ?? "")}" data-act="field" data-f="weight"></div>
+   <div class="fld"><label class="f" for="st">تعداد قدم</label>
+     <input id="st" type="text" inputmode="numeric" dir="ltr" value="${esc(dd.steps ?? "")}" data-act="field" data-f="steps">
+     <p class="small muted" id="sthint">${dd.steps >= 12000 ? "امروز در چالش " + en("Step Streak") + " حساب می‌شود." : "حداقل ۱۲٬۰۰۰ قدم برای چالش " + en("Step Streak") + "."}</p></div>
+   <div class="fld"><label class="f" for="nt">یادداشت (ست اصلی، گرسنگی، انرژی)</label>
+     <textarea id="nt" data-act="field" data-f="note">${esc(dd.note || "")}</textarea></div></section>`;
+}
+
+const SHORT = ["د", "س", "چ", "پ", "ج", "ش", "ی"];
+function viewMap() {
+  const cur = todayIdx();
+  let h = `<section class="blk" style="border-top:0"><h2>نقشه ۵۶ روز</h2><p class="muted small">رنگ هر روز نشان‌دهنده درصد انجام چک‌لیست است. روی هر روز بزن تا باز شود.</p><div class="hm">`;
+  for (let w = 0; w < 8; w++) {
+    const ph = PROGRAM.phases.find(x => x[0].includes(w + 1));
+    h += `<span class="wl">هفته ${fa(w + 1)} (${ph[2]})</span>`;
+    for (let d = 0; d < 7; d++) {
+      const i = w * 7 + d, inf = info(i), p = pct(i), future = i > cur;
+      const tag = inf.letter ? inf.letter : (inf.refeed ? "R" : "W");
+      h += `<button class="cell ${future ? "future" : "l" + lvl(p)} ${i === cur ? "today" : ""} ${i === sel ? "sel" : ""}"
+        data-act="open" data-i="${i}" aria-label="روز ${fa(i + 1)}، ${DAYFA[d]}، ${fa(Math.round(p * 100))} درصد"><b class="num">${fa(i + 1)}</b><span class="en" lang="en">${tag}</span><span class="vh">${SHORT[d]}</span></button>`;
+    }
+  }
+  h += `</div><div class="legend"><span>کم</span>` +
+    [0, 1, 2, 3, 4].map(v => `<i style="background:var(--h${v})"></i>`).join("") +
+    `<span>زیاد</span></div>
+    <p class="small muted">${en("A")} تا ${en("D")}: تمرین. ${en("W")}: پیاده‌روی. ${en("R")}: ریفید. حلقه طلایی: امروز. ستون‌ها از راست: دوشنبه تا یکشنبه.</p></section>`;
+  return h;
+}
+
+function weightChart(cur) {
+  const W = 640, H = 260, L = 44, R = 12, T = 14, B = 34;
+  const pts = [];
+  for (let i = 0; i < 56; i++) { const w = weightOn(dateOf(i)); if (w) pts.push({ i, w }); }
+  const all = pts.map(p => p.w).concat([TARGET_W, START_W]);
+  const lo = Math.floor(Math.min(...all) - 0.5), hi = Math.ceil(Math.max(...all) + 0.5);
+  const X = i => W - R - i / 55 * (W - L - R), Y = w => T + (hi - w) / (hi - lo) * (H - T - B);
+  let s = `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="نمودار وزن"><title>روند وزن</title>`;
+  for (let v = lo; v <= hi; v++) s += `<line class="grid" x1="${L}" x2="${W - R}" y1="${Y(v)}" y2="${Y(v)}"/><text x="${L - 6}" y="${Y(v) + 4}" text-anchor="end">${fa(v)}</text>`;
+  for (let w = 0; w < 8; w++) s += `<text x="${X(w * 7 + 3)}" y="${H - 8}" text-anchor="middle">${fa(w + 1)}</text>`;
+  s += `<line x1="${X(0)}" y1="${Y(START_W)}" x2="${X(55)}" y2="${Y(TARGET_W)}" stroke="var(--grip)" stroke-width="2" stroke-dasharray="6 5"/>`;
+  s += `<text x="${X(55) + 2}" y="${Y(TARGET_W) - 6}" style="fill:var(--grip-ink)" text-anchor="end">هدف ${fa(TARGET_W)}</text>`;
+  const line = pts.map(p => { const a = avg7(p.i); return `${X(p.i).toFixed(1)},${Y(a).toFixed(1)}`; }).join(" ");
+  if (pts.length > 1) s += `<polyline points="${line}" fill="none" stroke="var(--steel)" stroke-width="2.5" stroke-linejoin="round"/>`;
+  pts.forEach(p => { s += `<circle cx="${X(p.i)}" cy="${Y(p.w)}" r="4" fill="var(--surface)" stroke="var(--steel)" stroke-width="2"><title>روز ${fa(p.i + 1)}: ${fa(p.w)} kg</title></circle>`; });
+  if (cur >= 0 && cur <= 55) s += `<line x1="${X(cur)}" x2="${X(cur)}" y1="${T}" y2="${H - B}" stroke="var(--grip)" stroke-width="1.5"/>`;
+  return s + `</svg>`;
+}
+
+const TESTS = [
+  ["pullups", "Max Strict Pull-ups", "reps"], ["ctb", "Max Chest-to-Bar Pull-ups", "reps"],
+  ["pdip", "Max Parallel Bar Dips", "reps"], ["sdip", "Max Straight Bar Dips", "reps"],
+  ["hang", "Dead Hang", "s"], ["fgh", "False Grip Hang", "s"], ["hollow", "Hollow Body Hold", "s"],
+  ["wpu3", "Weighted Pull-up 3RM", "kg added"], ["bw", "Bodyweight (7-day average)", "kg"],
+  ["waist", "Waist at navel", "cm"], ["mu", "Muscle-Up", "reps"],
+];
+const LOWER_BETTER = ["bw", "waist"];
+const PH = [["start", "شروع"], ["w4", "هفته ۴"], ["w8", "هفته ۸"]];
+
+function cmpChart(row) {
+  const v = PH.map(p => +(S.tests[p[0]] || {})[row[0]] || 0), mx = Math.max(...v, 1);
+  let s = `<svg viewBox="0 0 240 78" role="img" aria-label="${esc(row[1])}: ${PH.map((p, k) => p[1] + " " + (v[k] || "-")).join("، ")}">`;
+  v.forEach((x, k) => {
+    const y = 4 + k * 24, w = x ? Math.max(4, x / mx * 170) : 0;
+    s += `<text x="0" y="${y + 14}" style="fill:var(--ink2);font-family:var(--font-fa);font-size:14px;font-weight:400">${PH[k][1]}</text>`;
+    if (x) s += `<rect x="52" y="${y}" width="${w}" height="16" rx="4" fill="var(--steel)" opacity="${[0.4, 0.7, 1][k]}"/><text x="${56 + w}" y="${y + 13}">${fa(x)}</text>`;
+    else s += `<text x="52" y="${y + 13}" style="fill:var(--ink2)">-</text>`;
+  });
+  return s + `</svg>`;
+}
+
+function prList(ex, lib, label) {
+  const best = {};
+  for (let i = 0; i < 56; i++) {
+    const dd = peek(dateOf(i)); const sets = dd && dd.lifts && dd.lifts[ex];
+    (sets || []).forEach(st => {
+      if ((st.ex || "") !== lib) return;
+      const r = +st.reps, kg = +st.kg;
+      if (r > 0 && st.kg !== "" && st.kg != null && kg >= 0 && (!best[r] || kg > best[r].kg)) best[r] = { kg, date: dateOf(i) };
+    });
+  }
+  const rows = Object.keys(best).map(Number).sort((a, b) => a - b);
+  return `<h3>${label}</h3>` + (rows.length ? `<table><thead><tr><th>تکرار</th><th>kg</th><th>روز</th></tr></thead><tbody>` +
+    rows.map(r => `<tr><td class="num">${fa(r)}</td><td class="num">${fa(best[r].kg)}</td><td class="num small">${fa(best[r].date.slice(5))}</td></tr>`).join("") + `</tbody></table>`
+    : `<p class="muted small">هنوز چیزی ثبت نشده. در تمرین، روی «ثبت وزنه و تکرار» بزن.</p>`);
+}
+
+function viewStats() {
+  const cur = clamp(todayIdx(), 0, 55), elapsed = todayIdx() < 0 ? 0 : cur + 1;
+  const ps = []; for (let i = 0; i < elapsed; i++) ps.push(pct(i));
+  const overall = elapsed ? mean(ps) : 0;
+  const w0 = weightOn(S.start) ?? (avg7(Math.min(6, cur)) ?? null), wNow = avg7(cur);
+  const wk = Math.floor(cur / 7) + 1;
+  const rates = weeklyRates(cur % 7 === 6 ? wk : wk - 1);
+  let h = `<section class="blk" style="border-top:0"><h2>خلاصه</h2><div class="kpis num">
+    <div class="kpi"><b>${fa(Math.round(overall * 100))}٪</b><span>تکمیل کل</span></div>
+    <div class="kpi"><b>${fa(streak(todayIdx()))}</b><span>رگه روزهای ≥ ۷۰٪</span></div>
+    <div class="kpi"><b>${wNow ? faN(wNow, 1) : "-"}</b><span>میانگین ۷ روزه (kg)</span></div>
+    <div class="kpi"><b>${wNow && w0 ? faN(wNow - w0, 1) : "-"}</b><span>تغییر از شروع (kg)</span></div></div></section>`;
+  /* rate + rule */
+  h += `<section class="blk"><h2>نرخ کاهش وزن</h2><p class="muted small">میانگین هفته نسبت به هفته قبل. باند هدف: ۰٫۴ تا ۱٫۲ کیلوگرم در هفته (حدود ۰٫۵ تا ۱٪ وزن بدن).</p>`;
+  const done = rates.filter(r => r.rate != null);
+  if (!done.length) h += `<div class="empty">برای محاسبه نرخ، حداقل ۳ وزن در هر هفته برای دو هفته پیاپی ثبت کن.</div>`;
+  else h += `<div class="tblwrap"><table><thead><tr><th>هفته</th><th>کاهش (kg)</th><th>وضعیت</th></tr></thead><tbody>` +
+    done.map(r => `<tr><td class="num">${fa(r.w)}</td><td class="num">${faN(r.rate, 2)}</td><td>${r.rate < 0.4 ? "کند" : r.rate > 1.2 ? "سریع" : "در باند"}</td></tr>`).join("") + `</tbody></table></div>`;
+  const last2 = rates.slice(-2);
+  const slow = last2.length === 2 && last2.every(r => r.rate != null && r.rate < 0.4);
+  const fast = rates.length && rates[rates.length - 1].rate != null && rates[rates.length - 1].rate > 1.2;
+  const drops = strengthDrops();
+  if (slow) h += `<div class="rule warn"><b>قانون تعدیل:</b> دو هفته پیاپی کمتر از ۰٫۴ کیلو. ۱۵۰ کیلوکالری کربوهیدرات را از روزهای استراحت (پیاده‌روی) کم کن.</div>`;
+  if (fast) h += `<div class="rule warn"><b>قانون تعدیل:</b> کاهش بیشتر از ۱٫۲ کیلو در هفته. ۱۵۰ کیلوکالری اضافه کن.</div>`;
+  if (drops.length) h += `<div class="rule bad"><b>قانون تعدیل:</b> قدرت در ۲ جلسه پیاپی افت کرده (${drops.map(x => en(x.toUpperCase())).join(", ")}). ۱۵۰ کیلوکالری اضافه کن.</div>`;
+  if (!slow && !fast && !drops.length) h += `<div class="rule ok"><b>قانون تعدیل:</b> فعلاً نیازی به تغییر نیست.</div>`;
+  h += `<p class="small muted">قانون‌ها: کمتر از ۰٫۴ کیلو/هفته در ۲ هفته پیاپی: ۱۵۰ کیلوکالری کربوهیدرات از روزهای استراحت کم شود. بیشتر از ۱٫۲ کیلو/هفته یا افت قدرت در ۲ جلسه پیاپی: ۱۵۰ کیلوکالری اضافه شود.</p></section>`;
+  h += `<section class="blk"><h2>روند وزن</h2>${weightChart(cur)}<p class="small muted">نقطه: وزن روزانه. خط پر: میانگین ۷ روزه. خط‌چین طلایی: مسیر ${fa(START_W)} به ${fa(TARGET_W)} کیلو.</p></section>`;
+  /* challenges */
+  let gtg = 0, hang = 0, hollowBest = 0;
+  for (let i = 0; i < 56; i++) { const d = peek(dateOf(i)); if (d) { if (d.done.gtg >= 5) gtg++; if (d.done.hang) hang++; } }
+  PH.forEach(p => { const x = +(S.tests[p[0]] || {}).hollow; if (x > hollowBest) hollowBest = x; });
+  const muBest = Math.max(0, ...PH.map(p => +(S.tests[p[0]] || {}).mu || 0));
+  h += `<section class="blk"><h2>چالش‌ها</h2><div class="kpis num">
+    <div class="kpi"><b>${fa(stepStreak(todayIdx()))}/۵۶</b><span>${en("Step Streak")} (≥ ۱۲٬۰۰۰ قدم)</span></div>
+    <div class="kpi"><b>${fa(hang)}</b><span>روز ${en("Dead Hang")} ۳ دقیقه</span></div>
+    <div class="kpi"><b>${fa(gtg)}</b><span>روز ${en("GTG")} کامل</span></div>
+    <div class="kpi"><b>${fa(hollowBest)}/۶۰</b><span>${en("Hollow Body 60")} (ثانیه)</span></div></div>
+    <p class="small muted">${en("Muscle-Up")} بهترین: ${fa(muBest)} تکرار.</p></section>`;
+  /* tests */
+  h += `<section class="blk"><h2>تست‌ها</h2><p class="muted small">روز ۱، جمعه هفته ۴، جمعه هفته ۸. بین تست‌ها ۳ تا ۵ دقیقه استراحت.</p><div class="tblwrap"><table><thead><tr><th>تست</th>${PH.map(p => `<th>${p[1]}</th>`).join("")}</tr></thead><tbody>` +
+    TESTS.map(t => `<tr><td>${en(t[1])}<br><span class="small muted en">${esc(t[2])}${LOWER_BETTER.includes(t[0]) ? " (lower is better)" : ""}</span></td>` +
+      PH.map(p => {
+        const val = (S.tests[p[0]] || {})[t[0]];
+        const hint = t[0] === "bw" && (val == null || val === "") ? (p[0] === "start" ? (avg7(Math.min(6, 55)) ?? "") : "") : "";
+        return `<td><input type="text" inputmode="decimal" dir="ltr" aria-label="${esc(t[1])} ${p[1]}" value="${esc(val ?? "")}" placeholder="${hint ? Number(hint).toFixed(1) : ""}" data-act="test" data-p="${p[0]}" data-t="${t[0]}"></td>`;
+      }).join("") + `</tr>`).join("") + `</tbody></table></div>
+    <h3 style="margin-top:16px">مقایسه</h3><div class="cmp" id="cmp">${TESTS.map(t => `<div><h3>${en(t[1])}</h3>${cmpChart(t)}</div>`).join("")}</div></section>`;
+  h += `<section class="blk"><h2>رکوردها</h2><div class="cols"><div>${prList("a1", "wpu", en("Weighted Pull-up") + " (دوشنبه)")}</div><div>${prList("d2", "wpuh", en("Weighted Pull-up (Heavy)") + " (جمعه)")}</div></div>
+    <div class="cols" style="margin-top:12px"><div>${prList("a2", "wdip", en("Weighted Dip"))}</div><div>${prList("a2", "bench", en("Barbell Bench Press"))}</div></div></section>`;
+  return h;
+}
+
+function viewSettings() {
+  const th = S.prefs.theme;
+  return `<section class="blk" style="border-top:0"><h2>تنظیمات</h2>
+   <div class="fld"><label class="f" for="sd">تاریخ شروع (باید دوشنبه باشد)</label>
+     <input id="sd" type="date" value="${esc(S.start)}" data-act="start"><p class="small muted">پیش‌فرض: ${fa(DEFAULT_START)}. داده‌های ثبت‌شده به تاریخ وصل هستند و با تغییر شروع، حذف نمی‌شوند.</p></div>
+   <div class="fld"><label class="f" for="th">پوسته</label>
+     <select id="th" data-act="theme"><option value="system" ${th === "system" ? "selected" : ""}>مثل سیستم</option><option value="light" ${th === "light" ? "selected" : ""}>روشن</option><option value="dark" ${th === "dark" ? "selected" : ""}>تیره</option></select></div></section>
+   <section class="blk"><h2>پشتیبان</h2><p class="small muted">داده‌ها فقط در همین مرورگر ذخیره می‌شوند. هر هفته یک بار Export بگیر.</p>
+     <div class="row"><button class="btn primary" data-act="export">${en("Export JSON")}</button><button class="btn" data-act="csv">${en("Export CSV")}</button>
+     <button class="btn" data-act="pick">${en("Import JSON")}</button><input type="file" id="file" class="vh" tabindex="-1" aria-hidden="true" accept="application/json,.json" data-act="import"></div>
+     <p class="small muted" id="sv"></p></section>
+   <section class="blk"><h2>نصب روی آیفون</h2><ol class="small" style="padding-inline-start:20px;margin:0">
+     <li>صفحه را در ${en("Safari")} باز کن.</li><li>دکمه ${en("Share")} را بزن.</li><li>گزینه ${en("Add to Home Screen")} را انتخاب کن.</li></ol>
+     <p class="small muted">بعد از اولین بارگذاری، ترکر بدون اینترنت کار می‌کند. فقط فونت‌ها به اینترنت نیاز دارند و جایگزین سیستمی دارند.</p></section>
+   <section class="blk"><h2>راهنما</h2><p><a href="../guide/index.html" target="_blank" rel="noopener">راهنمای کامل برنامه</a></p></section>
+   <section class="blk"><h2>پاک کردن</h2><button class="btn danger" data-act="reset">پاک کردن همه داده‌ها</button></section>`;
+}
+
+let probeOk = (() => { try { localStorage.setItem("t", "1"); localStorage.removeItem("t"); return true; } catch (e) { return false; } })();
+function render() {
+  const a = document.activeElement, sig = a && a.dataset && a.dataset.act ? a.dataset : null;
+  const v = $("#view");
+  v.innerHTML = tab === "today" ? viewToday() : tab === "map" ? viewMap() : tab === "stats" ? viewStats() : viewSettings();
+  $("#tabs").innerHTML = [["today", "امروز"], ["map", "نقشه"], ["stats", "آمار"], ["set", "تنظیمات"]]
+    .map(t => `<button data-act="tab" data-v="${t[0]}" ${tab === t[0] ? 'aria-current="page"' : ""}>${t[1]}</button>`).join("");
+  const sv = $("#sv"); if (sv) sv.textContent = probeOk ? "ذخیره‌سازی مرورگر فعال است." : "ذخیره‌سازی مرورگر غیرفعال است. فقط Export کار می‌کند.";
+  if (sig && sig.act !== "tab") {
+    const sel2 = Object.keys(sig).map(k => `[data-${k.replace(/[A-Z]/g, c => "-" + c.toLowerCase())}="${CSS.escape(sig[k])}"]`).join("");
+    const el = v.querySelector(sel2); if (el && !el.disabled) el.focus({ preventScroll: true });
+  }
+}
+document.addEventListener("toggle", e => { const d = e.target.dataset && e.target.dataset.d; if (d) { e.target.open ? openD.add(d) : openD.delete(d); } }, true);
+
+/* ---------- actions ---------- */
+async function download(name, text, type) {
+  const file = new File([text], name, { type });
+  if (navigator.canShare && navigator.canShare({ files: [file] }) && /iP(hone|ad|od)/.test(navigator.userAgent)) {
+    try { await navigator.share({ files: [file], title: name }); return; } catch (e) { if (e && e.name === "AbortError") return; }
+  }
+  const a = document.createElement("a"), u = URL.createObjectURL(new Blob([text], { type }));
+  a.href = u; a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(u), 1000);
+}
+const csvCell = c => { let t = String(c); if (/^[=+\-@\t\r]/.test(t)) t = "'" + t; return `"${t.replace(/"/g, '""')}"`; };
+function csv() {
+  const keys = ["workout","walk","kcal","protein","water","salt","creatine","hang","sleep","gtg","checkin","tests","mu"];
+  const rows = [["date","week","phase","day_type","workout_letter","completion_pct","weight_kg","steps","water_ml",...keys.map(k => "done_" + k),"note"]];
+  for (let i = 0; i < 56; i++) {
+    const inf = info(i), d = peek(inf.date) || { done: {} };
+    rows.push([inf.date, inf.week, inf.phaseEn, inf.type, inf.letter || "", Math.round(pct(i) * 100), d.weight ?? "", d.steps ?? "", d.water ?? "",
+      ...keys.map(k => d.done[k] === true ? 1 : (d.done[k] || "")), (d.note || "").replace(/\s+/g, " ")]);
+  }
+  return "\ufeff" + rows.map(r => r.map(csvCell).join(",")).join("\r\n");
+}
+function confirmDlg(title, body, yesLabel, onYes) {
+  const dl = $("#dlg");
+  dl.innerHTML = `<p id="dt"><b>${title}</b></p><p class="small muted">${body}</p><div class="row"><button class="btn danger" id="yes">${yesLabel}</button><button class="btn" id="no" autofocus>انصراف</button></div>`;
+  dl.showModal(); $("#no").focus();
+  $("#no").onclick = () => dl.close();
+  $("#yes").onclick = () => { dl.close(); onYes(); };
+}
+$("#dlg").addEventListener("click", e => { if (e.target === e.currentTarget) e.currentTarget.close(); });
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-act]"); if (!b || ["INPUT", "SELECT", "TEXTAREA"].includes(b.tagName)) return;
+  const a = b.dataset.act, inf = info(sel);
+  switch (a) {
+    case "tab": return go(b.dataset.v);
+    case "prev": return setSel(sel - 1);
+    case "next": return setSel(sel + 1);
+    case "today": return setSel(todayIdx());
+    case "open": sel = +b.dataset.i; tab = "today"; openLog = null; return render(), window.scrollTo(0, 0);
+    case "mode": S.prefs.mode = b.dataset.v; save(); return render();
+    case "tog": { const d = D(inf.date); d.done[b.dataset.k] = !d.done[b.dataset.k]; save(); return render(); }
+    case "cnt": { const d = D(inf.date), k = b.dataset.k; d.done[k] = clamp((d.done[k] || 0) + +b.dataset.d, 0, +b.dataset.max); save(); return render(); }
+    case "water": { const d = D(inf.date); d.water = Math.max(0, (d.water || 0) + +b.dataset.v); save(); return render(); }
+    case "log": openLog = openLog === b.dataset.id ? null : b.dataset.id; return render();
+    case "lgadd": { const d = D(inf.date); (d.lifts[b.dataset.id] = d.lifts[b.dataset.id] || []).push({ kg: "", reps: "", ex: b.dataset.lib }); save(); return render(); }
+    case "lgdel": { const d = D(inf.date); d.lifts[b.dataset.id].splice(+b.dataset.k, 1); save(); return render(); }
+    case "pick": return $("#file").click();
+    case "export": return download(`cut-backup-${todayISO()}.json`, JSON.stringify(S, null, 1), "application/json"), toast("فایل پشتیبان ساخته شد.");
+    case "csv": return download(`cut-${todayISO()}.csv`, csv(), "text/csv");
+    case "reset": return confirmDlg("همه داده‌ها پاک شود؟", "قبل از پاک کردن یک Export بگیر. این کار برگشت‌پذیر نیست.", "پاک کن", () => {
+      S = dflt(); save(); sel = clamp(todayIdx(), 0, 55); applyTheme(); render(); });
+  }
+});
+document.addEventListener("change", e => {
+  const el = e.target, a = el.dataset && el.dataset.act; if (!a) return;
+  const inf = info(sel);
+  if (a === "field") {
+    const d = D(inf.date), f = el.dataset.f;
+    if (f === "note") { d.note = el.value.slice(0, 2000); save(); return; }
+    const val = parseNum(el.value, 0, f === "weight" ? 250 : 100000);
+    if (val === undefined || (f === "weight" && val !== null && val < 30)) { toast("عدد معتبر وارد کن."); el.value = d[f] ?? ""; return; }
+    d[f] = val; el.value = val ?? ""; save();
+    if (f === "steps") { const h = $("#sthint"); if (h) h.innerHTML = val >= 12000 ? "امروز در چالش " + en("Step Streak") + " حساب می‌شود." : "حداقل ۱۲٬۰۰۰ قدم برای چالش " + en("Step Streak") + "."; }
+    return;
+  }
+  if (a === "lg") {
+    const d = D(inf.date), st = d.lifts[el.dataset.id][+el.dataset.k], f = el.dataset.f;
+    const val = parseNum(el.value, 0, f === "kg" ? 500 : 200);
+    if (val === undefined) { toast("عدد معتبر وارد کن."); el.value = st[f]; return; }
+    st[f] = val === null ? "" : val; el.value = st[f]; save(); return;
+  }
+  if (a === "test") {
+    const val = parseNum(el.value, 0, 1000);
+    if (val === undefined) { toast("عدد معتبر وارد کن."); return render(); }
+    (S.tests[el.dataset.p] = S.tests[el.dataset.p] || {})[el.dataset.t] = val === null ? "" : val; el.value = val ?? ""; save();
+    const c = $("#cmp"); if (c) c.innerHTML = TESTS.map(t => `<div><h3>${en(t[1])}</h3>${cmpChart(t)}</div>`).join("");
+    return;
+  }
+  if (a === "theme") { S.prefs.theme = el.value; save(); applyTheme(); return render(); }
+  if (a === "start") {
+    if (!el.value) return;
+    if (parseISO(el.value).getDay() !== 1) { toast("تاریخ شروع باید دوشنبه باشد."); el.value = S.start; return; }
+    S.start = el.value; save(); sel = clamp(todayIdx(), 0, 55); return render();
+  }
+  if (a === "import") {
+    const f = el.files[0]; if (!f) return;
+    const r = new FileReader();
+    r.onload = () => {
+      let n = null;
+      try { n = normalize(JSON.parse(r.result)); } catch (err) {}
+      el.value = "";
+      if (!n) return toast("فایل پشتیبان معتبر نیست.");
+      confirmDlg("داده‌های فعلی جایگزین شود؟", "پشتیبان وارد شده جایگزین همه داده‌های این مرورگر می‌شود.", "جایگزین کن", () => {
+        S = n; save(); applyTheme(); sel = clamp(todayIdx(), 0, 55); render(); toast("پشتیبان وارد شد.");
+      });
+    };
+    r.readAsText(f);
+  }
+});
+let lastISO = todayISO();
+document.addEventListener("visibilitychange", () => { if (!document.hidden && todayISO() !== lastISO) { lastISO = todayISO(); sel = clamp(todayIdx(), 0, 55); render(); } });
+window.addEventListener("storage", e => { if (e.key === KEY && e.newValue) { S = load(); render(); } });
+applyTheme();
+render();
+if ("serviceWorker" in navigator && /^https?:$/.test(location.protocol)) navigator.serviceWorker.register("sw.js").catch(() => {});
+</script>
+</body>
+</html>

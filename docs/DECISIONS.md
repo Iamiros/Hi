@@ -1,0 +1,36 @@
+# Decisions and corrections
+
+## Corrections to the brief (factual)
+1. **Creatine.** The brief says 5 g/day "raises muscle creatine/phosphocreatine 10-20%". The ISSN position stand (Kreider 2017, full text checked, PMID 28615996) says supplementation raises muscle creatine and PCr by **20-40%**; the **10-20%** figure is the improvement in high-intensity exercise performance. The guide states both correctly.
+2. **Helms 2014, IJSNEM.** Full author list is Helms, Zinn, Rowlands, Brown; published online Oct 2013, in issue 24(2) of 2014, pages 127-138. Findings (2.3-3.1 g/kg FFM) match the abstract.
+3. **"Newer meta-regression: up to ~1.9 g/kg body mass or ~2.5 g/kg FFM".** No PubMed record matching this could be found, so it is listed as an **unverified** claim with no link. Added instead the verifiable Morton 2018 meta-regression (PMID 28698222): no further gain in FFM beyond ~1.62 g/kg/day, in non-deficit training. 200 g/day (2.25 g/kg body mass, ~2.8 g/kg FFM) is above that plateau on purpose: Helms recommends higher intakes in deficit and leanness.
+4. **Pavel Tsatsouline / Grease the Groove** is labelled a practitioner method. No trial is cited.
+5. **FFM.** 72 kg (brief) vs 73 kg (89 x 0.82). Both shown; protein range given for 72 kg: about 166-223 g (brief rounded to 170-220).
+6. Nedeltcheva 2010: small crossover study (10 adults, 14 days). The guide says so.
+
+## Program as specified, with honest limits
+7. **Weekly hard sets.** Computed from the exact dosing (gym version, primary 1 set, secondary 0.5): back 18-20, shoulders 14-15, chest 10-12, biceps 11-12, triceps 8.5-9.5, quads 8.5-10.5, hamstrings 9, glutes 8-9, calves 3, core 6 (week 4 and 8 lower). The brief's "~6-10 per muscle" is therefore not met for back and shoulders (high) and calves (low). No number in the program was changed. The guide shows the table and suggests the first levers if recovery lags (Weighted Chin-up to 2 sets; optional extra calf set on Wednesday).
+8. **Box Pistol Squat** as the home Deadlift is quad-dominant, not a hip hinge. Kept as specified, flagged as approximate in the library.
+9. **Water.** The brief's formula (35 ml/kg + 500-750 ml per activity hour) gives more than 4.5 L on a strength + 90 min walk day. The brief's table (4.0-4.5 L) is kept as the minimum.
+10. **Deadlift 80-85% 1RM** refers to the current 1RM (test on day 1), not the earlier 160 kg.
+
+## Schedule logic
+11. **Refeed** every Saturday from week 3, including week 4 (deload week). Weeks 1-2 Saturday = 1900 kcal.
+12. **GTG** on Wed, Sat, Sun (challenge rule). The weekly layout in the brief names GTG only on Wednesday; the guide table now lists it on all three.
+13. **Week 4 Friday:** tests first (after warm-up), then Workout D at deload dosing. **Week 8 Friday:** Muscle-Up Day banner and tests; Workout D is shown collapsed as optional light work, since heavyD week 8 is "test".
+14. **Tests, day 1:** shown on Monday of week 1 (Workout A day), tests first.
+15. **Dosing text.** Ranges use a hyphen instead of an en dash (`6×2-3`) to follow the no-dash design rule. Values are unchanged. The home Box Pistol Squat uses `4×5 per leg`, deload `2×3 light`.
+
+## Tracker logic
+16. **Completion %** = mean of item fractions (counters and water count partially). **Streak** = consecutive days with at least 70%, today skipped if not yet 70%.
+17. **Weekly loss rate** = (average of previous week) minus (average of this week), each needing at least 3 weigh-ins, and only for completed weeks. Week 1 has no previous week. The adjustment messages follow the brief: two consecutive weeks under 0.4 kg, one week over 1.2 kg, or two consecutive drops in estimated strength.
+18. **Strength drop** uses estimated 1RM of logged sets (Epley), per exercise version (gym and home are tracked separately), ignoring deload and test weeks. Pull-ups and dips add current body weight.
+19. **Dates.** Stored by ISO date, so changing the start Monday does not delete data. Display shows Jalali date plus Gregorian.
+20. **Numbers.** UI text uses Persian digits. Exercise names, doses and the PR and test tables' English labels stay Latin. The guide uses Latin digits throughout for exact reading of macros.
+21. **Fonts** are embedded as base64 (both HTML files), so no network request is needed at all. The tracker also installs a service worker (cache name carries a build hash).
+22. The guide link inside the tracker is a normal link; the guide is not part of the tracker's offline cache.
+
+## Review pass results
+- Sports-science review: arithmetic confirmed (BMR, macros, deficits, caffeine, water). 30 findings, mostly Persian wording and cue precision; applied except the three items above (7-9).
+- Code review (with Playwright repro): lost-click after typing, unsafe import, unescaped values, focus loss, `<details>` collapsing, bench/dip mix-up in strength detection, contrast of heat cells, `color-mix` fallback, CSV injection, iOS download, SW cache versioning. All fixed, see git history.
+- The repository CLAUDE.md (medical study files) does not apply to this task and was not followed.
