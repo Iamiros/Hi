@@ -19,7 +19,7 @@ with sync_playwright() as p:
         if(f.test !== (i===0||(f.dow===4&&(f.week===4||f.week===8)))) bad.push('test '+i);
         if(f.mu!==(f.week===8&&f.dow===4)) bad.push('mu '+i);
         if(f.deload!==(f.week===4)) bad.push('deload '+i);
-        const hang=L.find(x=>x.k==='hang').l; if((f.week>=3)!==hang.includes('False Grip')) bad.push('fg '+i);
+        
         const wt=L.find(x=>x.k==='water'); if(waterTarget(f)!==(f.type==='train'?4000:3500)) bad.push('water '+i);
         if((f.letter!==null)!==k.includes('salt')) bad.push('salt '+i);
       }

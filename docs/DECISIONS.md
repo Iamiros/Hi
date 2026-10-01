@@ -34,3 +34,13 @@
 - Sports-science review: arithmetic confirmed (BMR, macros, deficits, caffeine, water). 30 findings, mostly Persian wording and cue precision; applied except the three items above (7-9).
 - Code review (with Playwright repro): lost-click after typing, unsafe import, unescaped values, focus loss, `<details>` collapsing, bench/dip mix-up in strength detection, contrast of heat cells, `color-mix` fallback, CSV injection, iOS download, SW cache versioning. All fixed, see git history.
 - The repository CLAUDE.md (medical study files) does not apply to this task and was not followed.
+
+## Edit 2: pull-up level (after your answers)
+Your answers: strict pull-up max 4-5, parallel dips under 8, squat and deadlift about 150 kg x 4, mostly gym (Assisted machine, cable, Smith, Leg Press, dumbbells to 30 kg), no pain, Muscle-Up not a priority now.
+- **Pull-ups.** Weighted Pull-up replaced by bodyweight **Pull-up** (Mon, new scheme 5x3, 6x3, 5x4, 3x3, 5x4, 5x5, 4x5-6, 3x3), body weight is already the load. Friday Heavy Weighted Pull-up replaced by **Assisted Pull-up** (gym machine) or Band-Assisted (home): 4x6, 4x6, 5x6, 3x5, 4x8, 4x8, 5x8, test. Week 8 Friday = max strict pull-up test (goal 8-10).
+- **Muscle-Up work removed or reduced:** Explosive Chest-to-Bar and False Grip Hang dropped; Muscle-Up Transition replaced by **Pull-up Negative** (old negative scheme kept); Muscle-Up Day became **Pull-up Test Day** with an optional 3 Muscle-Up attempts if 8+ reps; False Grip half of the daily hang dropped. The Muscle-Up row stays in the tests table.
+- **Dips.** Weighted Dip replaced by bodyweight **Dip** at home (4x4) and Bench at the gym; Straight Bar/Weighted tempo dip replaced by **Assisted Dip** (gym) or **Tempo Dip** (home).
+- **Chin-up** is bodyweight, 3x3-4 (deload 2x3).
+- **Removed Lat Pulldown/Explosive slot** in Workout A to keep back volume under control (back 18-19 hard sets). Workout A now has 5 exercises.
+- **Squat and Deadlift** keep the specified dosing; the notes give start loads from 150 x 4 (about 170 kg estimated 1RM): squat 120-130 kg for 5 at RPE 7, deadlift 135-145 kg for 3. Confirm with the day 1 test.
+- Tracker: PR lists now show Pull-up, Chin-up, Dip and Bench; Weighted Pull-up 3RM and False Grip tests were replaced by Max Strict Chin-ups.
