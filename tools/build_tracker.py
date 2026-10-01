@@ -1,6 +1,6 @@
 import json, pathlib, program as P
 root = pathlib.Path(__file__).resolve().parent.parent
-lib = {e["id"]: {"en": e["en"]} for e in P.LIB}
+lib = {e["id"]: {"en": e["en"], "yt": e["yt"]} for e in P.LIB}
 prog = dict(schemes=P.SCHEMES, phases=P.PHASES, warmup=P.WARMUP, nutrition=P.NUTRITION, lib=lib,
             workouts={k: dict(fa=v["fa"], ex=v["ex"]) for k, v in P.WORKOUTS.items()})
 t = (root / "tools/tracker.template.html").read_text()
@@ -14,8 +14,16 @@ def font_css():
             css+="@font-face{font-family:'%s';font-weight:%d;font-display:swap;src:url(data:font/woff2;base64,%s) format('woff2')}\n"%(fam,w,d)
     return css
 if __name__!="__main__": pass
-out = t.replace("__FONTS__",font_css()).replace("__PROGRAM__", json.dumps(prog, ensure_ascii=False))
+base = t.replace("__FONTS__",font_css()).replace("__PROGRAM__", json.dumps(prog, ensure_ascii=False))
+out = base.replace("__GUIDE__", '"../guide/index.html"')
 (root / "tracker/index.html").write_text(out)
+import re as _re
+art = base.replace("__GUIDE__", "null")
+title = _re.search(r"<title>.*?</title>", art, _re.S).group(0)
+style = _re.search(r"<style>.*?</style>", art, _re.S).group(0)
+style = style.replace("padding:env(safe-area-inset-top) env(safe-area-inset-right) calc(76px + env(safe-area-inset-bottom)) env(safe-area-inset-left)", "padding:0 0 calc(76px + env(safe-area-inset-bottom)) 0")
+body = _re.search(r"<body>(.*)</body>", art, _re.S).group(1)
+(root / "tracker/artifact.html").write_text(title + "\n" + style + "\n" + body)
 (root / "tracker/manifest.webmanifest").write_text(json.dumps({
  "name": "برش ۸ هفته‌ای", "short_name": "Cut 8W", "lang": "fa", "dir": "rtl", "start_url": "./index.html", "scope": "./",
  "display": "standalone", "background_color": "#E9ECEF", "theme_color": "#E9ECEF",
