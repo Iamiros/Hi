@@ -1230,7 +1230,7 @@ function confirmDlg(title, body, yesLabel, onYes) {
 }
 ["#dlg", "#sheet"].forEach(s => $(s).addEventListener("click", e => { if (e.target === e.currentTarget) e.currentTarget.close(); }));
 function checkSessionDone(inf, d) {
-  const W = PROGRAM.workouts[inf.letter]; if (!W) return;
+  const W = PROGRAM.workouts[inf.letter]; if (!W) return false;
   const home = S.prefs.mode === "home";
   const all = W.ex.every(ex => { const n = setsOf(doseOf(ex, inf.week, home)); return !n || (d.sets[ex.id] || 0) >= n; });
   if (all && !d.done.workout) { d.done.workout = true; d.done.wauto = true; stopTimer(); toast("همه ست‌ها انجام شد. جلسه ثبت شد."); }
