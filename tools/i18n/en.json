@@ -922,5 +922,22 @@
 "انباشت": "Accumulation",
 "دیلود": "Deload",
 "تشدید": "Intensification",
-"اوج و تست": "Peak & Test"
+"اوج و تست": "Peak & Test",
+"وزن بدن +": "Bodyweight +",
+"وزن بدن": "Bodyweight",
+"کمک": "Assist",
+"بدون کمک": "No assistance",
+"kg هر دمبل": "kg per dumbbell",
+"kg در هر دست": "kg per hand",
+"وزنه‌ی پیشنهادی:": "Suggested load:",
+"· تخمین اولیه، با RPE تنظیم کن": "· starting estimate, adjust by RPE",
+"· بر اساس رکوردهای اخیرت": "· based on your recent sets",
+"پیشرفت هفتگی وزنه‌ها": "Weekly strength progress",
+"برای هر حرکتی که وزنه‌اش را ثبت کرده‌ای، بهترین ست هر هفته (بر اساس e1RM) کنار هم می‌آید تا هر هفته رکوردت را مقایسه کنی. روی اسم حرکت بزن تا صفحه‌ی آن باز شود. «وزنه‌ی پیشنهادی» هر جلسه هم از همین رکوردهای ۳ هفته‌ی اخیر حساب می‌شود.": "For every exercise you have logged, the best set of each week (by e1RM) sits side by side so you can compare your records week to week. Tap an exercise name to open its page. Each session's \"Suggested load\" is also calculated from your sets of the last 3 weeks.",
+"بعد از اولین «ثبت وزنه»، بهترین ست هر هفته‌ی هر حرکت اینجا جمع می‌شود.": "After your first \"Log weights\", the best set of each week for every exercise collects here.",
+"بهترین ست هر هفته (kg×تکرار) و زیرش e1RM. سبز یعنی قوی‌تر از هفته‌ی قبل، قرمز یعنی افت. دمبل: هر دست؛ BW وزن بدن؛ − کمک دستگاه.": "Best set of each week (kg×reps) with e1RM below. Green means stronger than the week before, red means a drop. Dumbbells: per hand; BW bodyweight; − machine assistance.",
+"ردیف دوم: وزنه‌ی پیشنهادی (kg؛ دمبل هر دست؛ BW وزن بدن؛ − یعنی کمک دستگاه).": "Second row: suggested load (kg; dumbbells per hand; BW bodyweight; − means machine assistance).",
+"kg = میزان کمک دستگاه (کمتر یعنی قوی‌تر).": "kg = machine assistance (less means stronger).",
+"kg = وزن هر دمبل.": "kg = weight of each dumbbell.",
+"kg کمک": "kg assist"
 }

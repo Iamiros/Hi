@@ -216,3 +216,38 @@ const TESTS = [
 const LOWER_BETTER = ["bw", "waist"];
 const PH = [["start", "شروع"], ["w4", "هفته ۴"], ["w8", "هفته ۸"]];
 
+
+/* ---------- load suggestions ---------- */
+const bwNow = () => latestWeight() || START_W;
+const repsRange = d => { const m = /×(\d+)(?:-(\d+))?/.exec(d || ""); return m ? { lo: +m[1], hi: m[2] ? +m[2] : +m[1] } : null; };
+// Effective 1RM of a logged set by load kind (bw: bodyweight + added, assist: bodyweight - assistance).
+function setE1(lib, s) {
+  const ld = (PROGRAM.lib[lib] || {}).ld, r = +s.reps || 0; if (!r || r > 15) return null;
+  const kg = +s.kg || 0, k = ld ? ld[0] : "", eff = k === "bw" ? bwNow() + kg : k === "assist" ? bwNow() - kg : kg;
+  return eff > 0 ? eff * (1 + r / 30) : null;
+}
+// Best logged 1RM in the 21 days before day i, else the starting estimate.
+function baseE1(lib, i) {
+  let best = 0;
+  for (let k = Math.max(0, i - 21); k < i; k++) {
+    const d = peek(dateOf(k)); if (!d || !d.lifts) continue;
+    Object.values(d.lifts).forEach(a => a.forEach(s => { if ((s.ex || "") === lib) { const v = setE1(lib, s); if (v > best) best = v; } }));
+  }
+  const ld = (PROGRAM.lib[lib] || {}).ld;
+  return best ? { e1: best, src: "log" } : ld ? { e1: ld[1], src: "est" } : null;
+}
+// Suggested working load for a lib at a dose string, using reps + reps-in-reserve (Epley).
+function loadFor(lib, dose, i, deload) {
+  const ld = (PROGRAM.lib[lib] || {}).ld; if (!ld || !dose || dose === "test" || !/×/.test(dose) || /\d+\s*s\b/.test(dose)) return null;
+  if (ld[0] === "carry") return { kind: "carry", kg: ld[1], src: "est" };
+  const b = baseE1(lib, i), rr = repsRange(dose); if (!b || !rr) return null;
+  const pc = /@(\d+)(?:-(\d+))?%/.exec(dose), rpe = /RPE\s*([\d.]+)/.exec(dose), light = deload || /light/.test(dose);
+  let load = pc ? b.e1 * (+pc[1] + +(pc[2] || pc[1])) / 200
+    : b.e1 / (1 + (Math.ceil((rr.lo + rr.hi) / 2) + (rpe ? 10 - +rpe[1] : 2) + (lib === "adip" ? 2 : 0)) / 30);
+  if (light) load *= 0.85;
+  const k = ld[0], rnd = (x, st) => Math.max(0, Math.round(x / st) * st), bw = bwNow();
+  if (k === "bw") { const add = load - bw; return { kind: k, kg: add >= 1.25 ? rnd(add, 1.25) : 0, src: b.src }; }
+  if (k === "assist") return { kind: k, kg: rnd(bw - load, 2.5), src: b.src };
+  const st = k === "bar" || k === "cable" ? 2.5 : k === "machine" ? 5 : load < 10 ? 1 : 2;
+  return { kind: k, kg: Math.min(rnd(load, st), k === "db" ? 30 : 999), src: b.src };
+}

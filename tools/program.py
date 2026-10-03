@@ -472,3 +472,16 @@ FOODS = [
  ("apple", "سیب", "Apple", 52, 0.3, 14, 0.2, "عدد متوسط", 182),
  ("veg", "سالاد / سبزی", "Salad vegetables", 20, 1.5, 3.5, 0.2, None, 0),
 ]
+
+# Starting load model: lib id -> (kind, estimated 1RM). Kinds: bar (barbell total), db (per dumbbell),
+# cable / machine (stack), bw (bodyweight + added; 1RM is effective incl. bodyweight), assist (assisted machine,
+# 1RM of the bodyweight version), carry (fixed load per hand). Squat/deadlift from the reported 150 kg × 4;
+# pull-ups from 4-5 strict reps, dips from ~7; the rest are conservative estimates to confirm in week 1.
+LOAD = {
+    "squat": ("bar", 170), "dl": ("bar", 170), "bench": ("bar", 95), "bbrow": ("bar", 85), "ohp": ("bar", 60),
+    "rdl": ("bar", 120), "lunge": ("db", 24), "dbrow": ("db", 40), "incdb": ("db", 34), "lat": ("db", 12),
+    "inccurl": ("db", 16), "facepull": ("cable", 30), "cablelat": ("cable", 10), "pushdown": ("cable", 45),
+    "cablecrunch": ("cable", 70), "pallof": ("cable", 25), "reardelt": ("machine", 50), "calf": ("machine", 140),
+    "farmer": ("carry", 30), "pullup": ("bw", 104), "chin": ("bw", 107), "dip": ("bw", 110),
+    "apu": ("assist", 104), "adip": ("assist", 110),
+}

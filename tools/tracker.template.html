@@ -466,6 +466,18 @@ dialog::backdrop{background:rgba(3,6,12,.55);-webkit-backdrop-filter:blur(3px);b
 .langbtn{font-family:var(--f-x);font-weight:800;letter-spacing:.04em;min-width:44px;justify-content:center;cursor:pointer}
 .langbtn .fa{font-family:var(--f-fa);letter-spacing:0}
 :root[dir=ltr] [data-act=prev] svg,:root[dir=ltr] [data-act=next] svg,:root[dir=ltr] .back svg,:root[dir=ltr] a.li .faint svg{transform:scaleX(-1)}
+[data-act="go"],[data-act="wkmenu"]{cursor:pointer;transition:transform .15s ease,filter .2s ease}
+[data-act="go"]:active,.dayno:active{transform:scale(.97)}
+.kpis3 > [data-act="go"]:hover,.kpi[data-act="go"]:hover,.macro[data-act="go"]:hover{filter:brightness(1.04)}
+section[id^="s-"]{scroll-margin-top:14px}
+.flash{animation:flash 1.5s ease}
+@keyframes flash{0%,100%{box-shadow:var(--shadow),inset 0 1px 0 var(--hl),inset 0 0 0 1px var(--rim)}25%{box-shadow:0 0 0 3px var(--accent),0 0 32px var(--accent-soft)}}
+.hint-line.load{display:block;background:var(--gold-soft);color:var(--ink)}
+.hint-line.load b{color:var(--gold)}
+.wprog td,.wprog th{text-align:center;white-space:nowrap;padding:8px 6px}
+.wprog td:first-child,.wprog th:first-child{text-align:start;white-space:normal;min-width:120px}
+.wprog td span{display:block}
+.wprog td.up bdi{color:var(--ok)} .wprog td.dn bdi{color:var(--bad)}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .empty{padding:22px;text-align:center;color:var(--ink2);border:1.5px dashed var(--line);border-radius:var(--r-lg);font-size:.9rem}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
@@ -622,6 +634,19 @@ function lastSession(exId, lib, before) {
   for (let i = before - 1; i >= 0; i--) { const p = peek(dateOf(i)); const L = p && p.lifts && p.lifts[exId]; if (L) { const m = L.filter(s => (s.ex || "") === lib && +s.reps > 0); if (m.length) return { i, sets: m }; } }
   return null;
 }
+function loadTxt(L) {
+  if (!L) return "";
+  const n = fa(L.kg);
+  if (L.kind === "bw") return L.kg ? `وزن بدن + ${n} kg` : "وزن بدن";
+  if (L.kind === "assist") return L.kg ? `کمک ${n} kg` : "بدون کمک";
+  if (L.kind === "db") return `${n} kg هر دمبل`;
+  if (L.kind === "carry") return `${n} kg در هر دست`;
+  return `${n} kg`;
+}
+function loadLine(lib, dose) {
+  const L = loadFor(lib, dose, sel, info(sel).week % 4 === 0); if (!L) return "";
+  return `<p class="hint-line load"><b>وزنه‌ی پیشنهادی:</b> <span>${loadTxt(L)}</span>${L.src === "est" ? `<span class="faint"> · تخمین اولیه، با RPE تنظیم کن</span>` : `<span class="faint"> · بر اساس رکوردهای اخیرت</span>`}</p>`;
+}
 function suggestion(ex, lib, dose) {
   const last = lastSession(ex.id, lib, sel); if (!last) return null;
   const top = last.sets.reduce((a, s) => (+s.kg || 0) >= (+a.kg || 0) ? s : a, last.sets[0]), kg = +top.kg || 0;
@@ -659,6 +684,7 @@ const INFO = {
   aifood: ["ثبت با متن", "<p>غذاهایت را معمولی بنویس؛ Claude آنها را به آیتم با کالری و ماکرو تبدیل می‌کند (مقدار پخته، مگر اینکه بنویسی خام). قبل از افزودن، فهرست را چک کن. ارزش‌ها تقریبی‌اند.</p>"],
   coach: ["مربی هوشمند", "<p>Claude داده‌های ۱۴ روز اخیر تو (وزن، غذا، خواب، آمادگی، ست‌ها، قدم، آب) و قانون‌های برنامه را می‌خواند و پیشنهاد عملی می‌دهد. «تحلیل امروز» برای بقیه‌ی امروز، «تحلیل این هفته» برای تعدیل هفته‌ی بعد، یا سؤال خودت را بپرس. داده‌ها فقط برای همین پاسخ فرستاده می‌شوند.</p>"],
   badges: ["نشان‌ها", "<p>با پیش رفتن برنامه باز می‌شوند: جلسه‌ها، روز ۱۰۰٪، هفته‌ی ۵ از ۵، آب، ثبت غذا، قدم، ست‌های ثبت‌شده و تست‌ها. وقتی روزی ۱۰۰٪ شود یا جلسه را تمام کنی، جشن کوچک روی صفحه نمایش داده می‌شود.</p>"],
+  prog: ["پیشرفت هفتگی وزنه‌ها", "<p>برای هر حرکتی که وزنه‌اش را ثبت کرده‌ای، بهترین ست هر هفته (بر اساس e1RM) کنار هم می‌آید تا هر هفته رکوردت را مقایسه کنی. روی اسم حرکت بزن تا صفحه‌ی آن باز شود. «وزنه‌ی پیشنهادی» هر جلسه هم از همین رکوردهای ۳ هفته‌ی اخیر حساب می‌شود.</p>"],
   pr: ["رکوردها", "<p>بیشترین وزنه برای هر تعداد تکرار، از ست‌هایی که در «ثبت وزنه» وارد کرده‌ای. برای Pull-up و Chin-up و Dip، وزنه یعنی وزنه‌ی اضافه روی وزن بدن.</p>"],
 };
 
@@ -671,6 +697,14 @@ async function setLang(l) {
   S.prefs.lang = l; save(); window.name = "grip-lang=" + l;
   if (cloudRef) { clearTimeout(pushT); try { await Promise.race([cloudRef.set({ s: JSON.stringify(S), t: savedAt }), new Promise(r => setTimeout(r, 2500))]); } catch (e) {} }
   location.reload();
+}
+function goTo(t, to, day) {
+  if (day != null) sel = clamp(+day, 0, 55);
+  page = null; tab = t; render();
+  const el = to && document.getElementById(to);
+  if (!el) return window.scrollTo(0, 0);
+  el.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+  el.classList.remove("flash"); void el.offsetWidth; el.classList.add("flash");
 }
 function wkMenu(open) {
   const m = $("#wkmenu"), bk = $("#wkback"), btn = $("#phase");
@@ -721,14 +755,14 @@ function hero(inf, dd) {
   for (let i = 0; i < 56; i++) strip += `<i class="${i % 7 === 0 && i ? "w" : ""} ${i === sel ? "cur" : ""}" style="${i !== sel && i <= cur ? `background:var(--h${Math.max(1, lvl(pct(i)))})` : ""}"></i>`;
   const n = PROGRAM.nutrition[inf.type], rd = readiness(dd);
   return `<section class="panel hero rise" aria-label="خلاصه روز"><span class="glow"></span>
-    <div class="ph" style="margin-bottom:6px"><span class="dayno">روز <b class="x num">${fa(sel + 1)}</b> <span class="faint">/ ۵۶</span></span><div class="r">${infoBtn("hero")}</div></div>
-    <div class="hero-grid"><div class="ring">${ring(p, 150, 12)}<div class="ctr"><div><b class="x num">${fa(Math.round(p * 100))}٪</b><span>انجام شده</span></div></div></div>
+    <div class="ph" style="margin-bottom:6px"><span class="dayno" data-act="wkmenu" role="button" tabindex="0">روز <b class="x num">${fa(sel + 1)}</b> <span class="faint">/ ۵۶</span></span><div class="r">${infoBtn("hero")}</div></div>
+    <div class="hero-grid"><div class="ring" data-act="go" data-tab="today" data-to="s-check" role="button" tabindex="0">${ring(p, 150, 12)}<div class="ctr"><div><b class="x num">${fa(Math.round(p * 100))}٪</b><span>انجام شده</span></div></div></div>
     <div style="min-width:0"><h2>${esc(DAYFA[inf.dow])}، ${esc(jd)}</h2>${LANG === "en" ? "" : `<p class="sub">${esc(gd)}</p>`}
-      <div class="chips">${inf.letter ? `<span class="pill acc">${en("Workout " + inf.letter)}</span>` : `<span class="pill">روز پیاده‌روی</span>`}
-      ${inf.refeed ? `<span class="pill gold">ریفید</span>` : ""}${inf.test ? `<span class="pill gold">روز تست</span>` : ""}
+      <div class="chips">${inf.letter ? `<span class="pill acc" data-act="go" data-tab="today" data-to="s-session" role="button" tabindex="0">${en("Workout " + inf.letter)}</span>` : `<span class="pill" data-act="go" data-tab="today" data-to="s-walk" role="button" tabindex="0">روز پیاده‌روی</span>`}
+      ${inf.refeed ? `<span class="pill gold" data-act="go" data-tab="today" data-to="s-fuel" role="button" tabindex="0">ریفید</span>` : ""}${inf.test ? `<span class="pill gold" data-act="go" data-tab="stats" data-to="s-tests" role="button" tabindex="0">روز تست</span>` : ""}
       ${sel !== cur && cur >= 0 && cur <= 55 ? `<button class="pill" data-act="today" style="min-height:32px">برو به امروز</button>` : ""}</div></div></div>
-    <div class="kpis3 num"><div><b class="x">${fa(n.kcal)}</b><span>کیلوکالری</span></div><div><b class="x">${fa(String(Number(((dd.water || 0) / 1000).toFixed(1))))}<span class="faint" style="font-size:.6em">/${fa(waterTarget(inf) / 1000)}</span></b><span>آب، لیتر</span></div><div><b class="x" id="kpiRd">${rd == null ? "-" : fa(rd)}</b><span>آمادگی</span></div></div>
-    <div class="strip" aria-hidden="true">${strip}</div></section>`;
+    <div class="kpis3 num"><div data-act="go" data-tab="food" data-to="s-food" role="button" tabindex="0"><b class="x">${fa(n.kcal)}</b><span>کیلوکالری</span></div><div data-act="go" data-tab="today" data-to="s-water" role="button" tabindex="0"><b class="x">${fa(String(Number(((dd.water || 0) / 1000).toFixed(1))))}<span class="faint" style="font-size:.6em">/${fa(waterTarget(inf) / 1000)}</span></b><span>آب، لیتر</span></div><div data-act="go" data-tab="today" data-to="s-ready" role="button" tabindex="0"><b class="x" id="kpiRd">${rd == null ? "-" : fa(rd)}</b><span>آمادگی</span></div></div>
+    <div class="strip" data-act="go" data-tab="stats" data-to="s-map" role="button" tabindex="0" aria-label="نقشه ۵۶ روز">${strip}</div></section>`;
 }
 
 function notices(inf, dd) {
@@ -753,7 +787,7 @@ function session(inf, dd) {
     const dose = doseOf(ex, inf.week, home), n = setsOf(dose), k = Math.min(dd.sets[ex.id] || 0, n);
     total += n; done += k;
     const logs = ((dd.lifts && dd.lifts[ex.id]) || []).filter(s => (s.ex || "") === id);
-    const sug = ex.main && n ? suggestion(ex, id, dose) : null;
+    const sug = n ? suggestion(ex, id, dose) : null;
     let dots = "";
     for (let s = 1; s <= n; s++) dots += `<button class="dot ${s <= k ? "on" : ""}" data-act="set" data-id="${ex.id}" data-n="${s}" data-max="${n}" data-rest="${restSec(ex.rest)}" aria-pressed="${s <= k}" aria-label="${esc(shown.en)} ست ${fa(s)} از ${fa(n)}">${fa(s)}</button>`;
     return `<article class="ex ${n && k >= n ? "done" : ""}">
@@ -761,8 +795,8 @@ function session(inf, dd) {
         <p class="meta">${shown.en === other.en ? "باشگاه و خانه: همین حرکت" : `${home ? "باشگاه" : "خانه"}: ${en(other.en)}`} · استراحت ${en(ex.rest)}</p></div></div>
         <span class="dose">${doseH(dose === "test" ? "Test" : dose)}</span></div>
       ${ex.fa ? `<p class="meta" style="margin-top:6px">${bidi(ex.fa)}</p>` : ""}
-      ${sug ? `<p class="hint-line">${sug}</p>` : ""}
-      ${n ? `<div class="sets">${dots}${ex.main ? `<button class="linkbtn" data-act="log" data-id="${ex.id}" data-lib="${id}">ثبت وزنه${logs.length ? " · " + fa(logs.length) : ""}</button>` : ""}</div>` : `<p class="hint">این هفته اجرا نمی‌شود.</p>`}
+      ${n ? loadLine(id, dose) : ""}${sug ? `<p class="hint-line">${sug}</p>` : ""}
+      ${n ? `<div class="sets">${dots}<button class="linkbtn" data-act="log" data-id="${ex.id}" data-lib="${id}">ثبت وزنه${logs.length ? " · " + fa(logs.length) : ""}</button></div>` : `<p class="hint">این هفته اجرا نمی‌شود.</p>`}
     </article>`;
   }).join("");
   const sp = total ? done / total : 0, wd = !!dd.done.workout;
@@ -773,14 +807,14 @@ function session(inf, dd) {
     <details class="fold" data-d="wu" ${openD.has("wu") ? "open" : ""}><summary>گرم کردن ۸ تا ۱۰ دقیقه</summary><ul class="wu">${PROGRAM.warmup.map(w => `<li>${en(w[0])}<span class="en">${esc(w[1])}</span></li>`).join("")}</ul></details>
     ${rows}
     <button class="btn ${wd ? "done" : "pri"} block tick" style="margin-top:14px" data-act="tog" data-k="workout" aria-pressed="${wd}">${wd ? "جلسه انجام شد" : "پایان جلسه"}</button>`;
-  if (inf.mu) return `<section class="panel rise" style="--i:1"><details class="fold" style="border:0;margin:0" data-d="mu" ${openD.has("mu") ? "open" : ""}><summary>تمرین ${inf.letter} (سبک، فقط بعد از تست‌ها اگر تازه‌ای)</summary>${body}</details></section>`;
-  return `<section class="panel rise" style="--i:1" aria-label="جلسه تمرین">${body}</section>`;
+  if (inf.mu) return `<section class="panel rise" id="s-session" style="--i:1"><details class="fold" style="border:0;margin:0" data-d="mu" ${openD.has("mu") ? "open" : ""}><summary>تمرین ${inf.letter} (سبک، فقط بعد از تست‌ها اگر تازه‌ای)</summary>${body}</details></section>`;
+  return `<section class="panel rise" id="s-session" style="--i:1" aria-label="جلسه تمرین">${body}</section>`;
 }
 
 function walkDay(inf, dd) {
   const g = dd.done.gtg || 0;
   let pips = ""; for (let k = 1; k <= 5; k++) pips += `<button class="dot ${k <= g ? "on" : ""}" data-act="pip" data-k="gtg" data-n="${k}" data-max="5" aria-pressed="${k <= g}" aria-label="GTG ست ${fa(k)} از ۵">${fa(k)}</button>`;
-  return `<section class="panel rise" style="--i:1"><div class="sess-h"><div><span class="x" lang="en">WALK + GTG</span><span class="muted small">روز پیاده‌روی</span></div>${infoBtn("walk")}</div>
+  return `<section class="panel rise" id="s-walk" style="--i:1"><div class="sess-h"><div><span class="x" lang="en">WALK + GTG</span><span class="muted small">روز پیاده‌روی</span></div>${infoBtn("walk")}</div>
     <p class="muted" style="margin-top:10px">پیاده‌روی ${inf.weekend ? "۹۰ تا ۱۲۰" : "۶۰ تا ۹۰"} دقیقه با سرعت مکالمه (${en("Zone 2")})، هدف ۱۲٬۰۰۰ قدم یا بیشتر.</p>
     <h3 style="margin-top:16px;font-size:.92rem">${en("Grease the Groove")}</h3>
     <p class="small muted">۵ ست ${en("Pull-up")} سبک (الان ۲ تکرار)، فاصله حداقل ۶۰ دقیقه، هرگز سخت.</p>
@@ -795,7 +829,7 @@ function refreshReady(inf, d) { const g = $("#gauge"); if (g) g.innerHTML = gaug
 function readyCard(inf, dd) {
   const rd = readiness(dd), sc = (f, v) => `<div class="scale5" role="group" aria-label="${f}">${[1, 2, 3, 4, 5].map(k => `<button data-act="scale" data-f="${f}" data-n="${k}" aria-pressed="${v === k}">${fa(k)}</button>`).join("")}</div>`;
   const msg = rd == null ? "خواب، انرژی و کوفتگی را وارد کن." : rd >= 75 ? "آماده‌ای. طبق برنامه برو." : rd >= 50 ? "متوسط. ست‌های سنگین را RPE ۷ تا ۷٫۵ نگه دار." : "پایین. یک ست سنگین کمتر و RPE ۷.";
-  return `<section class="panel rise" style="--i:2" aria-label="آمادگی امروز">${ph("آمادگی امروز", "ready")}
+  return `<section class="panel rise" id="s-ready" style="--i:2" aria-label="آمادگی امروز">${ph("آمادگی امروز", "ready")}
     <div class="gauge" id="gauge" style="margin-bottom:0">${gaugeHtml(dd)}</div>
     <details class="fold" data-d="rd" ${rd == null || dd.hunger == null || openD.has("rd") ? "open" : ""}><summary>${rd == null ? "ثبت خواب، انرژی و کوفتگی" : "ویرایش"}</summary>
     <div class="fq"><label class="f" for="sl">خواب دیشب (ساعت)</label><input id="sl" class="inp num" type="text" inputmode="decimal" dir="ltr" value="${esc(dd.sleepH ?? "")}" data-act="field" data-f="sleepH" autocomplete="off"></div>
@@ -807,7 +841,7 @@ function readyCard(inf, dd) {
 function checklist(inf, dd) {
   const L = items(inf), groups = [[], [], []];
   L.forEach(it => groups[GROUP[it.k] ?? 2].push(it));
-  return `<section class="panel rise" style="--i:2" aria-label="چک‌لیست">${ph("چک‌لیست", "check", `<span class="small muted num">${fa(Math.round(pct(sel) * 100))}٪</span>`)}` +
+  return `<section class="panel rise" id="s-check" style="--i:2" aria-label="چک‌لیست">${ph("چک‌لیست", "check", `<span class="small muted num">${fa(Math.round(pct(sel) * 100))}٪</span>`)}` +
     groups.map((g, gi) => g.length ? `<div class="grp"><h3>${GROUP_FA[gi]}</h3>` + g.map(it => {
       const v = dd.done[it.k], f = frac(it, dd, inf);
       if (it.t === "b") return `<button class="chk tick" data-act="tog" data-k="${it.k}" aria-pressed="${!!v}"><span class="box">${ICON.check}</span><span class="lbl">${it.l}</span></button>`;
@@ -821,7 +855,7 @@ function checklist(inf, dd) {
 
 function waterCard(inf, dd) {
   const t = waterTarget(inf), ml = dd.water || 0, p = clamp(ml / t, 0, 1);
-  return `<section class="panel rise" style="--i:3" aria-label="آب">${ph("آب", "water")}<div class="water"><div class="tank" role="progressbar" aria-label="آب" aria-valuemin="0" aria-valuemax="${t}" aria-valuenow="${Math.min(ml, t)}"><i style="height:${(p * 100).toFixed(1)}%"></i></div>
+  return `<section class="panel rise" id="s-water" style="--i:3" aria-label="آب">${ph("آب", "water")}<div class="water"><div class="tank" role="progressbar" aria-label="آب" aria-valuemin="0" aria-valuemax="${t}" aria-valuenow="${Math.min(ml, t)}"><i style="height:${(p * 100).toFixed(1)}%"></i></div>
     <div><p><span class="big x num">${fa(String(Number((ml / 1000).toFixed(2))))}</span> <span class="muted">از ${fa(t / 1000)} لیتر</span></p>
     <p class="small muted">${fa(Math.floor(ml / 250))} لیوان ۲۵۰ میلی‌لیتری.</p>
     <div class="wbtns"><button class="btn pri" data-act="water" data-v="250"><bdi dir="ltr">+۲۵۰</bdi></button><button class="btn pri" data-act="water" data-v="500"><bdi dir="ltr">+۵۰۰</bdi></button><button class="btn" data-act="water" data-v="-250" ${ml <= 0 ? "disabled" : ""} aria-label="کم کردن ۲۵۰"><bdi dir="ltr">−۲۵۰</bdi></button></div></div></div></section>`;
@@ -830,8 +864,8 @@ function waterCard(inf, dd) {
 function fuel(inf, dd) {
   const n = PROGRAM.nutrition[inf.type], kp = n.p * 4, kf = n.f * 9, kc = n.c * 4, tot = kp + kf + kc;
   const M = (lbl, v, t, u) => { const q = v ? v / t : 0; return `<div class="meter ${q > 1.05 ? "over" : ""}"><div class="lb"><span>${lbl}</span><span class="num">${fa(v || 0)} / ${fa(t)} ${u}</span></div><div class="tr"><i style="width:${(clamp(q, 0, 1) * 100).toFixed(1)}%"></i></div></div>`; };
-  return `<section class="panel rise" style="--i:3" aria-label="تغذیه">${ph("سوخت امروز", "fuel", `<span class="tiny muted">۱۲:۰۰ تا ۲۰:۰۰</span>`)}
-    <div class="macro num"><div><b class="x">${fa(n.kcal)}</b><span>کیلوکالری</span></div><div><b class="x">${fa(n.p)}</b><span>پروتئین g</span></div><div><b class="x">${fa(n.f)}</b><span>چربی g</span></div><div><b class="x">${fa(n.c)}</b><span>کربو g</span></div></div>
+  return `<section class="panel rise" id="s-fuel" style="--i:3" aria-label="تغذیه">${ph("سوخت امروز", "fuel", `<span class="tiny muted">۱۲:۰۰ تا ۲۰:۰۰</span>`)}
+    <div class="macro num" data-act="go" data-tab="food" data-to="s-food" role="button" tabindex="0"><div><b class="x">${fa(n.kcal)}</b><span>کیلوکالری</span></div><div><b class="x">${fa(n.p)}</b><span>پروتئین g</span></div><div><b class="x">${fa(n.f)}</b><span>چربی g</span></div><div><b class="x">${fa(n.c)}</b><span>کربو g</span></div></div>
     <div class="ratio" aria-hidden="true"><i style="width:${kp / tot * 100}%;background:var(--accent)"></i><i style="width:${kf / tot * 100}%;background:var(--gold)"></i><i style="width:${kc / tot * 100}%;background:var(--ink3)"></i></div>
     <div class="legend"><span><i style="background:var(--accent)"></i>پروتئین ${fa(Math.round(kp / tot * 100))}٪</span><span><i style="background:var(--gold)"></i>چربی ${fa(Math.round(kf / tot * 100))}٪</span><span><i style="background:var(--ink3)"></i>کربو ${fa(Math.round(kc / tot * 100))}٪</span></div>
     <div class="fgrid" style="margin-top:14px"><div><label class="f" for="kin">کالری خورده‌شده</label><input id="kin" class="inp num" type="text" inputmode="numeric" dir="ltr" value="${esc(dd.kin ?? "")}" data-act="field" data-f="kin" autocomplete="off"></div>
@@ -840,7 +874,7 @@ function fuel(inf, dd) {
 }
 
 function dayLog(inf, dd) {
-  return `<section class="panel rise" style="--i:4" aria-label="ثبت روز">${ph("ثبت روز", "log")}
+  return `<section class="panel rise" id="s-log" style="--i:4" aria-label="ثبت روز">${ph("ثبت روز", "log")}
     <div class="fgrid"><div><label class="f" for="w">وزن صبح (kg)</label><input id="w" class="inp num" type="text" inputmode="decimal" dir="ltr" value="${esc(dd.weight ?? "")}" data-act="field" data-f="weight" autocomplete="off"></div>
     <div><label class="f" for="st">تعداد قدم</label><input id="st" class="inp num" type="text" inputmode="numeric" dir="ltr" value="${esc(dd.steps ?? "")}" data-act="field" data-f="steps" autocomplete="off"></div></div>
     <p class="hint" id="sthint">${dd.steps >= 12000 ? "امروز در چالش " + en("Step Streak") + " حساب می‌شود." : "حداقل ۱۲٬۰۰۰ قدم برای " + en("Step Streak") + "."}</p>
@@ -850,7 +884,7 @@ function dayLog(inf, dd) {
 function bodyCard(inf, dd) {
   const sf = dd.sf || {}, bf = bodyFat(sf, inf.date), w = dd.weight || avg7(sel);
   const I = (id, f, lbl, v) => `<div><label class="f" for="${id}">${lbl}</label><input id="${id}" class="inp num" type="text" inputmode="decimal" dir="ltr" value="${esc(v ?? "")}" data-act="sf" data-f="${f}" autocomplete="off"></div>`;
-  return `<section class="panel rise" style="--i:4" aria-label="ترکیب بدن">${ph("چک‌این هفتگی: ترکیب بدن", "body")}
+  return `<section class="panel rise" id="s-body" style="--i:4" aria-label="ترکیب بدن">${ph("چک‌این هفتگی: ترکیب بدن", "body")}
     <div class="fld"><label class="f" for="waist">دور شکم در ناف (cm)</label><input id="waist" class="inp num" type="text" inputmode="decimal" dir="ltr" value="${esc(dd.waist ?? "")}" data-act="field" data-f="waist" autocomplete="off"></div>
     <p class="f" style="margin:12px 0 6px;font-size:.8rem;font-weight:600;color:var(--ink2)">کالیپر ۳ نقطه (mm)</p>
     <div class="fgrid3">${I("sfch", "ch", "سینه", sf.ch)}${I("sfab", "ab", "شکم", sf.ab)}${I("sfth", "th", "ران", sf.th)}</div>
@@ -883,7 +917,7 @@ function viewPlan() {
   const inf = info(sel), home = S.prefs.mode === "home", wk = planWeek;
   const days = [0, 1, 2, 3, 4, 5, 6].map(d => {
     const f = info((wk - 1) * 7 + d), W = f.letter && PROGRAM.workouts[f.letter];
-    return `<div class="pd ${wk === inf.week && d === inf.dow ? "now" : ""}"><b>${DAYFA[d]}</b><span class="small">${W ? `${en("Workout " + f.letter)} · ${esc(W.fa.split(":")[1] || "")}` : "پیاده‌روی + " + en("GTG")}${f.refeed ? " · ریفید" : ""}${f.dow === 6 ? " · چک‌این" : ""}</span></div>`;
+    return `<div class="pd ${wk === inf.week && d === inf.dow ? "now" : ""}" data-act="go" data-tab="today" data-to="${f.letter ? "s-session" : "s-walk"}" data-day="${(wk - 1) * 7 + d}" role="button" tabindex="0"><b>${DAYFA[d]}</b><span class="small">${W ? `${en("Workout " + f.letter)} · ${esc(W.fa.split(":")[1] || "")}` : "پیاده‌روی + " + en("GTG")}${f.refeed ? " · ریفید" : ""}${f.dow === 6 ? " · چک‌این" : ""}</span></div>`;
   }).join("");
   const ph8 = PROGRAM.phases.find(x => x[0].includes(wk));
   let h = `<section class="panel rise">${ph(`برنامه‌ی هفته ${fa(wk)} · ${ph8[2]}`, "plan")}<div class="plan">${days}</div>
@@ -899,7 +933,7 @@ function viewPlan() {
 /* ---------- map ---------- */
 function viewMap() {
   const cur = todayIdx();
-  let h = `<section class="panel rise">${ph("نقشه ۵۶ روز", "map", `<span class="tiny muted">رنگ = درصد انجام</span>`)}<div class="hm">`;
+  let h = `<section class="panel rise" id="s-map">${ph("نقشه ۵۶ روز", "map", `<span class="tiny muted">رنگ = درصد انجام</span>`)}<div class="hm">`;
   for (let w = 0; w < 8; w++) {
     const phs = PROGRAM.phases.find(x => x[0].includes(w + 1));
     let wsum = 0, wn = 0; for (let d = 0; d < 7; d++) if (w * 7 + d <= cur) { wsum += pct(w * 7 + d); wn++; }
@@ -963,6 +997,30 @@ function cmpBars(row) {
   return `<div><h3>${en(row[1])}</h3><div class="bars" role="img" aria-label="${esc(row[1])}: ${PH.map((p, k) => p[1] + " " + (v[k] || "-")).join("، ")}">` +
     v.map((x, k) => `<div><span>${PH[k][1]}</span><span class="bv">${x ? `<i style="width:${Math.max(3, x / mx * 100)}%;opacity:${[0.45, 0.72, 1][k]}"></i><em>${fa(x)}</em>` : `<em class="faint">-</em>`}</span></div>`).join("") + `</div></div>`;
 }
+function weeklyProg() {
+  const libs = {};
+  for (let i = 0; i < 56; i++) {
+    const d = peek(dateOf(i)); if (!d || !d.lifts) continue; const w = Math.floor(i / 7);
+    Object.entries(d.lifts).forEach(([exId, a]) => a.forEach(st => {
+      const lib = st.ex || ""; if (!PROGRAM.lib[lib]) return;
+      const v = setE1(lib, st) ?? (+st.reps && +st.kg ? +st.kg * (1 + +st.reps / 30) : null); if (!v) return;
+      const L = libs[lib] || (libs[lib] = { ex: exId, w: {} });
+      if (!L.w[w] || v > L.w[w].e1) L.w[w] = { e1: v, kg: +st.kg || 0, reps: +st.reps };
+    }));
+  }
+  const ids = Object.keys(libs), nW = Math.floor(clamp(todayIdx(), 0, 55) / 7) + 1;
+  if (!ids.length) return `<div class="empty">بعد از اولین «ثبت وزنه»، بهترین ست هر هفته‌ی هر حرکت اینجا جمع می‌شود.</div>`;
+  const cell = (lib, c, p) => {
+    if (!c) return `<td class="faint">-</td>`;
+    const k = (PROGRAM.lib[lib].ld || [""])[0], kg = k === "bw" ? (c.kg ? "+" + c.kg : "BW") : k === "assist" ? "−" + c.kg : c.kg;
+    const ch = p ? c.e1 - p.e1 : 0, cls = !p ? "" : ch > 0.5 ? "up" : ch < -0.5 ? "dn" : "";
+    return `<td class="${cls}"><bdi class="en nw">${kg}×${c.reps}</bdi><span class="tiny faint">${faN(c.e1, 0)}</span></td>`;
+  };
+  return `<div class="tw"><table class="wprog"><thead><tr><th>حرکت</th>${Array.from({ length: nW }, (_, w) => `<th>${fa(w + 1)}</th>`).join("")}</tr></thead><tbody>` +
+    ids.map(lib => { const L = libs[lib]; return `<tr><td><button class="ename" lang="en" style="font-size:.86rem" data-act="exinfo" data-ex="${L.ex}" data-w="${L.ex[0].toUpperCase()}">${esc(PROGRAM.lib[lib].en)}</button></td>` +
+      Array.from({ length: nW }, (_, w) => cell(lib, L.w[w], L.w[w - 1])).join("") + `</tr>`; }).join("") +
+    `</tbody></table></div><p class="tiny faint" style="margin-top:6px">بهترین ست هر هفته (kg×تکرار) و زیرش e1RM. سبز یعنی قوی‌تر از هفته‌ی قبل، قرمز یعنی افت. دمبل: هر دست؛ BW وزن بدن؛ − کمک دستگاه.</p>`;
+}
 function prList(ex, lib, label) {
   const best = {};
   for (let i = 0; i < 56; i++) {
@@ -974,7 +1032,7 @@ function prList(ex, lib, label) {
     });
   }
   const rows = Object.keys(best).map(Number).sort((a, b) => a - b);
-  return `<div><h3 style="font-size:.9rem;margin-bottom:6px">${label}</h3>` + (rows.length ? `<table><thead><tr><th>تکرار</th><th>${BWLIFTS.includes(lib) ? "kg اضافه" : "kg"}</th><th>تاریخ</th></tr></thead><tbody>` +
+  return `<div><h3 style="font-size:.9rem;margin-bottom:6px"><button class="ename" data-act="exinfo" data-ex="${ex}" data-w="${ex[0].toUpperCase()}">${label}</button></h3>` + (rows.length ? `<table><thead><tr><th>تکرار</th><th>${BWLIFTS.includes(lib) ? "kg اضافه" : "kg"}</th><th>تاریخ</th></tr></thead><tbody>` +
     rows.map(r => `<tr><td class="num">${fa(r)}</td><td class="num">${fa(best[r].kg)}</td><td class="num small">${esc(fmtJ.format(parseISO(best[r].date)))}</td></tr>`).join("") + `</tbody></table>`
     : `<p class="small faint">هنوز ثبت نشده. در جلسه روی «ثبت وزنه» بزن.</p>`) + `</div>`;
 }
@@ -996,12 +1054,12 @@ function viewStats() {
   const wk = Math.floor(cur / 7) + 1, rates = weeklyRates(cur % 7 === 6 ? wk : wk - 1);
   const ch = wNow && w0 ? wNow - w0 : null;
   let h = `<div class="kpis num">
-    <div class="panel kpi rise"><b class="x">${fa(Math.round(overall * 100))}٪</b><span>تکمیل کل</span></div>
-    <div class="panel kpi rise" style="--i:1"><b class="x">${fa(streak(todayIdx()))}</b><span>روز پیاپی ۷۰٪+</span></div>
-    <div class="panel kpi rise" style="--i:2"><b class="x">${wNow ? faN(wNow, 1) : "-"}</b><span>میانگین ۷ روزه kg</span></div>
-    <div class="panel kpi rise" style="--i:3"><b class="x">${ch == null ? "-" : (ch < 0 ? "−" : "+") + faN(Math.abs(ch), 1)}</b><span>تغییر از شروع kg</span></div></div>`;
+    <div class="panel kpi rise" data-act="go" data-tab="stats" data-to="s-map" role="button" tabindex="0"><b class="x">${fa(Math.round(overall * 100))}٪</b><span>تکمیل کل</span></div>
+    <div class="panel kpi rise" style="--i:1" data-act="go" data-tab="stats" data-to="s-map" role="button" tabindex="0"><b class="x">${fa(streak(todayIdx()))}</b><span>روز پیاپی ۷۰٪+</span></div>
+    <div class="panel kpi rise" style="--i:2" data-act="go" data-tab="stats" data-to="s-weight" role="button" tabindex="0"><b class="x">${wNow ? faN(wNow, 1) : "-"}</b><span>میانگین ۷ روزه kg</span></div>
+    <div class="panel kpi rise" style="--i:3" data-act="go" data-tab="stats" data-to="s-weight" role="button" tabindex="0"><b class="x">${ch == null ? "-" : (ch < 0 ? "−" : "+") + faN(Math.abs(ch), 1)}</b><span>تغییر از شروع kg</span></div></div>`;
   h += coachCard() + `<div style="margin-top:14px">${viewMap()}</div>`;
-  h += `<section class="panel rise" style="margin-top:14px">${ph("روند وزن", "weight", `<span class="tiny muted">هدف ${fa(TARGET_W)} kg</span>`)}${weightChart(todayIdx())}
+  h += `<section class="panel rise" id="s-weight" style="margin-top:14px">${ph("روند وزن", "weight", `<span class="tiny muted">هدف ${fa(TARGET_W)} kg</span>`)}${weightChart(todayIdx())}
     <div class="legend"><span><i style="background:var(--accent)"></i>میانگین ۷ روزه</span><span><i style="background:var(--ink3)"></i>وزن روزانه</span><span><i style="background:var(--gold)"></i>مسیر ${fa(START_W)} به ${fa(TARGET_W)}</span></div></section>`;
   const a = weekStats(wk), b = weekStats(wk - 1), cell = (x, f) => x == null ? "-" : f(x);
   h += `<section class="panel rise" style="margin-top:14px">${ph("این هفته و هفته‌ی قبل", "weekcmp")}<div class="tw"><table class="wk2"><thead><tr><th></th><th>هفته ${fa(wk)}</th><th>${wk > 1 ? "هفته " + fa(wk - 1) : "-"}</th></tr></thead><tbody>
@@ -1032,20 +1090,21 @@ function chalHtml() {
   for (let i = 0; i < 56; i++) { const d = peek(dateOf(i)); if (d) { if (d.done.gtg >= 5) gtg++; if (d.done.hang) hang++; } }
   PH.forEach(p => { const x = +(S.tests[p[0]] || {}).hollow; if (x > hollowBest) hollowBest = x; });
   const puBest = Math.max(0, ...PH.map(p => +(S.tests[p[0]] || {}).pullups || 0)), ss = stepStreak(todayIdx());
-  const C = (p, b2, l) => `<div>${ring(p, 48, 6)}<div style="min-width:0"><b class="x num">${b2}</b><span>${l}</span></div></div>`;
+  const C = (p, b2, l, t, to) => `<div data-act="go" data-tab="${t}" data-to="${to}" role="button" tabindex="0">${ring(p, 48, 6)}<div style="min-width:0"><b class="x num">${b2}</b><span>${l}</span></div></div>`;
   return `<div class="ch">
-    ${C(puBest / 10, fa(puBest) + "/۱۰", "بهترین " + en("Pull-up"))}
-    ${C(ss / 56, fa(ss) + "/۵۶", en("Step Streak"))}
-    ${C(hollowBest / 60, fa(hollowBest) + "/۶۰", LANG === "en" ? "Hollow, seconds" : en("Hollow") + " ثانیه")}
-    ${C(hang / 56, fa(hang), LANG === "en" ? "Dead Hang days" : "روز " + en("Dead Hang"))}</div>
+    ${C(puBest / 10, fa(puBest) + "/۱۰", "بهترین " + en("Pull-up"), "stats", "s-tests")}
+    ${C(ss / 56, fa(ss) + "/۵۶", en("Step Streak"), "today", "s-log")}
+    ${C(hollowBest / 60, fa(hollowBest) + "/۶۰", LANG === "en" ? "Hollow, seconds" : en("Hollow") + " ثانیه", "stats", "s-tests")}
+    ${C(hang / 56, fa(hang), LANG === "en" ? "Dead Hang days" : "روز " + en("Dead Hang"), "today", "s-check")}</div>
     <p class="small muted" style="margin-top:12px">${LANG === "en" ? `Full GTG days: ${gtg}` : `${en("GTG")} کامل: ${fa(gtg)} روز`}</p>`;
 }
 function statsTail() {
-  let h = `<section class="panel rise" style="margin-top:14px">${ph("تست‌ها", "tests")}<div class="tw"><table class="tests"><thead><tr><th>تست</th>${PH.map(p => `<th>${p[1]}</th>`).join("")}</tr></thead><tbody>` +
+  let h = `<section class="panel rise" id="s-tests" style="margin-top:14px">${ph("تست‌ها", "tests")}<div class="tw"><table class="tests"><thead><tr><th>تست</th>${PH.map(p => `<th>${p[1]}</th>`).join("")}</tr></thead><tbody>` +
     TESTS.map(t => `<tr><td>${en(t[1])}<br><span class="tiny faint en" lang="en">${esc(t[2])}${LOWER_BETTER.includes(t[0]) ? " · lower is better" : ""}</span></td>` +
       PH.map(p => { const val = (S.tests[p[0]] || {})[t[0]]; return `<td><input class="inp num" type="text" inputmode="decimal" dir="ltr" aria-label="${esc(t[1])} ${p[1]}" value="${esc(val ?? "")}" data-act="test" data-p="${p[0]}" data-t="${t[0]}"></td>`; }).join("") + `</tr>`).join("") +
     `</tbody></table></div><div class="cmp" id="cmp">${TESTS.map(cmpBars).join("")}</div></section>`;
-  h += `<section class="panel rise" style="margin-top:14px">${ph("رکوردها", "pr")}<div class="prs">
+  h += `<section class="panel rise" id="s-prog" style="margin-top:14px">${ph("پیشرفت هفتگی وزنه‌ها", "prog")}${weeklyProg()}</section>`;
+  h += `<section class="panel rise" id="s-pr" style="margin-top:14px">${ph("رکوردها", "pr")}<div class="prs">
     ${prList("a1", "pullup", en("Pull-up"))}${prList("c5", "chin", en("Chin-up"))}${prList("a2", "dip", en("Dip"))}${prList("a2", "bench", en("Barbell Bench Press"))}${prList("b1", "squat", en("Back Squat"))}${prList("d1", "dl", en("Deadlift"))}</div></section>`;
   return h;
 }
@@ -1147,13 +1206,15 @@ function pageEx(p) {
   const W = PROGRAM.workouts[p.w], ex = W.ex.find(e => e.id === p.ex); if (!ex) { page = null; return viewToday(); }
   const home = (S.prefs.mode === "home") !== !!p.alt, id = home ? ex.home : ex.gym, lb = PROGRAM.lib[id], otherId = home ? ex.gym : ex.home, other = PROGRAM.lib[otherId];
   const wk = info(sel).week, dose = doseOf(ex, wk, home), yt = "https://www.youtube.com/results?search_query=" + encodeURIComponent(lb.yt);
+  const LS = [1, 2, 3, 4, 5, 6, 7, 8].map(w => loadFor(id, doseOf(ex, w, home), sel, w % 4 === 0));
+  const loads = LS.some(Boolean) ? `<tr>${LS.map((L, k) => `<td class="num" style="text-align:center;${k + 1 === wk ? "font-weight:800;color:var(--accent-ink)" : "color:var(--ink2)"}"><span class="en">${!L ? "-" : L.kind === "bw" ? (L.kg ? "+" + L.kg : "BW") : L.kind === "assist" ? (L.kg ? "−" + L.kg : "0") : L.kg}</span></td>`).join("")}</tr>` : "";
   const doses = [1, 2, 3, 4, 5, 6, 7, 8].map(w => `<td class="num" style="text-align:center;${w === wk ? "font-weight:800;color:var(--accent-ink)" : "color:var(--ink2)"}"><span class="en">${esc(doseOf(ex, w, home))}</span></td>`).join("");
   return `<div class="pagehead rise">${backBtn()}<button class="pill acc" data-act="wopage" data-w="${p.w}">${en("Workout " + p.w)}</button></div>
   <section class="panel hero rise" style="--i:1"><span class="glow"></span>
     ${figHtml(id)}<p class="tiny muted">${home ? "نسخه‌ی خانه" : "نسخه‌ی باشگاه"}</p>
     <h1 class="pt-fa">${esc(lb.fan || lb.en)}</h1>${lb.fan ? `<p class="pt-en x" lang="en">${esc(lb.en)}</p>` : ""}
     <div class="chips" style="margin-top:14px"><span class="pill acc">${en(dose === "test" ? "Test" : dose)}</span><span class="pill">استراحت ${en(ex.rest)}</span><span class="pill">هفته ${fa(wk)}</span></div>
-    <div class="chips">${muscleChips(ex.m)}</div>
+    <div class="chips">${muscleChips(ex.m)}</div>${loadLine(id, dose)}
     ${lb.en !== other.en ? `<button class="btn" style="margin-top:14px" data-act="exalt">نمایش نسخه‌ی ${home ? "باشگاه" : "خانه"}: ${en(other.en)}</button>` : ""}</section>
   <section class="panel rise" style="--i:2"><h2 class="h2">اصول حرکت</h2><p style="margin-top:6px">${bidi(lb.fa)}</p>${ex.fa ? `<p class="hint-line" style="margin-top:10px">${bidi(ex.fa)}</p>` : ""}</section>
   <div class="grid2" style="margin-top:14px">
@@ -1162,8 +1223,8 @@ function pageEx(p) {
   <div class="grid2" style="margin-top:14px">
     <section class="panel rise" style="--i:5"><h2 class="h2">ساده‌تر</h2><p style="margin-top:6px">${bidi(lb.reg)}</p></section>
     <section class="panel rise" style="--i:5"><h2 class="h2">سخت‌تر</h2><p style="margin-top:6px">${bidi(lb.prog)}</p></section></div>
-  <section class="panel rise" style="--i:6;margin-top:14px"><h2 class="h2">دوز ۸ هفته</h2><div class="tw" style="margin-top:8px"><table><thead><tr>${[1, 2, 3, 4, 5, 6, 7, 8].map(w => `<th style="text-align:center">${fa(w)}</th>`).join("")}</tr></thead><tbody><tr>${doses}</tr></tbody></table></div>
-    <p class="tiny faint" style="margin-top:6px">هفته‌ی ۴ دیلود، هفته‌ی ۸ اوج و تست.</p></section>
+  <section class="panel rise" style="--i:6;margin-top:14px"><h2 class="h2">دوز ۸ هفته</h2><div class="tw" style="margin-top:8px"><table><thead><tr>${[1, 2, 3, 4, 5, 6, 7, 8].map(w => `<th style="text-align:center">${fa(w)}</th>`).join("")}</tr></thead><tbody><tr>${doses}</tr>${loads}</tbody></table></div>
+    <p class="tiny faint" style="margin-top:6px">هفته‌ی ۴ دیلود، هفته‌ی ۸ اوج و تست.${loads ? " ردیف دوم: وزنه‌ی پیشنهادی (kg؛ دمبل هر دست؛ BW وزن بدن؛ − یعنی کمک دستگاه)." : ""}</p></section>
   ${historyHtml(ex, id)}
   <a class="btn pri block rise" style="margin-top:14px;text-decoration:none" href="${yt}" target="_blank" rel="noopener">ویدیوی آموزشی در YouTube</a>`;
 }
@@ -1201,7 +1262,7 @@ function viewFood() {
   let h = `<div class="weekbar"><button class="iconbtn" data-act="prev" aria-label="روز قبل" ${sel === 0 ? "disabled" : ""}>${ICON.prev}</button>
     <div style="text-align:center"><b>${esc(DAYFA[inf.dow])}، ${esc(fmtJ.format(parseISO(inf.date)))}</b><div class="tiny muted">روز ${fa(sel + 1)} · ${inf.type === "refeed" ? "ریفید" : inf.letter ? "تمرین " + en(inf.letter) : "پیاده‌روی"}</div></div>
     <button class="iconbtn" data-act="next" aria-label="روز بعد" ${sel === 55 ? "disabled" : ""}>${ICON.next}</button></div>
-  <section class="panel hero rise" style="margin-top:10px"><span class="glow"></span>${ph("خوراک امروز", "food")}
+  <section class="panel hero rise" id="s-food" style="margin-top:10px"><span class="glow"></span>${ph("خوراک امروز", "food")}
     <div class="hero-grid"><div class="ring">${ring(t.k / n.kcal, 150, 12)}<div class="ctr"><div><b class="x num">${fa(Math.round(t.k))}</b><span>از ${fa(n.kcal)} kcal</span></div></div></div>
     <div style="min-width:0">${macroBar("پروتئین", t.p, n.p, "var(--accent)")}${macroBar("کربوهیدرات", t.c, n.c, "var(--ink3)")}${macroBar("چربی", t.f, n.f, "var(--gold)")}</div></div>
     <p class="small ${left < 0 ? "" : "muted"}" style="margin-top:12px;${left < 0 ? "color:var(--warn)" : ""}">${left >= 0 ? `${fa(Math.round(left))} کیلوکالری باقی مانده` : `${fa(Math.round(-left))} کیلوکالری بیشتر از هدف`} · پروتئین ${t.p >= n.p ? "کامل" : fa(Math.round(n.p - t.p)) + " گرم مانده"}</p></section>`;
@@ -1371,7 +1432,8 @@ function openSheet(exId, lib) {
   let rows = (d.lifts[exId] || []).filter(s => (s.ex || "") === lib).map(s => ({ kg: s.kg, reps: s.reps, rpe: s.rpe ?? "" }));
   if (!rows.length) {
     const prev = lastSession(exId, lib, sel);
-    rows = Array.from({ length: n }, (_, k) => { const p = prev && prev.sets[Math.min(k, prev.sets.length - 1)]; return { kg: p ? (p.kg ?? "") : "", reps: p ? (p.reps ?? "") : "", rpe: "" }; });
+    const dose = doseOf(ex, inf.week, S.prefs.mode === "home"), L = loadFor(lib, dose, sel, inf.week % 4 === 0), rr = repsOf(dose);
+    rows = Array.from({ length: n }, (_, k) => { const p = prev && prev.sets[Math.min(k, prev.sets.length - 1)]; return p ? { kg: p.kg ?? "", reps: p.reps ?? "", rpe: "" } : { kg: L && L.kg ? L.kg : "", reps: rr ? rr.lo : "", rpe: "" }; });
   }
   sheetRows = rows; sheetEx = { exId, lib };
   drawSheet(); $("#sheet").showModal();
@@ -1383,10 +1445,11 @@ function platesHtml() {
   return `<p class="tiny muted" style="margin-top:12px">صفحه‌ها برای هر طرف هالتر ${en("20 kg")} (سنگین‌ترین ست ${fa(top)} kg):</p><div class="plates">${pl.map(p => `<i>${p}</i>`).join("") || '<span class="small faint">فقط میله</span>'}</div>`;
 }
 function drawSheet() {
-  const lib = PROGRAM.lib[sheetEx.lib], bw = BWLIFTS.includes(sheetEx.lib), bar = BARBELL.includes(sheetEx.lib);
+  const lib = PROGRAM.lib[sheetEx.lib], bw = BWLIFTS.includes(sheetEx.lib), bar = BARBELL.includes(sheetEx.lib), kind = lib.ld ? lib.ld[0] : "";
     $("#sheet").innerHTML = `<div class="in"><div class="grab"></div><div class="ph"><h2 id="sht" class="en" lang="en">${esc(lib.en)}</h2><button class="iconbtn" data-act="shclose" aria-label="بستن">✕</button></div>
-    <p class="small muted">${bw ? "وزن بدن حساب است؛ فقط وزنه‌ی اضافه را بنویس (یا خالی)." : "وزنه‌ی کل و تکرار هر ست."} RPE: ۱۰ یعنی هیچ تکرار ذخیره، ۸ یعنی ۲ تکرار ذخیره.</p>
-    <div class="lrow tiny muted" style="padding-top:8px"><span>ست</span><span>${bw ? "kg اضافه" : "kg"}</span><span>تکرار</span><span>RPE</span></div>` +
+    <p class="small muted">${bw ? "وزن بدن حساب است؛ فقط وزنه‌ی اضافه را بنویس (یا خالی)." : kind === "assist" ? "kg = میزان کمک دستگاه (کمتر یعنی قوی‌تر)." : kind === "db" ? "kg = وزن هر دمبل." : "وزنه‌ی کل و تکرار هر ست."} RPE: ۱۰ یعنی هیچ تکرار ذخیره، ۸ یعنی ۲ تکرار ذخیره.</p>
+    ${(() => { const inf = info(sel), W = PROGRAM.workouts[inf.letter], ex = W && W.ex.find(e => e.id === sheetEx.exId); return ex ? loadLine(sheetEx.lib, doseOf(ex, inf.week, S.prefs.mode === "home")) : ""; })()}
+    <div class="lrow tiny muted" style="padding-top:8px"><span>ست</span><span>${bw ? "kg اضافه" : kind === "assist" ? "kg کمک" : "kg"}</span><span>تکرار</span><span>RPE</span></div>` +
     sheetRows.map((r, k) => `<div class="lrow"><span class="num faint">${fa(k + 1)}</span>
       <div class="step"><button data-act="st" data-k="${k}" data-f="kg" data-d="-2.5" aria-label="کم کردن وزنه ست ${fa(k + 1)}">−</button><input id="kg${k}" inputmode="decimal" aria-label="وزنه ست ${fa(k + 1)}" value="${esc(r.kg)}" data-act="sti" data-k="${k}" data-f="kg"><button data-act="st" data-k="${k}" data-f="kg" data-d="2.5" aria-label="افزودن وزنه ست ${fa(k + 1)}">+</button></div>
       <div class="step"><button data-act="st" data-k="${k}" data-f="reps" data-d="-1" aria-label="کم کردن تکرار ست ${fa(k + 1)}">−</button><input id="rp${k}" inputmode="numeric" aria-label="تکرار ست ${fa(k + 1)}" value="${esc(r.reps)}" data-act="sti" data-k="${k}" data-f="reps"><button data-act="st" data-k="${k}" data-f="reps" data-d="1" aria-label="افزودن تکرار ست ${fa(k + 1)}">+</button></div>
@@ -1455,6 +1518,7 @@ document.addEventListener("click", e => {
     case "today": return setSel(todayIdx());
     case "lang": return setLang(LANG === "en" ? "fa" : "en");
     case "setlang": return setLang(b.dataset.v);
+    case "go": return goTo(b.dataset.tab || tab, b.dataset.to, b.dataset.day);
     case "wkmenu": return wkMenu($("#wkmenu").hidden);
     case "wkclose": return wkMenu(false);
     case "wkpick": { const w = +b.dataset.w, t = todayIdx(); wkMenu(false); page = null; tab = "today";
@@ -1589,6 +1653,7 @@ document.addEventListener("input", e => {
 });
 window.addEventListener("scroll", () => { if (!$("#wkmenu").hidden && Math.abs(scrollY - (wkMenu.y || 0)) > 40) wkMenu(false); }, { passive: true });
 document.addEventListener("keydown", e => {
+  if ((e.key === "Enter" || e.key === " ") && e.target.getAttribute && e.target.getAttribute("role") === "button" && e.target.dataset.act) { e.preventDefault(); e.target.click(); return; }
   if (!$("#wkmenu").hidden) {
     if (e.key === "Escape") { e.preventDefault(); wkMenu(false); $("#phase").focus(); return; }
     if (e.key === "ArrowDown" || e.key === "ArrowUp") { e.preventDefault(); const it = [...$("#wkmenu").querySelectorAll("button")], k = it.indexOf(document.activeElement); it[(k + (e.key === "ArrowDown" ? 1 : -1) + it.length) % it.length].focus(); return; }
