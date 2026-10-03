@@ -1,5 +1,11 @@
-const PROGRAM = __PROGRAM__;
 const KEY = "amir-cut-v1";
+const LANG = (() => {
+  const m = /grip-lang=(fa|en)/.exec(window.name || ""); if (m) return m[1];
+  try { const o = JSON.parse(localStorage.getItem(KEY) || "{}"); return o && o.prefs && o.prefs.lang === "en" ? "en" : "fa"; } catch (e) { return "fa"; }
+})();
+const I18N = LANG === "en" ? __I18N__ : null;
+const TT = s => I18N ? (I18N[s] ?? s) : s;
+const PROGRAM = LANG === "en" ? __PROGRAM_EN__ : __PROGRAM__;
 const GUIDE = __GUIDE__;
 const IMGS = __IMGS__;
 const DEFAULT_START = "2026-10-03";
@@ -8,7 +14,7 @@ const DAYFA = ["شنبه","یکشنبه","دوشنبه","سه‌شنبه","چه�
 const FD = "۰۱۲۳۴۵۶۷۸۹";
 
 /* ---------- helpers ---------- */
-const fa = s => String(s).replace(/\d/g, d => FD[d]).replace(/\./g, "٫");
+const fa = s => LANG === "en" ? String(s) : String(s).replace(/\d/g, d => FD[d]).replace(/\./g, "٫");
 const faN = (x, d = 0) => (x == null || isNaN(x)) ? "-" : fa(Number(x).toFixed(d));
 const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const en = s => `<bdi class="en${String(s).length <= 24 ? " nw" : ""}" dir="ltr" lang="en">${esc(s)}</bdi>`;
@@ -21,12 +27,12 @@ const addDays = (d, n) => { const x = new Date(d); x.setDate(x.getDate() + n); r
 const todayISO = () => iso(new Date());
 const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
 const mean = a => a.length ? a.reduce((s, x) => s + x, 0) / a.length : null;
-const fmtJ = new Intl.DateTimeFormat("fa-IR", { month: "long", day: "numeric" });
-const fmtG = new Intl.DateTimeFormat("fa-IR-u-ca-gregory", { year: "numeric", month: "long", day: "numeric" });
+const fmtJ = new Intl.DateTimeFormat(LANG === "en" ? "en-US" : "fa-IR", { month: LANG === "en" ? "short" : "long", day: "numeric" });
+const fmtG = new Intl.DateTimeFormat(LANG === "en" ? "en-US" : "fa-IR-u-ca-gregory", { year: "numeric", month: "long", day: "numeric" });
 
 /* ---------- persistence ---------- */
 let mem = null;
-const dflt = () => ({ v: 1, start: DEFAULT_START, days: {}, tests: {}, foods: [], prefs: { mode: "gym", theme: "system" } });
+const dflt = () => ({ v: 1, start: DEFAULT_START, days: {}, tests: {}, foods: [], prefs: { mode: "gym", theme: "system", lang: "fa" } });
 const isObj = o => o && typeof o === "object" && !Array.isArray(o);
 const numOr = (x, lo, hi) => { const n = Number(x); return isFinite(n) && x !== "" && x !== null && n >= lo && n <= hi ? n : null; };
 function normalize(o) {
@@ -48,7 +54,7 @@ function normalize(o) {
   });
   if (isObj(o.tests)) Object.keys(o.tests).forEach(p => { if (isObj(o.tests[p])) { R.tests[p] = {}; Object.keys(o.tests[p]).forEach(t => { const n = numOr(o.tests[p][t], 0, 1000); R.tests[p][t] = n === null ? "" : n; }); } });
   if (Array.isArray(o.foods)) R.foods = o.foods.filter(isObj).slice(0, 100).map(x => ({ id: String(x.id || "").slice(0, 20), n: String(x.n || "").slice(0, 60), u: x.u ? String(x.u).slice(0, 20) : null, ug: numOr(x.ug, 0, 2000) || 0, k: numOr(x.k, 0, 2000) || 0, p: numOr(x.p, 0, 200) || 0, c: numOr(x.c, 0, 300) || 0, f: numOr(x.f, 0, 200) || 0 })).filter(x => x.id && x.n);
-  if (isObj(o.prefs)) { if (["gym", "home"].includes(o.prefs.mode)) R.prefs.mode = o.prefs.mode; if (["system", "light", "dark"].includes(o.prefs.theme)) R.prefs.theme = o.prefs.theme; }
+  if (isObj(o.prefs)) { if (["gym", "home"].includes(o.prefs.mode)) R.prefs.mode = o.prefs.mode; if (["system", "light", "dark"].includes(o.prefs.theme)) R.prefs.theme = o.prefs.theme; if (["fa", "en"].includes(o.prefs.lang)) R.prefs.lang = o.prefs.lang; }
   return R;
 }
 function load() {
@@ -94,7 +100,7 @@ function info(i) {
   const ph = PROGRAM.phases.find(p => p[0].includes(week));
   return {
     i, date: dateOf(i), week, dow, letter, type, refeed, weekend: dow <= 1,
-    phase: ph[1], phaseFa: ph[2], phaseEn: ph[3],
+    phase: ph[1], phaseFa: LANG === "en" ? ph[3] : ph[2], phaseEn: ph[3],
     deload: week === 4, test: i === 0 || (dow === 6 && (week === 4 || week === 8)), mu: week === 8 && dow === 6,
   };
 }

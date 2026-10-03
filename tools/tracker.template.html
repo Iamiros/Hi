@@ -81,7 +81,7 @@ a{color:var(--accent-ink)}
 .mark{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;flex:none;background:radial-gradient(120% 120% at 25% 15%,#1A2A55,#0A0F1E 60%,#05070C);box-shadow:0 8px 22px rgba(47,91,234,.35),inset 0 0 0 1px rgba(255,255,255,.08)}
 .mark svg{width:34px;height:34px}
 .brand h1{font-size:1.5rem;font-weight:800;font-stretch:125%;letter-spacing:.14em;line-height:1;background:linear-gradient(90deg,var(--ink),var(--accent-ink));-webkit-background-clip:text;background-clip:text;color:transparent}
-.brand .sub{font-size:.74rem;color:var(--ink3);display:block;margin-top:3px}
+.brand .sub{font-size:.74rem;color:var(--ink3);display:block;margin-top:3px;white-space:nowrap}
 .pill{display:inline-flex;align-items:center;gap:6px;min-height:30px;padding:2px 12px;border-radius:999px;background:var(--surface2);font-size:.8rem;font-weight:500;white-space:nowrap}
 .pill.acc{background:var(--accent-soft);color:var(--accent-ink)}
 .pill.gold{background:var(--gold-soft);color:var(--gold)}
@@ -169,7 +169,7 @@ details.fold[open] > summary::after{transform:translateY(2px) rotate(-135deg)}
 .ename{font-size:1.12rem;font-family:var(--f-x);font-weight:700;color:var(--ink);text-align:start;line-height:1.25;display:inline-flex;align-items:center;gap:6px;min-height:32px}
 .ename::after{content:"i";font-size:.7rem;width:18px;height:18px;border-radius:999px;display:inline-grid;place-items:center;background:var(--surface2);color:var(--ink3);font-weight:800;font-stretch:100%}
 .ex.done .ename{color:var(--ink2)}
-.dose{font-family:var(--f-x);font-stretch:112%;font-weight:800;font-size:1.2rem;color:var(--accent-ink);direction:ltr;unicode-bidi:isolate;max-width:9em;text-align:left;flex:none}
+.dose{font-family:var(--f-x);font-stretch:112%;font-weight:800;font-size:1.2rem;color:var(--accent-ink);direction:ltr;unicode-bidi:isolate;max-width:9em;text-align:end;flex:none}
 .meta{font-size:.82rem;color:var(--ink2);margin-top:2px}
 .hint-line{font-size:.8rem;margin-top:8px;padding:6px 10px;border-radius:10px;background:var(--accent-soft);color:var(--accent-ink);display:inline-block}
 .sets{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;align-items:center}
@@ -227,7 +227,7 @@ details.fold[open] > summary::after{transform:translateY(2px) rotate(-135deg)}
 
 /* fuel */
 .macro{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
-.macro b{display:block;font-size:1.35rem;line-height:1.1;text-align:right}
+.macro b{display:block;font-size:1.35rem;line-height:1.1;text-align:start}
 .macro span{font-size:.74rem;color:var(--ink2)}
 .ratio{display:flex;height:8px;border-radius:4px;overflow:hidden;gap:2px;margin-top:12px}
 .ratio i{display:block;height:100%}
@@ -258,7 +258,7 @@ textarea.inp{min-height:88px;resize:vertical}
 .back{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 12px 0 6px;border-radius:var(--r-md);background:var(--surface2);font-weight:600;color:var(--ink)}
 .back svg{width:20px;height:20px}
 .pt-fa{font-size:1.6rem;font-weight:700;line-height:1.35;margin-top:4px}
-.pt-en{font-size:1.5rem;line-height:1.05;color:var(--accent-ink);margin-top:4px;text-align:right}
+.pt-en{font-size:1.5rem;line-height:1.05;color:var(--accent-ink);margin-top:4px;text-align:start}
 .h2{font-size:1rem;font-weight:700}
 .steps{margin:10px 0 0;padding-inline-start:0;list-style:none;counter-reset:s;display:grid;gap:10px}
 .steps li{counter-increment:s;position:relative;padding-inline-start:40px;min-height:30px;padding-top:3px}
@@ -280,7 +280,7 @@ textarea.inp{min-height:88px;resize:vertical}
 .foods li:first-child{border-top:0}
 .foods .fn{flex:1;min-width:0;display:flex;flex-direction:column}
 .foods .fn b{font-size:.92rem;font-weight:600}
-.fmac{text-align:left;line-height:1.5;white-space:nowrap}
+.fmac{text-align:end;line-height:1.5;white-space:nowrap}
 .foods.pick li{padding:0}
 .foods.pick li > button:first-child{flex:1;min-width:0;text-align:start;display:flex;flex-direction:column;padding:10px 4px;min-height:52px}
 .pickhead{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 12px;border-radius:var(--r-md);background:var(--accent-soft)}
@@ -315,7 +315,7 @@ textarea.inp{min-height:88px;resize:vertical}
 /* stats */
 .kpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 @media (min-width:720px){.kpis{grid-template-columns:repeat(4,minmax(0,1fr))}}
-.kpi b{display:block;font-size:2rem;line-height:1.1;text-align:right}
+.kpi b{display:block;font-size:2rem;line-height:1.1;text-align:start}
 .kpi span{font-size:.78rem;color:var(--ink2)}
 .chartwrap{position:relative}
 .chart{width:100%;height:auto;display:block;touch-action:pan-y}
@@ -324,7 +324,7 @@ textarea.inp{min-height:88px;resize:vertical}
 .tip{position:absolute;top:6px;inset-inline-start:6px;background:var(--ink);color:var(--bg);font-size:.78rem;padding:4px 10px;border-radius:8px;pointer-events:none}
 .rates{display:flex;flex-wrap:wrap;gap:8px}
 .rate{padding:8px 12px;border-radius:var(--r-md);background:var(--surface2);min-width:84px}
-.rate b{font-size:1.15rem;display:block;text-align:right}
+.rate b{font-size:1.15rem;display:block;text-align:start}
 .rate span{font-size:.74rem;color:var(--ink2)}
 .rate.ok{box-shadow:inset 0 -3px 0 var(--ok)} .rate.slow,.rate.fast{box-shadow:inset 0 -3px 0 var(--warn)}
 .rule{display:flex;gap:10px;padding:12px 14px;border-radius:var(--r-md);background:var(--surface2);margin-top:12px;font-size:.9rem}
@@ -334,7 +334,7 @@ textarea.inp{min-height:88px;resize:vertical}
 @media (min-width:720px){.ch{grid-template-columns:repeat(4,minmax(0,1fr))}}
 .ch > div{display:flex;gap:10px;align-items:center;min-width:0}
 .ch svg{width:48px;height:48px;flex:none;transform:rotate(-90deg)}
-.ch b{font-size:1.15rem;display:block;line-height:1.1;text-align:right}
+.ch b{font-size:1.15rem;display:block;line-height:1.1;text-align:start}
 .ch span{font-size:.76rem;color:var(--ink2)}
 .tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
 table{width:100%;border-collapse:collapse;font-size:.88rem}
@@ -460,6 +460,12 @@ dialog::backdrop{background:rgba(3,6,12,.55);-webkit-backdrop-filter:blur(3px);b
 @keyframes pop-in{from{opacity:0;transform:scale(.88) translateY(-8px)}to{opacity:1;transform:none}}
 @keyframes fade{from{opacity:0}}
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.wkmenu{background:var(--panel-solid)}}
+:root[lang=en] body{font-family:var(--f-x);letter-spacing:-.005em}
+:root[lang=en] .steps li::before{content:counter(s)}
+.topr{display:flex;align-items:center;gap:8px;min-width:0}
+.langbtn{font-family:var(--f-x);font-weight:800;letter-spacing:.04em;min-width:44px;justify-content:center;cursor:pointer}
+.langbtn .fa{font-family:var(--f-fa);letter-spacing:0}
+:root[dir=ltr] [data-act=prev] svg,:root[dir=ltr] [data-act=next] svg,:root[dir=ltr] .back svg,:root[dir=ltr] a.li .faint svg{transform:scaleX(-1)}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .empty{padding:22px;text-align:center;color:var(--ink2);border:1.5px dashed var(--line);border-radius:var(--r-lg);font-size:.9rem}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
@@ -473,7 +479,7 @@ dialog::backdrop{background:rgba(3,6,12,.55);-webkit-backdrop-filter:blur(3px);b
       <span class="mark" aria-hidden="true"><svg viewBox="0 0 512 512"><defs><linearGradient id="mkA" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#3D6BFF"/><stop offset=".6" stop-color="#5B94FF"/><stop offset="1" stop-color="#8FE0FF"/></linearGradient></defs><path d="M362 150 A150 150 0 1 0 406 256" fill="none" stroke="url(#mkA)" stroke-width="54" stroke-linecap="round"/><rect x="236" y="230" width="196" height="52" rx="26" fill="#EEF3FF"/><rect x="300" y="222" width="36" height="68" rx="10" fill="#F1BC55"/><rect x="358" y="222" width="36" height="68" rx="10" fill="#F1BC55"/><circle cx="362" cy="150" r="22" fill="#FFD877"/></svg></span>
       <div><h1 class="x" lang="en">GRIP</h1><span class="sub">گریپ · برش ۸ هفته‌ای</span></div>
     </div>
-    <button id="phase" class="pill acc phasebtn" data-act="wkmenu" aria-haspopup="menu" aria-expanded="false" aria-controls="wkmenu"></button>
+    <div class="topr"><button id="lang" class="pill langbtn" data-act="lang" aria-label="Language / زبان"></button><button id="phase" class="pill acc phasebtn" data-act="wkmenu" aria-haspopup="menu" aria-expanded="false" aria-controls="wkmenu"></button></div>
   </header>
   <main id="view" tabindex="-1"></main>
 </div>
@@ -503,9 +509,9 @@ const ICON = {
   set: SV('<circle cx="12" cy="12" r="3"/><path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M5.6 18.4l1.8-1.8M16.6 7.4l1.8-1.8"/>', 1.8),
 };
 const SHORT = ["ش", "ی", "د", "س", "چ", "پ", "ج"];
-const fmtDay = new Intl.DateTimeFormat("fa-IR", { day: "numeric" });
+const fmtDay = new Intl.DateTimeFormat(LANG === "en" ? "en-US" : "fa-IR", { day: "numeric" });
 const BIDI_RE = /\+?[A-Za-z0-9][A-Za-z0-9.\-/+×%'&@ ]*[A-Za-z0-9%]|[A-Za-z0-9]/g;
-const bidi = s => { s = String(s); let o = "", last = 0; s.replace(BIDI_RE, (m, i) => { o += esc(s.slice(last, i)) + `<bdi dir="ltr"${m.length <= 24 ? ' class="nw"' : ""}>${esc(m)}</bdi>`; last = i + m.length; return m; }); return o + esc(s.slice(last)); };
+const bidi = s => { s = String(s); if (LANG === "en") return esc(s); let o = "", last = 0; s.replace(BIDI_RE, (m, i) => { o += esc(s.slice(last, i)) + `<bdi dir="ltr"${m.length <= 24 ? ' class="nw"' : ""}>${esc(m)}</bdi>`; last = i + m.length; return m; }); return o + esc(s.slice(last)); };
 const doseH = d => String(d).split(" ").map(t => `<span class="nw">${esc(t)}</span>`).join(" ");
 const GROUP = { workout: 0, salt: 0, gtg: 0, tests: 0, mu: 0, kcal: 1, protein: 1, creatine: 1, walk: 2, water: 2, hang: 2, sleep: 2, checkin: 2 };
 const GROUP_FA = ["تمرین", "تغذیه", "بدن و ریکاوری"];
@@ -592,6 +598,12 @@ const INFO = {
 let tab = "today", planWeek = 1;
 let sel = clamp(todayIdx(), 0, 55);
 const openD = new Set();
+async function setLang(l) {
+  if (l === LANG) return;
+  S.prefs.lang = l; save(); window.name = "grip-lang=" + l;
+  if (cloudRef) { clearTimeout(pushT); try { await Promise.race([cloudRef.set({ s: JSON.stringify(S), t: savedAt }), new Promise(r => setTimeout(r, 2500))]); } catch (e) {} }
+  location.reload();
+}
 function wkMenu(open) {
   const m = $("#wkmenu"), bk = $("#wkback"), btn = $("#phase");
   if (!open) { m.hidden = bk.hidden = true; btn.setAttribute("aria-expanded", "false"); return; }
@@ -643,7 +655,7 @@ function hero(inf, dd) {
   return `<section class="panel hero rise" aria-label="خلاصه روز"><span class="glow"></span>
     <div class="ph" style="margin-bottom:6px"><span class="dayno">روز <b class="x num">${fa(sel + 1)}</b> <span class="faint">/ ۵۶</span></span><div class="r">${infoBtn("hero")}</div></div>
     <div class="hero-grid"><div class="ring">${ring(p, 150, 12)}<div class="ctr"><div><b class="x num">${fa(Math.round(p * 100))}٪</b><span>انجام شده</span></div></div></div>
-    <div style="min-width:0"><h2>${esc(DAYFA[inf.dow])}، ${esc(jd)}</h2><p class="sub">${esc(gd)}</p>
+    <div style="min-width:0"><h2>${esc(DAYFA[inf.dow])}، ${esc(jd)}</h2>${LANG === "en" ? "" : `<p class="sub">${esc(gd)}</p>`}
       <div class="chips">${inf.letter ? `<span class="pill acc">${en("Workout " + inf.letter)}</span>` : `<span class="pill">روز پیاده‌روی</span>`}
       ${inf.refeed ? `<span class="pill gold">ریفید</span>` : ""}${inf.test ? `<span class="pill gold">روز تست</span>` : ""}
       ${sel !== cur && cur >= 0 && cur <= 55 ? `<button class="pill" data-act="today" style="min-height:32px">برو به امروز</button>` : ""}</div></div></div>
@@ -653,7 +665,7 @@ function hero(inf, dd) {
 
 function notices(inf, dd) {
   const cur = todayIdx(); let h = "";
-  if (cur < 0) h += `<div class="notice acc"><div><b>برنامه ${fa(-cur)} روز دیگر شروع می‌شود</b>شروع: ${esc(fmtJ.format(startDate()))}. روزها را از قبل ببین.</div></div>`;
+  if (cur < 0) h += `<div class="notice acc"><div><b>${LANG === "en" ? `Program starts in ${-cur} day${-cur === 1 ? "" : "s"}` : `برنامه ${fa(-cur)} روز دیگر شروع می‌شود`}</b>شروع: ${esc(fmtJ.format(startDate()))}. روزها را از قبل ببین.</div></div>`;
   if (cur > 55) h += `<div class="notice"><div><b>۸ هفته تمام شد</b>نتیجه‌ها در بخش آمار.</div></div>`;
   if (inf.deload) h += `<div class="notice"><div><b>هفته دیلود</b>نصف ست‌ها، وزنه‌ی سبک‌تر. جمعه تست میانی.</div></div>`;
   if (inf.week === 8 && !inf.mu) h += `<div class="notice"><div><b>هفته اوج و تست</b>حجم کم. جمعه ${en("Pull-up Test Day")}.</div></div>`;
@@ -956,9 +968,9 @@ function chalHtml() {
   return `<div class="ch">
     ${C(puBest / 10, fa(puBest) + "/۱۰", "بهترین " + en("Pull-up"))}
     ${C(ss / 56, fa(ss) + "/۵۶", en("Step Streak"))}
-    ${C(hollowBest / 60, fa(hollowBest) + "/۶۰", en("Hollow") + " ثانیه")}
-    ${C(hang / 56, fa(hang), "روز " + en("Dead Hang"))}</div>
-    <p class="small muted" style="margin-top:12px">${en("GTG")} کامل: ${fa(gtg)} روز</p>`;
+    ${C(hollowBest / 60, fa(hollowBest) + "/۶۰", LANG === "en" ? "Hollow, seconds" : en("Hollow") + " ثانیه")}
+    ${C(hang / 56, fa(hang), LANG === "en" ? "Dead Hang days" : "روز " + en("Dead Hang"))}</div>
+    <p class="small muted" style="margin-top:12px">${LANG === "en" ? `Full GTG days: ${gtg}` : `${en("GTG")} کامل: ${fa(gtg)} روز`}</p>`;
 }
 function statsTail() {
   let h = `<section class="panel rise" style="margin-top:14px">${ph("تست‌ها", "tests")}<div class="tw"><table class="tests"><thead><tr><th>تست</th>${PH.map(p => `<th>${p[1]}</th>`).join("")}</tr></thead><tbody>` +
@@ -975,6 +987,7 @@ function viewSettings() {
   const th = S.prefs.theme;
   return `<div class="rise"><p class="sect">برنامه</p><div class="panel list">
     <div class="li"><label class="lbl" for="sd">تاریخ شروع (شنبه)</label><input id="sd" class="inp" style="width:auto" type="date" value="${esc(S.start)}" data-act="start"></div>
+    <div class="li"><span class="lbl">زبان · Language</span><div class="seg" role="group" aria-label="Language"><button data-act="setlang" data-v="fa" aria-pressed="${LANG === "fa"}" lang="fa">فارسی</button><button data-act="setlang" data-v="en" aria-pressed="${LANG === "en"}" lang="en">English</button></div></div>
     <div class="li"><label class="lbl" for="th">پوسته</label><select id="th" class="inp" data-act="theme"><option value="system" ${th === "system" ? "selected" : ""}>مثل سیستم</option><option value="dark" ${th === "dark" ? "selected" : ""}>تیره</option><option value="light" ${th === "light" ? "selected" : ""}>روشن</option></select></div>
     <div class="li"><span class="lbl">نسخه پیش‌فرض تمرین</span><div class="seg" role="group" aria-label="نسخه تمرین"><button data-act="mode" data-v="gym" aria-pressed="${S.prefs.mode !== "home"}">${en("Gym")}</button><button data-act="mode" data-v="home" aria-pressed="${S.prefs.mode === "home"}">${en("Home")}</button></div></div></div>
     <p class="hint" style="margin:8px 6px 0">داده‌ها به تاریخ وصل‌اند؛ با تغییر تاریخ شروع پاک نمی‌شوند.</p>
@@ -1070,7 +1083,7 @@ function pageEx(p) {
   return `<div class="pagehead rise">${backBtn()}<button class="pill acc" data-act="wopage" data-w="${p.w}">${en("Workout " + p.w)}</button></div>
   <section class="panel hero rise" style="--i:1"><span class="glow"></span>
     ${figHtml(id)}<p class="tiny muted">${home ? "نسخه‌ی خانه" : "نسخه‌ی باشگاه"}</p>
-    <h1 class="pt-fa">${esc(lb.fan || lb.en)}</h1><p class="pt-en x" lang="en">${esc(lb.en)}</p>
+    <h1 class="pt-fa">${esc(lb.fan || lb.en)}</h1>${lb.fan ? `<p class="pt-en x" lang="en">${esc(lb.en)}</p>` : ""}
     <div class="chips" style="margin-top:14px"><span class="pill acc">${en(dose === "test" ? "Test" : dose)}</span><span class="pill">استراحت ${en(ex.rest)}</span><span class="pill">هفته ${fa(wk)}</span></div>
     <div class="chips">${muscleChips(ex.m)}</div>
     ${lb.en !== other.en ? `<button class="btn" style="margin-top:14px" data-act="exalt">نمایش نسخه‌ی ${home ? "باشگاه" : "خانه"}: ${en(other.en)}</button>` : ""}</section>
@@ -1185,7 +1198,7 @@ function coachContext(kind) {
 async function askCoach(kind, q) {
   if (!smp || aiBusy) return; aiBusy = true; const out = $("#coachOut"); if (out) out.innerHTML = `<p class="small muted">در حال فکر کردن…</p>`;
   const ask = kind === "q" ? `Question from the athlete: ${q}` : kind === "day" ? "Review TODAY: readiness, training, food vs targets, water, steps. Give what to do for the rest of today." : "Review THIS WEEK so far: weight trend vs 0.4-1.2 kg/wk band, adherence, food, strength logs, recovery. Give the 3 most important adjustments for next week.";
-  const prompt = `You are a direct, practical strength and nutrition coach. Answer in Persian (Farsi), no moralizing, no medical disclaimers beyond one short line if a red flag appears (fainting during effort, chest pain, palpitations). Use short headed bullets, concrete numbers, max ~180 words. Keep exercise names in English. Base advice strictly on the program rules in the data; do not change the program unless the data shows a rule is triggered.\n\n${ask}\n\nDATA (JSON):\n${coachContext(kind)}`;
+  const prompt = `You are a direct, practical strength and nutrition coach. Answer in ${LANG === "en" ? "English" : "Persian (Farsi)"}, no moralizing, no medical disclaimers beyond one short line if a red flag appears (fainting during effort, chest pain, palpitations). Use short headed bullets, concrete numbers, max ~180 words. Keep exercise names in English. Base advice strictly on the program rules in the data; do not change the program unless the data shows a rule is triggered.\n\n${ask}\n\nDATA (JSON):\n${coachContext(kind)}`;
   try {
     await smp(prompt, { cache: false, onText: ({ text }) => { const o = $("#coachOut"); if (o) o.textContent = text; } });
   } catch (e) { const o = $("#coachOut"); if (o) o.textContent = e && e.code === "rate_limited" ? "محدودیت موقت. چند دقیقه بعد دوباره امتحان کن." : e && e.code === "not_granted" ? "اجازه‌ی استفاده از Claude داده نشد." : "پاسخ نیامد. دوباره امتحان کن."; }
@@ -1202,7 +1215,7 @@ function coachCard() {
 async function aiParseFood() {
   const q = ($("#aiq") || {}).value || "", m = +(($("#aim") || {}).value || 0), out = $("#aiout");
   if (!smp || aiBusy || !q.trim()) return; aiBusy = true; out.innerHTML = `<p class="small muted" style="margin-top:10px">در حال محاسبه…</p>`;
-  const prompt = `Convert this food description (Persian or English) into nutrition items. Use standard USDA values; assume weights are as eaten (cooked) unless stated raw; if a quantity is missing, assume a typical portion and say so in the amount text. Return ONLY a JSON array, no prose: [{"n": "<Persian food name>", "a": "<amount in Persian, e.g. ۲۰۰ گرم>", "k": kcal, "p": protein_g, "c": carbs_g, "f": fat_g}]. Numbers with at most 1 decimal.\n\nDescription: ${q}`;
+  const prompt = `Convert this food description (Persian or English) into nutrition items. Use standard USDA values; assume weights are as eaten (cooked) unless stated raw; if a quantity is missing, assume a typical portion and say so in the amount text. Return ONLY a JSON array, no prose: [{"n": "<${LANG === "en" ? "English" : "Persian"} food name>", "a": "<amount in Persian, e.g. ۲۰۰ گرم>", "k": kcal, "p": protein_g, "c": carbs_g, "f": fat_g}]. Numbers with at most 1 decimal.\n\nDescription: ${q}`;
   try {
     const arr = await smp.json(prompt, { modelTier: "default" });
     const items = (Array.isArray(arr) ? arr : []).filter(isObj).slice(0, 20).map(x => ({ m, n: String(x.n || "").slice(0, 60), a: String(x.a || "").slice(0, 30), k: numOr(x.k, 0, 5000) || 0, p: numOr(x.p, 0, 500) || 0, c: numOr(x.c, 0, 1000) || 0, f: numOr(x.f, 0, 500) || 0 })).filter(x => x.n);
@@ -1372,6 +1385,8 @@ document.addEventListener("click", e => {
     case "wprev": planWeek = Math.max(1, planWeek - 1); return render();
     case "wnext": planWeek = Math.min(8, planWeek + 1); return render();
     case "today": return setSel(todayIdx());
+    case "lang": return setLang(LANG === "en" ? "fa" : "en");
+    case "setlang": return setLang(b.dataset.v);
     case "wkmenu": return wkMenu($("#wkmenu").hidden);
     case "wkclose": return wkMenu(false);
     case "wkpick": { const w = +b.dataset.w, t = todayIdx(); wkMenu(false); page = null; tab = "today";
@@ -1515,7 +1530,7 @@ let sx = null, sy = 0;
 $("#view").addEventListener("touchstart", e => { if (tab !== "today" || e.touches.length !== 1 || e.target.closest(".tw,.chart,input,textarea,select,.week,.scale5")) { sx = null; return; } sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
 $("#view").addEventListener("touchend", e => {
   if (sx === null) return; const t = e.changedTouches[0], dx = t.clientX - sx, dy = t.clientY - sy; sx = null;
-  if (Math.abs(dx) > 70 && Math.abs(dy) < 40) setSel(sel + (dx > 0 ? 1 : -1));
+  if (Math.abs(dx) > 70 && Math.abs(dy) < 40) setSel(sel + ((dx > 0) === (LANG !== "en") ? 1 : -1));
 }, { passive: true });
 let lastISO = todayISO();
 document.addEventListener("visibilitychange", () => { if (!document.hidden && todayISO() !== lastISO) { lastISO = todayISO(); sel = clamp(todayIdx(), 0, 55); render(); } if (!document.hidden && TM.end) tickTimer(); });
@@ -1529,7 +1544,11 @@ async function pull() {
   try {
     const snap = await cloudRef.get(), d = snap.exists ? snap.data() : null;
     const n = d && typeof d.s === "string" ? normalize(JSON.parse(d.s)) : null;
-    if (n && (+d.t || 0) > savedAt) { S = n; savedAt = +d.t; save(true); applyTheme(); sel = clamp(todayIdx(), 0, 55); render(); }
+    if (n && (+d.t || 0) > savedAt) {
+      S = n; savedAt = +d.t; save(true);
+      if (S.prefs.lang !== LANG && !/grip-lang=/.test(window.name || "")) { window.name = "grip-lang=" + S.prefs.lang; return location.reload(); }
+      applyTheme(); sel = clamp(todayIdx(), 0, 55); render();
+    }
     else if (Object.keys(S.days).length || Object.keys(S.tests).length) push();
   } catch (e) {}
 }
@@ -1546,6 +1565,15 @@ async function pull() {
 })();
 document.addEventListener("visibilitychange", () => { if (!document.hidden) pull(); });
 applyTheme();
+/* ---------- language ---------- */
+document.documentElement.lang = LANG; document.documentElement.dir = LANG === "en" ? "ltr" : "rtl";
+$("#lang").innerHTML = LANG === "en" ? '<span class="fa" lang="fa">فا</span>' : "EN";
+if (I18N) {
+  const tw = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT); let n;
+  while ((n = tw.nextNode())) { const k = n.nodeValue.trim(); if (k && I18N[k]) n.nodeValue = n.nodeValue.replace(k, I18N[k]); }
+  document.querySelectorAll("[aria-label],[title],[placeholder]").forEach(e => ["aria-label", "title", "placeholder"].forEach(a => { const v = e.getAttribute(a); if (v && I18N[v.trim()]) e.setAttribute(a, I18N[v.trim()]); }));
+}
+
 /* ---------- bidi: isolate every Latin run inside Persian text ---------- */
 const LAT = BIDI_RE, SKIP = "script,style,svg,input,textarea,bdi,[dir=ltr],[lang=en],code,pre,.dose";
 function isolate(root) {
@@ -1570,8 +1598,7 @@ function isolate(root) {
 function isolateOpts(sel) {
   (sel.tagName === "OPTION" ? [sel] : [...sel.options]).forEach(o => { if (/[\u0600-\u06FF]/.test(o.text) && /[A-Za-z]/.test(o.text) && !o.text.includes("\u2066")) o.text = o.text.replace(LAT, m => "\u2066" + m + "\u2069"); });
 }
-new MutationObserver(ms => ms.forEach(m => m.addedNodes.forEach(isolate))).observe(document.body, { childList: true, subtree: true });
-isolate(document.body);
+if (LANG !== "en") { new MutationObserver(ms => ms.forEach(m => m.addedNodes.forEach(isolate))).observe(document.body, { childList: true, subtree: true }); isolate(document.body); }
 render();
 if ("serviceWorker" in navigator && /^https?:$/.test(location.protocol)) navigator.serviceWorker.register("sw.js").catch(() => {});
 </script>

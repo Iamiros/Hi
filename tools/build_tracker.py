@@ -1,12 +1,14 @@
-import json, pathlib, program as P
-root = pathlib.Path(__file__).resolve().parent.parent
-lib = {e["id"]: {k: e[k] for k in ("en", "fa", "cues", "mistakes", "reg", "prog", "yt")} for e in P.LIB}
-for k, v in lib.items(): v["fan"] = P.FAN.get(k, "")
-foods = [dict(id=f[0], n=f[1], en=f[2], k=f[3], p=f[4], c=f[5], f=f[6], u=f[7], ug=f[8]) for f in P.FOODS]
-prog = dict(schemes=P.SCHEMES, phases=P.PHASES, warmup=P.WARMUP, nutrition=P.NUTRITION, lib=lib,
-            workouts={k: dict(fa=v["fa"], ex=v["ex"], info=P.WORKOUT_INFO[k]) for k, v in P.WORKOUTS.items()}, muscles=P.MUSCLE_FA, foods=foods)
+from build_prog import *
 t = (root / "tools/tracker.template.html").read_text()
 t = t.replace("/*__LOGIC__*/", (root / "tools/tracker.logic.js").read_text())
+import sys; sys.path.insert(0, str(root / "tools/i18n"))
+import apply as I
+EN = I.en_dict(prog)
+a = t.index("<script>") + 8; t = I.wrap_js(t, a, t.rindex("</script>"))
+prog_en = I.en_data(prog, EN)
+for v in prog_en["lib"].values(): v["fan"] = ""
+for f in prog_en["foods"]: f["n"] = f["en"]
+t = t.replace("__I18N__", json.dumps(EN, ensure_ascii=False)).replace("__PROGRAM_EN__", json.dumps(prog_en, ensure_ascii=False))
 import base64
 def font_css(barlow=True, archivo=False):
     f=root/"tools/fonts"; css=""
