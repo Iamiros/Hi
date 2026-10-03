@@ -381,9 +381,12 @@ function load() {
 }
 let S = load();
 let saveWarned = false;
-function save() {
-  mem = S;
-  try { localStorage.setItem(KEY, JSON.stringify(S)); saveWarned = false; }
+let savedAt = (() => { try { return +localStorage.getItem(KEY + "-t") || 0; } catch (e) { return 0; } })();
+let onSaved = null;
+function save(fromCloud) {
+  mem = S; if (!fromCloud) savedAt = Date.now();
+  if (onSaved && !fromCloud) onSaved();
+  try { localStorage.setItem(KEY, JSON.stringify(S)); localStorage.setItem(KEY + "-t", String(savedAt)); saveWarned = false; }
   catch (e) { if (!saveWarned) { saveWarned = true; toast("ذخیره‌سازی مرورگر در دسترس نیست. از Export برای پشتیبان استفاده کن."); } }
 }
 function toast(msg) {
@@ -843,7 +846,7 @@ function render() {
   $("#phase").textContent = `هفته ${fa(inf.week)} · ${inf.phaseFa}`;
   $("#tabs").innerHTML = [["today", "امروز"], ["map", "نقشه"], ["stats", "آمار"], ["set", "تنظیمات"]]
     .map(t => `<button data-act="tab" data-v="${t[0]}" ${tab === t[0] ? 'aria-current="page"' : ""}>${t[1]}</button>`).join("");
-  const sv = $("#sv"); if (sv) sv.textContent = probeOk ? "ذخیره‌سازی مرورگر فعال است." : "ذخیره‌سازی مرورگر غیرفعال است؛ فقط پشتیبان متنی کار می‌کند.";
+  const sv = $("#sv"); if (sv) sv.textContent = cloudRef ? "همگام‌سازی ابری فعال است." : probeOk ? "ذخیره‌سازی مرورگر فعال است." : "ذخیره‌سازی مرورگر غیرفعال است؛ فقط پشتیبان متنی کار می‌کند.";
   if (sig && sig.act !== "tab") {
     const q = Object.keys(sig).map(k => `[data-${k.replace(/[A-Z]/g, c => "-" + c.toLowerCase())}="${CSS.escape(sig[k])}"]`).join("");
     const el = v.querySelector(q); if (el && !el.disabled) el.focus({ preventScroll: true });
@@ -1052,6 +1055,28 @@ $("#view").addEventListener("touchend", e => {
 let lastISO = todayISO();
 document.addEventListener("visibilitychange", () => { if (!document.hidden && todayISO() !== lastISO) { lastISO = todayISO(); sel = clamp(todayIdx(), 0, 55); render(); } if (!document.hidden && TM.end) tickTimer(); });
 window.addEventListener("storage", e => { if (e.key === KEY && e.newValue) { S = load(); render(); } });
+/* ---------- cloud sync (artifact viewer: per-user private db doc) ---------- */
+let cloudRef = null, pushT = 0;
+function push() { clearTimeout(pushT); pushT = setTimeout(() => { if (cloudRef) cloudRef.set({ s: JSON.stringify(S), t: savedAt }).catch(() => {}); }, 800); }
+async function pull() {
+  if (!cloudRef) return;
+  try {
+    const snap = await cloudRef.get(), d = snap.exists ? snap.data() : null;
+    const n = d && typeof d.s === "string" ? normalize(JSON.parse(d.s)) : null;
+    if (n && (+d.t || 0) > savedAt) { S = n; savedAt = +d.t; save(true); applyTheme(); sel = clamp(todayIdx(), 0, 55); render(); }
+    else if (Object.keys(S.days).length || Object.keys(S.tests).length) push();
+  } catch (e) {}
+}
+(async () => {
+  if (!window.claude || !window.claude.use) return;
+  try {
+    const [db, user] = await Promise.all([claude.use("db"), claude.use("user")]);
+    const id = user && await user.id(); if (!db || !id) return;
+    cloudRef = db.doc("data/users/" + id + "/tracker"); onSaved = push; probeOk = true;
+    await pull(); const sv = $("#sv"); if (sv) sv.textContent = "همگام‌سازی ابری فعال است.";
+  } catch (e) {}
+})();
+document.addEventListener("visibilitychange", () => { if (!document.hidden) pull(); });
 applyTheme();
 render();
 if ("serviceWorker" in navigator && /^https?:$/.test(location.protocol)) navigator.serviceWorker.register("sw.js").catch(() => {});

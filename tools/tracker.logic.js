@@ -57,9 +57,12 @@ function load() {
 }
 let S = load();
 let saveWarned = false;
-function save() {
-  mem = S;
-  try { localStorage.setItem(KEY, JSON.stringify(S)); saveWarned = false; }
+let savedAt = (() => { try { return +localStorage.getItem(KEY + "-t") || 0; } catch (e) { return 0; } })();
+let onSaved = null;
+function save(fromCloud) {
+  mem = S; if (!fromCloud) savedAt = Date.now();
+  if (onSaved && !fromCloud) onSaved();
+  try { localStorage.setItem(KEY, JSON.stringify(S)); localStorage.setItem(KEY + "-t", String(savedAt)); saveWarned = false; }
   catch (e) { if (!saveWarned) { saveWarned = true; toast("ذخیره‌سازی مرورگر در دسترس نیست. از Export برای پشتیبان استفاده کن."); } }
 }
 function toast(msg) {
