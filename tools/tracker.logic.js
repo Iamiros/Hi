@@ -36,10 +36,12 @@ function normalize(o) {
     const d = o.days[k], r = { done: {}, water: numOr(d.water, 0, 20000) || 0, lifts: {}, sets: {} };
     if (isObj(d.sets)) Object.keys(d.sets).forEach(x => { r.sets[x] = numOr(d.sets[x], 0, 20) || 0; });
     if (isObj(d.done)) Object.keys(d.done).forEach(x => { const v = d.done[x]; r.done[x] = typeof v === "boolean" ? v : (numOr(v, 0, 10) || 0); });
-    if (isObj(d.lifts)) Object.keys(d.lifts).forEach(x => { if (Array.isArray(d.lifts[x])) r.lifts[x] = d.lifts[x].slice(0, 20).filter(isObj).map(s => ({ kg: numOr(s.kg, 0, 500) ?? "", reps: numOr(s.reps, 0, 200) ?? "", ex: typeof s.ex === "string" ? s.ex.slice(0, 20) : "" })); });
+    if (isObj(d.lifts)) Object.keys(d.lifts).forEach(x => { if (Array.isArray(d.lifts[x])) r.lifts[x] = d.lifts[x].slice(0, 20).filter(isObj).map(s => ({ kg: numOr(s.kg, 0, 500) ?? "", reps: numOr(s.reps, 0, 200) ?? "", rpe: numOr(s.rpe, 5, 10) ?? "", ex: typeof s.ex === "string" ? s.ex.slice(0, 20) : "" })); });
     const w = numOr(d.weight, 30, 250), st = numOr(d.steps, 0, 100000);
     if (w !== null) r.weight = w; if (st !== null) r.steps = st;
     if (typeof d.note === "string") r.note = d.note.slice(0, 2000);
+    [["sleepH", 0, 16], ["energy", 1, 5], ["sore", 1, 5], ["hunger", 1, 5], ["kin", 0, 10000], ["pin", 0, 1000], ["waist", 40, 200]].forEach(([f, lo, hi]) => { const v = numOr(d[f], lo, hi); if (v !== null) r[f] = v; });
+    if (isObj(d.sf)) { r.sf = {}; ["ch", "ab", "th"].forEach(f => { const v = numOr(d.sf[f], 1, 80); if (v !== null) r.sf[f] = v; }); }
     R.days[k] = r;
   });
   if (isObj(o.tests)) Object.keys(o.tests).forEach(p => { if (isObj(o.tests[p])) { R.tests[p] = {}; Object.keys(o.tests[p]).forEach(t => { const n = numOr(o.tests[p][t], 0, 1000); R.tests[p][t] = n === null ? "" : n; }); } });

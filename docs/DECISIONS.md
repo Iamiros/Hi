@@ -65,3 +65,8 @@ Your answers: strict pull-up max 4-5, parallel dips under 8, squat and deadlift 
 
 ## Edit 6: cloud save
 - In the claude.ai artifact, browser storage did not survive between visits on iPhone (the page runs in a sandboxed frame whose storage Safari may clear). The tracker now also saves to the artifact's private per-user database (`data/users/<id>/tracker`, readable only by that user) through the `db` and `user` capabilities. Local storage stays as a fast cache; the newer copy wins on open and whenever the app returns to the foreground.
+
+## Edit 7: tracker v3 (redesign + features)
+- New visual system: dark-first "night training console" (aurora field, grain, glass panels with inner hairline, gradient rings and set dots), Archivo variable (expanded 800 for numerals and English titles) + Vazirmatn, light theme kept. Icons in the floating tab bar are drawn inline (5 tabs: Today, Program, Map, Stats, Settings).
+- New features: an info (i) sheet on every panel; exercise detail sheet (description, cues, mistakes, easier/harder, 8-week dose table, YouTube); readiness check-in (sleep, energy, soreness, hunger) with a score and training advice; progression hint per main lift from the last logged session; RPE per set and a plate calculator in the log sheet; kcal and protein eaten meters; Friday body composition (waist + Jackson-Pollock 3-site skinfolds, Siri equation, age from birth date) with charts; Program tab (week plan, all workouts, doses per week); this-week vs last-week table; more PR tables (squat, deadlift).
+- Readiness score: sleep up to 8 h = 40 points, energy 1-5 = 0-30, soreness 1-5 = 30-0. This is a practical heuristic, not a validated instrument.

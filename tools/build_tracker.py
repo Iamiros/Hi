@@ -1,28 +1,28 @@
 import json, pathlib, program as P
 root = pathlib.Path(__file__).resolve().parent.parent
-lib = {e["id"]: {"en": e["en"], "yt": e["yt"]} for e in P.LIB}
+lib = {e["id"]: {k: e[k] for k in ("en", "fa", "cues", "mistakes", "reg", "prog", "yt")} for e in P.LIB}
 prog = dict(schemes=P.SCHEMES, phases=P.PHASES, warmup=P.WARMUP, nutrition=P.NUTRITION, lib=lib,
             workouts={k: dict(fa=v["fa"], ex=v["ex"]) for k, v in P.WORKOUTS.items()})
 t = (root / "tools/tracker.template.html").read_text()
 t = t.replace("/*__LOGIC__*/", (root / "tools/tracker.logic.js").read_text())
 import base64
-def font_css():
+def font_css(barlow=True, archivo=False):
     f=root/"tools/fonts"; css=""
-    for fam,files in (("Vazirmatn",[("Regular",400),("Medium",500),("Bold",700)]),("Barlow Condensed",[("500",500),("600",600),("700",700)])):
-        for n,w in files:
-            fn=("Vazirmatn-%s.woff2"%n) if fam=="Vazirmatn" else ("BarlowCondensed-%s.woff2"%n)
-            d=base64.b64encode((f/fn).read_bytes()).decode()
-            css+="@font-face{font-family:'%s';font-weight:%d;font-display:swap;src:url(data:font/woff2;base64,%s) format('woff2')}\n"%(fam,w,d)
+    face=lambda fam,w,fn,extra="": "@font-face{font-family:'%s';font-weight:%s;font-display:swap;%ssrc:url(data:font/woff2;base64,%s) format('woff2')}\n"%(fam,w,extra,base64.b64encode((f/fn).read_bytes()).decode())
+    for n,w in (("Regular",400),("Medium",500),("Bold",700)): css+=face("Vazirmatn",w,"Vazirmatn-%s.woff2"%n)
+    if barlow:
+        for w in (500,600,700): css+=face("Barlow Condensed",w,"BarlowCondensed-%d.woff2"%w)
+    if archivo: css+=face("Archivo","100 900","Archivo-var.woff2","font-stretch:62% 125%;")
     return css
 if __name__!="__main__": pass
-base = t.replace("__FONTS__",font_css()).replace("__PROGRAM__", json.dumps(prog, ensure_ascii=False))
+base = t.replace("__FONTS__",font_css(barlow=False, archivo=True)).replace("__PROGRAM__", json.dumps(prog, ensure_ascii=False))
 out = base.replace("__GUIDE__", '"../guide/index.html"')
 (root / "tracker/index.html").write_text(out)
 import re as _re
 art = base.replace("__GUIDE__", "null")
 title = _re.search(r"<title>.*?</title>", art, _re.S).group(0)
 style = _re.search(r"<style>.*?</style>", art, _re.S).group(0)
-style = style.replace("padding:env(safe-area-inset-top) env(safe-area-inset-right) calc(96px + env(safe-area-inset-bottom)) env(safe-area-inset-left)", "padding:0 0 calc(96px + env(safe-area-inset-bottom)) 0")
+style = style.replace("padding:env(safe-area-inset-top) env(safe-area-inset-right) calc(104px + env(safe-area-inset-bottom)) env(safe-area-inset-left)", "padding:0 0 calc(104px + env(safe-area-inset-bottom)) 0")
 body = _re.search(r"<body>(.*)</body>", art, _re.S).group(1)
 (root / "tracker/artifact.html").write_text(title + "\n" + style + "\n" + body)
 (root / "tracker/manifest.webmanifest").write_text(json.dumps({

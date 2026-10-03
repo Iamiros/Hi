@@ -28,7 +28,7 @@ try:
         pg.screenshot(path=str(out/f'{name}-sheet.png'))
         pg.click('[data-act=shsave]'); pg.wait_for_timeout(200)
         pg.click('[data-act=tstop]') if pg.is_visible('[data-act=tstop]') else None
-        pg.click('nav.tabs >> text=نقشه'); pg.wait_for_timeout(300); pg.screenshot(path=str(out/f'{name}-map.png'),full_page=True)
+        pg.click('nav.tabs >> text=برنامه'); pg.wait_for_timeout(300); pg.screenshot(path=str(out/f'{name}-plan.png'),full_page=True); pg.click('.ename >> nth=0'); pg.wait_for_timeout(400); pg.screenshot(path=str(out/f'{name}-exinfo.png')); pg.click('[data-act=shclose]'); pg.click('nav.tabs >> text=نقشه'); pg.wait_for_timeout(300); pg.screenshot(path=str(out/f'{name}-map.png'),full_page=True)
         pg.click('nav.tabs >> text=آمار'); pg.wait_for_timeout(300); pg.screenshot(path=str(out/f'{name}-stats.png'),full_page=True)
         pg.click('nav.tabs >> text=تنظیمات'); pg.wait_for_timeout(300); pg.screenshot(path=str(out/f'{name}-set.png'),full_page=True)
         print(name,'hscroll',pg.evaluate("document.documentElement.scrollWidth>document.documentElement.clientWidth"))
