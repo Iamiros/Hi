@@ -90,3 +90,8 @@ Your answers: strict pull-up max 4-5, parallel dips under 8, squat and deadlift 
 
 ## Edit 11: week picker
 - The week pill in the header opens an iOS-style frosted-glass menu (backdrop blur, saturate) listing the 8 weeks with phase, date range, completion ring and an "this week" tag. Picking a week jumps to today if it is in that week, otherwise to the same weekday. Closes on Escape, backdrop tap, scroll or pick; arrow keys move through items. QA: `tools/qa_week.py`.
+
+## Edit 12: English mode and Liquid Glass
+- Bilingual: an EN/فا pill in the header and a Language row in Settings switch the whole app (UI, exercise library, workout notes, foods, AI prompts, dates, digits, layout direction). Persian stays the source in the code; `tools/i18n/` extracts every Persian string at build time, wraps it in `TT()`, and the build fails if any string lacks an English entry in `tools/i18n/en.json`. The choice is saved in prefs (and synced); switching reloads the page once (`window.name` carries it so it survives storage loss).
+- Liquid Glass theme (iOS 26 style) in both modes: a slow-drifting colour mesh behind everything (lavender, sky, aqua, peach in light; indigo, blue, teal, violet in dark), translucent panels with blur + saturation, a specular sheen and rim highlight, floating capsule tab bar with a glass lens on the active tab, glass sheets, dialogs, pills and week picker. Light mode is now tinted periwinkle instead of plain white. Solid fallback where backdrop-filter is missing; drift is off under reduced motion.
+- QA: `tools/qa_en.py` (no Persian left in English mode, no errors), `tools/qa_lang.py` (switch both ways and persistence), plus the earlier suites; no horizontal overflow on any of the 56 days in either language.
