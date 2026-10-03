@@ -439,6 +439,31 @@ dialog::backdrop{background:rgba(3,6,12,.55);-webkit-backdrop-filter:blur(3px);b
 @keyframes pop{0%{transform:translate(0,0) rotate(0);opacity:1}55%{transform:translate(var(--x),var(--y)) rotate(calc(var(--r) * .6));opacity:1}100%{transform:translate(calc(var(--x) * 1.15),calc(var(--y) + 170px)) rotate(var(--r));opacity:0}}
 @media (prefers-reduced-motion:reduce){.flip{aspect-ratio:3/1}.flip img{width:50%}.flip img+img{inset-inline-start:auto;inset-inline-end:0;opacity:1}.flip img:first-child{inset-inline-end:auto}.flip .lab span{opacity:1}}
 .nw{white-space:nowrap}
+.phasebtn{cursor:pointer;transition:transform .15s ease,background .2s ease}
+.phasebtn svg{width:14px;height:14px;transition:transform .25s ease}
+.phasebtn[aria-expanded="true"] svg{transform:rotate(180deg)}
+.phasebtn:active{transform:scale(.96)}
+.wkback{position:fixed;inset:0;z-index:38;background:rgba(5,8,15,.22);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);animation:fade .2s ease}
+.wkmenu{position:fixed;z-index:39;inset-inline-end:16px;width:min(330px,calc(100vw - 32px));max-height:min(72vh,620px);overflow:auto;overscroll-behavior:contain;padding:6px;border-radius:24px;
+ background:color-mix(in srgb,var(--panel-solid) 58%,transparent);-webkit-backdrop-filter:blur(30px) saturate(190%);backdrop-filter:blur(30px) saturate(190%);
+ box-shadow:0 24px 60px rgba(0,0,0,.35),inset 0 0 0 1px color-mix(in srgb,var(--ink) 10%,transparent),inset 0 1px 0 rgba(255,255,255,.12);transform-origin:top left;animation:pop-in .26s cubic-bezier(.2,.9,.3,1.15)}
+[dir=rtl] .wkmenu{transform-origin:top left}
+.wkmenu .wh{padding:10px 14px 6px;font-size:.74rem;color:var(--ink3);font-weight:700}
+.wkmenu button{display:flex;align-items:center;gap:12px;width:100%;text-align:start;padding:10px 12px;border-radius:16px;min-height:58px;transition:background .15s ease}
+.wkmenu button+button{box-shadow:0 -1px 0 color-mix(in srgb,var(--ink) 7%,transparent)}
+.wkmenu button:hover,.wkmenu button:focus-visible{background:color-mix(in srgb,var(--ink) 7%,transparent);box-shadow:none}
+.wkmenu button[aria-checked="true"]{background:var(--accent-soft)}
+.wkmenu .wn{width:36px;height:36px;flex:none;position:relative;display:grid;place-items:center}
+.wkmenu .wn svg{position:absolute;inset:0;width:36px;height:36px}
+.wkmenu .wn b{font-size:.86rem;font-weight:800}
+.wkmenu .wt{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.35}
+.wkmenu .wt b{font-size:.92rem}
+.wkmenu .wt span{font-size:.74rem;color:var(--ink3)}
+.wkmenu .tag{font-size:.68rem;padding:2px 8px;border-radius:999px;background:var(--gold-soft);color:var(--gold);font-weight:700}
+.wkmenu .ck{width:18px;height:18px;flex:none;color:var(--accent-ink)}
+@keyframes pop-in{from{opacity:0;transform:scale(.88) translateY(-8px)}to{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0}}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.wkmenu{background:var(--panel-solid)}}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .empty{padding:22px;text-align:center;color:var(--ink2);border:1.5px dashed var(--line);border-radius:var(--r-lg);font-size:.9rem}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
@@ -452,7 +477,7 @@ dialog::backdrop{background:rgba(3,6,12,.55);-webkit-backdrop-filter:blur(3px);b
       <span class="mark" aria-hidden="true"><svg viewBox="0 0 512 512"><defs><linearGradient id="mkA" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#3D6BFF"/><stop offset=".6" stop-color="#5B94FF"/><stop offset="1" stop-color="#8FE0FF"/></linearGradient></defs><path d="M362 150 A150 150 0 1 0 406 256" fill="none" stroke="url(#mkA)" stroke-width="54" stroke-linecap="round"/><rect x="236" y="230" width="196" height="52" rx="26" fill="#EEF3FF"/><rect x="300" y="222" width="36" height="68" rx="10" fill="#F1BC55"/><rect x="358" y="222" width="36" height="68" rx="10" fill="#F1BC55"/><circle cx="362" cy="150" r="22" fill="#FFD877"/></svg></span>
       <div><h1 class="x" lang="en">GRIP</h1><span class="sub">گریپ · برش ۸ هفته‌ای</span></div>
     </div>
-    <span id="phase" class="pill acc"></span>
+    <button id="phase" class="pill acc phasebtn" data-act="wkmenu" aria-haspopup="menu" aria-expanded="false" aria-controls="wkmenu"></button>
   </header>
   <main id="view" tabindex="-1"></main>
 </div>
@@ -460,6 +485,8 @@ dialog::backdrop{background:rgba(3,6,12,.55);-webkit-backdrop-filter:blur(3px);b
 <div id="timer" class="timer" hidden role="timer" aria-live="off"></div>
 <dialog id="sheet" class="sheet" aria-labelledby="sht"></dialog>
 <dialog id="dlg" class="cdlg" aria-labelledby="dt"></dialog>
+<div id="wkback" class="wkback" hidden data-act="wkclose"></div>
+<div id="wkmenu" class="wkmenu" hidden role="menu" aria-label="انتخاب هفته"></div>
 <div id="toast" class="toast" hidden role="status" aria-live="polite"></div>
 <noscript><p class="app">برای استفاده از ترکر جاوااسکریپت لازم است.</p></noscript>
 
@@ -781,6 +808,25 @@ const INFO = {
 let tab = "today", planWeek = 1;
 let sel = clamp(todayIdx(), 0, 55);
 const openD = new Set();
+function wkMenu(open) {
+  const m = $("#wkmenu"), bk = $("#wkback"), btn = $("#phase");
+  if (!open) { m.hidden = bk.hidden = true; btn.setAttribute("aria-expanded", "false"); return; }
+  const cw = info(sel).week, tw = todayIdx() >= 0 && todayIdx() <= 55 ? info(todayIdx()).week : 0;
+  let h = `<div class="wh">برنامه‌ی ۸ هفته</div>`;
+  for (let w = 1; w <= 8; w++) {
+    const f = info((w - 1) * 7), st = weekStats(w), p = st ? st.pct : 0, r = 15, c = 2 * Math.PI * r;
+    const range = `${fmtJ.format(parseISO(dateOf((w - 1) * 7)))} تا ${fmtJ.format(parseISO(dateOf(w * 7 - 1)))}`;
+    h += `<button role="menuitemradio" aria-checked="${w === cw}" data-act="wkpick" data-w="${w}">
+      <span class="wn"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="${r}" fill="none" stroke="color-mix(in srgb,var(--ink) 12%,transparent)" stroke-width="3"/>${p > 0 ? "" : "<!--"}<circle cx="18" cy="18" r="${r}" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" stroke-dasharray="${(c * p).toFixed(1)} ${c.toFixed(1)}" transform="rotate(-90 18 18)"/>${p > 0 ? "" : "-->"}</svg><b class="num">${fa(w)}</b></span>
+      <span class="wt"><b>هفته ${fa(w)} · ${esc(f.phaseFa)}</b><span>${range}${st ? " · " + fa(Math.round(p * 100)) + "٪" : ""}</span></span>
+      ${w === tw ? '<span class="tag">این هفته</span>' : ""}${w === cw ? '<svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>' : ""}</button>`;
+  }
+  m.innerHTML = h;
+  const b = btn.getBoundingClientRect(); m.style.top = (b.bottom + 8) + "px";
+  m.hidden = bk.hidden = false; btn.setAttribute("aria-expanded", "true");
+  (m.querySelector('[aria-checked="true"]') || m.querySelector("button")).focus({ preventScroll: true });
+  m.querySelector('[aria-checked="true"]')?.scrollIntoView({ block: "nearest" });
+}
 function go(t) { tab = t; render(); window.scrollTo(0, 0); }
 function setSel(i) { sel = clamp(i, 0, 55); render(); }
 function applyTheme() {
@@ -1393,7 +1439,7 @@ function render() {
   v.innerHTML = page ? (page.type === "ex" ? pageEx(page) : pageWo(page)) : tab === "today" ? viewToday() : tab === "food" ? viewFood() : tab === "plan" ? viewPlan() : tab === "stats" ? viewStats() : viewSettings();
   if (!lastP || lastP.i !== sel) { const d = peek(dateOf(sel)); lastP = { i: sel, p: pct(sel), w: !!(d && d.done.workout) }; }
   const inf = info(sel);
-  $("#phase").textContent = `هفته ${fa(inf.week)} · ${inf.phaseFa}`;
+  $("#phase").innerHTML = `<span>هفته ${fa(inf.week)} · ${esc(inf.phaseFa)}</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>`;
   $("#tabs").innerHTML = TABS.map(t => `<button data-act="tab" data-v="${t[0]}" ${tab === t[0] && !page ? 'aria-current="page"' : ""}>${ICON[t[2]]}<span>${t[1]}</span></button>`).join("");
   const sv = $("#sv"); if (sv) sv.textContent = cloudRef ? "همگام‌سازی ابری فعال است. داده‌ها در حساب Claude تو ذخیره می‌شوند." : probeOk ? "ذخیره‌سازی مرورگر فعال است." : "ذخیره‌سازی مرورگر غیرفعال است؛ فقط پشتیبان متنی کار می‌کند.";
   if (sig && sig.act !== "tab") {
@@ -1542,6 +1588,10 @@ document.addEventListener("click", e => {
     case "wprev": planWeek = Math.max(1, planWeek - 1); return render();
     case "wnext": planWeek = Math.min(8, planWeek + 1); return render();
     case "today": return setSel(todayIdx());
+    case "wkmenu": return wkMenu($("#wkmenu").hidden);
+    case "wkclose": return wkMenu(false);
+    case "wkpick": { const w = +b.dataset.w, t = todayIdx(); wkMenu(false); page = null; tab = "today";
+      sel = t >= (w - 1) * 7 && t < w * 7 ? t : (w - 1) * 7 + (sel % 7); render(); window.scrollTo(0, 0); $("#phase").focus({ preventScroll: true }); return; }
     case "open": page = null; sel = +b.dataset.i; if (tab !== "today") { tab = "today"; window.scrollTo(0, 0); } return render();
     case "info": return openInfo(b.dataset.k);
     case "exinfo": if ($("#sheet").open) $("#sheet").close(); return openPage({ type: "ex", ex: b.dataset.ex, w: b.dataset.w, alt: false });
@@ -1670,7 +1720,12 @@ document.addEventListener("input", e => {
   if (a === "fsearch") { FS.q = el.value; const l = $("#flist"); if (l) l.innerHTML = foodList(); }
   if (a === "famt") { FS.amt = el.value; const p = $("#fprev"); if (p) p.innerHTML = previewHtml(); }
 });
-document.addEventListener("keydown", e => { if (e.key === "Enter" && e.target.id === "famt") { e.preventDefault(); const b = document.querySelector('[data-act="fsave"]'); if (b) b.click(); } });
+window.addEventListener("scroll", () => { if (!$("#wkmenu").hidden) wkMenu(false); }, { passive: true });
+document.addEventListener("keydown", e => {
+  if (!$("#wkmenu").hidden) {
+    if (e.key === "Escape") { e.preventDefault(); wkMenu(false); $("#phase").focus(); return; }
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") { e.preventDefault(); const it = [...$("#wkmenu").querySelectorAll("button")], k = it.indexOf(document.activeElement); it[(k + (e.key === "ArrowDown" ? 1 : -1) + it.length) % it.length].focus(); return; }
+  } if (e.key === "Enter" && e.target.id === "famt") { e.preventDefault(); const b = document.querySelector('[data-act="fsave"]'); if (b) b.click(); } });
 /* swipe between days */
 let sx = null, sy = 0;
 $("#view").addEventListener("touchstart", e => { if (tab !== "today" || e.touches.length !== 1 || e.target.closest(".tw,.chart,input,textarea,select,.week,.scale5")) { sx = null; return; } sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });

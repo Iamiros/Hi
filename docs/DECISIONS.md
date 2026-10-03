@@ -87,3 +87,6 @@ Your answers: strict pull-up max 4-5, parallel dips under 8, squat and deadlift 
 - Every Latin run inside Persian text is now isolated automatically (a MutationObserver wraps it in `<bdi dir="ltr">`; `<option>` text gets LRI/PDI marks). Short runs do not wrap mid-term. `bidi()` escapes after matching, so apostrophes no longer split a term (Farmer's Carry). Long doses wrap between words, not at hyphens; no horizontal overflow on any of the 56 days.
 - Export and CSV in the claude.ai artifact use the `downloads` capability.
 - QA: `tools/qa_bidi.py` lists any Latin text left un-isolated in RTL context (0 left).
+
+## Edit 11: week picker
+- The week pill in the header opens an iOS-style frosted-glass menu (backdrop blur, saturate) listing the 8 weeks with phase, date range, completion ring and an "this week" tag. Picking a week jumps to today if it is in that week, otherwise to the same weekday. Closes on Escape, backdrop tap, scroll or pick; arrow keys move through items. QA: `tools/qa_week.py`.
