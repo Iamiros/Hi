@@ -4,7 +4,7 @@ Whole-body strength, muscle retention, fat loss and a first strict muscle-up, fo
 
 | Path | What |
 |---|---|
-| `tracker/index.html` | Interactive 8-week tracker (single file, fonts embedded, works offline, installable) |
+| `tracker/index.html` | GRIP: interactive 8-week tracker (single file, fonts embedded, works offline, installable) |
 | `guide/index.html`, `guide/guide.pdf` | Full guide: energy math, nutrition, program, exercise library, challenges, tests, safety, science, cheat sheet |
 | `docs/TOOLING.md`, `docs/DECISIONS.md` | Tools used, corrections and decisions |
 | `tools/` | Source data (`program.py`) and build scripts |
@@ -29,3 +29,4 @@ python3 tools/export_pdf.py      # guide/guide.pdf (needs playwright + chromium)
 Edit program numbers only in `tools/program.py`; both outputs read from it.
 
 Fonts: Vazirmatn and Barlow Condensed, SIL Open Font License 1.1.
+- Exercise images: free-exercise-db (github.com/yuhonas/free-exercise-db), Unlicense / public domain.

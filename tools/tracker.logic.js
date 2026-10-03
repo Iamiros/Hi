@@ -1,6 +1,7 @@
 const PROGRAM = __PROGRAM__;
 const KEY = "amir-cut-v1";
 const GUIDE = __GUIDE__;
+const IMGS = __IMGS__;
 const DEFAULT_START = "2026-10-03";
 const TARGET_W = 83, START_W = 89;
 const DAYFA = ["شنبه","یکشنبه","دوشنبه","سه‌شنبه","چهارشنبه","پنجشنبه","جمعه"];
@@ -66,6 +67,7 @@ let onSaved = null;
 function save(fromCloud) {
   mem = S; if (!fromCloud) savedAt = Date.now();
   if (onSaved && !fromCloud) onSaved();
+  if (!fromCloud && typeof afterSave === "function") afterSave();
   try { localStorage.setItem(KEY, JSON.stringify(S)); localStorage.setItem(KEY + "-t", String(savedAt)); saveWarned = false; }
   catch (e) { if (!saveWarned) { saveWarned = true; toast("ذخیره‌سازی مرورگر در دسترس نیست. از Export برای پشتیبان استفاده کن."); } }
 }

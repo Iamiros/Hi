@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>ترکر برش ۸ هفته‌ای</title>
+<title>GRIP · گریپ</title>
 <meta name="description" content="ترکر تعاملی ۸ هفته: حفظ عضله، قدرت کل بدن، لاغری و رسیدن به ۸-۱۰ Pull-up">
 <meta name="theme-color" content="#07090D">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Cut 8W">
+<meta name="apple-mobile-web-app-title" content="GRIP">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
@@ -78,10 +78,10 @@ a{color:var(--accent-ink)}
 /* top bar */
 .top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 0 12px}
 .brand{display:flex;align-items:center;gap:12px;min-width:0}
-.mark{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;flex:none;background:linear-gradient(140deg,var(--accent),var(--accent2));box-shadow:0 6px 18px var(--accent-soft)}
-.mark svg{width:22px;height:22px}
-.brand h1{font-size:1.02rem;font-weight:700}
-.brand .x{font-size:.72rem;color:var(--ink3);display:block;line-height:1;font-weight:700;letter-spacing:.08em}
+.mark{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;flex:none;background:radial-gradient(120% 120% at 25% 15%,#1A2A55,#0A0F1E 60%,#05070C);box-shadow:0 8px 22px rgba(47,91,234,.35),inset 0 0 0 1px rgba(255,255,255,.08)}
+.mark svg{width:34px;height:34px}
+.brand h1{font-size:1.5rem;font-weight:800;font-stretch:125%;letter-spacing:.14em;line-height:1;background:linear-gradient(90deg,var(--ink),var(--accent-ink));-webkit-background-clip:text;background-clip:text;color:transparent}
+.brand .sub{font-size:.74rem;color:var(--ink3);display:block;margin-top:3px}
 .pill{display:inline-flex;align-items:center;gap:6px;min-height:30px;padding:2px 12px;border-radius:999px;background:var(--surface2);font-size:.8rem;font-weight:500;white-space:nowrap}
 .pill.acc{background:var(--accent-soft);color:var(--accent-ink)}
 .pill.gold{background:var(--gold-soft);color:var(--gold)}
@@ -262,8 +262,8 @@ textarea.inp{min-height:88px;resize:vertical}
 .pt-en{font-size:1.5rem;line-height:1.05;color:var(--accent-ink);margin-top:4px;text-align:right}
 .h2{font-size:1rem;font-weight:700}
 .steps{margin:10px 0 0;padding-inline-start:0;list-style:none;counter-reset:s;display:grid;gap:10px}
-.steps li{counter-increment:s;display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start}
-.steps li::before{content:counter(s,persian);width:30px;height:30px;border-radius:999px;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent-ink);font-weight:700;font-size:.85rem}
+.steps li{counter-increment:s;position:relative;padding-inline-start:40px;min-height:30px;padding-top:3px}
+.steps li::before{content:counter(s,persian);position:absolute;inset-inline-start:0;top:0;width:30px;height:30px;border-radius:999px;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent-ink);font-weight:700;font-size:.85rem}
 .bad-list{margin:10px 0 0;padding-inline-start:0;list-style:none;display:grid;gap:10px}
 .bad-list li{display:flex;gap:10px}
 .bad-list li::before{content:"✕";flex:none;width:26px;height:26px;border-radius:999px;display:grid;place-items:center;background:color-mix(in srgb,var(--bad) 14%,transparent);color:var(--bad);font-size:.75rem;font-weight:800}
@@ -405,6 +405,37 @@ dialog::backdrop{background:rgba(3,6,12,.55);-webkit-backdrop-filter:blur(3px);b
 .cdlg{margin:auto;width:min(400px,92vw)}
 .cdlg .in{background:var(--panel-solid);border-radius:var(--r-lg);padding:20px;box-shadow:var(--shadow)}
 .toast{position:fixed;inset-inline:16px;top:calc(12px + env(safe-area-inset-top));max-width:420px;margin-inline:auto;background:var(--ink);color:var(--bg);padding:12px 16px;border-radius:16px;z-index:40;text-align:center;font-size:.9rem;box-shadow:var(--shadow);animation:up .25s ease}
+.thumb{display:block;position:relative;flex:none;width:52px;height:52px;border-radius:12px;overflow:hidden;background:#fff;box-shadow:inset 0 0 0 1px var(--line)}
+.thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.thumb.mo img+img{animation:flipf 2.6s ease-in-out infinite}
+.excard{grid-template-columns:auto minmax(0,1fr) auto}
+.excard .thumb{width:64px;height:48px}
+.excard .exn{position:absolute;inset-inline-start:4px;top:4px;width:20px;height:20px;font-size:.7rem;z-index:1;background:rgba(7,9,13,.72);color:#fff}
+.ex-top .lead{display:flex;gap:12px;align-items:flex-start;min-width:0}
+.flip{position:relative;aspect-ratio:3/2;border-radius:var(--r-md);overflow:hidden;background:#fff;margin:4px 0 14px;box-shadow:inset 0 0 0 1px var(--line)}
+.flip img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.flip img+img{animation:flipf 2.6s ease-in-out infinite}
+.flip .lab{position:absolute;bottom:10px;inset-inline-start:10px;display:flex;gap:6px}
+.flip .lab span{padding:4px 10px;border-radius:999px;font-size:.74rem;font-weight:700;background:rgba(7,9,13,.78);color:#fff}
+.flip .lab span+span{animation:flipf 2.6s ease-in-out infinite}
+.flip .lab span:first-child{animation:flipr 2.6s ease-in-out infinite}
+@keyframes flipf{0%,40%{opacity:0}50%,90%{opacity:1}100%{opacity:0}}
+@keyframes flipr{0%,40%{opacity:1}50%,90%{opacity:0}100%{opacity:1}}
+.collage{display:flex;gap:6px;margin:-4px 0 14px;height:84px}
+.collage img{flex:1;min-width:0;height:100%;object-fit:cover;border-radius:12px;background:#fff}
+.collage img:nth-child(n+5){display:none}
+.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:8px}
+.badge{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;padding:12px 6px;border-radius:var(--r-md);background:var(--surface2);opacity:.5}
+.badge svg{width:34px;height:34px}
+.badge b{font-size:.8rem;line-height:1.3}
+.badge span{font-size:.68rem;color:var(--ink3)}
+.badge.on{opacity:1;background:linear-gradient(160deg,var(--gold-soft),var(--accent-soft));box-shadow:inset 0 0 0 1px var(--gold-soft)}
+.badge.on svg{color:var(--gold);filter:drop-shadow(0 0 8px var(--gold-soft))}
+.burst{position:fixed;left:50%;top:40%;z-index:45;pointer-events:none}
+.burst i{position:absolute;width:8px;height:13px;border-radius:2px;animation:pop 1.3s cubic-bezier(.15,.7,.3,1) forwards}
+@keyframes pop{0%{transform:translate(0,0) rotate(0);opacity:1}55%{transform:translate(var(--x),var(--y)) rotate(calc(var(--r) * .6));opacity:1}100%{transform:translate(calc(var(--x) * 1.15),calc(var(--y) + 170px)) rotate(var(--r));opacity:0}}
+@media (prefers-reduced-motion:reduce){.flip{aspect-ratio:3/1}.flip img{width:50%}.flip img+img{inset-inline-start:auto;inset-inline-end:0;opacity:1}.flip img:first-child{inset-inline-end:auto}.flip .lab span{opacity:1}}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .empty{padding:22px;text-align:center;color:var(--ink2);border:1.5px dashed var(--line);border-radius:var(--r-lg);font-size:.9rem}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
@@ -414,8 +445,8 @@ dialog::backdrop{background:rgba(3,6,12,.55);-webkit-backdrop-filter:blur(3px);b
 <div class="app">
   <header class="top">
     <div class="brand">
-      <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="2.6" rx="1.3" fill="#fff"/><rect x="5" y="4.8" width="3" height="5" rx="1" fill="#06101F"/><rect x="16" y="4.8" width="3" height="5" rx="1" fill="#06101F"/><rect x="6" y="12.5" width="2.2" height="7" rx="1.1" fill="#fff"/><rect x="11" y="12.5" width="2.2" height="4.5" rx="1.1" fill="#fff" opacity=".8"/><rect x="16" y="12.5" width="2.2" height="7" rx="1.1" fill="#fff"/></svg></span>
-      <div><h1>برش ۸ هفته‌ای</h1><span class="x" lang="en">8-WEEK CUT</span></div>
+      <span class="mark" aria-hidden="true"><svg viewBox="0 0 512 512"><defs><linearGradient id="mkA" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#3D6BFF"/><stop offset=".6" stop-color="#5B94FF"/><stop offset="1" stop-color="#8FE0FF"/></linearGradient></defs><path d="M362 150 A150 150 0 1 0 406 256" fill="none" stroke="url(#mkA)" stroke-width="54" stroke-linecap="round"/><rect x="236" y="230" width="196" height="52" rx="26" fill="#EEF3FF"/><rect x="300" y="222" width="36" height="68" rx="10" fill="#F1BC55"/><rect x="358" y="222" width="36" height="68" rx="10" fill="#F1BC55"/><circle cx="362" cy="150" r="22" fill="#FFD877"/></svg></span>
+      <div><h1 class="x" lang="en">GRIP</h1><span class="sub">گریپ · برش ۸ هفته‌ای</span></div>
     </div>
     <span id="phase" class="pill acc"></span>
   </header>
@@ -524,6 +555,7 @@ const INFO = {
   food: ["خوراک امروز", "<p>هر غذا را در وعده‌ی خودش ثبت کن: از فهرست (ارزش‌ها برای هر ۱۰۰ گرم یا هر عدد) جستجو کن، مقدار را بنویس، کالری و ماکروها خودکار حساب می‌شوند. «اخیر» غذاهای چند روز گذشته را با همان مقدار دوباره اضافه می‌کند. محصول بسته‌بندی را با «تعریف غذای جدید» و برچسبش وارد کن. حلقه کالری است، نوارها پروتئین، کربو و چربی نسبت به هدف همان روز.</p>"],
   aifood: ["ثبت با متن", "<p>غذاهایت را معمولی بنویس؛ Claude آنها را به آیتم با کالری و ماکرو تبدیل می‌کند (مقدار پخته، مگر اینکه بنویسی خام). قبل از افزودن، فهرست را چک کن. ارزش‌ها تقریبی‌اند.</p>"],
   coach: ["مربی هوشمند", "<p>Claude داده‌های ۱۴ روز اخیر تو (وزن، غذا، خواب، آمادگی، ست‌ها، قدم، آب) و قانون‌های برنامه را می‌خواند و پیشنهاد عملی می‌دهد. «تحلیل امروز» برای بقیه‌ی امروز، «تحلیل این هفته» برای تعدیل هفته‌ی بعد، یا سؤال خودت را بپرس. داده‌ها فقط برای همین پاسخ فرستاده می‌شوند.</p>"],
+  badges: ["نشان‌ها", "<p>با پیش رفتن برنامه باز می‌شوند: جلسه‌ها، روز ۱۰۰٪، هفته‌ی ۵ از ۵، آب، ثبت غذا، قدم، ست‌های ثبت‌شده و تست‌ها. وقتی روزی ۱۰۰٪ شود یا جلسه را تمام کنی، جشن کوچک روی صفحه نمایش داده می‌شود.</p>"],
   pr: ["رکوردها", "<p>بیشترین وزنه برای هر تعداد تکرار، از ست‌هایی که در «ثبت وزنه» وارد کرده‌ای. برای Pull-up و Chin-up و Dip، وزنه یعنی وزنه‌ی اضافه روی وزن بدن.</p>"],
 };
 
@@ -597,8 +629,8 @@ function session(inf, dd) {
     let dots = "";
     for (let s = 1; s <= n; s++) dots += `<button class="dot ${s <= k ? "on" : ""}" data-act="set" data-id="${ex.id}" data-n="${s}" data-max="${n}" data-rest="${restSec(ex.rest)}" aria-pressed="${s <= k}" aria-label="${esc(shown.en)} ست ${fa(s)} از ${fa(n)}">${fa(s)}</button>`;
     return `<article class="ex ${n && k >= n ? "done" : ""}">
-      <div class="ex-top"><div style="min-width:0"><span class="faint tiny num">${fa(idx + 1)} </span><button class="ename" lang="en" data-act="exinfo" data-ex="${ex.id}" data-w="${inf.letter}">${esc(shown.en)}</button>
-        <p class="meta">${shown.en === other.en ? "باشگاه و خانه: همین حرکت" : `${home ? "باشگاه" : "خانه"}: ${en(other.en)}`} · استراحت ${en(ex.rest)}</p></div>
+      <div class="ex-top"><div class="lead">${thumb(id)}<div style="min-width:0"><span class="faint tiny num">${fa(idx + 1)} </span><button class="ename" lang="en" data-act="exinfo" data-ex="${ex.id}" data-w="${inf.letter}">${esc(shown.en)}</button>
+        <p class="meta">${shown.en === other.en ? "باشگاه و خانه: همین حرکت" : `${home ? "باشگاه" : "خانه"}: ${en(other.en)}`} · استراحت ${en(ex.rest)}</p></div></div>
         <span class="dose">${esc(dose === "test" ? "Test" : dose)}</span></div>
       ${ex.fa ? `<p class="meta" style="margin-top:6px">${bidi(ex.fa)}</p>` : ""}
       ${sug ? `<p class="hint-line">${sug}</p>` : ""}
@@ -864,6 +896,7 @@ function viewStats() {
   for (let i = 0; i < 56; i++) { const d = peek(dateOf(i)); if (d) { if (d.waist) waistPts.push({ i, v: +d.waist }); const bf = bodyFat(d.sf, dateOf(i)); if (bf != null) bfPts.push({ i, v: bf }); } }
   h += `<section class="panel rise" style="margin-top:14px">${ph("دور شکم و درصد چربی", "body2")}<h3 class="small muted" style="margin-bottom:4px">دور شکم (cm)</h3>${miniChart(waistPts, "دور شکم", "cm", "var(--accent)")}<h3 class="small muted" style="margin:10px 0 4px">درصد چربی</h3>${miniChart(bfPts, "درصد چربی", "٪", "var(--gold)")}</section>`;
   h += `<section class="panel rise" style="margin-top:14px">${ph("چالش‌ها", "chal")}<div id="chal">${chalHtml()}</div></section>`;
+  h += `<section class="panel rise" style="margin-top:14px">${ph("نشان‌ها", "badges")}<div id="bdg">${badgesHtml()}</div></section>`;
   return h + statsTail();
 }
 function chalHtml() {
@@ -928,6 +961,59 @@ function historyHtml(ex, id) {
     last.map(r => { const best = Math.max(...r.m.map(s => e1rm(id, s) || 0)); return `<tr><td class="small num">${esc(fmtJ.format(parseISO(dateOf(r.i))))}</td><td class="small num"><bdi dir="ltr">${r.m.map(s => `${fa(+s.kg || 0)}×${fa(s.reps)}${s.rpe ? "@" + fa(s.rpe) : ""}`).join("  ")}</bdi></td><td class="num">${best ? faN(best, 0) : "-"}</td></tr>`; }).join("") +
     `</tbody></table></div><p class="tiny faint" style="margin-top:6px">e1RM (Epley)${BWLIFTS.includes(id) ? " با احتساب وزن بدن" : ""}.</p></section>`;
 }
+/* ---------- exercise images (free-exercise-db, Unlicense) ---------- */
+const imgOf = id => { const d = IMGS.map[id]; return d ? IMGS.src[d] : null; };
+const thumb = (id, cls = "") => { const s = imgOf(id); return s ? `<span class="thumb ${cls}" aria-hidden="true"><img src="${s[0]}" alt="">${cls ? `<img src="${s[1]}" alt="">` : ""}</span>` : ""; };
+function figHtml(id) {
+  const s = imgOf(id); if (!s) return "";
+  return `<figure class="flip"><img src="${s[0]}" alt="وضعیت شروع حرکت"><img src="${s[1]}" alt="وضعیت پایان حرکت"><figcaption class="lab"><span>۱ · شروع</span><span>۲ · پایان</span></figcaption></figure>`;
+}
+const collage = ids => { const u = [...new Set(ids)].map(imgOf).filter(Boolean); return u.length ? `<div class="collage" aria-hidden="true">${u.map(x => `<img src="${x[1]}" alt="">`).join("")}</div>` : ""; };
+
+/* ---------- badges + celebration ---------- */
+const BADGE_SVG = {
+  bolt: '<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>', star: '<path d="M12 3l2.8 5.8 6.2.9-4.5 4.4 1 6.2L12 17.4 6.5 20.3l1-6.2L3 9.7l6.2-.9z"/>',
+  drop: '<path d="M12 3s7 7.6 7 12a7 7 0 0 1-14 0c0-4.4 7-12 7-12z"/>', fire: '<path d="M12 22a7 7 0 0 0 7-7c0-4-3-6-4-10-2 2-3 4-3 6-1-1-2-2-2-4-3 3-5 5.5-5 8a7 7 0 0 0 7 7z"/>',
+  bar: '<path d="M3 7h18M7 5v4M17 5v4M9 11v8M15 11v6"/>', crown: '<path d="M3 18h18l-2-11-5 5-2-7-2 7-5-5z"/>', bowl: '<path d="M3 11h18a9 9 0 0 1-18 0zM8 7c0-2 2-2 2-4M13 7c0-2 2-2 2-4"/>',
+  feet: '<path d="M7 3c2 0 3 3 3 6s-1 4-3 4-3-1-3-4 1-6 3-6zM17 9c2 0 3 3 3 6s-1 4-3 4-3-1-3-4 1-6 3-6zM5 16h4M15 22h4"/>', medal: '<circle cx="12" cy="15" r="6"/><path d="M8 3l4 6 4-6"/>'
+};
+function badgesHtml() {
+  let ses = 0, full = 0, water = 0, food = 0, steps = 0, sets = 0; const wk = Array(8).fill(0);
+  for (let i = 0; i < 56; i++) {
+    const d = peek(dateOf(i)); if (!d) continue;
+    if (d.done.workout) { ses++; wk[Math.floor(i / 7)]++; }
+    if (pct(i) >= 1) full++;
+    if ((d.water || 0) >= waterTarget(info(i))) water++;
+    if (d.food && d.food.length) food++;
+    if (d.steps >= 12000) steps++;
+    sets += Object.values(d.lifts || {}).reduce((n, a) => n + a.length, 0);
+  }
+  const t = k => Math.max(0, ...PH.map(p => +(S.tests[p[0]] || {})[k] || 0)), best = streak(todayIdx());
+  const B = [
+    [ses >= 1, "bolt", "اولین جلسه", "First Session"], [ses >= 10, "bar", "۱۰ جلسه", "10 Sessions"], [ses >= 25, "medal", "۲۵ جلسه", "25 Sessions"],
+    [wk.some(n => n >= 5), "crown", "هفته‌ی کامل", "5/5 Week"], [full >= 1, "star", "روز ۱۰۰٪", "Perfect Day"], [best >= 7, "fire", "۷ روز پیاپی", "7-Day Streak"],
+    [water >= 7, "drop", "۷ روز آب کامل", "Hydrated"], [food >= 7, "bowl", "۷ روز ثبت غذا", "Food Logger"], [steps >= 14, "feet", "۱۴ روز ۱۲ هزار قدم", "Walker"],
+    [sets >= 50, "bar", "۵۰ ست ثبت‌شده", "50 Logged Sets"], [t("pullups") >= 10, "crown", "۱۰ بارفیکس", "10 Pull-ups"], [t("mu") >= 1, "star", "اولین Muscle-Up", "Muscle-Up"]];
+  const on = B.filter(b => b[0]).length;
+  return `<p class="tiny muted num" style="margin-bottom:10px">${fa(on)} از ${fa(B.length)} باز شده</p><div class="badges">` + B.map(b => `<div class="badge ${b[0] ? "on" : ""}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${BADGE_SVG[b[1]]}</svg><b>${bidi(b[2])}</b><span lang="en" dir="ltr">${b[3]}</span>${b[0] ? '<span class="sr-only">باز شده</span>' : '<span class="sr-only">قفل</span>'}</div>`).join("") + `</div>`;
+}
+let lastP = null;
+function burst() {
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const box = document.createElement("div"), C = ["var(--accent)", "var(--accent2)", "var(--gold)", "var(--ok)"];
+  box.className = "burst"; box.setAttribute("aria-hidden", "true");
+  for (let i = 0; i < 32; i++) { const s = document.createElement("i"), a = Math.random() * Math.PI * 2, r = 80 + Math.random() * 150; s.style.cssText = `--x:${(Math.cos(a) * r).toFixed(0)}px;--y:${(Math.sin(a) * r - 70).toFixed(0)}px;--r:${(Math.random() * 720 - 360).toFixed(0)}deg;background:${C[i % 4]};animation-delay:${(Math.random() * 90).toFixed(0)}ms`; box.appendChild(s); }
+  document.body.appendChild(box); setTimeout(() => box.remove(), 1600);
+}
+function afterSave() {
+  const d = peek(dateOf(sel)), p = pct(sel), w = !!(d && d.done.workout);
+  if (lastP && lastP.i === sel) {
+    if (lastP.p < 1 && p >= 1) { burst(); toast("روز ۱۰۰٪ کامل شد."); }
+    else if (!lastP.w && w) burst();
+  }
+  lastP = { i: sel, p, w };
+}
+
 function pageEx(p) {
   const W = PROGRAM.workouts[p.w], ex = W.ex.find(e => e.id === p.ex); if (!ex) { page = null; return viewToday(); }
   const home = (S.prefs.mode === "home") !== !!p.alt, id = home ? ex.home : ex.gym, lb = PROGRAM.lib[id], otherId = home ? ex.gym : ex.home, other = PROGRAM.lib[otherId];
@@ -935,7 +1021,7 @@ function pageEx(p) {
   const doses = [1, 2, 3, 4, 5, 6, 7, 8].map(w => `<td class="num" style="text-align:center;${w === wk ? "font-weight:800;color:var(--accent-ink)" : "color:var(--ink2)"}"><span class="en">${esc(doseOf(ex, w, home))}</span></td>`).join("");
   return `<div class="pagehead rise">${backBtn()}<button class="pill acc" data-act="wopage" data-w="${p.w}">${en("Workout " + p.w)}</button></div>
   <section class="panel hero rise" style="--i:1"><span class="glow"></span>
-    <p class="tiny muted">${home ? "نسخه‌ی خانه" : "نسخه‌ی باشگاه"}</p>
+    ${figHtml(id)}<p class="tiny muted">${home ? "نسخه‌ی خانه" : "نسخه‌ی باشگاه"}</p>
     <h1 class="pt-fa">${esc(lb.fan || lb.en)}</h1><p class="pt-en x" lang="en">${esc(lb.en)}</p>
     <div class="chips" style="margin-top:14px"><span class="pill acc">${en(dose === "test" ? "Test" : dose)}</span><span class="pill">استراحت ${en(ex.rest)}</span><span class="pill">هفته ${fa(wk)}</span></div>
     <div class="chips">${muscleChips(ex.m)}</div>
@@ -958,14 +1044,14 @@ function pageWo(p) {
   const vchips = Object.keys(vol).filter(k => vol[k] > 0).sort((a, b) => vol[b] - vol[a]).map(k => `<span class="pill">${esc(PROGRAM.muscles[k])} <b class="num">${faN(vol[k], vol[k] % 1 ? 1 : 0)}</b></span>`).join("");
   return `<div class="pagehead rise">${backBtn()}<span class="pill">هفته ${fa(wk)}</span></div>
   <section class="panel hero rise" style="--i:1"><span class="glow"></span>
-    <p class="pt-en x" lang="en" style="font-size:2.4rem">WORKOUT ${p.w}</p><h1 class="pt-fa" style="font-size:1.25rem">${esc(W.fa.split(":")[1] || W.fa)}</h1>
+    ${collage(W.ex.map(ex => home ? ex.home : ex.gym))}<p class="pt-en x" lang="en" style="font-size:2.4rem">WORKOUT ${p.w}</p><h1 class="pt-fa" style="font-size:1.25rem">${esc(W.fa.split(":")[1] || W.fa)}</h1>
     <p style="margin-top:10px">${bidi(I.goal)}</p>
     <div class="chips" style="margin-top:12px"><span class="pill acc">زمان ${esc(I.time)}</span><span class="pill">${fa(W.ex.length)} حرکت</span></div></section>
   <section class="panel rise" style="--i:2;margin-top:14px"><h2 class="h2">اصول این جلسه</h2><ol class="steps">${I.rules.map(r => `<li>${bidi(r)}</li>`).join("")}</ol></section>
   <section class="panel rise" style="--i:3;margin-top:14px"><h2 class="h2">ست سخت برای هر عضله در این جلسه</h2><div class="chips" style="margin-top:8px">${vchips || '<span class="small faint">فقط ست‌های مهارتی</span>'}</div></section>
   <section class="panel rise" style="--i:4;margin-top:14px"><h2 class="h2">گرم کردن</h2><ul class="wu" style="margin-top:8px">${PROGRAM.warmup.map(w => `<li>${en(w[0])}<span class="en">${esc(w[1])}</span></li>`).join("")}</ul></section>
   <section class="panel rise" style="--i:5;margin-top:14px"><h2 class="h2">حرکت‌ها</h2><div class="exlist">` +
-    W.ex.map((ex, i) => { const id = home ? ex.home : ex.gym, lb = PROGRAM.lib[id]; return `<button class="excard" data-act="exinfo" data-ex="${ex.id}" data-w="${p.w}"><span class="exn num x">${fa(i + 1)}</span><span class="exm"><b>${esc(lb.fan)}</b><span class="en" lang="en">${esc(lb.en)}</span></span><span class="dose" style="font-size:1rem">${esc(doseOf(ex, wk, home))}</span></button>`; }).join("") + `</div></section>`;
+    W.ex.map((ex, i) => { const id = home ? ex.home : ex.gym, lb = PROGRAM.lib[id]; return `<button class="excard" data-act="exinfo" data-ex="${ex.id}" data-w="${p.w}"><span style="position:relative;display:block">${thumb(id, "mo") || '<span class="thumb" style="display:grid;place-items:center;color:var(--ink3);font-weight:800" lang="en">' + esc(lb.en.slice(0, 2).toUpperCase()) + '</span>'}<span class="exn num x">${fa(i + 1)}</span></span><span class="exm"><b>${esc(lb.fan)}</b><span class="en" lang="en">${esc(lb.en)}</span></span><span class="dose" style="font-size:1rem">${esc(doseOf(ex, wk, home))}</span></button>`; }).join("") + `</div></section>`;
 }
 
 /* ---------- food log ---------- */
@@ -1087,6 +1173,7 @@ function render() {
   const a = document.activeElement, sig = a && a.dataset && a.dataset.act ? { ...a.dataset } : null;
   const v = $("#view"); gid = 0; const vk = tab + ":" + sel + ":" + (page ? page.type + page.w + (page.ex || "") : ""); v.classList.toggle("anim", vk !== render.k); render.k = vk;
   v.innerHTML = page ? (page.type === "ex" ? pageEx(page) : pageWo(page)) : tab === "today" ? viewToday() : tab === "food" ? viewFood() : tab === "plan" ? viewPlan() : tab === "stats" ? viewStats() : viewSettings();
+  if (!lastP || lastP.i !== sel) { const d = peek(dateOf(sel)); lastP = { i: sel, p: pct(sel), w: !!(d && d.done.workout) }; }
   const inf = info(sel);
   $("#phase").textContent = `هفته ${fa(inf.week)} · ${inf.phaseFa}`;
   $("#tabs").innerHTML = TABS.map(t => `<button data-act="tab" data-v="${t[0]}" ${tab === t[0] && !page ? 'aria-current="page"' : ""}>${ICON[t[2]]}<span>${t[1]}</span></button>`).join("");

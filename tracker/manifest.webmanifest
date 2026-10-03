@@ -1,13 +1,13 @@
 {
- "name": "برش ۸ هفته‌ای",
- "short_name": "Cut 8W",
+ "name": "GRIP · گریپ",
+ "short_name": "GRIP",
  "lang": "fa",
  "dir": "rtl",
  "start_url": "./index.html",
  "scope": "./",
  "display": "standalone",
- "background_color": "#E9ECEF",
- "theme_color": "#E9ECEF",
+ "background_color": "#07090D",
+ "theme_color": "#07090D",
  "id": "./index.html",
  "icons": [
   {
