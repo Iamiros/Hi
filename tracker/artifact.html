@@ -10,7 +10,7 @@
 :root{
   --bg:#EDF0F5; --bg-glow1:rgba(79,124,255,.18); --bg-glow2:rgba(124,196,255,.16);
   --panel:rgba(255,255,255,.72); --panel-solid:#F8FAFC; --surface2:#E4E9F0; --line:rgba(15,25,45,.09); --hl:rgba(255,255,255,.9);
-  --ink:#0C1320; --ink2:#4A5669; --ink3:#6D7889;
+  --ink:#0C1320; --ink2:#46526A; --ink3:#5A6578;
   --accent:#2E66E8; --accent2:#3FA5F5; --accent-ink:#1F50C2; --on-accent:#FFFFFF; --accent-soft:rgba(46,102,232,.12);
   --gold:#A9760F; --gold-soft:rgba(201,148,30,.16); --ok:#148556; --warn:#A35C0B; --bad:#BE3A33;
   --h0:#E2E7EE; --h1:#C6D6F3; --h2:#94B3EC; --h3:#3C70E0; --h4:#1F4AA1; --t-lo:#0C1320; --t-hi:#FFFFFF;
@@ -24,7 +24,7 @@
   :root:not([data-theme="light"]){
     --bg:#07090D; --bg-glow1:rgba(64,110,255,.30); --bg-glow2:rgba(80,190,255,.16);
     --panel:rgba(18,23,32,.72); --panel-solid:#11161E; --surface2:#1A212C; --line:rgba(255,255,255,.07); --hl:rgba(255,255,255,.06);
-    --ink:#F2F5F9; --ink2:#9DA9BA; --ink3:#6F7B8D;
+    --ink:#F2F5F9; --ink2:#A3AFC0; --ink3:#8793A5;
     --accent:#5B94FF; --accent2:#7CD0FF; --accent-ink:#93B8FF; --on-accent:#06101F; --accent-soft:rgba(91,148,255,.14);
     --gold:#F1BC55; --gold-soft:rgba(241,188,85,.14); --ok:#45D39C; --warn:#F5AA60; --bad:#FF7E76;
     --h0:#161C26; --h1:#1E2F4B; --h2:#2B4C86; --h3:#5B94FF; --h4:#A9C8FF; --t-lo:#F2F5F9; --t-hi:#06101F;
@@ -34,7 +34,7 @@
 :root[data-theme="dark"]{
   --bg:#07090D; --bg-glow1:rgba(64,110,255,.30); --bg-glow2:rgba(80,190,255,.16);
   --panel:rgba(18,23,32,.72); --panel-solid:#11161E; --surface2:#1A212C; --line:rgba(255,255,255,.07); --hl:rgba(255,255,255,.06);
-  --ink:#F2F5F9; --ink2:#9DA9BA; --ink3:#6F7B8D;
+  --ink:#F2F5F9; --ink2:#A3AFC0; --ink3:#8793A5;
   --accent:#5B94FF; --accent2:#7CD0FF; --accent-ink:#93B8FF; --on-accent:#06101F; --accent-soft:rgba(91,148,255,.14);
   --gold:#F1BC55; --gold-soft:rgba(241,188,85,.14); --ok:#45D39C; --warn:#F5AA60; --bad:#FF7E76;
   --h0:#161C26; --h1:#1E2F4B; --h2:#2B4C86; --h3:#5B94FF; --h4:#A9C8FF; --t-lo:#F2F5F9; --t-hi:#06101F;
@@ -45,6 +45,7 @@ html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-fa);font-size:16px;line-height:1.65;min-height:100dvh;
   padding:0 0 calc(104px + env(safe-area-inset-bottom)) 0;
   -webkit-tap-highlight-color:transparent;overflow-x:hidden}
+body.has-timer{padding-bottom:calc(176px + env(safe-area-inset-bottom))}
 body::before{content:"";position:fixed;inset:-20% -10% auto;height:70vh;pointer-events:none;z-index:-1;
   background:radial-gradient(40% 50% at 78% 18%,var(--bg-glow1),transparent 70%),radial-gradient(35% 45% at 18% 8%,var(--bg-glow2),transparent 70%)}
 body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.05;
@@ -88,7 +89,7 @@ a{color:var(--accent-ink)}
 .info:hover{color:var(--accent-ink);background:var(--accent-soft)}
 .grid2{display:grid;gap:14px}
 @media (min-width:980px){.grid2{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);align-items:start}}
-.rise{animation:rise .5s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i,0) * 50ms)}
+.anim .rise{animation:rise .5s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i,0) * 50ms)}
 @keyframes rise{from{opacity:.001;transform:translateY(10px)}to{opacity:1;transform:none}}
 
 /* week strip */
@@ -250,7 +251,7 @@ textarea.inp{min-height:88px;resize:vertical}
 .cell{min-height:54px;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.15;transition:transform .15s ease}
 .cell:active{transform:scale(.93)}
 .cell b{font-family:var(--f-x);font-weight:800;font-size:.98rem}
-.cell .en{font-size:.72rem;opacity:.85}
+.cell .en{font-size:.74rem}
 .cell.future{background:transparent;box-shadow:inset 0 0 0 1.5px var(--line);color:var(--ink3)}
 .cell.l0{background:var(--h0);color:var(--t-lo)} .cell.l1{background:var(--h1);color:var(--t-lo)} .cell.l2{background:var(--h2);color:var(--t-lo)}
 .cell.l3{background:var(--h3);color:var(--t-hi)} .cell.l4{background:var(--h4);color:var(--t-hi)}
@@ -348,10 +349,10 @@ dialog::backdrop{background:rgba(3,6,12,.55);-webkit-backdrop-filter:blur(3px);b
 .sheet h3{font-size:.88rem;margin:14px 0 6px;color:var(--ink2)}
 .sheet ul{margin:0;padding-inline-start:18px;display:grid;gap:4px;font-size:.92rem}
 .sheet p{font-size:.92rem}
-.lrow{display:grid;grid-template-columns:24px 1fr 1fr 64px;gap:8px;align-items:center;padding:8px 0}
+.lrow{display:grid;grid-template-columns:20px 1.3fr 1fr 56px;gap:8px;align-items:center;padding:8px 0}
 .lrow + .lrow{border-top:1px solid var(--line)}
 .step{display:flex;align-items:center;background:var(--surface2);border-radius:var(--r-md);overflow:hidden}
-.step button{width:38px;min-height:46px;font-size:1.15rem;color:var(--ink2);flex:none}
+.step button{width:32px;min-height:46px;font-size:1.15rem;color:var(--ink2);flex:none}
 .step input{flex:1;min-width:0;width:100%;border:0;background:transparent;text-align:center;font-family:var(--f-x);font-weight:800;font-size:1.05rem;min-height:46px;direction:ltr}
 .step input:focus{outline:2px solid var(--accent);outline-offset:-2px}
 .rpe{min-height:46px;border-radius:var(--r-md);background:var(--surface2);border:0;padding:0 6px;font-family:var(--f-x);font-weight:700;width:100%;direction:ltr;text-align:center}
@@ -397,7 +398,7 @@ const fa = s => String(s).replace(/\d/g, d => FD[d]).replace(/\./g, "٫");
 const faN = (x, d = 0) => (x == null || isNaN(x)) ? "-" : fa(Number(x).toFixed(d));
 const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const en = s => `<bdi class="en" dir="ltr" lang="en">${esc(s)}</bdi>`;
-const toEn = s => String(s).replace(/[۰-۹]/g, d => FD.indexOf(d)).replace(/[٫,]/g, ".").trim();
+const toEn = s => String(s).replace(/[۰-۹]/g, d => FD.indexOf(d)).replace(/[٠-٩]/g, d => "٠١٢٣٤٥٦٧٨٩".indexOf(d)).replace(/[٫,]/g, ".").trim();
 const parseNum = (s, lo, hi) => { const t = toEn(s); if (t === "") return null; const n = Number(t); return isFinite(n) && n >= lo && n <= hi ? n : undefined; };
 const $ = (s, r = document) => r.querySelector(s);
 const parseISO = s => { const [y, m, d] = s.split("-").map(Number); return new Date(y, m - 1, d, 12); };
@@ -454,7 +455,7 @@ function save(fromCloud) {
   catch (e) { if (!saveWarned) { saveWarned = true; toast("ذخیره‌سازی مرورگر در دسترس نیست. از Export برای پشتیبان استفاده کن."); } }
 }
 function toast(msg) {
-  const t = $("#toast"); t.textContent = msg; t.hidden = false;
+  const t = $("#toast"), host = document.querySelector("dialog[open]") || document.body; if (t.parentNode !== host) host.appendChild(t); t.textContent = msg; t.hidden = false;
   clearTimeout(toast.t); toast.t = setTimeout(() => t.hidden = true, 3200);
 }
 function D(date) { const d = S.days[date] || (S.days[date] = { done: {}, water: 0, lifts: {}, sets: {} }); d.sets = d.sets || {}; d.lifts = d.lifts || {}; return d; }
@@ -686,13 +687,14 @@ const INFO = {
 };
 
 /* ---------- state ---------- */
-let tab = "today";
+let tab = "today", planWeek = 1;
 let sel = clamp(todayIdx(), 0, 55);
 const openD = new Set();
 function go(t) { tab = t; render(); window.scrollTo(0, 0); }
 function setSel(i) { sel = clamp(i, 0, 55); render(); }
 function applyTheme() {
-  const t = S.prefs.theme;
+  const t = S.prefs.theme, dark = t === "dark" || (t !== "light" && matchMedia("(prefers-color-scheme: dark)").matches);
+  const m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = dark ? "#07090D" : "#EDF0F5";
   if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
   else document.documentElement.removeAttribute("data-theme");
 }
@@ -724,7 +726,7 @@ function hero(inf, dd) {
       <div class="chips">${inf.letter ? `<span class="pill acc">${en("Workout " + inf.letter)}</span>` : `<span class="pill">روز پیاده‌روی</span>`}
       ${inf.refeed ? `<span class="pill gold">ریفید</span>` : ""}${inf.test ? `<span class="pill gold">روز تست</span>` : ""}
       ${sel !== cur && cur >= 0 && cur <= 55 ? `<button class="pill" data-act="today" style="min-height:32px">برو به امروز</button>` : ""}</div></div></div>
-    <div class="kpis3 num"><div><b class="x">${fa(n.kcal)}</b><span>کیلوکالری</span></div><div><b class="x">${fa(String(Number(((dd.water || 0) / 1000).toFixed(1))))}<span class="faint" style="font-size:.6em">/${fa(waterTarget(inf) / 1000)}</span></b><span>آب، لیتر</span></div><div><b class="x">${rd == null ? "-" : fa(rd)}</b><span>آمادگی</span></div></div>
+    <div class="kpis3 num"><div><b class="x">${fa(n.kcal)}</b><span>کیلوکالری</span></div><div><b class="x">${fa(String(Number(((dd.water || 0) / 1000).toFixed(1))))}<span class="faint" style="font-size:.6em">/${fa(waterTarget(inf) / 1000)}</span></b><span>آب، لیتر</span></div><div><b class="x" id="kpiRd">${rd == null ? "-" : fa(rd)}</b><span>آمادگی</span></div></div>
     <div class="strip" aria-hidden="true">${strip}</div></section>`;
 }
 
@@ -784,12 +786,17 @@ function walkDay(inf, dd) {
     <div class="sets">${pips}</div></section>`;
 }
 
+function gaugeHtml(dd) {
+  const rd = readiness(dd), msg = rd == null ? "خواب، انرژی و کوفتگی را وارد کن." : rd >= 75 ? "آماده‌ای. طبق برنامه برو." : rd >= 50 ? "متوسط. ست‌های سنگین را RPE ۷ تا ۷٫۵ نگه دار." : "پایین. یک ست سنگین کمتر و RPE ۷.";
+  return `${ring((rd || 0) / 100, 84, 9)}<div><b class="x num">${rd == null ? "-" : fa(rd)}</b><p class="small muted">${msg}</p></div>`;
+}
+function refreshReady(inf, d) { const g = $("#gauge"); if (g) g.innerHTML = gaugeHtml(d); const k = $("#kpiRd"); if (k) { const rd = readiness(d); k.textContent = rd == null ? "-" : fa(rd); } }
 function readyCard(inf, dd) {
   const rd = readiness(dd), sc = (f, v) => `<div class="scale5" role="group" aria-label="${f}">${[1, 2, 3, 4, 5].map(k => `<button data-act="scale" data-f="${f}" data-n="${k}" aria-pressed="${v === k}">${fa(k)}</button>`).join("")}</div>`;
   const msg = rd == null ? "خواب، انرژی و کوفتگی را وارد کن." : rd >= 75 ? "آماده‌ای. طبق برنامه برو." : rd >= 50 ? "متوسط. ست‌های سنگین را RPE ۷ تا ۷٫۵ نگه دار." : "پایین. یک ست سنگین کمتر و RPE ۷.";
   return `<section class="panel rise" style="--i:2" aria-label="آمادگی امروز">${ph("آمادگی امروز", "ready")}
-    <div class="gauge" style="margin-bottom:0">${ring((rd || 0) / 100, 84, 9)}<div><b class="x num">${rd == null ? "-" : fa(rd)}</b><p class="small muted">${msg}</p></div></div>
-    <details class="fold" ${rd == null ? "open" : `data-d="rd" ${openD.has("rd") ? "open" : ""}`}><summary>${rd == null ? "ثبت خواب، انرژی و کوفتگی" : "ویرایش"}</summary>
+    <div class="gauge" id="gauge" style="margin-bottom:0">${gaugeHtml(dd)}</div>
+    <details class="fold" data-d="rd" ${rd == null || dd.hunger == null || openD.has("rd") ? "open" : ""}><summary>${rd == null ? "ثبت خواب، انرژی و کوفتگی" : "ویرایش"}</summary>
     <div class="fq"><label class="f" for="sl">خواب دیشب (ساعت)</label><input id="sl" class="inp num" type="text" inputmode="decimal" dir="ltr" value="${esc(dd.sleepH ?? "")}" data-act="field" data-f="sleepH" autocomplete="off"></div>
     <div class="fq"><div class="lb"><span>انرژی</span><span>۱ کم · ۵ عالی</span></div>${sc("energy", dd.energy)}</div>
     <div class="fq"><div class="lb"><span>کوفتگی عضلات</span><span>۱ هیچ · ۵ شدید</span></div>${sc("sore", dd.sore)}</div>
@@ -816,7 +823,7 @@ function waterCard(inf, dd) {
   return `<section class="panel rise" style="--i:3" aria-label="آب">${ph("آب", "water")}<div class="water"><div class="tank" role="progressbar" aria-label="آب" aria-valuemin="0" aria-valuemax="${t}" aria-valuenow="${Math.min(ml, t)}"><i style="height:${(p * 100).toFixed(1)}%"></i></div>
     <div><p><span class="big x num">${fa(String(Number((ml / 1000).toFixed(2))))}</span> <span class="muted">از ${fa(t / 1000)} لیتر</span></p>
     <p class="small muted">${fa(Math.floor(ml / 250))} لیوان ۲۵۰ میلی‌لیتری.</p>
-    <div class="wbtns"><button class="btn pri" data-act="water" data-v="250">+۲۵۰</button><button class="btn pri" data-act="water" data-v="500">+۵۰۰</button><button class="btn" data-act="water" data-v="-250" ${ml <= 0 ? "disabled" : ""} aria-label="کم کردن ۲۵۰">−۲۵۰</button></div></div></div></section>`;
+    <div class="wbtns"><button class="btn pri" data-act="water" data-v="250"><bdi dir="ltr">+۲۵۰</bdi></button><button class="btn pri" data-act="water" data-v="500"><bdi dir="ltr">+۵۰۰</bdi></button><button class="btn" data-act="water" data-v="-250" ${ml <= 0 ? "disabled" : ""} aria-label="کم کردن ۲۵۰"><bdi dir="ltr">−۲۵۰</bdi></button></div></div></div></section>`;
 }
 
 function fuel(inf, dd) {
@@ -872,10 +879,10 @@ function viewToday() {
 
 /* ---------- program ---------- */
 function viewPlan() {
-  const inf = info(sel), home = S.prefs.mode === "home", wk = inf.week;
+  const inf = info(sel), home = S.prefs.mode === "home", wk = planWeek;
   const days = [0, 1, 2, 3, 4, 5, 6].map(d => {
     const f = info((wk - 1) * 7 + d), W = f.letter && PROGRAM.workouts[f.letter];
-    return `<div class="pd ${d === inf.dow ? "now" : ""}"><b>${DAYFA[d]}</b><span class="small">${W ? `${en("Workout " + f.letter)} · ${esc(W.fa.split(":")[1] || "")}` : "پیاده‌روی + " + en("GTG")}${f.refeed ? " · ریفید" : ""}${f.dow === 6 ? " · چک‌این" : ""}</span></div>`;
+    return `<div class="pd ${wk === inf.week && d === inf.dow ? "now" : ""}"><b>${DAYFA[d]}</b><span class="small">${W ? `${en("Workout " + f.letter)} · ${esc(W.fa.split(":")[1] || "")}` : "پیاده‌روی + " + en("GTG")}${f.refeed ? " · ریفید" : ""}${f.dow === 6 ? " · چک‌این" : ""}</span></div>`;
   }).join("");
   const ph8 = PROGRAM.phases.find(x => x[0].includes(wk));
   let h = `<section class="panel rise">${ph(`برنامه‌ی هفته ${fa(wk)} · ${ph8[2]}`, "plan")}<div class="plan">${days}</div>
@@ -894,8 +901,8 @@ function viewMap() {
   let h = `<section class="panel rise">${ph("نقشه ۵۶ روز", "map", `<span class="tiny muted">رنگ = درصد انجام</span>`)}<div class="hm">`;
   for (let w = 0; w < 8; w++) {
     const phs = PROGRAM.phases.find(x => x[0].includes(w + 1));
-    let wsum = 0; for (let d = 0; d < 7; d++) wsum += w * 7 + d <= cur ? pct(w * 7 + d) : 0;
-    h += `<div class="wl"><span>هفته ${fa(w + 1)} · ${phs[2]}</span><span class="num">${w * 7 <= cur ? fa(Math.round(wsum / 7 * 100)) + "٪" : ""}</span></div>`;
+    let wsum = 0, wn = 0; for (let d = 0; d < 7; d++) if (w * 7 + d <= cur) { wsum += pct(w * 7 + d); wn++; }
+    h += `<div class="wl"><span>هفته ${fa(w + 1)} · ${phs[2]}</span><span class="num">${wn ? fa(Math.round(wsum / wn * 100)) + "٪" : ""}</span></div>`;
     for (let d = 0; d < 7; d++) {
       const i = w * 7 + d, inf = info(i), p = pct(i), future = i > cur;
       const tag = inf.letter ? inf.letter + (inf.refeed ? "+R" : "") : "W";
@@ -1014,18 +1021,24 @@ function viewStats() {
   const waistPts = [], bfPts = [];
   for (let i = 0; i < 56; i++) { const d = peek(dateOf(i)); if (d) { if (d.waist) waistPts.push({ i, v: +d.waist }); const bf = bodyFat(d.sf, dateOf(i)); if (bf != null) bfPts.push({ i, v: bf }); } }
   h += `<section class="panel rise" style="margin-top:14px">${ph("دور شکم و درصد چربی", "body2")}<h3 class="small muted" style="margin-bottom:4px">دور شکم (cm)</h3>${miniChart(waistPts, "دور شکم", "cm", "var(--accent)")}<h3 class="small muted" style="margin:10px 0 4px">درصد چربی</h3>${miniChart(bfPts, "درصد چربی", "٪", "var(--gold)")}</section>`;
+  h += `<section class="panel rise" style="margin-top:14px">${ph("چالش‌ها", "chal")}<div id="chal">${chalHtml()}</div></section>`;
+  return h + statsTail();
+}
+function chalHtml() {
   let gtg = 0, hang = 0, hollowBest = 0;
   for (let i = 0; i < 56; i++) { const d = peek(dateOf(i)); if (d) { if (d.done.gtg >= 5) gtg++; if (d.done.hang) hang++; } }
   PH.forEach(p => { const x = +(S.tests[p[0]] || {}).hollow; if (x > hollowBest) hollowBest = x; });
   const puBest = Math.max(0, ...PH.map(p => +(S.tests[p[0]] || {}).pullups || 0)), ss = stepStreak(todayIdx());
   const C = (p, b2, l) => `<div>${ring(p, 48, 6)}<div style="min-width:0"><b class="x num">${b2}</b><span>${l}</span></div></div>`;
-  h += `<section class="panel rise" style="margin-top:14px">${ph("چالش‌ها", "chal")}<div class="ch">
+  return `<div class="ch">
     ${C(puBest / 10, fa(puBest) + "/۱۰", "بهترین " + en("Pull-up"))}
     ${C(ss / 56, fa(ss) + "/۵۶", en("Step Streak"))}
     ${C(hollowBest / 60, fa(hollowBest) + "/۶۰", en("Hollow") + " ثانیه")}
     ${C(hang / 56, fa(hang), "روز " + en("Dead Hang"))}</div>
-    <p class="small muted" style="margin-top:12px">${en("GTG")} کامل: ${fa(gtg)} روز</p></section>`;
-  h += `<section class="panel rise" style="margin-top:14px">${ph("تست‌ها", "tests")}<div class="tw"><table class="tests"><thead><tr><th>تست</th>${PH.map(p => `<th>${p[1]}</th>`).join("")}</tr></thead><tbody>` +
+    <p class="small muted" style="margin-top:12px">${en("GTG")} کامل: ${fa(gtg)} روز</p>`;
+}
+function statsTail() {
+  let h = `<section class="panel rise" style="margin-top:14px">${ph("تست‌ها", "tests")}<div class="tw"><table class="tests"><thead><tr><th>تست</th>${PH.map(p => `<th>${p[1]}</th>`).join("")}</tr></thead><tbody>` +
     TESTS.map(t => `<tr><td>${en(t[1])}<br><span class="tiny faint en" lang="en">${esc(t[2])}${LOWER_BETTER.includes(t[0]) ? " · lower is better" : ""}</span></td>` +
       PH.map(p => { const val = (S.tests[p[0]] || {})[t[0]]; return `<td><input class="inp num" type="text" inputmode="decimal" dir="ltr" aria-label="${esc(t[1])} ${p[1]}" value="${esc(val ?? "")}" data-act="test" data-p="${p[0]}" data-t="${t[0]}"></td>`; }).join("") + `</tr>`).join("") +
     `</tbody></table></div><div class="cmp" id="cmp">${TESTS.map(cmpBars).join("")}</div></section>`;
@@ -1062,7 +1075,7 @@ let cloudRef = null;
 const TABS = [["today", "امروز", "today"], ["plan", "برنامه", "plan"], ["map", "نقشه", "map"], ["stats", "آمار", "stats"], ["set", "تنظیمات", "set"]];
 function render() {
   const a = document.activeElement, sig = a && a.dataset && a.dataset.act ? { ...a.dataset } : null;
-  const v = $("#view"); gid = 0;
+  const v = $("#view"); gid = 0; const vk = tab + ":" + sel; v.classList.toggle("anim", vk !== render.k); render.k = vk;
   v.innerHTML = tab === "today" ? viewToday() : tab === "plan" ? viewPlan() : tab === "map" ? viewMap() : tab === "stats" ? viewStats() : viewSettings();
   const inf = info(sel);
   $("#phase").textContent = `هفته ${fa(inf.week)} · ${inf.phaseFa}`;
@@ -1096,7 +1109,7 @@ function openInfo(k) {
 function openExInfo(exId, L) {
   const W = PROGRAM.workouts[L], ex = W.ex.find(e => e.id === exId), home = S.prefs.mode === "home";
   const id = home ? ex.home : ex.gym, lb = PROGRAM.lib[id], alt = PROGRAM.lib[home ? ex.gym : ex.home];
-  const yt = "https://www.youtube.com/results?search_query=" + encodeURIComponent(lb.yt), wk = info(sel).week;
+  const yt = "https://www.youtube.com/results?search_query=" + encodeURIComponent(lb.yt), wk = tab === "plan" ? planWeek : info(sel).week;
   const doses = [1, 2, 3, 4, 5, 6, 7, 8].map(w => `<td class="num ${w === wk ? "" : "faint"}" style="${w === wk ? "font-weight:800;color:var(--accent-ink)" : ""}"><span class="en">${esc(doseOf(ex, w, home))}</span></td>`).join("");
   $("#sheet").innerHTML = `<div class="in"><div class="grab"></div><div class="ph"><h2 id="sht" class="en" lang="en">${esc(lb.en)}</h2><button class="iconbtn" data-act="shclose" aria-label="بستن">✕</button></div>
     <p>${bidi(lb.fa)}</p>
@@ -1127,18 +1140,18 @@ function startTimer(sec, label) {
   try { actx = actx || new (window.AudioContext || window.webkitAudioContext)(); actx.resume && actx.resume(); } catch (e) {}
   clearTimeout(TM.hide); TM.end = Date.now() + sec * 1000; TM.total = sec; TM.label = label; clearInterval(TM.id); TM.id = setInterval(tickTimer, 250); tickTimer();
 }
-function stopTimer() { clearInterval(TM.id); clearTimeout(TM.hide); TM.end = 0; const el = $("#timer"); el.hidden = true; el.classList.remove("ding"); }
+function stopTimer() { clearInterval(TM.id); clearTimeout(TM.hide); TM.end = 0; document.body.classList.remove("has-timer"); const el = $("#timer"); el.hidden = true; el.classList.remove("ding"); }
 function tickTimer() {
   const el = $("#timer"); if (!TM.end) return;
   const left = Math.max(0, Math.ceil((TM.end - Date.now()) / 1000)), mm = Math.floor(left / 60), ss = String(left % 60).padStart(2, "0");
-  el.hidden = false;
+  el.hidden = false; document.body.classList.add("has-timer");
   if (left <= 0) {
     clearInterval(TM.id); TM.end = 0; el.classList.add("ding"); beep();
     el.innerHTML = `<div class="in"><span class="t num">${fa("0:00")}</span><span class="lb">وقت ست بعدی · ${esc(TM.label)}</span><button data-act="tstop">باشه</button></div>`;
     TM.hide = setTimeout(stopTimer, 8000); return;
   }
   el.classList.remove("ding");
-  el.innerHTML = `<div class="in"><span class="t num">${fa(mm + ":" + ss)}</span><span class="lb">استراحت · ${esc(TM.label)}</span><button data-act="tadd">+۳۰</button><button data-act="tstop">رد کن</button><span class="bar" style="width:${(left / TM.total * 100).toFixed(1)}%"></span></div>`;
+  el.innerHTML = `<div class="in"><span class="t num">${fa(mm + ":" + ss)}</span><span class="lb">استراحت · ${esc(TM.label)}</span><button data-act="tadd"><bdi dir="ltr">+۳۰</bdi></button><button data-act="tstop">رد کن</button><span class="bar" style="width:${(left / TM.total * 100).toFixed(1)}%"></span></div>`;
 }
 
 /* ---------- log sheet ---------- */
@@ -1154,17 +1167,22 @@ function openSheet(exId, lib) {
   sheetRows = rows; sheetEx = { exId, lib };
   drawSheet(); $("#sheet").showModal();
 }
+function platesHtml() {
+  const top = Math.max(0, ...sheetRows.map(r => +r.kg || 0));
+  if (top <= 0) return "";
+  const pl = platesFor(top);
+  return `<p class="tiny muted" style="margin-top:12px">صفحه‌ها برای هر طرف هالتر ${en("20 kg")} (سنگین‌ترین ست ${fa(top)} kg):</p><div class="plates">${pl.map(p => `<i>${p}</i>`).join("") || '<span class="small faint">فقط میله</span>'}</div>`;
+}
 function drawSheet() {
   const lib = PROGRAM.lib[sheetEx.lib], bw = BWLIFTS.includes(sheetEx.lib), bar = BARBELL.includes(sheetEx.lib);
-  const top = Math.max(0, ...sheetRows.map(r => +r.kg || 0)), pl = bar ? platesFor(top) : [];
-  $("#sheet").innerHTML = `<div class="in"><div class="grab"></div><div class="ph"><h2 id="sht" class="en" lang="en">${esc(lib.en)}</h2><button class="iconbtn" data-act="shclose" aria-label="بستن">✕</button></div>
+    $("#sheet").innerHTML = `<div class="in"><div class="grab"></div><div class="ph"><h2 id="sht" class="en" lang="en">${esc(lib.en)}</h2><button class="iconbtn" data-act="shclose" aria-label="بستن">✕</button></div>
     <p class="small muted">${bw ? "وزن بدن حساب است؛ فقط وزنه‌ی اضافه را بنویس (یا خالی)." : "وزنه‌ی کل و تکرار هر ست."} RPE: ۱۰ یعنی هیچ تکرار ذخیره، ۸ یعنی ۲ تکرار ذخیره.</p>
     <div class="lrow tiny muted" style="padding-top:8px"><span>ست</span><span>${bw ? "kg اضافه" : "kg"}</span><span>تکرار</span><span>RPE</span></div>` +
     sheetRows.map((r, k) => `<div class="lrow"><span class="num faint">${fa(k + 1)}</span>
       <div class="step"><button data-act="st" data-k="${k}" data-f="kg" data-d="-2.5" aria-label="کم کردن وزنه ست ${fa(k + 1)}">−</button><input id="kg${k}" inputmode="decimal" aria-label="وزنه ست ${fa(k + 1)}" value="${esc(r.kg)}" data-act="sti" data-k="${k}" data-f="kg"><button data-act="st" data-k="${k}" data-f="kg" data-d="2.5" aria-label="افزودن وزنه ست ${fa(k + 1)}">+</button></div>
       <div class="step"><button data-act="st" data-k="${k}" data-f="reps" data-d="-1" aria-label="کم کردن تکرار ست ${fa(k + 1)}">−</button><input id="rp${k}" inputmode="numeric" aria-label="تکرار ست ${fa(k + 1)}" value="${esc(r.reps)}" data-act="sti" data-k="${k}" data-f="reps"><button data-act="st" data-k="${k}" data-f="reps" data-d="1" aria-label="افزودن تکرار ست ${fa(k + 1)}">+</button></div>
       <select class="rpe" aria-label="RPE ست ${fa(k + 1)}" data-act="rpe" data-k="${k}"><option value="">-</option>${[6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10].map(v => `<option value="${v}" ${+r.rpe === v ? "selected" : ""}>${v}</option>`).join("")}</select></div>`).join("") +
-    (bar && top > 20 ? `<p class="tiny muted" style="margin-top:12px">صفحه‌ها برای هر طرف هالتر ${en("20 kg")} (سنگین‌ترین ست ${fa(top)} kg):</p><div class="plates" id="plates">${pl.map(p => `<i>${p}</i>`).join("") || '<span class="small faint">فقط میله</span>'}</div>` : "") +
+    (bar ? `<div id="platewrap">${platesHtml()}</div>` : "") +
     `<div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap"><button class="btn" data-act="shadd">+ ست</button><button class="btn" data-act="shdel" ${sheetRows.length < 2 ? "disabled" : ""}>− ست</button><span style="flex:1"></span><button class="btn pri" data-act="shsave">ذخیره</button></div></div>`;
 }
 
@@ -1200,7 +1218,9 @@ function checkSessionDone(inf, d) {
   const W = PROGRAM.workouts[inf.letter]; if (!W) return;
   const home = S.prefs.mode === "home";
   const all = W.ex.every(ex => { const n = setsOf(doseOf(ex, inf.week, home)); return !n || (d.sets[ex.id] || 0) >= n; });
-  if (all && !d.done.workout) { d.done.workout = true; stopTimer(); toast("همه ست‌ها انجام شد. جلسه ثبت شد."); }
+  if (all && !d.done.workout) { d.done.workout = true; d.done.wauto = true; stopTimer(); toast("همه ست‌ها انجام شد. جلسه ثبت شد."); }
+  else if (!all && d.done.workout && d.done.wauto) { d.done.workout = false; d.done.wauto = false; }
+  return all;
 }
 function refreshMeters(inf, d) {
   const n = PROGRAM.nutrition[inf.type], m = $("#meters"); if (!m) return;
@@ -1211,28 +1231,29 @@ document.addEventListener("click", e => {
   const b = e.target.closest("[data-act]"); if (!b || ["INPUT", "SELECT", "TEXTAREA"].includes(b.tagName)) return;
   const a = b.dataset.act, inf = info(sel);
   switch (a) {
-    case "tab": return go(b.dataset.v);
+    case "tab": if (b.dataset.v === "plan") planWeek = info(sel).week; return go(b.dataset.v);
     case "prev": return setSel(sel - 1);
     case "next": return setSel(sel + 1);
-    case "wprev": return setSel(sel - 7);
-    case "wnext": return setSel(sel + 7);
+    case "wprev": planWeek = Math.max(1, planWeek - 1); return render();
+    case "wnext": planWeek = Math.min(8, planWeek + 1); return render();
     case "today": return setSel(todayIdx());
     case "open": sel = +b.dataset.i; if (tab !== "today") { tab = "today"; window.scrollTo(0, 0); } return render();
     case "info": return openInfo(b.dataset.k);
     case "exinfo": return openExInfo(b.dataset.ex, b.dataset.w);
     case "mode": S.prefs.mode = b.dataset.v; save(); return render();
-    case "tog": { const d = D(inf.date); d.done[b.dataset.k] = !d.done[b.dataset.k]; save(); return render(); }
+    case "tog": { const d = D(inf.date); d.done[b.dataset.k] = !d.done[b.dataset.k]; if (b.dataset.k === "workout") d.done.wauto = false; save(); return render(); }
     case "pip": { const d = D(inf.date), k = b.dataset.k, n = +b.dataset.n; d.done[k] = (d.done[k] || 0) === n ? n - 1 : n; save(); return render(); }
-    case "scale": { const d = D(inf.date), f = b.dataset.f, n = +b.dataset.n; d[f] = d[f] === n ? undefined : n; if (d[f] === undefined) delete d[f]; save(); return render(); }
+    case "scale": { openD.add("rd"); const d = D(inf.date), f = b.dataset.f, n = +b.dataset.n; d[f] = d[f] === n ? undefined : n; if (d[f] === undefined) delete d[f]; save(); return render(); }
     case "set": {
       const d = D(inf.date), id = b.dataset.id, n = +b.dataset.n, max = +b.dataset.max, was = d.sets[id] || 0;
       d.sets[id] = was === n ? n - 1 : n;
-      if (d.sets[id] > was && d.sets[id] < max) startTimer(+b.dataset.rest, b.getAttribute("aria-label").split(" ست ")[0] + " · ست " + fa(d.sets[id] + 1));
-      checkSessionDone(inf, d); save(); return render();
+      const all = checkSessionDone(inf, d);
+      if (d.sets[id] > was && !all) startTimer(+b.dataset.rest, d.sets[id] < max ? b.getAttribute("aria-label").split(" ست ")[0] + " · ست " + fa(d.sets[id] + 1) : "حرکت بعدی");
+      save(); return render();
     }
     case "tadd": TM.end += 30000; TM.total += 30; return tickTimer();
     case "tstop": return stopTimer();
-    case "water": { const d = D(inf.date); d.water = Math.max(0, (d.water || 0) + +b.dataset.v); save(); return render(); }
+    case "water": { const d = D(inf.date); d.water = clamp((d.water || 0) + +b.dataset.v, 0, 20000); save(); return render(); }
     case "log": return openSheet(b.dataset.id, b.dataset.lib);
     case "shclose": return $("#sheet").close();
     case "st": { const r = sheetRows[+b.dataset.k]; if (!r) return; const f = b.dataset.f, cur = parseNum(String(r[f] ?? ""), -1e9, 1e9) || 0; r[f] = Math.max(0, Math.round((cur + +b.dataset.d) * 100) / 100); return drawSheet(); }
@@ -1265,7 +1286,7 @@ document.addEventListener("click", e => {
 document.addEventListener("change", e => {
   const el = e.target, a = el.dataset && el.dataset.act; if (!a) return;
   const inf = info(sel);
-  if (a === "sti") { const v = parseNum(el.value, 0, 1000); if (v === undefined) { toast("عدد معتبر وارد کن."); el.value = sheetRows[+el.dataset.k][el.dataset.f]; return; } sheetRows[+el.dataset.k][el.dataset.f] = v ?? ""; el.value = v ?? ""; if (el.dataset.f === "kg") { const pl = $("#plates"); if (pl) { const top = Math.max(0, ...sheetRows.map(r => +r.kg || 0)); pl.innerHTML = platesFor(top).map(p => `<i>${p}</i>`).join(""); } } return; }
+  if (a === "sti") { const v = parseNum(el.value, 0, el.dataset.f === "kg" ? 500 : 200); if (v === undefined) { toast("عدد معتبر وارد کن."); el.value = sheetRows[+el.dataset.k][el.dataset.f]; return; } sheetRows[+el.dataset.k][el.dataset.f] = v ?? ""; el.value = v ?? ""; if (el.dataset.f === "kg") { const pw = $("#platewrap"); if (pw) pw.innerHTML = platesHtml(); } return; }
   if (a === "rpe") { sheetRows[+el.dataset.k].rpe = el.value === "" ? "" : +el.value; return; }
   if (a === "field") {
     const d = D(inf.date), f = el.dataset.f;
@@ -1277,7 +1298,7 @@ document.addEventListener("change", e => {
     el.value = val ?? ""; save();
     if (f === "steps") { const h = $("#sthint"); if (h) h.innerHTML = val >= 12000 ? "امروز در چالش " + en("Step Streak") + " حساب می‌شود." : "حداقل ۱۲٬۰۰۰ قدم برای " + en("Step Streak") + "."; }
     if (f === "kin" || f === "pin") refreshMeters(inf, d);
-    if (f === "sleepH") render();
+    if (f === "sleepH") refreshReady(inf, d);
     if (f === "waist" || f === "weight") { const r = $("#bfres"); if (r) r.innerHTML = bfBlock(bodyFat(d.sf, inf.date), d.weight || avg7(sel)); }
     return;
   }
@@ -1292,7 +1313,7 @@ document.addEventListener("change", e => {
     const val = parseNum(el.value, 0, 1000);
     if (val === undefined) { toast("عدد معتبر وارد کن."); el.value = (S.tests[el.dataset.p] || {})[el.dataset.t] ?? ""; return; }
     (S.tests[el.dataset.p] = S.tests[el.dataset.p] || {})[el.dataset.t] = val === null ? "" : val; el.value = val ?? ""; save();
-    const c = $("#cmp"); if (c) c.innerHTML = TESTS.map(cmpBars).join("");
+    const c = $("#cmp"); if (c) c.innerHTML = TESTS.map(cmpBars).join(""); const ch = $("#chal"); if (ch) ch.innerHTML = chalHtml();
     return;
   }
   if (a === "theme") { S.prefs.theme = el.value; save(); applyTheme(); return render(); }

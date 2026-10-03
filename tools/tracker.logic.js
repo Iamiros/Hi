@@ -11,7 +11,7 @@ const fa = s => String(s).replace(/\d/g, d => FD[d]).replace(/\./g, "٫");
 const faN = (x, d = 0) => (x == null || isNaN(x)) ? "-" : fa(Number(x).toFixed(d));
 const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const en = s => `<bdi class="en" dir="ltr" lang="en">${esc(s)}</bdi>`;
-const toEn = s => String(s).replace(/[۰-۹]/g, d => FD.indexOf(d)).replace(/[٫,]/g, ".").trim();
+const toEn = s => String(s).replace(/[۰-۹]/g, d => FD.indexOf(d)).replace(/[٠-٩]/g, d => "٠١٢٣٤٥٦٧٨٩".indexOf(d)).replace(/[٫,]/g, ".").trim();
 const parseNum = (s, lo, hi) => { const t = toEn(s); if (t === "") return null; const n = Number(t); return isFinite(n) && n >= lo && n <= hi ? n : undefined; };
 const $ = (s, r = document) => r.querySelector(s);
 const parseISO = s => { const [y, m, d] = s.split("-").map(Number); return new Date(y, m - 1, d, 12); };
@@ -68,7 +68,7 @@ function save(fromCloud) {
   catch (e) { if (!saveWarned) { saveWarned = true; toast("ذخیره‌سازی مرورگر در دسترس نیست. از Export برای پشتیبان استفاده کن."); } }
 }
 function toast(msg) {
-  const t = $("#toast"); t.textContent = msg; t.hidden = false;
+  const t = $("#toast"), host = document.querySelector("dialog[open]") || document.body; if (t.parentNode !== host) host.appendChild(t); t.textContent = msg; t.hidden = false;
   clearTimeout(toast.t); toast.t = setTimeout(() => t.hidden = true, 3200);
 }
 function D(date) { const d = S.days[date] || (S.days[date] = { done: {}, water: 0, lifts: {}, sets: {} }); d.sets = d.sets || {}; d.lifts = d.lifts || {}; return d; }

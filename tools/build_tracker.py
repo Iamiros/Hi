@@ -38,7 +38,7 @@ self.addEventListener("activate",e=>{e.waitUntil(caches.keys().then(k=>Promise.a
 self.addEventListener("fetch",e=>{
  if(e.request.method!=="GET")return;
  e.respondWith(caches.match(e.request,{ignoreSearch:true}).then(h=>{
-  const n=fetch(e.request).then(r=>{if(r&&r.status===200){const cp=r.clone();e.waitUntil(caches.open(C).then(c=>c.put(e.request,cp)))}return r}).catch(()=>h);
+  const n=fetch(e.request).then(r=>{if(r&&r.status===200){const cp=r.clone();return caches.open(C).then(c=>c.put(e.request,cp)).then(()=>r)}return r}).catch(()=>h);
   return h||n}))});
 '''.replace("HASH",H))
 (root / "tracker/icon.svg").write_text('''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" fill="#2B3E52"/>
