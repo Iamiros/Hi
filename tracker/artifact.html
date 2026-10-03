@@ -1468,13 +1468,20 @@ function drawSheet() {
 }
 
 /* ---------- actions ---------- */
+let dl = null;
 async function download(name, text, type) {
+  if (dl) {
+    try { await dl.save({ filename: name, data: new Blob([text], { type }) }); toast("فایل ذخیره شد."); }
+    catch (e) { if (e && e.code !== "declined") toast("ذخیره‌ی فایل انجام نشد. از «کپی پشتیبان» استفاده کن."); }
+    return;
+  }
   const file = new File([text], name, { type });
   if (navigator.canShare && navigator.canShare({ files: [file] }) && /iP(hone|ad|od)/.test(navigator.userAgent)) {
     try { await navigator.share({ files: [file], title: name }); return; } catch (e) { if (e && e.name === "AbortError") return; }
   }
   const a = document.createElement("a"), u = URL.createObjectURL(new Blob([text], { type }));
   a.href = u; a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(u), 1000);
+  toast("فایل ساخته شد.");
 }
 const csvCell = c => { let t = String(c); if (/^[=+\-@\t\r]/.test(t)) t = "'" + t; return `"${t.replace(/"/g, '""')}"`; };
 function csv() {
@@ -1583,7 +1590,7 @@ document.addEventListener("click", e => {
       return confirmDlg("داده‌های فعلی جایگزین شود؟", "پشتیبان چسبانده‌شده جایگزین همه داده‌های این مرورگر می‌شود.", "جایگزین کن", () => {
         S = n; save(); applyTheme(); sel = clamp(todayIdx(), 0, 55); render(); toast("پشتیبان وارد شد."); });
     }
-    case "export": return download(`cut-backup-${todayISO()}.json`, JSON.stringify(S, null, 1), "application/json"), toast("فایل پشتیبان ساخته شد.");
+    case "export": return download(`cut-backup-${todayISO()}.json`, JSON.stringify(S, null, 1), "application/json");
     case "csv": return download(`cut-${todayISO()}.csv`, csv(), "text/csv");
     case "reset": return confirmDlg("همه داده‌ها پاک شود؟", "قبل از پاک کردن پشتیبان بگیر. این کار برگشت‌پذیر نیست.", "پاک کن", () => {
       S = dflt(); save(); sel = clamp(todayIdx(), 0, 55); applyTheme(); render(); });
@@ -1676,6 +1683,7 @@ async function pull() {
     const [db, user] = await Promise.all([claude.use("db"), claude.use("user")]);
     const id = user && await user.id(); if (!db || !id) return;
     cloudRef = db.doc("data/users/" + id + "/tracker"); onSaved = push;
+    claude.use("downloads").then(d => { dl = d; }).catch(() => {});
     claude.use("sample").then(s => { smp = s; if (s && (tab === "stats" || tab === "food") && !page) render(); }).catch(() => {});
     await pull(); const sv = $("#sv"); if (sv) sv.textContent = "همگام‌سازی ابری فعال است. داده‌ها در حساب Claude تو ذخیره می‌شوند.";
   } catch (e) {}
