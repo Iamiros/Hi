@@ -25,7 +25,7 @@ const fmtG = new Intl.DateTimeFormat("fa-IR-u-ca-gregory", { year: "numeric", mo
 
 /* ---------- persistence ---------- */
 let mem = null;
-const dflt = () => ({ v: 1, start: DEFAULT_START, days: {}, tests: {}, prefs: { mode: "gym", theme: "system" } });
+const dflt = () => ({ v: 1, start: DEFAULT_START, days: {}, tests: {}, foods: [], prefs: { mode: "gym", theme: "system" } });
 const isObj = o => o && typeof o === "object" && !Array.isArray(o);
 const numOr = (x, lo, hi) => { const n = Number(x); return isFinite(n) && x !== "" && x !== null && n >= lo && n <= hi ? n : null; };
 function normalize(o) {
@@ -41,10 +41,12 @@ function normalize(o) {
     if (w !== null) r.weight = w; if (st !== null) r.steps = st;
     if (typeof d.note === "string") r.note = d.note.slice(0, 2000);
     [["sleepH", 0, 16], ["energy", 1, 5], ["sore", 1, 5], ["hunger", 1, 5], ["kin", 0, 10000], ["pin", 0, 1000], ["waist", 40, 200]].forEach(([f, lo, hi]) => { const v = numOr(d[f], lo, hi); if (v !== null) r[f] = v; });
+    if (Array.isArray(d.food)) r.food = d.food.filter(isObj).slice(0, 80).map(x => ({ m: numOr(x.m, 0, 4) ?? 4, n: String(x.n || "").slice(0, 60), a: String(x.a || "").slice(0, 30), k: numOr(x.k, 0, 5000) || 0, p: numOr(x.p, 0, 500) || 0, c: numOr(x.c, 0, 1000) || 0, f: numOr(x.f, 0, 500) || 0 })).filter(x => x.n);
     if (isObj(d.sf)) { r.sf = {}; ["ch", "ab", "th"].forEach(f => { const v = numOr(d.sf[f], 1, 80); if (v !== null) r.sf[f] = v; }); }
     R.days[k] = r;
   });
   if (isObj(o.tests)) Object.keys(o.tests).forEach(p => { if (isObj(o.tests[p])) { R.tests[p] = {}; Object.keys(o.tests[p]).forEach(t => { const n = numOr(o.tests[p][t], 0, 1000); R.tests[p][t] = n === null ? "" : n; }); } });
+  if (Array.isArray(o.foods)) R.foods = o.foods.filter(isObj).slice(0, 100).map(x => ({ id: String(x.id || "").slice(0, 20), n: String(x.n || "").slice(0, 60), u: x.u ? String(x.u).slice(0, 20) : null, ug: numOr(x.ug, 0, 2000) || 0, k: numOr(x.k, 0, 2000) || 0, p: numOr(x.p, 0, 200) || 0, c: numOr(x.c, 0, 300) || 0, f: numOr(x.f, 0, 200) || 0 })).filter(x => x.id && x.n);
   if (isObj(o.prefs)) { if (["gym", "home"].includes(o.prefs.mode)) R.prefs.mode = o.prefs.mode; if (["system", "light", "dark"].includes(o.prefs.theme)) R.prefs.theme = o.prefs.theme; }
   return R;
 }
