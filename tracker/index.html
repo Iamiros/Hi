@@ -1250,7 +1250,7 @@ document.addEventListener("click", e => {
     case "water": { const d = D(inf.date); d.water = Math.max(0, (d.water || 0) + +b.dataset.v); save(); return render(); }
     case "log": return openSheet(b.dataset.id, b.dataset.lib);
     case "shclose": return $("#sheet").close();
-    case "st": { const r = sheetRows[+b.dataset.k], f = b.dataset.f, cur = parseNum(String(r[f] ?? ""), -1e9, 1e9) || 0; r[f] = Math.max(0, Math.round((cur + +b.dataset.d) * 100) / 100); return drawSheet(); }
+    case "st": { const r = sheetRows[+b.dataset.k]; if (!r) return; const f = b.dataset.f, cur = parseNum(String(r[f] ?? ""), -1e9, 1e9) || 0; r[f] = Math.max(0, Math.round((cur + +b.dataset.d) * 100) / 100); return drawSheet(); }
     case "shadd": sheetRows.push({ ...(sheetRows[sheetRows.length - 1] || { kg: "", reps: "", rpe: "" }) }); return drawSheet();
     case "shdel": if (sheetRows.length > 1) sheetRows.pop(); return drawSheet();
     case "shsave": {
@@ -1305,7 +1305,7 @@ document.addEventListener("change", e => {
   }
   if (a === "test") {
     const val = parseNum(el.value, 0, 1000);
-    if (val === undefined) { toast("عدد معتبر وارد کن."); return render(); }
+    if (val === undefined) { toast("عدد معتبر وارد کن."); el.value = (S.tests[el.dataset.p] || {})[el.dataset.t] ?? ""; return; }
     (S.tests[el.dataset.p] = S.tests[el.dataset.p] || {})[el.dataset.t] = val === null ? "" : val; el.value = val ?? ""; save();
     const c = $("#cmp"); if (c) c.innerHTML = TESTS.map(cmpBars).join("");
     return;
