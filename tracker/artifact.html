@@ -159,9 +159,8 @@ details.fold[open] > summary::after{transform:translateY(2px) rotate(-135deg)}
 .ename{font-size:1.12rem;font-family:var(--f-x);font-weight:700;color:var(--ink);text-align:start;line-height:1.25;display:inline-flex;align-items:center;gap:6px;min-height:32px}
 .ename::after{content:"i";font-size:.7rem;width:18px;height:18px;border-radius:999px;display:inline-grid;place-items:center;background:var(--surface2);color:var(--ink3);font-weight:800;font-stretch:100%}
 .ex.done .ename{color:var(--ink2)}
-.dose{font-family:var(--f-x);font-stretch:112%;font-weight:800;font-size:1.2rem;color:var(--accent-ink);white-space:nowrap;direction:ltr}
+.dose{font-family:var(--f-x);font-stretch:112%;font-weight:800;font-size:1.2rem;color:var(--accent-ink);direction:ltr;unicode-bidi:isolate;max-width:9em;text-align:left;flex:none}
 .meta{font-size:.82rem;color:var(--ink2);margin-top:2px}
-.meta bdi,.meta .en{white-space:nowrap}
 .hint-line{font-size:.8rem;margin-top:8px;padding:6px 10px;border-radius:10px;background:var(--accent-soft);color:var(--accent-ink);display:inline-block}
 .sets{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;align-items:center}
 .dot{width:44px;height:44px;border-radius:999px;display:grid;place-items:center;font-family:var(--f-x);font-weight:800;color:var(--ink3);background:var(--surface2);box-shadow:inset 0 0 0 1.5px var(--line);transition:background .2s ease,transform .15s ease,box-shadow .2s ease}
@@ -401,7 +400,7 @@ dialog::backdrop{background:rgba(3,6,12,.55);-webkit-backdrop-filter:blur(3px);b
 .excard{grid-template-columns:auto minmax(0,1fr) auto}
 .excard .thumb{width:64px;height:48px}
 .excard .exn{position:absolute;inset-inline-start:4px;top:4px;width:20px;height:20px;font-size:.7rem;z-index:1;background:rgba(7,9,13,.72);color:#fff}
-.ex-top .lead{display:flex;gap:12px;align-items:flex-start;min-width:0}
+.ex-top .lead{display:flex;gap:12px;align-items:flex-start;min-width:0;flex:1 1 auto}
 .flip{position:relative;aspect-ratio:3/2;border-radius:var(--r-md);overflow:hidden;background:#fff;margin:4px 0 14px;box-shadow:inset 0 0 0 1px var(--line)}
 .flip img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
 .flip img+img{animation:flipf 2.6s ease-in-out infinite}
@@ -425,6 +424,7 @@ dialog::backdrop{background:rgba(3,6,12,.55);-webkit-backdrop-filter:blur(3px);b
 .burst i{position:absolute;width:8px;height:13px;border-radius:2px;animation:pop 1.3s cubic-bezier(.15,.7,.3,1) forwards}
 @keyframes pop{0%{transform:translate(0,0) rotate(0);opacity:1}55%{transform:translate(var(--x),var(--y)) rotate(calc(var(--r) * .6));opacity:1}100%{transform:translate(calc(var(--x) * 1.15),calc(var(--y) + 170px)) rotate(var(--r));opacity:0}}
 @media (prefers-reduced-motion:reduce){.flip{aspect-ratio:3/1}.flip img{width:50%}.flip img+img{inset-inline-start:auto;inset-inline-end:0;opacity:1}.flip img:first-child{inset-inline-end:auto}.flip .lab span{opacity:1}}
+.nw{white-space:nowrap}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .empty{padding:22px;text-align:center;color:var(--ink2);border:1.5px dashed var(--line);border-radius:var(--r-lg);font-size:.9rem}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
@@ -463,7 +463,7 @@ const FD = "۰۱۲۳۴۵۶۷۸۹";
 const fa = s => String(s).replace(/\d/g, d => FD[d]).replace(/\./g, "٫");
 const faN = (x, d = 0) => (x == null || isNaN(x)) ? "-" : fa(Number(x).toFixed(d));
 const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const en = s => `<bdi class="en" dir="ltr" lang="en">${esc(s)}</bdi>`;
+const en = s => `<bdi class="en${String(s).length <= 24 ? " nw" : ""}" dir="ltr" lang="en">${esc(s)}</bdi>`;
 const toEn = s => String(s).replace(/[۰-۹]/g, d => FD.indexOf(d)).replace(/[٠-٩]/g, d => "٠١٢٣٤٥٦٧٨٩".indexOf(d)).replace(/[٫,]/g, ".").trim();
 const parseNum = (s, lo, hi) => { const t = toEn(s); if (t === "") return null; const n = Number(t); return isFinite(n) && n >= lo && n <= hi ? n : undefined; };
 const $ = (s, r = document) => r.querySelector(s);
@@ -678,7 +678,9 @@ const ICON = {
 };
 const SHORT = ["ش", "ی", "د", "س", "چ", "پ", "ج"];
 const fmtDay = new Intl.DateTimeFormat("fa-IR", { day: "numeric" });
-const bidi = s => esc(s).replace(/[A-Za-z0-9][A-Za-z0-9.\-/+×%' ]*[A-Za-z0-9%]|[A-Za-z0-9]/g, m => `<bdi dir="ltr">${m}</bdi>`);
+const BIDI_RE = /\+?[A-Za-z0-9][A-Za-z0-9.\-/+×%'&@ ]*[A-Za-z0-9%]|[A-Za-z0-9]/g;
+const bidi = s => { s = String(s); let o = "", last = 0; s.replace(BIDI_RE, (m, i) => { o += esc(s.slice(last, i)) + `<bdi dir="ltr"${m.length <= 24 ? ' class="nw"' : ""}>${esc(m)}</bdi>`; last = i + m.length; return m; }); return o + esc(s.slice(last)); };
+const doseH = d => String(d).split(" ").map(t => `<span class="nw">${esc(t)}</span>`).join(" ");
 const GROUP = { workout: 0, salt: 0, gtg: 0, tests: 0, mu: 0, kcal: 1, protein: 1, creatine: 1, walk: 2, water: 2, hang: 2, sleep: 2, checkin: 2 };
 const GROUP_FA = ["تمرین", "تغذیه", "بدن و ریکاوری"];
 const BARBELL = ["squat", "dl", "bench", "rdl", "bbrow", "ohp"];
@@ -832,7 +834,7 @@ function session(inf, dd) {
     return `<article class="ex ${n && k >= n ? "done" : ""}">
       <div class="ex-top"><div class="lead">${thumb(id)}<div style="min-width:0"><span class="faint tiny num">${fa(idx + 1)} </span><button class="ename" lang="en" data-act="exinfo" data-ex="${ex.id}" data-w="${inf.letter}">${esc(shown.en)}</button>
         <p class="meta">${shown.en === other.en ? "باشگاه و خانه: همین حرکت" : `${home ? "باشگاه" : "خانه"}: ${en(other.en)}`} · استراحت ${en(ex.rest)}</p></div></div>
-        <span class="dose">${esc(dose === "test" ? "Test" : dose)}</span></div>
+        <span class="dose">${doseH(dose === "test" ? "Test" : dose)}</span></div>
       ${ex.fa ? `<p class="meta" style="margin-top:6px">${bidi(ex.fa)}</p>` : ""}
       ${sug ? `<p class="hint-line">${sug}</p>` : ""}
       ${n ? `<div class="sets">${dots}${ex.main ? `<button class="linkbtn" data-act="log" data-id="${ex.id}" data-lib="${id}">ثبت وزنه${logs.length ? " · " + fa(logs.length) : ""}</button>` : ""}</div>` : `<p class="hint">این هفته اجرا نمی‌شود.</p>`}
@@ -964,7 +966,7 @@ function viewPlan() {
   Object.keys(PROGRAM.workouts).forEach((L, k) => {
     const W = PROGRAM.workouts[L];
     h += `<section class="panel rise" style="--i:${k + 1};margin-top:14px"><div class="sess-h" style="margin-bottom:6px"><div><button class="x wolink" lang="en" style="font-size:1.5rem" data-act="wopage" data-w="${L}">WORKOUT ${L}</button><span class="muted small">${esc(W.fa.split(":")[1] || W.fa)}</span></div></div><ul class="wlist">` +
-      W.ex.map(ex => { const id = home ? ex.home : ex.gym; return `<li><button class="ename" lang="en" data-act="exinfo" data-ex="${ex.id}" data-w="${L}">${esc(PROGRAM.lib[id].en)}</button><span class="dose" style="font-size:1rem">${esc(doseOf(ex, wk, home))}</span></li>`; }).join("") + `</ul></section>`;
+      W.ex.map(ex => { const id = home ? ex.home : ex.gym; return `<li><button class="ename" lang="en" data-act="exinfo" data-ex="${ex.id}" data-w="${L}">${esc(PROGRAM.lib[id].en)}</button><span class="dose" style="font-size:1rem">${doseH(doseOf(ex, wk, home))}</span></li>`; }).join("") + `</ul></section>`;
   });
   return h;
 }
@@ -1086,7 +1088,7 @@ function viewStats() {
   const done = rates.filter(r => r.rate != null);
   const last2 = rates.slice(-2), slow = last2.length === 2 && last2.every(r => r.rate != null && r.rate < 0.4);
   const fast = rates.length && rates[rates.length - 1].rate != null && rates[rates.length - 1].rate > 1.2, drops = strengthDrops();
-  h += `<section class="panel rise" style="margin-top:14px">${ph("سرعت کاهش وزن", "rate", `<span class="tiny muted">۰٫۴ تا ۱٫۲ kg/هفته</span>`)}` +
+  h += `<section class="panel rise" style="margin-top:14px">${ph("سرعت کاهش وزن", "rate", `<span class="tiny muted">۰٫۴ تا ۱٫۲ kg در هفته</span>`)}` +
     (done.length ? `<div class="rates">${done.map(r => { const c = r.rate < 0.4 ? "slow" : r.rate > 1.2 ? "fast" : "ok"; return `<div class="rate ${c}"><b class="x num">${faN(r.rate, 2)}</b><span>هفته ${fa(r.w)} · ${c === "ok" ? "در باند" : c === "slow" ? "کند" : "سریع"}</span></div>`; }).join("")}</div>`
       : `<div class="empty">برای محاسبه، در دو هفته‌ی کامل پیاپی حداقل ۳ وزن در هر هفته ثبت کن.</div>`) +
     (slow ? `<div class="rule warn"><div><b>تعدیل:</b> دو هفته پیاپی زیر ۰٫۴ kg. ۱۵۰ کیلوکالری کربوهیدرات از روزهای پیاده‌روی کم کن.</div></div>` : "") +
@@ -1252,7 +1254,7 @@ function pageWo(p) {
   <section class="panel rise" style="--i:3;margin-top:14px"><h2 class="h2">ست سخت برای هر عضله در این جلسه</h2><div class="chips" style="margin-top:8px">${vchips || '<span class="small faint">فقط ست‌های مهارتی</span>'}</div></section>
   <section class="panel rise" style="--i:4;margin-top:14px"><h2 class="h2">گرم کردن</h2><ul class="wu" style="margin-top:8px">${PROGRAM.warmup.map(w => `<li>${en(w[0])}<span class="en">${esc(w[1])}</span></li>`).join("")}</ul></section>
   <section class="panel rise" style="--i:5;margin-top:14px"><h2 class="h2">حرکت‌ها</h2><div class="exlist">` +
-    W.ex.map((ex, i) => { const id = home ? ex.home : ex.gym, lb = PROGRAM.lib[id]; return `<button class="excard" data-act="exinfo" data-ex="${ex.id}" data-w="${p.w}"><span style="position:relative;display:block">${thumb(id, "mo") || '<span class="thumb" style="display:grid;place-items:center;color:var(--ink3);font-weight:800" lang="en">' + esc(lb.en.slice(0, 2).toUpperCase()) + '</span>'}<span class="exn num x">${fa(i + 1)}</span></span><span class="exm"><b>${esc(lb.fan)}</b><span class="en" lang="en">${esc(lb.en)}</span></span><span class="dose" style="font-size:1rem">${esc(doseOf(ex, wk, home))}</span></button>`; }).join("") + `</div></section>`;
+    W.ex.map((ex, i) => { const id = home ? ex.home : ex.gym, lb = PROGRAM.lib[id]; return `<button class="excard" data-act="exinfo" data-ex="${ex.id}" data-w="${p.w}"><span style="position:relative;display:block">${thumb(id, "mo") || '<span class="thumb" style="display:grid;place-items:center;color:var(--ink3);font-weight:800" lang="en">' + esc(lb.en.slice(0, 2).toUpperCase()) + '</span>'}<span class="exn num x">${fa(i + 1)}</span></span><span class="exm"><b>${esc(lb.fan)}</b><span class="en" lang="en">${esc(lb.en)}</span></span><span class="dose" style="font-size:1rem">${doseH(doseOf(ex, wk, home))}</span></button>`; }).join("") + `</div></section>`;
 }
 
 /* ---------- food log ---------- */
@@ -1690,6 +1692,32 @@ async function pull() {
 })();
 document.addEventListener("visibilitychange", () => { if (!document.hidden) pull(); });
 applyTheme();
+/* ---------- bidi: isolate every Latin run inside Persian text ---------- */
+const LAT = BIDI_RE, SKIP = "script,style,svg,input,textarea,bdi,[dir=ltr],[lang=en],code,pre,.dose";
+function isolate(root) {
+  if (root.nodeType === 3) root = root.parentNode;
+  if (!root || root.nodeType !== 1) return;
+  if (root.tagName === "OPTION" || root.tagName === "SELECT") return isolateOpts(root);
+  if (root.closest(SKIP)) return;
+  root.querySelectorAll("select").forEach(isolateOpts);
+  const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, { acceptNode: n => /[A-Za-z0-9]/.test(n.nodeValue) && !n.parentElement.closest(SKIP + ",select") ? 1 : 2 });
+  const list = []; let n; while ((n = w.nextNode())) list.push(n);
+  list.forEach(t => {
+    const v = t.nodeValue, f = document.createDocumentFragment(); let last = 0;
+    v.replace(LAT, (m, i) => {
+      if (i > last) f.appendChild(document.createTextNode(v.slice(last, i)));
+      const b = document.createElement("bdi"); b.dir = "ltr"; b.textContent = m; if (m.length <= 24) b.className = "nw";
+      f.appendChild(b); last = i + m.length; return m;
+    });
+    if (last < v.length) f.appendChild(document.createTextNode(v.slice(last)));
+    t.replaceWith(f);
+  });
+}
+function isolateOpts(sel) {
+  (sel.tagName === "OPTION" ? [sel] : [...sel.options]).forEach(o => { if (/[\u0600-\u06FF]/.test(o.text) && /[A-Za-z]/.test(o.text) && !o.text.includes("\u2066")) o.text = o.text.replace(LAT, m => "\u2066" + m + "\u2069"); });
+}
+new MutationObserver(ms => ms.forEach(m => m.addedNodes.forEach(isolate))).observe(document.body, { childList: true, subtree: true });
+isolate(document.body);
 render();
 if ("serviceWorker" in navigator && /^https?:$/.test(location.protocol)) navigator.serviceWorker.register("sw.js").catch(() => {});
 </script>

@@ -82,3 +82,8 @@ Your answers: strict pull-up max 4-5, parallel dips under 8, squat and deadlift 
 - Badges (12) in Stats and a short confetti burst when a day reaches 100% or a session is completed (off under reduced motion).
 - Fixed: numbered step lists broke apart when a step contained Latin terms.
 - QA: `tools/qa_grip.py` (dark and light, 390 px, no console errors).
+
+## Edit 10: Persian/English ordering
+- Every Latin run inside Persian text is now isolated automatically (a MutationObserver wraps it in `<bdi dir="ltr">`; `<option>` text gets LRI/PDI marks). Short runs do not wrap mid-term. `bidi()` escapes after matching, so apostrophes no longer split a term (Farmer's Carry). Long doses wrap between words, not at hyphens; no horizontal overflow on any of the 56 days.
+- Export and CSV in the claude.ai artifact use the `downloads` capability.
+- QA: `tools/qa_bidi.py` lists any Latin text left un-isolated in RTL context (0 left).
