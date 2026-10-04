@@ -548,6 +548,11 @@ section[id^="s-"]{scroll-margin-top:72px}
 .mfit span{padding:2px 8px;border-radius:99px;background:var(--surface2)}
 .mfit small{font-weight:500;color:var(--ink3)}
 .mfit .ok{color:var(--ok)} .mfit .hi{color:var(--warn)} .mfit .lo{color:var(--ink2)}
+.aiimgs{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;align-items:center}
+.aithumb{position:relative;width:64px;height:64px;border-radius:14px;overflow:hidden;box-shadow:inset 0 0 0 1px var(--rim)}
+.aithumb img{width:100%;height:100%;object-fit:cover}
+.aithumb button{position:absolute;top:3px;inset-inline-end:3px;width:22px;height:22px;border-radius:99px;background:rgba(0,0,0,.6);color:#fff;font-size:.7rem;display:grid;place-items:center}
+.aipic{min-height:44px;font-size:.84rem} .aipic svg{width:18px;height:18px}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .empty{padding:22px;text-align:center;color:var(--ink2);border:1.5px dashed var(--line);border-radius:var(--r-lg);font-size:.9rem}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
@@ -1579,6 +1584,9 @@ function viewFood() {
   if (smp) h += `<section class="panel rise" style="--i:1;margin-top:14px">${ph("ثبت با متن (هوش مصنوعی)", "aifood")}
     <label class="f" for="aiq">چی خوردی و کی؟ مثلاً «ساعت ۸ صبح ۳ تخم‌مرغ و نان، ساعت ۱۳ دویست گرم مرغ با برنج»</label>
     <textarea id="aiq" class="inp" style="min-height:70px"></textarea>
+    ${smpImg ? `<div class="aiimgs">${aiImgs.map((f, k) => `<span class="aithumb"><img src="${aiImgUrls[k]}" alt=""><button data-act="aiimgdel" data-i="${k}" aria-label="حذف عکس">✕</button></span>`).join("")}
+      <label class="btn aipic" for="aiimg">${SV('<path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>', 1.8)}عکس جدول غذایی یا بشقاب</label><input id="aiimg" type="file" accept="image/*" multiple hidden data-act="aiimg"></div>
+      <p class="tiny faint" style="margin-top:6px">جدول ارزش غذایی بسته: مقدار مصرفی را در متن بنویس (مثلاً «۸۰ گرم از این پاستا خشک»). عکس بشقاب: مقدار تخمینی است.</p>` : ""}
     <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;align-items:center"><select id="aim" class="inp" style="width:auto"><option value="-1">خودکار از روی ساعت</option>${MEALS().map((m, i) => `<option value="${i}">${plain(m)}</option>`).join("")}</select><button class="btn pri" data-act="aiparse">محاسبه</button></div>
     <div id="aiout"></div></section>`;
   h += MEALS().map((m, mi) => {
@@ -1626,7 +1634,7 @@ function drawFoodSheet() {
 }
 
 /* ---------- AI (artifact sample capability) ---------- */
-let smp = null, aiBusy = false, aiParsed = null;
+let smp = null, aiBusy = false, aiParsed = null, aiImgs = [], aiImgUrls = [];
 const PROFILE = "Amir, male 21 y, 183 cm, started 89 kg (~18-20% BF), goal ~83 kg in 8 weeks, medical student. 8-week cut: keep muscle, gain whole-body strength, reach 8-10 strict pull-ups (currently 4-5). Week Sat-Fri: Sat A upper strength, Sun B lower strength (refeed 2500 kcal from week 3), Mon walk+GTG, Tue C upper shape + pull-up volume, Wed walk+GTG, Thu D full-body strength, Fri E light arms/shoulders/core + weekly check-in. Targets: 1900 kcal, P200 F60 C140 on training and walk days. Water 4 L training / 3.5 L other. 16/8 eating 12:00-20:00. Never train heavy fasted (he fainted once between sets fasted). Adjustment rule: loss <0.4 kg/wk two weeks: -150 kcal carbs on walk days; >1.2 kg/wk or strength down two sessions: +150 kcal. RPE 7-9, never to failure.";
 function coachContext(kind) {
   const days = [];
@@ -1653,10 +1661,12 @@ function coachCard() {
 }
 async function aiParseFood() {
   const q = ($("#aiq") || {}).value || "", m = +(($("#aim") || {}).value ?? -1), out = $("#aiout"), dd = peek(dateOf(sel)) || {};
-  if (!smp || aiBusy || !q.trim()) return; aiBusy = true; out.innerHTML = `<p class="small muted" style="margin-top:10px">در حال محاسبه…</p>`;
-  const prompt = `Convert this food description (Persian or English) into nutrition items. Use standard USDA values; assume weights are as eaten (cooked) unless stated raw; if a quantity is missing, assume a typical portion and say so in the amount text. If the text gives a clock time for an item (e.g. "8 am", "ساعت ۸ صبح", "13:00"), put it as "t" in 24-hour "HH:MM"; otherwise "t": null. Return ONLY a JSON array, no prose: [{"t": "HH:MM or null", "n": "<${LANG === "en" ? "English" : "Persian"} food name>", "a": "<amount in Persian, e.g. ۲۰۰ گرم>", "k": kcal, "p": protein_g, "c": carbs_g, "f": fat_g}]. Numbers with at most 1 decimal.\n\nDescription: ${q}`;
+  const imgs = smpImg ? aiImgs.slice() : [];
+  if (!smp || aiBusy || (!q.trim() && !imgs.length)) return; aiBusy = true; out.innerHTML = `<p class="small muted" style="margin-top:10px">در حال محاسبه…</p>`;
+  const imgNote = imgs.length ? ` ${imgs.length} photo(s) are attached. If a photo is a nutrition facts label, read its per-serving or per-100 g values exactly and scale them to the amount stated in the text (if no amount is stated, use one serving and say so). If a photo shows a plate or food, identify each food and estimate the portion weights from the photo (plate size, utensils), and say "~" in the amount. The text, if any, adds context (brand, amount, what was eaten).` : "";
+  const prompt = `Convert this food description (Persian or English) into nutrition items.${imgNote} Use standard USDA values; assume weights are as eaten (cooked) unless stated raw; if a quantity is missing, assume a typical portion and say so in the amount text. If the text gives a clock time for an item (e.g. "8 am", "ساعت ۸ صبح", "13:00"), put it as "t" in 24-hour "HH:MM"; otherwise "t": null. Return ONLY a JSON array, no prose: [{"t": "HH:MM or null", "n": "<${LANG === "en" ? "English" : "Persian"} food name>", "a": "<amount in Persian, e.g. ۲۰۰ گرم>", "k": kcal, "p": protein_g, "c": carbs_g, "f": fat_g}]. Numbers with at most 1 decimal.\n\nDescription: ${q}`;
   try {
-    const arr = await smp.json(prompt, { modelTier: "default" });
+    const arr = await smp.json(prompt + (q.trim() ? "" : "\n\nDescription: (photos only)"), imgs.length ? { modelTier: "default", images: imgs } : { modelTier: "default" });
     const now = new Date(), nowT = dateOf(sel) === todayISO() ? hm(now.getHours() * 60 + now.getMinutes()) : null;
     const items = (Array.isArray(arr) ? arr : []).filter(isObj).slice(0, 20).map(x => { const t = TIME_RE.test(String(x.t || "")) ? String(x.t) : null; return { m: m >= 0 ? m : mealAt(t || nowT, dd), t, n: String(x.n || "").slice(0, 60), a: String(x.a || "").slice(0, 30), k: numOr(x.k, 0, 5000) || 0, p: numOr(x.p, 0, 500) || 0, c: numOr(x.c, 0, 1000) || 0, f: numOr(x.f, 0, 500) || 0 }; }).filter(x => x.n);
     aiParsed = items; const t = sumF(items);
@@ -1837,6 +1847,7 @@ document.addEventListener("click", e => {
     case "rtimer": return startTimer(+b.dataset.sec, b.dataset.l || "");
     case "whtext": openD.has("whtxt") ? openD.delete("whtxt") : openD.add("whtxt"); render(); { const t = $("#whta"); if (t) t.focus(); } return;
     case "whparse": { const t = $("#whta"); if (t && t.value.trim()) whoopAI(null, t.value.trim()); else toast("متن را بچسبان."); return; }
+    case "aiimgdel": { const k = +b.dataset.i, q = $("#aiq"), keep = q ? q.value : ""; aiImgs.splice(k, 1); aiImgUrls.splice(k, 1); render(); const q2 = $("#aiq"); if (q2) q2.value = keep; return; }
     case "mpm": mpM = +b.dataset.m; mpDay = sel; return render();
     case "mpai": return plannerAI();
     case "mpadd": {
@@ -1877,7 +1888,7 @@ document.addEventListener("click", e => {
     case "aiparse": return aiParseFood();
     case "aiadd": { if (!aiParsed || !aiParsed.length) return; const d = D(inf.date); d.mt = d.mt || {};
       aiParsed.forEach(x => { if (x.t && !(d.food || []).some(y => y.m === x.m)) d.mt[x.m] = x.t; });
-      d.food = (d.food || []).concat(aiParsed.map(({ t, ...x }) => x)); syncFood(d); aiParsed = null; save(); toast("ثبت شد."); return render(); }
+      d.food = (d.food || []).concat(aiParsed.map(({ t, ...x }) => x)); syncFood(d); aiImgs = []; aiImgUrls = []; aiParsed = null; save(); toast("ثبت شد."); return render(); }
     case "coach": return askCoach(b.dataset.k);
     case "coachq": { const q = ($("#cq").value || "").trim().slice(0, 500); if (!q) return toast("سؤالت را بنویس."); return askCoach("q", q); }
     case "mode": S.prefs.mode = b.dataset.v; save(); return render();
@@ -1928,6 +1939,14 @@ document.addEventListener("change", e => {
   const inf = info(sel);
   if (a === "sti") { const v = parseNum(el.value, 0, el.dataset.f === "kg" ? 500 : 200); if (v === undefined) { toast("عدد معتبر وارد کن."); el.value = sheetRows[+el.dataset.k][el.dataset.f]; return; } sheetRows[+el.dataset.k][el.dataset.f] = v ?? ""; el.value = v ?? ""; if (el.dataset.f === "kg") { const pw = $("#platewrap"); if (pw) pw.innerHTML = platesHtml(); } return; }
   if (a === "rpe") { sheetRows[+el.dataset.k].rpe = el.value === "" ? "" : +el.value; return; }
+  if (a === "aiimg") {
+    const q = $("#aiq"), keep = q ? q.value : "";
+    const files = [...(el.files || [])].slice(0, 4 - aiImgs.length);
+    Promise.all(files.map(f => new Promise(res => { const r = new FileReader(); r.onload = () => res(r.result); r.onerror = () => res(""); r.readAsDataURL(f); }))).then(urls => {
+      files.forEach((f, k) => { aiImgs.push(f); aiImgUrls.push(urls[k]); });
+      render(); const q2 = $("#aiq"); if (q2) q2.value = keep;
+    }); return;
+  }
   if (a === "mtime") {
     const d = D(inf.date), m = +el.dataset.m, v = el.value;
     d.mt = d.mt || {}; if (TIME_RE.test(v)) d.mt[m] = v; else delete d.mt[m];

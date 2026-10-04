@@ -1094,5 +1094,8 @@
 "پیشنهاد هوشمند Claude برای این وعده": "Smart suggestions from Claude for this meal",
 "۱۸۰ گرم": "180 g",
 "پیشنهاد نیامد. دوباره امتحان کن.": "No suggestions came back. Try again.",
-"اضافه شد.": "added."
+"اضافه شد.": "added.",
+"حذف عکس": "Remove photo",
+"عکس جدول غذایی یا بشقاب": "Photo of nutrition label or plate",
+"جدول ارزش غذایی بسته: مقدار مصرفی را در متن بنویس (مثلاً «۸۰ گرم از این پاستا خشک»). عکس بشقاب: مقدار تخمینی است.": "Packaged label: write the amount you ate in the text (e.g. \"80 g of this pasta, dry\"). Plate photo: amounts are estimates."
 }
