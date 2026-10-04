@@ -315,6 +315,20 @@ LIB += [
    "hammer curl proper form"),
 ]
 
+LIB += [
+ E("revcurl", "Reverse Curl",
+   "جلو بازو با کف دست‌های رو به پایین؛ ساعد روی (اکستنسورها) و بازویی، و تعادل مچ و آرنج در برابر حجم زیاد کشش.",
+   ["گریپ به عرض شانه، کف دست‌ها رو به پایین", "مچ صاف بماند، خم نشود", "آرنج کنار بدن، پایین آمدن ۲ ثانیه"],
+   ["خم شدن مچ به پایین", "تاب دادن تنه", "وزنه‌ی سنگین با دامنه‌ی ناقص"],
+   "میله‌ی EZ یا وزنه‌ی سبک‌تر", "وزنه‌ی بیشتر یا مکث ۱ ثانیه بالا",
+   "reverse barbell curl proper form"),
+ E("wristcurl", "Dumbbell Wrist Curl",
+   "خم کردن مچ با دمبل در حالی که ساعد روی ران یا نیمکت است؛ ساعد زیر (فلکسورها) و گریپ، کمک مستقیم برای آویز و بارفیکس.",
+   ["ساعد روی ران یا لبه‌ی نیمکت، فقط مچ حرکت کند", "پایین تا کشش کامل، بگذار دمبل تا انگشت‌ها پایین برود", "بالا تا انقباض کامل، ۱ ثانیه مکث"],
+   ["حرکت دادن آرنج و شانه", "دامنه‌ی کوتاه", "سرعت زیاد و تکان"],
+   "وزنه‌ی سبک‌تر", "وزنه‌ی بیشتر یا ۲۰ تکرار کامل",
+   "dumbbell wrist curl proper form"),
+]
 LIBD = {e["id"]: e for e in LIB}
 
 # ---------------------------------------------------------------------------
@@ -335,8 +349,8 @@ WORKOUTS = {
      dose_home=["4×4", "2×3"]),
    X("a3", "cablerow", "dbrow", ["3×10-12", "2×10"], "60-90 s", dict(back=1, bi=.5), 1, 0,
      "باشگاه: Seated Cable Row. خانه: One-Arm Dumbbell Row."),
-   X("a4", "lat", "lat", ["3×12-15", "2×12"], "60-90 s", dict(delt=1), 1, 0,
-     "۱ تا ۲ تکرار ذخیره."),
+   X("a6", "ohext", "bandtri", ["3×10-12", "2×10"], "60-90 s", dict(tri=1), 1, 0,
+     "باشگاه: Overhead Dumbbell Triceps Extension. خانه: Band Triceps Pushdown."),
    X("a5", "deadhang", "deadhang", "hangs", "60-90 s", dict(grip=1), 0, 0,
      "آویز با شانه‌های فعال."),
  ]),
@@ -367,8 +381,10 @@ WORKOUTS = {
      "وزن بدن؛ ۱-۲ تکرار ذخیره. بعد از ۱۰ تکرار تمیز وزنه."),
    X("c6", "facepull", "facepull", ["3×12-15", "2×12"], "60-90 s", dict(delt=1, back=.5), 1, 0,
      "ابرست: Lateral Raise سپس Face Pull (کابل) یا Band Pull-Apart (خانه)."),
-   X("c7", "hlr", "hlr", ["3×10", "2×8"], "60-90 s", dict(core=1), 1, 0,
-     "بدون تاب."),
+   X("c8", "inccurl", "bandcurl", ["3×10-12", "2×10"], "60 s", dict(bi=1), 1, 0,
+     "باشگاه: Incline Dumbbell Curl. خانه: Band Curl. سوپرست با Reverse Curl."),
+   X("c9", "revcurl", "revcurl", ["2×12-15", "1×12"], "60 s", dict(fore=1, bi=.5), 1, 0,
+     "ساعد روی (اکستنسورها) و بازویی. باشگاه: EZ یا هالتر. خانه: با کش."),
  ]),
  "D": dict(name="Workout D", fa="تمرین D: قدرت کل بدن", day="Thu", ex=[
    X("d1", "dl", "pistol", ["3×3 @80-85% 1RM", "2×3 light"], "3 min", dict(ham=1, glute=1, back=.5, quad=.5), 1, 1,
@@ -381,17 +397,19 @@ WORKOUTS = {
    X("d3", "adip", "tdip", ["3×6-8", "2×6"], "60-90 s", dict(chest=1, tri=.5, delt=.5), 1, 0,
      "فرود ۳ ثانیه‌ای. باشگاه: Assisted Dip. خانه: Tempo Dip (۳×۴-۶، دیلود ۲×۴).",
      dose_home=["3×4-6", "2×4"]),
+   X("d7", "hammer", "bandcurl", ["3×10-12", "2×10"], "60 s", dict(bi=1, fore=.5), 1, 0,
+     "باشگاه: Hammer Curl، سوپرست با Wrist Curl. خانه: Band Curl با کف دست‌های رو به هم."),
+   X("d8", "wristcurl", "wristcurl", ["2×15-20", "1×15"], "60 s", dict(fore=1), 1, 0,
+     "ساعد زیر (فلکسورها) و قدرت گریپ. خانه: با کوله‌پشتی یا بطری آب."),
    X("d4", "hollow", "hollow", "hollow", "60-90 s", dict(core=1), 0, 0,
      "کمر چسبیده به زمین."),
    X("d5", "farmer", "farmer", ["3×40 m", "-"], "60-90 s", dict(grip=1, core=.5), 0, 0,
      "در هفته‌ی دیلود حذف می‌شود. خانه: کوله‌پشتی یا کیسه‌ی سنگین."),
  ]),
- "E": dict(name="Workout E", fa="تمرین E: سبک، شانه و بازو و مرکز بدن", day="Fri", ex=[
+ "E": dict(name="Workout E", fa="تمرین E: سبک، شانه، ساق و مرکز بدن", day="Fri", ex=[
    X("e1", "cablelat", "bandlat", ["3×15-20", "2×15"], "60 s", dict(delt=1), 1, 0, "پمپ سبک؛ ۲ تکرار ذخیره."),
    X("e2", "reardelt", "bandrear", ["3×12-15", "2×12"], "60 s", dict(delt=.5, back=.5), 1, 0, "باشگاه: Reverse Pec Deck. خانه: Band Reverse Fly."),
-   X("e3", "inccurl", "bandcurl", ["3×10-12", "2×10"], "60 s", dict(bi=1), 1, 0, "باشگاه: Incline Dumbbell Curl. خانه: Band Curl."),
-   X("e7", "hammer", "bandcurl", ["3×10-12", "2×10"], "60 s", dict(bi=1, grip=.5), 1, 0, "باشگاه: Hammer Curl، با Overhead Extension سوپرست کن. خانه: Band Curl با کف دست‌های رو به هم."),
-   X("e4", "ohext", "bandtri", ["3×10-12", "2×10"], "60 s", dict(tri=1), 1, 0, "باشگاه: Overhead Dumbbell Triceps Extension. خانه: Band Triceps Pushdown."),
+   X("e8", "calf", "calf", ["3×12-15", "2×12"], "60 s", dict(calf=1), 1, 0, "ساق بار دوم در هفته؛ دامنه‌ی کامل و مکث پایین."),
    X("e5", "cablecrunch", "bpcrunch", ["3×12-15", "2×12"], "60 s", dict(core=1), 1, 0, "باشگاه: Cable Crunch. خانه: Backpack Crunch."),
    X("e6", "pallof", "pallof", ["3×10 per side", "2×8 per side"], "60 s", dict(core=.5), 1, 0, "کابل یا کش."),
  ]),
@@ -400,7 +418,7 @@ WORKOUTS = {
 DAYS = ["Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"]
 DAY_PLAN = {0: "A", 1: "B", 2: None, 3: "C", 4: None, 5: "D", 6: "E"}  # Sat..Fri
 
-MUSCLE_FA = dict(back="پشت و لت", chest="سینه", delt="شانه", bi="جلو بازو", tri="پشت بازو",
+MUSCLE_FA = dict(fore="ساعد", back="پشت و لت", chest="سینه", delt="شانه", bi="جلو بازو", tri="پشت بازو",
                  quad="چهارسر", ham="همسترینگ", glute="باسن", calf="ساق", core="مرکز بدن", grip="گریپ")
 
 NUTRITION = {
@@ -463,6 +481,7 @@ WORKOUT_INFO = {
            rules=["اول سنگین‌ترین حرکت (Pull-up و Bench/Dip) با بدن تازه، بعد حرکت‌های فرعی.",
                   "ست‌های اصلی ۳ دقیقه استراحت، فرعی ۶۰ تا ۹۰ ثانیه.",
                   "Pull-up با وزن بدن: هر ست ۲ تکرار کمتر از حداکثر؛ وقتی همه تمیز بود هفته بعد تکرار اضافه کن.",
+                  "Overhead Extension بعد از ست‌های اصلی؛ پشت بازو در حالت کشیده.",
                   "Dead Hang آخر جلسه برای گریپ و سلامت شانه."], time="۶۰ تا ۷۰ دقیقه"),
  "B": dict(goal="قدرت پایین‌تنه: یک حرکت سنگین اسکوات، یک هینج، کار تک‌پا، همسترینگ فاز منفی، ساق و مرکز بدن.",
            rules=["اسکوات سنگین اول، با گرم کردن پله‌ای (۴ تا ۵ ست سبک تا وزنه‌ی کار).",
@@ -473,15 +492,18 @@ WORKOUT_INFO = {
            rules=["Lat Pulldown را با کتف فعال و کنترل بزن؛ Negative را با کیفیت و بدون خستگی، چون تمرین مهارت است.",
                   "Negative: ۴ تا ۵ ثانیه پایین بیا، از پله یا پرش بالا برو.",
                   "پرس‌ها ۱ تا ۲ تکرار ذخیره؛ سینه‌ی بالا و شانه برای فرم V.",
-                  "ابرست شانه‌ی جانبی و پشت شانه با استراحت کوتاه."], time="۶۰ تا ۷۰ دقیقه"),
+                  "ابرست شانه‌ی جانبی و پشت شانه با استراحت کوتاه.",
+                  "آخر جلسه سوپرست Incline Curl و Reverse Curl برای جلو بازو و ساعد."], time="۶۵ تا ۷۵ دقیقه"),
  "D": dict(goal="قدرت کل بدن: ددلیفت سنگین، حجم Pull-up با کمک، Dip با فاز منفی، ثبات تنه و گریپ.",
            rules=["ددلیفت ۸۰ تا ۸۵٪ 1RM فعلی با ۳ تکرار؛ کمر خنثی، هر تکرار ریست روی زمین.",
                   "Assisted Pull-up: کمک را هر هفته کم کن تا به Pull-up کامل برسی.",
                   "Dip با فرود ۳ ثانیه‌ای برای قدرت در پایین حرکت.",
-                  "Hollow و Farmer's Carry آخر جلسه."], time="۶۰ تا ۷۰ دقیقه"),
- "E": dict(goal="جلسه‌ی سبک: شانه‌ی جانبی و پشت شانه، بازو و مرکز بدن برای فرم، با خستگی کم تا شنبه تازه باشی.",
+                  "سوپرست Hammer Curl و Wrist Curl بعد از Dip؛ ساعد و گریپ برای بارفیکس.",
+                  "Hollow و Farmer's Carry آخر جلسه."], time="۶۵ تا ۷۵ دقیقه"),
+ "E": dict(goal="جلسه‌ی سبک: شانه‌ی جانبی و پشت شانه، ساق و مرکز بدن. بدون کار بازو، چون شنبه سنگین‌ترین بارفیکس و پرس است و جلو و پشت بازو باید ۴۸ ساعت ریکاوری داشته باشند.",
            rules=["همه‌ی ست‌ها RPE ۷ تا ۸؛ پمپ، نه ناتوانی.",
                   "استراحت ۶۰ ثانیه.",
+                  "ساق: دامنه‌ی کامل، ۱ ثانیه مکث در پایین.",
                   "اگر هفته سنگین بوده، یک ست از هر حرکت کم کن.",
                   "بعد از جلسه پیاده‌روی ۶۰ تا ۹۰ دقیقه."], time="۴۰ تا ۵۰ دقیقه"),
 }
@@ -521,6 +543,7 @@ FOODS = [
 # 1RM of the bodyweight version), carry (fixed load per hand). Squat/deadlift from the reported 150 kg × 4;
 # pull-ups from 4-5 strict reps, dips from ~7; the rest are conservative estimates to confirm in week 1.
 LOAD = {
+    "revcurl": ("bar", 36), "wristcurl": ("db", 22),
     "latpd": ("cable", 85), "cablerow": ("cable", 85), "dbsp": ("db", 26), "csrow": ("db", 34), "ohext": ("db", 26), "hammer": ("db", 18),
     "squat": ("bar", 170), "dl": ("bar", 170), "bench": ("bar", 95), "bbrow": ("bar", 85), "ohp": ("bar", 60),
     "rdl": ("bar", 120), "lunge": ("db", 24), "dbrow": ("db", 40), "incdb": ("db", 34), "lat": ("db", 12),
@@ -532,3 +555,4 @@ LOAD = {
 
 FAN.update(latpd="زیربغل سیم‌کش از جلو", cablerow="زیربغل سیم‌کش نشسته", dbsp="پرس سرشانه دمبل نشسته",
            csrow="زیربغل دمبل روی نیمکت شیب‌دار", ohext="پشت بازو دمبل بالای سر", hammer="جلو بازو چکشی")
+FAN.update(revcurl="جلو بازو برعکس", wristcurl="مچ دمبل")
