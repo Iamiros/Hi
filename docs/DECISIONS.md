@@ -109,3 +109,11 @@ Your answers: strict pull-up max 4-5, parallel dips under 8, squat and deadlift 
 - Navigation highlight is slower (3 s) and stronger: blue ring, soft glow, slight lift, accent tint and bold text for the whole card.
 - Almost everything navigates now (audit script `tools/qa_taps.py`): notices, week label, readiness gauge, water tank (+250), macro bars, legends, badges, muscle and dose chips, workout chips, food ring.
 - Sticky glass jump bar on Today and Stats with the current section highlighted while scrolling.
+
+## Edit 15: exercises from the user's reference images (asked first, user picked all four)
+- Workout A: Seated Cable Row 3×10-12 replaces Barbell Row (home unchanged: One-Arm Dumbbell Row).
+- Workout C: Lat Pulldown 3×8-10 replaces Band-Assisted High Pull-up at the gym (home keeps the band high pull scheme); Seated Dumbbell Shoulder Press 3×8-10 replaces Standing Overhead Press (home keeps Deficit Pike Push-up 3×5-6).
+- Workout D: Chest-Supported Incline Row 3×10-12 added after the assisted pull-ups (upper back without loading the lower back after deadlifts).
+- Workout E: Overhead Dumbbell Triceps Extension replaces the cable rope pushdown (user preference); Hammer Curl 3×10-12 added and supersetted with it.
+- Not added: Front Raise (front delts already get pressing volume), Straight-Bar Pushdown, Barbell Curl, Preacher Curl (redundant with the arm work already in E).
+- Each new move has a library entry (description, cues, mistakes, easier/harder, YouTube), Persian name, English translation, free-exercise-db start/end photos and a starting load estimate. Old entries stay in the library so past logs still display.
