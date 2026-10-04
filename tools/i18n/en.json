@@ -366,7 +366,7 @@
 "جستجوی غذا": "Search foods",
 "تغییر غذا": "Change food",
 "واحد": "Unit",
-"گرم": "grams",
+"گرم": "g",
 "تعداد (": "Count (",
 "مقدار (گرم)": "Amount (g)",
 "افزودن به": "Add to",
@@ -1097,5 +1097,8 @@
 "اضافه شد.": "added.",
 "حذف عکس": "Remove photo",
 "عکس جدول غذایی یا بشقاب": "Photo of nutrition label or plate",
-"جدول ارزش غذایی بسته: مقدار مصرفی را در متن بنویس (مثلاً «۸۰ گرم از این پاستا خشک»). عکس بشقاب: مقدار تخمینی است.": "Packaged label: write the amount you ate in the text (e.g. \"80 g of this pasta, dry\"). Plate photo: amounts are estimates."
+"جدول ارزش غذایی بسته: مقدار مصرفی را در متن بنویس (مثلاً «۸۰ گرم از این پاستا خشک»). عکس بشقاب: مقدار تخمینی است.": "Packaged label: write the amount you ate in the text (e.g. \"80 g of this pasta, dry\"). Plate photo: amounts are estimates.",
+"پیشنهاد هوشمند": "Smart suggestions",
+"گزینه‌های متنوع‌تر با دلیل، از Claude": "More varied options with reasons, from Claude",
+"پیشنهادهای Claude": "Claude's suggestions"
 }

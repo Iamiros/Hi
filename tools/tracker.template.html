@@ -341,7 +341,13 @@ table{width:100%;border-collapse:collapse;font-size:.88rem}
 th,td{padding:8px 6px;text-align:start;vertical-align:middle}
 thead th{font-size:.74rem;color:var(--ink3);font-weight:600;border-bottom:1px solid var(--line)}
 tbody tr + tr td{border-top:1px solid var(--line)}
-.tests tbody td:first-child{min-width:132px}
+.tests tbody td:first-child{min-width:0;width:40%;overflow-wrap:anywhere}
+.tests td:first-child,.tests td:first-child *{white-space:normal!important;font-size:.8rem;line-height:1.35}
+.tests{width:100%;table-layout:fixed}
+.tests thead th:first-child{width:40%}
+.tests th,.tests td{padding:6px 3px}
+.tests th:not(:first-child){text-align:center;font-size:.72rem;white-space:nowrap}
+.tests .inp{min-height:40px;padding:6px 4px;text-align:center;font-size:.95rem;width:100%}
 td .inp{min-height:44px;padding:6px 8px;text-align:center;direction:ltr;min-width:58px}
 .cmp{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 18px;margin-top:14px}
 @media (min-width:720px){.cmp{grid-template-columns:repeat(3,minmax(0,1fr))}}
@@ -553,6 +559,17 @@ section[id^="s-"]{scroll-margin-top:72px}
 .aithumb img{width:100%;height:100%;object-fit:cover}
 .aithumb button{position:absolute;top:3px;inset-inline-end:3px;width:22px;height:22px;border-radius:99px;background:rgba(0,0,0,.6);color:#fff;font-size:.7rem;display:grid;place-items:center}
 .aipic{min-height:44px;font-size:.84rem} .aipic svg{width:18px;height:18px}
+#s-mplan{overflow:hidden}
+.mph{font-size:.84rem;color:var(--ink2);margin:14px 0 0}
+.aibtn{display:flex;align-items:center;gap:12px;width:100%;margin-top:14px;padding:12px 14px;border-radius:20px;text-align:start;color:var(--ink);
+  background:linear-gradient(var(--panel-solid),var(--panel-solid)) padding-box,linear-gradient(120deg,var(--accent),var(--accent2),#B98CFF) border-box;border:1.5px solid transparent;box-shadow:0 8px 24px var(--accent-soft)}
+.aibtn .aiic{width:40px;height:40px;flex:none;border-radius:13px;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,var(--accent),#B98CFF)}
+.aibtn .aiic svg{width:22px;height:22px}
+.aibtn .ait{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.35}
+.aibtn .ait b{font-size:.95rem} .aibtn .ait small{font-size:.74rem;color:var(--ink3)}
+.aibtn > svg{width:18px;height:18px;flex:none;color:var(--ink3)}
+:root[dir=rtl] .aibtn > svg{transform:scaleX(-1)}
+.mtime input::-webkit-calendar-picker-indicator{display:none}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .empty{padding:22px;text-align:center;color:var(--ink2);border:1.5px dashed var(--line);border-radius:var(--r-lg);font-size:.9rem}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
@@ -986,7 +1003,7 @@ function whoopCard(inf, dd) {
     ${smp ? `<div class="whai">${smpImg ? `<label class="btn" for="whimg">${SV('<rect x="3" y="5" width="18" height="14" rx="3"/><circle cx="9" cy="11" r="2"/><path d="M21 17l-5-5-8 7"/>', 1.8)}خواندن از اسکرین‌شات</label><input id="whimg" type="file" accept="image/*" multiple hidden data-act="whimg">` : ""}<button class="btn" data-act="whtext">چسباندن متن</button></div>
       ${openD.has("whtxt") ? `<div class="fq"><textarea id="whta" class="inp" rows="3" placeholder="متن خلاصه‌ی WHOOP را اینجا بچسبان"></textarea><button class="btn pri block" style="margin-top:8px" data-act="whparse">استخراج عددها</button></div>` : ""}
       <p class="tiny faint" id="whst" aria-live="polite"></p>` : ""}
-    <details class="fold" data-d="wh" ${!has || openD.has("wh") ? "open" : ""}><summary>${has ? "ویرایش عددها" : "وارد کردن دستی"}</summary>
+    <details class="fold" data-d="wh" ${openD.has("wh") || (!has && !smp) ? "open" : ""}><summary>${has ? "ویرایش عددها" : "وارد کردن دستی"}</summary>
     <div class="fgrid">${F("rec", "ریکاوری ٪", "0-100")}${F("hrv", "HRV (ms)", "")}${F("rhr", "ضربان استراحت", "bpm")}${F("sp", "کیفیت خواب ٪", "0-100")}${F("sh", "خواب (ساعت)", "")}${F("strain", "استرین دیروز", "0-21")}${F("kcal", "کالری سوزانده‌شده دیروز", "kcal")}</div></details></section>`;
 }
 async function whoopAI(images, text) {
@@ -1282,7 +1299,7 @@ function statsTail() {
   let h = `<section class="panel rise" id="s-tests" style="margin-top:14px">${ph("تست‌ها", "tests")}<div class="tw"><table class="tests"><thead><tr><th>تست</th>${PH.map(p => `<th>${p[1]}</th>`).join("")}</tr></thead><tbody>` +
     TESTS.map(t => `<tr><td>${en(t[1])}<br><span class="tiny faint en" lang="en">${esc(t[2])}${LOWER_BETTER.includes(t[0]) ? " · lower is better" : ""}</span></td>` +
       PH.map(p => { const val = (S.tests[p[0]] || {})[t[0]]; return `<td><input class="inp num" type="text" inputmode="decimal" dir="ltr" aria-label="${esc(t[1])} ${p[1]}" value="${esc(val ?? "")}" data-act="test" data-p="${p[0]}" data-t="${t[0]}"></td>`; }).join("") + `</tr>`).join("") +
-    `</tbody></table></div><div class="cmp" id="cmp">${TESTS.map(cmpBars).join("")}</div></section>`;
+    `</tbody></table></div><div class="cmp" id="cmp">${TESTS.filter(t => PH.some(p => +(S.tests[p[0]] || {})[t[0]])).map(cmpBars).join("")}</div></section>`;
   h += `<section class="panel rise" id="s-prog" style="margin-top:14px">${ph("پیشرفت هفتگی وزنه‌ها", "prog")}${weeklyProg()}</section>`;
   h += `<section class="panel rise" id="s-pr" style="margin-top:14px">${ph("رکوردها", "pr")}<div class="prs">
     ${prList("a1", "pullup", en("Pull-up"))}${prList("c5", "chin", en("Chin-up"))}${prList("a2", "dip", en("Dip"))}${prList("a2", "bench", en("Barbell Bench Press"))}${prList("b1", "squat", en("Back Squat"))}${prList("d1", "dl", en("Deadlift"))}</div></section>`;
@@ -1426,7 +1443,7 @@ function pageEx(p) {
     <h1 class="pt-fa">${esc(lb.fan || lb.en)}</h1>${lb.fan ? `<p class="pt-en x" lang="en">${esc(lb.en)}</p>` : ""}
     <div class="chips" style="margin-top:14px"><span class="pill acc" data-act="go" data-tab="plan" role="button" tabindex="0">${en(dose === "test" ? "Test" : dose)}</span><span class="pill" data-act="rtimer" data-sec="${restSec(ex.rest)}" data-l="${esc(lb.en)}" role="button" tabindex="0">استراحت ${en(ex.rest)}</span><span class="pill" data-act="wkmenu" role="button" tabindex="0">هفته ${fa(wk)}</span></div>
     <div class="chips">${muscleChips(ex.m)}</div>${loadLine(id, dose)}
-    ${lb.en !== other.en ? `<button class="btn" style="margin-top:14px" data-act="exalt">نمایش نسخه‌ی ${home ? "باشگاه" : "خانه"}: ${en(other.en)}</button>` : ""}</section>
+    ${lb.en !== other.en ? `<button class="altlink" style="margin-top:14px" data-act="exalt"><span>${home ? "نسخه‌ی باشگاه" : "نسخه‌ی خانه"}</span><b lang="en">${esc(other.en)}</b>${SV('<path d="M9 6l6 6-6 6"/>', 2.2)}</button>` : ""}</section>
   <section class="panel rise" style="--i:2"><h2 class="h2">اصول حرکت</h2><p style="margin-top:6px">${linkLib(bidi(lb.fa), id)}</p>${ex.fa ? `<p class="hint-line" style="margin-top:10px">${linkLib(bidi(ex.fa), id)}</p>` : ""}</section>
   <div class="grid2" style="margin-top:14px">
     <section class="panel rise" style="--i:3"><h2 class="h2">اجرای صحیح</h2><ol class="steps">${lb.cues.map(c => `<li>${linkLib(bidi(c), id)}</li>`).join("")}</ol></section>
@@ -1554,7 +1571,7 @@ function plannerCard(i) {
     <div class="mtgt num"><div><b>${fa(Math.round(T.p))}</b><span>پروتئین g</span></div><div><b>${fa(Math.round(T.f))}</b><span>چربی g</span></div><div><b>${fa(Math.round(T.c))}</b><span>کربو g</span></div><div><b>${fa(Math.round(T.k))}</b><span>kcal</span></div></div>
     <p class="tiny muted" style="margin-top:6px">هدف همین وعده از باقی‌مانده‌ی امروز تقسیم بر ${fa(T.left)} وعده‌ی خالی. اول پروتئین، بعد چربی، کربو باقی کالری را پر می‌کند${T.train && (m === 1 || m === 2) ? "؛ اطراف تمرین چربی کمتر و کربو بیشتر" : ""}.</p>
     ${P.cards.length ? `<div class="mcards">${P.cards.map((c, k) => mcardHtml(c, k, T, "db")).join("")}</div>` : `<div class="empty" style="margin-top:10px">هدف این وعده پر شده است. اگر گرسنه‌ای سبزی و پروتئین کم‌چرب انتخاب کن.</div>`}
-    ${smp ? `<button class="btn block" style="margin-top:12px" data-act="mpai">${SV('<path d="M12 3l1.8 4.7L18.5 9l-4.7 1.8L12 15.5l-1.8-4.7L5.5 9l4.7-1.3z"/><path d="M19 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/>', 1.6)}پیشنهاد هوشمند Claude برای این وعده</button><div id="mpaiout">${mpAI && mpAI.i === i && mpAI.m === m ? `<div class="mcards">${mpAI.cards.map((c, k) => mcardHtml(c, k, T, "ai")).join("")}</div>` : ""}</div>` : ""}
+    ${smp ? `<button class="aibtn" data-act="mpai"><span class="aiic">${SV('<path d="M12 3l1.8 4.7L18.5 9l-4.7 1.8L12 15.5l-1.8-4.7L5.5 9l4.7-1.3z"/><path d="M19 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/>', 1.6)}</span><span class="ait"><b>پیشنهاد هوشمند</b><small>گزینه‌های متنوع‌تر با دلیل، از Claude</small></span>${SV('<path d="M9 6l6 6-6 6"/>', 2.2)}</button><div id="mpaiout">${mpAI && mpAI.i === i && mpAI.m === m ? `<h3 class="mph">پیشنهادهای Claude</h3><div class="mcards">${mpAI.cards.map((c, k) => mcardHtml(c, k, T, "ai")).join("")}</div>` : ""}</div>` : ""}
   </section>`;
 }
 async function plannerAI() {
@@ -1985,7 +2002,7 @@ document.addEventListener("change", e => {
     const val = parseNum(el.value, 0, 1000);
     if (val === undefined) { toast("عدد معتبر وارد کن."); el.value = (S.tests[el.dataset.p] || {})[el.dataset.t] ?? ""; return; }
     (S.tests[el.dataset.p] = S.tests[el.dataset.p] || {})[el.dataset.t] = val === null ? "" : val; el.value = val ?? ""; save();
-    const c = $("#cmp"); if (c) c.innerHTML = TESTS.map(cmpBars).join(""); const ch = $("#chal"); if (ch) ch.innerHTML = chalHtml();
+    const c = $("#cmp"); if (c) c.innerHTML = TESTS.filter(t => PH.some(p => +(S.tests[p[0]] || {})[t[0]])).map(cmpBars).join(""); const ch = $("#chal"); if (ch) ch.innerHTML = chalHtml();
     return;
   }
   if (a === "theme") { S.prefs.theme = el.value; save(); applyTheme(); return render(); }

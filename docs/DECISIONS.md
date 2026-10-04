@@ -144,3 +144,12 @@ Evidence: more weekly sets give more hypertrophy, with about 10+ hard sets per m
 
 ## Edit 20: food photos
 - The AI food entry takes up to 4 photos (when the claude.ai viewer supports images): a nutrition label is read exactly and scaled to the amount written in the text, a plate photo is identified and portions estimated (marked "~"). Thumbnails show with remove buttons; photos clear after adding. QA: `tools/qa_aiimg.py` with a mocked sample capability.
+
+## Edit 21: UX review pass
+- Smart-suggestion button redesigned as a gradient-bordered card with icon, title and subtitle (was an oversized icon in a pill); Claude results get their own heading; planner card clips its swipe row.
+- Exercise page "other version" button uses the same alternative-link row as the session list.
+- WHOOP manual fields start folded when the AI reader is available.
+- Meal time inputs hide the browser's own clock icon (one icon only).
+- Test table: fixed column widths, wrapping labels, compact inputs; the comparison bars only list tests that have a value.
+- English: food amounts read "100 g".
+- Full QA suite re-run in both languages.
