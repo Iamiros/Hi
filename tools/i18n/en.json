@@ -1078,5 +1078,21 @@
 "چی خوردی و کی؟ مثلاً «ساعت ۸ صبح ۳ تخم‌مرغ و نان، ساعت ۱۳ دویست گرم مرغ با برنج»": "What did you eat and when? e.g. \"8 am 3 eggs and bread, 13:00 200 g chicken with rice\"",
 "خودکار از روی ساعت": "Auto by time",
 "ساعت ۸ صبح": "at 8 am",
-"افزودن همه به وعده‌ها": "Add all to their meals"
+"افزودن همه به وعده‌ها": "Add all to their meals",
+"چی بخورم؟": "What should I eat?",
+"برای وعده‌ای که انتخاب می‌کنی (پیش‌فرض: وعده‌ی خالیِ نزدیک به ساعت الان) هدف همان وعده را از باقی‌مانده‌ی امروز حساب می‌کند: کالری، پروتئین و چربی باقی‌مانده تقسیم بر وعده‌های اصلی خالی.": "For the meal you pick (default: the empty meal closest to now) it works out that meal's target from what is left today: remaining calories, protein and fat divided by the empty main meals.",
+"اولویت: اول پروتئین را دقیق می‌رساند، بعد چربی، و کربوهیدرات باقی کالری را پر می‌کند.": "Priority: it hits protein exactly first, then fat, and carbs fill the remaining calories.",
+"وعده‌ی پیش و بعد از تمرین: چربی کمتر، کربو بیشتر.": "Pre- and post-workout meals: less fat, more carbs.",
+"کارت‌ها را افقی بکش؛ عدد سبز یعنی در محدوده‌ی ۱۵٪ هدف. «افزودن» همه‌ی آیتم‌ها را با مقدار به همان وعده اضافه می‌کند.": "Swipe the cards sideways; a green number means within 15% of the target. \"Add\" puts every item with its amount into that meal.",
+"«پیشنهاد هوشمند Claude» گزینه‌های متنوع‌تر با توضیح می‌دهد.": "\"Smart suggestions from Claude\" gives more varied options with a reason.",
+"چی بخورم؟ پیشنهاد وعده": "What should I eat? Meal ideas",
+"وعده": "Meal",
+"هدف همین وعده از باقی‌مانده‌ی امروز تقسیم بر": "This meal's target is what is left today divided by",
+"وعده‌ی خالی. اول پروتئین، بعد چربی، کربو باقی کالری را پر می‌کند": "empty meals. Protein first, then fat, carbs fill the remaining calories",
+"؛ اطراف تمرین چربی کمتر و کربو بیشتر": "; around training less fat and more carbs",
+"هدف این وعده پر شده است. اگر گرسنه‌ای سبزی و پروتئین کم‌چرب انتخاب کن.": "This meal's target is already met. If you are hungry, choose vegetables and lean protein.",
+"پیشنهاد هوشمند Claude برای این وعده": "Smart suggestions from Claude for this meal",
+"۱۸۰ گرم": "180 g",
+"پیشنهاد نیامد. دوباره امتحان کن.": "No suggestions came back. Try again.",
+"اضافه شد.": "added."
 }

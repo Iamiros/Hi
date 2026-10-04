@@ -528,6 +528,26 @@ section[id^="s-"]{scroll-margin-top:72px}
 .mtime{display:inline-flex;align-items:center;gap:4px;padding:2px 4px 2px 10px;border-radius:999px;background:var(--surface2);box-shadow:inset 0 1px 0 var(--hl),inset 0 0 0 1px var(--rim);color:var(--ink2)}
 .mtime svg{width:15px;height:15px;flex:none}
 .mtime input{border:0;background:transparent;font-family:var(--f-x);font-weight:700;font-size:.9rem;color:var(--ink);min-height:34px;padding:0 6px;direction:ltr;width:auto}
+.mpm{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-top:4px;padding-bottom:2px}
+.mpm::-webkit-scrollbar{display:none}
+.mtgt{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:12px}
+.mtgt > div{padding:10px;border-radius:14px;background:var(--sheen),var(--surface2);box-shadow:inset 0 1px 0 var(--hl),inset 0 0 0 1px var(--rim)}
+.mtgt b{display:block;font-family:var(--f-x);font-size:1.25rem;line-height:1.1}
+.mtgt span{font-size:.7rem;color:var(--ink3)}
+.mtgt > div:nth-child(1) b{color:var(--accent-ink)} .mtgt > div:nth-child(2) b{color:var(--gold)}
+.mcards{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:18px;margin:14px -18px 0;padding:4px 18px 10px;scrollbar-width:none;overscroll-behavior-x:contain}
+.mcards::-webkit-scrollbar{display:none}
+.mcard{flex:0 0 min(80%,300px);scroll-snap-align:center;display:flex;flex-direction:column;padding:14px;border-radius:22px;background:var(--sheen),var(--panel);-webkit-backdrop-filter:blur(18px) saturate(170%);backdrop-filter:blur(18px) saturate(170%);box-shadow:var(--shadow),inset 0 1px 0 var(--hl),inset 0 0 0 1px var(--rim)}
+.mcard header{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:8px}
+.mcard header b{font-size:1rem} .mcard header span{font-size:.8rem;color:var(--ink2);white-space:nowrap}
+.mcard ul{list-style:none;margin:0;padding:0;display:grid;gap:6px;flex:1}
+.mcard li{display:flex;justify-content:space-between;gap:8px;font-size:.86rem;padding:6px 10px;border-radius:12px;background:var(--surface2)}
+.mcard li b{white-space:nowrap;font-size:.84rem}
+.mbar{display:flex;height:8px;border-radius:99px;overflow:hidden;margin:12px 0 8px;background:var(--surface2)}
+.mfit{display:flex;justify-content:space-between;gap:6px;font-size:.8rem;font-weight:700;margin-bottom:10px}
+.mfit span{padding:2px 8px;border-radius:99px;background:var(--surface2)}
+.mfit small{font-weight:500;color:var(--ink3)}
+.mfit .ok{color:var(--ok)} .mfit .hi{color:var(--warn)} .mfit .lo{color:var(--ink2)}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .empty{padding:22px;text-align:center;color:var(--ink2);border:1.5px dashed var(--line);border-radius:var(--r-lg);font-size:.9rem}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
@@ -733,6 +753,7 @@ const INFO = {
   tests: ["تست‌ها", "<p>روز ۱ (شنبه، قبل از تمرین A)، جمعه هفته ۴ و جمعه هفته ۸. ترتیب: گرم کردن، Max Pull-ups، Chin-up، Dip ها، Chest-to-Bar، بعد Dead Hang و Hollow. بین تست‌ها ۳ تا ۵ دقیقه استراحت.</p>"],
   whoop: ["WHOOP", "<p>هر صبح عددهای WHOOP را وارد کن: ریکاوری، HRV، ضربان استراحت، کیفیت و ساعت خواب دیشب، و استرین و کالری سوزانده‌شده‌ی دیروز. راحت‌ترین راه: اسکرین‌شات صفحه‌ی اصلی WHOOP را بده تا Claude عددها را بخواند (یا متن را بچسبان)، بعد چک کن.</p><ul><li>ریکاوری سبز (۶۷ به بالا): طبق برنامه.</li><li>زرد (۳۴ تا ۶۶): RPE پایین بازه.</li><li>قرمز (زیر ۳۴): یک ست سنگین کمتر، RPE ۷.</li></ul><p>اگر آمادگی دستی هم پر شده باشد، عدد آمادگی میانگین هر دو است. ساعت خواب WHOOP اگر خواب دستی خالی باشد آن را پر می‌کند. تراز انرژی دیروز = کالری خورده‌شده‌ی دیروز منهای کالری سوزانده‌شده؛ عدد WHOOP تخمینی است و فقط روند را نگاه کن. مربی هوشمند هم این عددها را می‌خواند.</p>"],
   body2: ["دور شکم و درصد چربی", "<p>از ثبت‌های جمعه ساخته می‌شود. دور شکم معتبرترین نشانه‌ی چربی‌سوزی در کات است؛ اگر وزن ثابت ماند ولی دور شکم کم شد، روند درست است.</p>"],
+  mplan: ["چی بخورم؟", "<p>برای وعده‌ای که انتخاب می‌کنی (پیش‌فرض: وعده‌ی خالیِ نزدیک به ساعت الان) هدف همان وعده را از باقی‌مانده‌ی امروز حساب می‌کند: کالری، پروتئین و چربی باقی‌مانده تقسیم بر وعده‌های اصلی خالی.</p><ul><li>اولویت: اول پروتئین را دقیق می‌رساند، بعد چربی، و کربوهیدرات باقی کالری را پر می‌کند.</li><li>وعده‌ی پیش و بعد از تمرین: چربی کمتر، کربو بیشتر.</li><li>کارت‌ها را افقی بکش؛ عدد سبز یعنی در محدوده‌ی ۱۵٪ هدف. «افزودن» همه‌ی آیتم‌ها را با مقدار به همان وعده اضافه می‌کند.</li><li>«پیشنهاد هوشمند Claude» گزینه‌های متنوع‌تر با توضیح می‌دهد.</li></ul>"],
   food: ["خوراک امروز", "<p>هر غذا را در وعده‌ی خودش ثبت کن: از فهرست (ارزش‌ها برای هر ۱۰۰ گرم یا هر عدد) جستجو کن، مقدار را بنویس، کالری و ماکروها خودکار حساب می‌شوند. «اخیر» غذاهای چند روز گذشته را با همان مقدار دوباره اضافه می‌کند. محصول بسته‌بندی را با «تعریف غذای جدید» و برچسبش وارد کن. حلقه کالری است، نوارها پروتئین، کربو و چربی نسبت به هدف همان روز.</p>"],
   aifood: ["ثبت با متن", "<p>غذاهایت را معمولی بنویس؛ Claude آنها را به آیتم با کالری و ماکرو تبدیل می‌کند (مقدار پخته، مگر اینکه بنویسی خام). قبل از افزودن، فهرست را چک کن. ارزش‌ها تقریبی‌اند.</p>"],
   coach: ["مربی هوشمند", "<p>Claude داده‌های ۱۴ روز اخیر تو (وزن، غذا، خواب، آمادگی، ست‌ها، قدم، آب) و قانون‌های برنامه را می‌خواند و پیشنهاد عملی می‌دهد. «تحلیل امروز» برای بقیه‌ی امروز، «تحلیل این هفته» برای تعدیل هفته‌ی بعد، یا سؤال خودت را بپرس. داده‌ها فقط برای همین پاسخ فرستاده می‌شوند.</p>"],
@@ -1456,6 +1477,93 @@ function recentItems() {
   for (let i = sel; i >= Math.max(0, sel - 10) && out.length < 8; i--) { const p = peek(dateOf(i)); (p && p.food || []).slice().reverse().forEach(x => { const key = x.n + "|" + x.a; if (!seen.has(key) && out.length < 8) { seen.add(key); out.push(x); } }); }
   return out;
 }
+/* ---------- meal planner: protein first, then fat, carbs fill the rest ---------- */
+const PLAN = { prot: ["chk", "tuna", "steak", "egg", "salmon", "yog", "whey", "iso", "shake", "soy", "lamb"], fat: ["avo", "alm", "olive", "eggy"], carb: ["rice", "potato", "pasta", "banana", "apple"] };
+const CAP = { rice: [60, 350], pasta: [60, 300], potato: [100, 450], avo: [30, 150], alm: [10, 40], yog: [150, 400], soy: [30, 120], lamb: [80, 200], veg: [100, 200], _: [80, 300] };
+const UCAP = { banana: 2, apple: 2, olive: 2, eggy: 3, egg: 5, eggw: 6, whey: 2, iso: 2, shake: 2 };
+const foodById = id => PROGRAM.foods.find(f => f.id === id);
+let mpM = null, mpDay = null, mpCards = [], mpAI = null;
+// One portion of food f that supplies `need` of macro `key` (p/f/c), snapped to sensible units and capped.
+function portion(f, need, key) {
+  const per = f[key]; if (!(per > 0) || !(need > 0)) return null;
+  let mult, label;
+  if (f.u && !f.ug) { const n = clamp(Math.round(need / per), 1, UCAP[f.id] || 2); mult = n; label = `${fa(n)} ${f.u}`; }
+  else if (f.u && f.ug) { const n = clamp(Math.round(need / (per * f.ug / 100)), 1, UCAP[f.id] || 3); mult = n * f.ug / 100; label = `${fa(n)} ${f.u}`; }
+  else { const c = CAP[f.id] || CAP._, g = clamp(Math.round(need / per * 100 / 10) * 10, c[0], c[1]); mult = g / 100; label = `${fa(g)} گرم`; }
+  return { id: f.id, n: f.n, a: label, k: r1(f.k * mult), p: r1(f.p * mult), c: r1(f.c * mult), f: r1(f.f * mult) };
+}
+function mealTarget(i, m) {
+  const inf = info(i), d = peek(dateOf(i)) || {}, n = PROGRAM.nutrition[inf.type], food = d.food || [];
+  const other = food.filter(x => x.m !== m), e = sumF(other);
+  const busy = new Set(other.map(x => x.m));
+  const left = Math.max(1, [0, 1, 2, 3].filter(k => !busy.has(k)).length + (m === 4 ? 1 : 0));
+  let t = { p: (n.p - e.p) / left, f: (n.f - e.f) / left, k: (n.kcal - e.k) / left };
+  if (inf.letter && (m === 1 || m === 2)) t.f *= 0.6;          // around training: less fat, more carbs
+  if (m === 4) t = { p: Math.min(t.p, 30), f: Math.min(t.f, 10), k: Math.min(t.k, 300) };
+  t.p = Math.max(0, t.p); t.f = Math.max(0, t.f); t.k = Math.max(0, t.k);
+  t.c = Math.max(0, (t.k - t.p * 4 - t.f * 9) / 4);
+  return { ...t, left, train: !!inf.letter };
+}
+function planMeal(i, m) {
+  const T = mealTarget(i, m), out = [], pre = T.train && (m === 1 || m === 2);
+  const prots = PLAN.prot.filter(id => !(pre && (id === "salmon" || id === "lamb")) && !(m === 4 && !["yog", "whey", "iso", "shake", "egg"].includes(id)));
+  prots.forEach((pid, k) => {
+    const pf = foodById(pid); if (!pf || T.p < 5) return;
+    const items = [portion(pf, T.p, "p")]; if (!items[0]) return;
+    let s1 = sumF(items);
+    if (s1.f > T.f * 1.35 + 3) return;                         // too fatty for this meal
+    const needF = T.f - s1.f;
+    const shaky = ["whey", "iso", "shake", "yog"].includes(pid);
+    if (needF > 3 && !pre) { const fid = shaky ? "alm" : pid === "egg" ? "avo" : ["avo", "olive"][k % 2], ff = foodById(fid), it = ff && portion(ff, needF, "f"); if (it) items.push(it); }
+    s1 = sumF(items);
+    const needC = Math.max(0, (T.k - s1.k) / 4);
+    if (needC > 8) { const cid = shaky ? (needC > 35 ? "banana" : "apple") : pre ? (k % 2 ? "potato" : "rice") : PLAN.carb[k % 3], cf = foodById(cid), it = cf && portion(cf, needC, "c"); if (it) items.push(it); }
+    if (["chk", "tuna", "steak", "salmon", "soy", "lamb"].includes(pid)) { const v = portion(foodById("veg"), 3, "c"); if (v) items.push(v); }
+    const s2 = sumF(items), err = Math.abs(s2.p - T.p) / Math.max(T.p, 10) + Math.abs(s2.f - T.f) / Math.max(T.f, 8) + Math.abs(s2.k - T.k) / Math.max(T.k, 150);
+    const supp = ["whey", "iso", "shake"].includes(pid) && m !== 4 && m !== 2 ? 0.25 : 0;   // whole-food meals first, shakes for snack/post-workout
+    out.push({ title: pf.n, items, s: s2, err: err + supp });
+  });
+  return { T, cards: out.sort((a, b) => a.err - b.err).slice(0, 8) };
+}
+function defaultMeal(i) {
+  const d = peek(dateOf(i)) || {}, busy = new Set((d.food || []).map(x => x.m));
+  if (dateOf(i) === todayISO()) { const now = new Date(), t = hm(now.getHours() * 60 + now.getMinutes()), m = mealAt(t, d); if (!busy.has(m)) return m; }
+  for (let k = 0; k < 4; k++) if (!busy.has(k)) return k;
+  return 4;
+}
+function mcardHtml(c, k, T, src) {
+  const tot = c.s.p * 4 + c.s.f * 9 + c.s.c * 4 || 1, fit = (v, t) => t > 0 ? (Math.abs(v - t) / t <= 0.15 ? "ok" : v > t ? "hi" : "lo") : "";
+  return `<article class="mcard">
+    <header><b>${esc(String(c.title).split(" (")[0])}</b><span class="num">${fa(Math.round(c.s.k))} kcal</span></header>
+    ${c.why ? `<p class="tiny muted" style="margin:-4px 0 8px">${bidi(c.why)}</p>` : ""}
+    <ul>${c.items.map(x => `<li><span>${esc(String(x.n).split(" (")[0])}</span><b class="num">${esc(x.a)}</b></li>`).join("")}</ul>
+    <div class="mbar" aria-hidden="true"><i style="width:${c.s.p * 4 / tot * 100}%;background:var(--accent)"></i><i style="width:${c.s.f * 9 / tot * 100}%;background:var(--gold)"></i><i style="width:${c.s.c * 4 / tot * 100}%;background:var(--ink3)"></i></div>
+    <div class="mfit num"><span class="${fit(c.s.p, T.p)}">P ${fa(Math.round(c.s.p))}<small>/${fa(Math.round(T.p))}</small></span><span class="${fit(c.s.f, T.f)}">F ${fa(Math.round(c.s.f))}<small>/${fa(Math.round(T.f))}</small></span><span class="${fit(c.s.c, T.c)}">C ${fa(Math.round(c.s.c))}<small>/${fa(Math.round(T.c))}</small></span></div>
+    <button class="btn pri block" data-act="mpadd" data-src="${src}" data-i="${k}">افزودن به ${plain(MEALS()[mpM]).split(" · ")[0]}</button></article>`;
+}
+function plannerCard(i) {
+  if (mpM == null || mpDay !== i) { mpM = defaultMeal(i); mpDay = i; }
+  const m = mpM, P = planMeal(i, m), T = P.T; mpCards = P.cards;
+  return `<section class="panel rise" id="s-mplan" style="--i:1;margin-top:14px">${ph("چی بخورم؟ پیشنهاد وعده", "mplan")}
+    <div class="chips mpm" role="group" aria-label="وعده">${MEAL_NAMES.map((n, k) => `<button class="pill ${k === m ? "acc" : ""}" data-act="mpm" data-m="${k}" aria-pressed="${k === m}">${esc(n.split(" · ")[0])}${mealT(peek(dateOf(i)) || {}, k) ? ` <bdi dir="ltr" class="faint">${fa(mealT(peek(dateOf(i)) || {}, k))}</bdi>` : ""}</button>`).join("")}</div>
+    <div class="mtgt num"><div><b>${fa(Math.round(T.p))}</b><span>پروتئین g</span></div><div><b>${fa(Math.round(T.f))}</b><span>چربی g</span></div><div><b>${fa(Math.round(T.c))}</b><span>کربو g</span></div><div><b>${fa(Math.round(T.k))}</b><span>kcal</span></div></div>
+    <p class="tiny muted" style="margin-top:6px">هدف همین وعده از باقی‌مانده‌ی امروز تقسیم بر ${fa(T.left)} وعده‌ی خالی. اول پروتئین، بعد چربی، کربو باقی کالری را پر می‌کند${T.train && (m === 1 || m === 2) ? "؛ اطراف تمرین چربی کمتر و کربو بیشتر" : ""}.</p>
+    ${P.cards.length ? `<div class="mcards">${P.cards.map((c, k) => mcardHtml(c, k, T, "db")).join("")}</div>` : `<div class="empty" style="margin-top:10px">هدف این وعده پر شده است. اگر گرسنه‌ای سبزی و پروتئین کم‌چرب انتخاب کن.</div>`}
+    ${smp ? `<button class="btn block" style="margin-top:12px" data-act="mpai">${SV('<path d="M12 3l1.8 4.7L18.5 9l-4.7 1.8L12 15.5l-1.8-4.7L5.5 9l4.7-1.3z"/><path d="M19 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/>', 1.6)}پیشنهاد هوشمند Claude برای این وعده</button><div id="mpaiout">${mpAI && mpAI.i === i && mpAI.m === m ? `<div class="mcards">${mpAI.cards.map((c, k) => mcardHtml(c, k, T, "ai")).join("")}</div>` : ""}</div>` : ""}
+  </section>`;
+}
+async function plannerAI() {
+  const i = sel, m = mpM, T = mealTarget(i, m), inf = info(i), d = peek(dateOf(i)) || {}, out = $("#mpaiout");
+  if (!smp || aiBusy) return; aiBusy = true; if (out) out.innerHTML = `<p class="small muted" style="margin-top:10px">در حال فکر کردن…</p>`;
+  const foods = allFoods().map(f => `${f.n} (${f.en || ""}): per ${f.u && !f.ug ? "1 " + f.u : "100 g"} ${f.k} kcal P${f.p} C${f.c} F${f.f}`).join("\n");
+  const prompt = `You plan one meal for a 21-year-old man on a cut (89 kg, lifting, pull-up goal). Meal: ${MEAL_NAMES[m]} at ${mealT(d, m) || "any time"}${inf.letter ? ", training day" + (m === 1 ? ", this is the pre-workout meal (low fat, easy carbs)" : m === 2 ? ", this is the post-workout meal" : "") : ", rest/walk day"}. Target for this meal: protein ${Math.round(T.p)} g, fat ${Math.round(T.f)} g, carbs ${Math.round(T.c)} g, about ${Math.round(T.k)} kcal. Priority: hit protein first, then fat, then fill carbs. Already eaten today: ${JSON.stringify((d.food || []).map(x => x.n + " " + x.a))}. Prefer these foods he has (values given), simple Chinese-supermarket foods are fine too:\n${foods}\nGive 4 varied options. Return ONLY JSON: [{"title": "<short ${LANG === "en" ? "English" : "Persian"} name>", "why": "<one short ${LANG === "en" ? "English" : "Persian"} reason>", "items": [{"n": "<food name>", "a": "<amount, e.g. ${LANG === "en" ? "180 g" : "۱۸۰ گرم"}>", "k": kcal, "p": g, "c": g, "f": g}]}]`;
+  try {
+    const arr = await smp.json(prompt, { modelTier: "default" });
+    const cards = (Array.isArray(arr) ? arr : []).filter(isObj).slice(0, 6).map(o => { const items = (Array.isArray(o.items) ? o.items : []).filter(isObj).slice(0, 8).map(x => ({ n: String(x.n || "").slice(0, 60), a: String(x.a || "").slice(0, 30), k: numOr(x.k, 0, 3000) || 0, p: numOr(x.p, 0, 300) || 0, c: numOr(x.c, 0, 500) || 0, f: numOr(x.f, 0, 300) || 0 })).filter(x => x.n); return { title: String(o.title || "").slice(0, 50), why: String(o.why || "").slice(0, 160), items, s: sumF(items) }; }).filter(c => c.items.length);
+    mpAI = { i, m, cards }; render();
+  } catch (e) { const o = $("#mpaiout"); if (o) o.innerHTML = `<p class="small faint" style="margin-top:10px">${e && e.code === "not_granted" ? "اجازه‌ی استفاده از Claude داده نشد." : "پیشنهاد نیامد. دوباره امتحان کن."}</p>`; }
+  aiBusy = false;
+}
 function viewFood() {
   const inf = info(sel), d = peek(inf.date) || {}, items = d.food || [], t = sumF(items), n = PROGRAM.nutrition[inf.type], left = n.kcal - t.k;
   let h = `<div class="weekbar"><button class="iconbtn" data-act="prev" aria-label="روز قبل" ${sel === 0 ? "disabled" : ""}>${ICON.prev}</button>
@@ -1467,6 +1575,7 @@ function viewFood() {
     <p class="small ${left < 0 ? "" : "muted"}" style="margin-top:12px;${left < 0 ? "color:var(--warn)" : ""}">${left >= 0 ? `${fa(Math.round(left))} کیلوکالری باقی مانده` : `${fa(Math.round(-left))} کیلوکالری بیشتر از هدف`} · پروتئین ${t.p >= n.p ? "کامل" : fa(Math.round(n.p - t.p)) + " گرم مانده"}</p><!--EW--></section>`;
   const ew = eatWindow(sel);
   if (ew.a) h = h.replace("<!--EW-->", `<p class="small muted num" style="margin-top:6px">پنجره‌ی غذا: <bdi dir="ltr">${fa(hm(ew.a[0]))}–${fa(hm(ew.a[1]))}</bdi> · ${faN((ew.a[1] - ew.a[0]) / 60, 1)} ساعت${ew.fast != null ? ` · ناشتایی از دیروز: ${faN(ew.fast / 60, 1)} ساعت` : ""}</p>`);
+  h += plannerCard(sel);
   if (smp) h += `<section class="panel rise" style="--i:1;margin-top:14px">${ph("ثبت با متن (هوش مصنوعی)", "aifood")}
     <label class="f" for="aiq">چی خوردی و کی؟ مثلاً «ساعت ۸ صبح ۳ تخم‌مرغ و نان، ساعت ۱۳ دویست گرم مرغ با برنج»</label>
     <textarea id="aiq" class="inp" style="min-height:70px"></textarea>
@@ -1728,6 +1837,14 @@ document.addEventListener("click", e => {
     case "rtimer": return startTimer(+b.dataset.sec, b.dataset.l || "");
     case "whtext": openD.has("whtxt") ? openD.delete("whtxt") : openD.add("whtxt"); render(); { const t = $("#whta"); if (t) t.focus(); } return;
     case "whparse": { const t = $("#whta"); if (t && t.value.trim()) whoopAI(null, t.value.trim()); else toast("متن را بچسبان."); return; }
+    case "mpm": mpM = +b.dataset.m; mpDay = sel; return render();
+    case "mpai": return plannerAI();
+    case "mpadd": {
+      const c = (b.dataset.src === "ai" ? (mpAI && mpAI.cards) : mpCards)[+b.dataset.i]; if (!c) return;
+      const d = D(inf.date); d.food = (d.food || []).concat(c.items.map(x => ({ m: mpM, n: x.n, a: plain(x.a), k: x.k, p: x.p, c: x.c, f: x.f }))); syncFood(d); save();
+      toast(`به ${plain(MEALS()[mpM]).split(" · ")[0]} اضافه شد.`); render();
+      const el = document.getElementById("s-meal" + mpM); if (el) el.scrollIntoView({ behavior: motionOK() ? "smooth" : "auto", block: "start" }); return;
+    }
     case "wkmenu": return wkMenu($("#wkmenu").hidden);
     case "wkclose": return wkMenu(false);
     case "wkpick": { const w = +b.dataset.w, t = todayIdx(); wkMenu(false); page = null; tab = "today";
