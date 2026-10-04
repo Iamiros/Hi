@@ -280,6 +280,18 @@ textarea.inp{min-height:88px;resize:vertical}
 .foods li:first-child{border-top:0}
 .foods .fn{flex:1;min-width:0;display:flex;flex-direction:column}
 .foods .fn b{font-size:.92rem;font-weight:600}
+.fgrip{flex:none;width:28px;height:44px;margin-inline-start:-6px;display:grid;place-items:center;color:var(--ink3);cursor:grab;touch-action:none;border-radius:10px}
+.fgrip svg{width:18px;height:18px;fill:currentColor}
+.fgrip:hover{color:var(--accent-ink);background:var(--surface2)}
+.dragghost{position:fixed;z-index:60;list-style:none;display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:16px;pointer-events:none;background:var(--panel-solid);box-shadow:0 18px 40px rgba(0,0,0,.28),inset 0 0 0 1.5px var(--accent);transform:scale(1.03) rotate(-1deg);opacity:.96}
+.dragghost .fn{flex:1;min-width:0;display:flex;flex-direction:column}
+.dragsrc{opacity:.35}
+body.dragging{user-select:none;-webkit-user-select:none;cursor:grabbing}
+.mealsec{transition:box-shadow .2s ease,transform .2s ease}
+body.dragging .mealsec{outline:1.5px dashed color-mix(in srgb,var(--accent) 40%,transparent);outline-offset:-1px}
+body.dragging .mealsec.dropon{background:color-mix(in srgb,var(--accent) 8%,var(--panel-solid));outline:2.5px solid var(--accent);outline-offset:-2px;transform:scale(1.015)}
+.mvlist{display:grid;gap:8px}
+.mvlist .btn{justify-content:flex-start;text-align:start}
 .aislot{align-self:flex-start;margin-top:5px;max-width:100%;border:0;border-radius:10px;padding:4px 8px;font:inherit;font-size:.76rem;font-weight:700;color:var(--accent-ink);background:var(--lens);box-shadow:inset 0 0 0 1px var(--rim)}
 .fmac{text-align:end;line-height:1.5;white-space:nowrap}
 .foods.pick li{padding:0}
@@ -1672,14 +1684,61 @@ function viewFood() {
     <div id="aiout">${aiParsed && aiParsed.length && aiDay === sel ? aiOutHtml() : ""}</div></section>`;
   h += MEALS().map((m, mi) => {
     const L = items.map((x, i) => ({ x, i })).filter(o => o.x.m === mi), st = sumF(L.map(o => o.x));
-    return `<section class="panel rise" id="s-meal${mi}" style="--i:${mi + 2};margin-top:14px"><div class="ph"><h2>${MEAL_NAMES[mi]}</h2><label class="mtime">${SV('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>', 2)}<input type="time" value="${esc(mealT(d, mi))}" data-act="mtime" data-m="${mi}" aria-label="زمان ${MEAL_NAMES[mi]}"></label></div><div class="ph" style="margin-top:-6px"><span class="small muted num">${fa(Math.round(st.k))} کالری · ${fa(Math.round(st.p))} گرم پروتئین</span></div>` +
-      (L.length ? `<ul class="foods">${L.map(o => `<li><div class="fn"><b>${esc(o.x.n)}</b><span class="tiny muted">${esc(o.x.a)}</span></div><span class="num small fmac">${fa(Math.round(o.x.k))} کالری<br><span class="faint">${MAC[0]} ${fa(r1(o.x.p))} · ${MAC[1]} ${fa(r1(o.x.c))} · ${MAC[2]} ${fa(r1(o.x.f))}</span></span><button class="iconbtn" data-act="fdel" data-i="${o.i}" aria-label="حذف ${esc(o.x.n)}">✕</button></li>`).join("")}</ul>` : `<p class="small faint">هنوز چیزی ثبت نشده.</p>`) +
+    return `<section class="panel rise mealsec" id="s-meal${mi}" data-meal="${mi}" style="--i:${mi + 2};margin-top:14px"><div class="ph"><h2>${MEAL_NAMES[mi]}</h2><label class="mtime">${SV('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>', 2)}<input type="time" value="${esc(mealT(d, mi))}" data-act="mtime" data-m="${mi}" aria-label="زمان ${MEAL_NAMES[mi]}"></label></div><div class="ph" style="margin-top:-6px"><span class="small muted num">${fa(Math.round(st.k))} کالری · ${fa(Math.round(st.p))} گرم پروتئین</span></div>` +
+      (L.length ? `<ul class="foods">${L.map(o => `<li data-fi="${o.i}"><button class="fgrip" data-act="fmove" data-i="${o.i}" aria-label="جابه‌جایی به وعده‌ی دیگر" title="بکش و در وعده‌ی دیگر رها کن">${SV('<circle cx="9" cy="6" r="1.4"/><circle cx="15" cy="6" r="1.4"/><circle cx="9" cy="12" r="1.4"/><circle cx="15" cy="12" r="1.4"/><circle cx="9" cy="18" r="1.4"/><circle cx="15" cy="18" r="1.4"/>', 0)}</button><div class="fn"><b>${esc(o.x.n)}</b><span class="tiny muted">${esc(o.x.a)}</span></div><span class="num small fmac">${fa(Math.round(o.x.k))} کالری<br><span class="faint">${MAC[0]} ${fa(r1(o.x.p))} · ${MAC[1]} ${fa(r1(o.x.c))} · ${MAC[2]} ${fa(r1(o.x.f))}</span></span><button class="iconbtn" data-act="fdel" data-i="${o.i}" aria-label="حذف ${esc(o.x.n)}">✕</button></li>`).join("")}</ul>` : `<p class="small faint">هنوز چیزی ثبت نشده.</p>`) +
       `<button class="btn block" style="margin-top:10px" data-act="fadd" data-m="${mi}">+ افزودن غذا</button></section>`;
   }).join("");
   h += `<section class="panel rise" style="--i:7;margin-top:14px"><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" data-act="fcopy" ${sel === 0 ? "disabled" : ""}>کپی غذاهای دیروز</button><button class="btn" data-act="fnew">تعریف غذای جدید</button></div>
     <p class="tiny faint" style="margin-top:8px">مجموع این صفحه خودکار در «کالری و پروتئین خورده‌شده» صفحه‌ی امروز ثبت می‌شود. ارزش‌ها تقریبی‌اند (USDA)؛ برای محصول بسته‌بندی، برچسب را با «تعریف غذای جدید» وارد کن.</p></section>`;
   return h;
 }
+// Move a logged food to another meal: drag the grip (pointer events, so touch works), or tap it for a meal list.
+function moveFood(i, m) {
+  const d = D(dateOf(sel)), x = d.food && d.food[i]; if (!x || x.m === m) return;
+  x.m = m; save(); toast(`منتقل شد به ${plain(MEALS()[m]).split(" · ")[0]}`); render();
+  const li = document.querySelector(`[data-fi="${i}"]`); if (li) li.classList.add("flash");
+}
+function moveMenu(i) {
+  const d = peek(dateOf(sel)), x = d && d.food && d.food[i], dl = $("#dlg"); if (!x || dl.open) return;
+  dl.innerHTML = `<div class="in"><h2 id="dt">${esc(x.n)}</h2><p class="small muted" style="margin:6px 0 12px">به کدام وعده منتقل شود؟</p>
+    <div class="mvlist">${MEAL_NAMES.map((n, k) => `<button class="btn ${k === x.m ? "pri" : ""}" data-mv="${k}" ${k === x.m ? 'aria-current="true"' : ""}>${n}</button>`).join("")}</div>
+    <div style="display:flex;justify-content:flex-end;margin-top:14px"><button class="btn" id="no">انصراف</button></div></div>`;
+  dl.showModal(); $("#no").onclick = () => dl.close();
+  dl.querySelectorAll("[data-mv]").forEach(bt => bt.onclick = () => { dl.close(); moveFood(i, +bt.dataset.mv); });
+}
+let drag = null, dragEnd = 0;
+document.addEventListener("pointerdown", e => {
+  const g = e.target.closest(".fgrip"); if (!g || e.button > 0) return;
+  drag = { i: +g.dataset.i, li: g.closest("li"), x: e.clientX, y: e.clientY, on: false, id: e.pointerId };
+});
+document.addEventListener("pointermove", e => {
+  if (!drag || e.pointerId !== drag.id) return;
+  if (!drag.on) {
+    if (Math.hypot(e.clientX - drag.x, e.clientY - drag.y) < 6) return;
+    const r = drag.li.getBoundingClientRect(), gh = drag.li.cloneNode(true);
+    gh.className = "dragghost"; gh.removeAttribute("data-fi"); gh.querySelectorAll("[data-act]").forEach(n => n.removeAttribute("data-act"));
+    Object.assign(gh.style, { width: r.width + "px", left: r.left + "px", top: r.top + "px" });
+    document.body.appendChild(gh); Object.assign(drag, { on: true, gh, dx: e.clientX - r.left, dy: e.clientY - r.top });
+    drag.li.classList.add("dragsrc"); document.body.classList.add("dragging");
+    if (navigator.vibrate) try { navigator.vibrate(8); } catch (_) {}
+  }
+  e.preventDefault();
+  drag.gh.style.top = e.clientY - drag.dy + "px";
+  const sec = document.elementFromPoint(e.clientX, e.clientY)?.closest(".mealsec");
+  document.querySelectorAll(".mealsec.dropon").forEach(n => n !== sec && n.classList.remove("dropon"));
+  if (sec && +sec.dataset.meal !== (peek(dateOf(sel)).food[drag.i] || {}).m) sec.classList.add("dropon");
+  drag.vy = e.clientY < 90 ? -1 : e.clientY > innerHeight - 120 ? 1 : 0;
+  if (drag.vy && !drag.raf) { const step = () => { if (!drag || !drag.vy) { if (drag) drag.raf = 0; return; } scrollBy(0, drag.vy * 10); drag.raf = requestAnimationFrame(step); }; drag.raf = requestAnimationFrame(step); }
+}, { passive: false });
+function dropDrag(e, cancel) {
+  if (!drag || (e && e.pointerId !== drag.id)) return;
+  const d0 = drag; drag = null; if (!d0.on) return;
+  dragEnd = Date.now(); d0.gh.remove(); d0.li.classList.remove("dragsrc"); document.body.classList.remove("dragging");
+  const sec = document.querySelector(".mealsec.dropon"); document.querySelectorAll(".mealsec.dropon").forEach(n => n.classList.remove("dropon"));
+  if (!cancel && sec) moveFood(d0.i, +sec.dataset.meal);
+}
+document.addEventListener("pointerup", e => dropDrag(e));
+document.addEventListener("pointercancel", e => dropDrag(e, true));
 let FS = null;
 function openFoodSheet(m) { FS = { m, f: null, unit: false, amt: "", q: "" }; drawFoodSheet(); $("#sheet").showModal(); }
 function foodList() {
@@ -1980,6 +2039,7 @@ document.addEventListener("click", e => {
     case "fsave": { const x = calcFood(); if (!x) return toast("مقدار را وارد کن."); const d = D(inf.date); d.food = (d.food || []).concat(x); syncFood(d); save(); $("#sheet").close(); toast(`${x.n} ثبت شد.`); return render(); }
     case "frec": { const x = recentItems()[+b.dataset.i]; if (!x) return; const d = D(inf.date); d.food = (d.food || []).concat({ ...x, m: FS.m }); syncFood(d); save(); $("#sheet").close(); toast(`${x.n} ثبت شد.`); return render(); }
     case "fdelc": S.foods = (S.foods || []).filter(f => f.id !== b.dataset.id); save(); return drawFoodSheet();
+    case "fmove": { if (dragEnd && Date.now() - dragEnd < 400) return; return moveMenu(+b.dataset.i); }
     case "fdel": { const d = D(inf.date); d.food = (d.food || []).filter((_, i) => i !== +b.dataset.i); if (d.food.length) syncFood(d); else { delete d.kin; delete d.pin; } save(); return render(); }
     case "fcopy": { const p = peek(dateOf(sel - 1)); if (!p || !(p.food || []).length) return toast("دیروز غذایی ثبت نشده."); const d = D(inf.date); d.food = (d.food || []).concat(p.food.map(x => ({ ...x }))); syncFood(d); save(); toast(`${fa(p.food.length)} آیتم کپی شد.`); return render(); }
     case "aiparse": return aiParseFood();

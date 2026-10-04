@@ -1124,5 +1124,10 @@
 "وعده‌ی هر غذا را اگر اشتباه است همین‌جا عوض کن.": "Change any item’s meal here if it is wrong.",
 "افزودن به وعده‌ها": "Add to meals",
 "ک": "C",
-"Persian, e.g. ۲۰۰ گرم": "Persian, e.g. ۲۰۰ گرم"
+"Persian, e.g. ۲۰۰ گرم": "Persian, e.g. ۲۰۰ گرم",
+"جابه‌جایی به وعده‌ی دیگر": "Move to another meal",
+"بکش و در وعده‌ی دیگر رها کن": "Drag and drop on another meal",
+"منتقل شد.": "moved.",
+"به کدام وعده منتقل شود؟": "Move to which meal?",
+"منتقل شد به": "Moved to"
 }

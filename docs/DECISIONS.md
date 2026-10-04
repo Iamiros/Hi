@@ -168,3 +168,8 @@ Evidence: more weekly sets give more hypertrophy, with about 10+ hard sets per m
 - Smart-suggestion default meal is post-workout once the workout is done.
 - Fixes found by the benchmark: toast element was destroyed when a sheet redrew (page error); in English the macro letters showed "Th"/"We" (Persian weekday letters share the keys); English amounts from Claude now come back in English.
 - QA: `tools/qa_slots.py` (20 placement cases plus the full AI flow in both languages) and `tools/qa_foodui.py` (every food-tab control in both languages).
+
+## Edit 24: move logged food between meals
+- Each logged food has a grip handle. Drag it (pointer events, so mouse and touch both work; the page auto-scrolls near the edges) and drop it on any meal card; the target meal is outlined while hovering. A tap on the grip opens a meal list instead.
+- Moving only changes the item's meal; day totals stay the same.
+- QA: `tools/qa_drag.py` (mouse drag, touch drag, drop on same meal, tap menu, cleanup; both languages).
