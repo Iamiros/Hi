@@ -160,3 +160,11 @@ Evidence: more weekly sets give more hypertrophy, with about 10+ hard sets per m
 - Today shows a wake card first (time input plus the derived meal and training times).
 - On the first data saved for today, a dialog asks for the wake-up time once (`wakeAsked`). It waits until the user leaves the field being typed in, so it never interrupts entry. The WHOOP reader also fills `wake` if the screenshot shows it.
 - QA: `tools/qa_wake.py` (card, dialog timing, derived times, composer layout in both languages); other QA scripts stub the dialog. Overflow check over all 56 days in both languages and both colour schemes.
+
+## Edit 23: food placement bug and food-tab benchmark
+- Bug: AI-logged food went to the meal whose default clock time was nearest, so a post-workout meal eaten at 12:00 landed in meal 1. Placement now follows, in order: the meal select if chosen; a meal named in the text (Claude returns slot "s": first meal, pre-workout, post-workout, last meal, snack, "meal N"); the workout end time (`wt`, stamped when the workout is marked done today) splitting pre and post; order with meals already logged that day (a 45 min match joins that meal); then the nearest planned time among free meals. The first food of a day goes to meal 1.
+- The preview lets each item's meal be changed before adding; the preview and typed text survive re-renders, and a preview is only added to the day it was made for.
+- A meal time the user typed is never overwritten by an AI time; a new meal takes the earliest AI time.
+- Smart-suggestion default meal is post-workout once the workout is done.
+- Fixes found by the benchmark: toast element was destroyed when a sheet redrew (page error); in English the macro letters showed "Th"/"We" (Persian weekday letters share the keys); English amounts from Claude now come back in English.
+- QA: `tools/qa_slots.py` (20 placement cases plus the full AI flow in both languages) and `tools/qa_foodui.py` (every food-tab control in both languages).

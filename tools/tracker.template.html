@@ -280,6 +280,7 @@ textarea.inp{min-height:88px;resize:vertical}
 .foods li:first-child{border-top:0}
 .foods .fn{flex:1;min-width:0;display:flex;flex-direction:column}
 .foods .fn b{font-size:.92rem;font-weight:600}
+.aislot{align-self:flex-start;margin-top:5px;max-width:100%;border:0;border-radius:10px;padding:4px 8px;font:inherit;font-size:.76rem;font-weight:700;color:var(--accent-ink);background:var(--lens);box-shadow:inset 0 0 0 1px var(--rim)}
 .fmac{text-align:end;line-height:1.5;white-space:nowrap}
 .foods.pick li{padding:0}
 .foods.pick li > button:first-child{flex:1;min-width:0;text-align:start;display:flex;flex-direction:column;padding:10px 4px;min-height:52px}
@@ -698,6 +699,8 @@ const ICON = {
   food: SV('<path d="M7 3v7a2 2 0 0 0 2 2v9M11 3v7M7 7h4M17 3c-2.2 1.8-2.2 7.2 0 9v9"/>', 1.8),
   set: SV('<circle cx="12" cy="12" r="3"/><path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M5.6 18.4l1.8-1.8M16.6 7.4l1.8-1.8"/>', 1.8),
 };
+// Macro letters (P, C, F); not translated by key because "پ" and "چ" are also weekday letters.
+const MAC = LANG === "en" ? ["P", "C", "F"] : ["پ", "ک", "چ"];
 const SHORT = ["ش", "ی", "د", "س", "چ", "پ", "ج"];
 const fmtDay = new Intl.DateTimeFormat(LANG === "en" ? "en-US" : "fa-IR", { day: "numeric" });
 const BIDI_RE = /\+?[A-Za-z0-9][A-Za-z0-9.\-/+×%'&@ ]*[A-Za-z0-9%]|[A-Za-z0-9]/g;
@@ -1521,8 +1524,22 @@ const trainWin = d => d && d.wake ? [hm(toMin(d.wake) + 510), hm(toMin(d.wake) +
 const mealLabel = (d, i) => MEAL_NAMES[i] + (mealT(d, i) ? ` · <bdi dir="ltr">${fa(mealT(d, i))}</bdi>` : "");
 const MEALS = () => { const d = peek(dateOf(sel)) || {}; return MEAL_NAMES.map((_, i) => mealLabel(d, i)); };
 const toMin = t => TIME_RE.test(t || "") ? +t.slice(0, 2) * 60 + +t.slice(3) : null;
-// Nearest main meal (not the snack) to a clock time.
-function mealAt(t, d) { const m = toMin(t); if (m == null) return 0; let best = 0, bd = 1e9; for (let i = 0; i < 4; i++) { const x = toMin(mealT(d, i)); if (x != null && Math.abs(x - m) < bd) { bd = Math.abs(x - m); best = i; } } return best; }
+// Slot (0-3 main, 4 snack) for food eaten at clock time t. Order: same meal (filled slot within 45 min) >
+// workout end time (d.wt) splits pre/post > keeps order with filled slots > nearest planned time among free slots.
+// `used` = Map(slot -> minutes) of slots already holding food; defaults to the day's food.
+const usedSlots = d => new Map([...new Set(((d && d.food) || []).map(x => x.m))].filter(s => s < 4).map(s => [s, toMin(mealT(d, s))]).filter(e => e[1] != null));
+function mealAt(t, d, used) {
+  used = used || usedSlots(d); const m = toMin(t), free = [0, 1, 2, 3].filter(s => !used.has(s));
+  if (m == null) return free.length ? free[0] : 4;
+  for (const [s, x] of used) if (Math.abs(x - m) <= 45) return s;
+  const w = toMin(d && d.wt); let lo = 0, hi = 3;
+  if (w != null) { if (m >= w) { lo = 2; if (!used.has(2) && ![...used].some(([s, x]) => s === 3 && x <= m)) return 2; } else hi = 1; }
+  for (const [s, x] of used) { if (x < m) lo = Math.max(lo, s + 1); else hi = Math.min(hi, s - 1); }
+  const ok = free.filter(s => s >= lo && s <= hi);
+  if (!ok.length) { if (w != null && m >= w && !used.has(2)) return 2; let best = 4, bd = 120; for (const [s, x] of used) if (Math.abs(x - m) < bd) { bd = Math.abs(x - m); best = s; } return best; }
+  if (!used.size && w == null) return ok[0];
+  return ok.reduce((b, s) => Math.abs(toMin(mealT(d, s)) - m) < Math.abs(toMin(mealT(d, b)) - m) ? s : b);
+}
 // Eating window of a day from the times of meals that have food, and the fast since the previous day's last meal.
 function eatWindow(i) {
   const span = k => { const d = peek(dateOf(k)); if (!d || !d.food || !d.food.length) return null; const ts = [...new Set(d.food.map(x => x.m))].map(m => toMin(mealT(d, m))).filter(x => x != null); return ts.length ? [Math.min(...ts), Math.max(...ts)] : null; };
@@ -1589,9 +1606,12 @@ function planMeal(i, m) {
   });
   return { T, cards: out.sort((a, b) => a.err - b.err).slice(0, 8) };
 }
+// Workout end time: logged live only (marking an old day done later says nothing about the clock).
+function markWt(d, inf) { if (inf.date === todayISO() && !d.wt) { const n = new Date(); d.wt = hm(n.getHours() * 60 + n.getMinutes()); } }
 function defaultMeal(i) {
   const d = peek(dateOf(i)) || {}, busy = new Set((d.food || []).map(x => x.m));
-  if (dateOf(i) === todayISO()) { const now = new Date(), t = hm(now.getHours() * 60 + now.getMinutes()), m = mealAt(t, d); if (!busy.has(m)) return m; }
+  if (dateOf(i) === todayISO()) { const now = new Date(), m = mealAt(hm(now.getHours() * 60 + now.getMinutes()), d); if (!busy.has(m)) return m; }
+  if (d.done && d.done.workout && !busy.has(2) && !busy.has(3)) return 2;
   for (let k = 0; k < 4; k++) if (!busy.has(k)) return k;
   return 4;
 }
@@ -1643,17 +1663,17 @@ function viewFood() {
   if (smp) h += `<section class="panel rise" style="--i:1;margin-top:14px">${ph("ثبت با متن (هوش مصنوعی)", "aifood")}
     <div class="composer">
       ${smpImg && aiImgs.length ? `<div class="cthumbs">${aiImgs.map((f, k) => `<span class="aithumb"><img src="${aiImgUrls[k]}" alt=""><button data-act="aiimgdel" data-i="${k}" aria-label="حذف عکس">✕</button></span>`).join("")}</div>` : ""}
-      <textarea id="aiq" class="cta" rows="3" aria-label="چی خوردی؟" placeholder="چی خوردی و کی؟ مثلاً «ساعت ۸ صبح ۳ تخم‌مرغ و نان، ساعت ۱۳ دویست گرم مرغ با برنج»"></textarea>
+      <textarea id="aiq" class="cta" rows="3" aria-label="چی خوردی؟" placeholder="چی خوردی و کی؟ مثلاً «ساعت ۸ صبح ۳ تخم‌مرغ و نان، ساعت ۱۳ دویست گرم مرغ با برنج»">${esc(aiQ)}</textarea>
       <div class="cbar">${smpImg ? `<label class="cbtn" for="aiimg" title="عکس جدول غذایی یا بشقاب">${SV('<path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>', 1.8)}<span>عکس</span>${aiImgs.length ? `<b class="num">${fa(aiImgs.length)}</b>` : ""}</label><input id="aiimg" type="file" accept="image/*" multiple hidden data-act="aiimg">` : ""}
         <select id="aim" class="csel" aria-label="وعده"><option value="-1">خودکار (ساعت)</option>${MEALS().map((m, i) => `<option value="${i}">${plain(m)}</option>`).join("")}</select>
         <button class="btn pri cgo" data-act="aiparse">محاسبه</button></div>
     </div>
     ${smpImg ? `<p class="tiny faint" style="margin-top:8px">عکس جدول ارزش غذایی: مقدار مصرفی را در متن بنویس (مثلاً «۸۰ گرم از این پاستا خشک»). عکس بشقاب: مقدار تخمینی است.</p>` : ""}
-    <div id="aiout"></div></section>`;
+    <div id="aiout">${aiParsed && aiParsed.length && aiDay === sel ? aiOutHtml() : ""}</div></section>`;
   h += MEALS().map((m, mi) => {
     const L = items.map((x, i) => ({ x, i })).filter(o => o.x.m === mi), st = sumF(L.map(o => o.x));
     return `<section class="panel rise" id="s-meal${mi}" style="--i:${mi + 2};margin-top:14px"><div class="ph"><h2>${MEAL_NAMES[mi]}</h2><label class="mtime">${SV('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>', 2)}<input type="time" value="${esc(mealT(d, mi))}" data-act="mtime" data-m="${mi}" aria-label="زمان ${MEAL_NAMES[mi]}"></label></div><div class="ph" style="margin-top:-6px"><span class="small muted num">${fa(Math.round(st.k))} کالری · ${fa(Math.round(st.p))} گرم پروتئین</span></div>` +
-      (L.length ? `<ul class="foods">${L.map(o => `<li><div class="fn"><b>${esc(o.x.n)}</b><span class="tiny muted">${esc(o.x.a)}</span></div><span class="num small fmac">${fa(Math.round(o.x.k))} کالری<br><span class="faint">پ ${fa(r1(o.x.p))} · ک ${fa(r1(o.x.c))} · چ ${fa(r1(o.x.f))}</span></span><button class="iconbtn" data-act="fdel" data-i="${o.i}" aria-label="حذف ${esc(o.x.n)}">✕</button></li>`).join("")}</ul>` : `<p class="small faint">هنوز چیزی ثبت نشده.</p>`) +
+      (L.length ? `<ul class="foods">${L.map(o => `<li><div class="fn"><b>${esc(o.x.n)}</b><span class="tiny muted">${esc(o.x.a)}</span></div><span class="num small fmac">${fa(Math.round(o.x.k))} کالری<br><span class="faint">${MAC[0]} ${fa(r1(o.x.p))} · ${MAC[1]} ${fa(r1(o.x.c))} · ${MAC[2]} ${fa(r1(o.x.f))}</span></span><button class="iconbtn" data-act="fdel" data-i="${o.i}" aria-label="حذف ${esc(o.x.n)}">✕</button></li>`).join("")}</ul>` : `<p class="small faint">هنوز چیزی ثبت نشده.</p>`) +
       `<button class="btn block" style="margin-top:10px" data-act="fadd" data-m="${mi}">+ افزودن غذا</button></section>`;
   }).join("");
   h += `<section class="panel rise" style="--i:7;margin-top:14px"><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" data-act="fcopy" ${sel === 0 ? "disabled" : ""}>کپی غذاهای دیروز</button><button class="btn" data-act="fnew">تعریف غذای جدید</button></div>
@@ -1695,7 +1715,7 @@ function drawFoodSheet() {
 }
 
 /* ---------- AI (artifact sample capability) ---------- */
-let smp = null, aiBusy = false, aiParsed = null, aiImgs = [], aiImgUrls = [];
+let smp = null, aiBusy = false, aiParsed = null, aiDay = null, aiQ = "", aiImgs = [], aiImgUrls = [];
 const PROFILE = "Amir, male 21 y, 183 cm, started 89 kg (~18-20% BF), goal ~83 kg in 8 weeks, medical student. 8-week cut: keep muscle, gain whole-body strength, reach 8-10 strict pull-ups (currently 4-5). Week Sat-Fri: Sat A upper strength, Sun B lower strength (refeed 2500 kcal from week 3), Mon walk+GTG, Tue C upper shape + pull-up volume, Wed walk+GTG, Thu D full-body strength, Fri E light arms/shoulders/core + weekly check-in. Targets: 1900 kcal, P200 F60 C140 on training and walk days. Water 4 L training / 3.5 L other. 16/8 eating 12:00-20:00. Never train heavy fasted (he fainted once between sets fasted). Adjustment rule: loss <0.4 kg/wk two weeks: -150 kcal carbs on walk days; >1.2 kg/wk or strength down two sessions: +150 kcal. RPE 7-9, never to failure.";
 function coachContext(kind) {
   const days = [];
@@ -1720,19 +1740,35 @@ function coachCard() {
     <button class="btn" style="margin-top:8px" data-act="coachq">بپرس</button>
     <div id="coachOut" class="coachout"></div></section>`;
 }
+// Slot for each parsed item: named meal ("s") first, then clock time in order (mealAt), untimed items join one meal.
+function placeItems(items, d, nowT) {
+  const used = usedSlots(d), take = (x, sl) => { x.m = sl; if (sl < 4 && !used.has(sl)) used.set(sl, toMin(x.t) ?? toMin(mealT(d, sl))); };
+  items.filter(x => x.s != null).forEach(x => take(x, x.s));
+  items.filter(x => x.m == null && x.t).sort((a, b) => toMin(a.t) - toMin(b.t)).forEach(x => take(x, mealAt(x.t, d, used)));
+  const rest = items.filter(x => x.m == null); if (!rest.length) return items;
+  const sl = nowT ? mealAt(nowT, d, used) : [0, 1, 2, 3].find(k => !used.has(k)) ?? 4; rest.forEach(x => take(x, sl));
+  return items;
+}
+// Parsed preview; each item's meal can be changed before adding.
+function aiOutHtml() {
+  const t = sumF(aiParsed), opts = k => MEAL_NAMES.map((mm, i) => `<option value="${i}" ${i === k ? "selected" : ""}>${mm}</option>`).join("");
+  return `<ul class="foods aiprev" style="margin-top:10px">${aiParsed.map((x, i) => `<li><div class="fn"><b>${esc(x.n)}</b><span class="tiny muted">${esc(x.a)}${x.t ? ` · <bdi dir="ltr">${fa(x.t)}</bdi>` : ""}</span>
+    <select class="aislot" data-act="aislot" data-i="${i}" aria-label="وعده">${opts(x.m)}</select></div><span class="num small fmac">${fa(Math.round(x.k))} کالری<br><span class="faint">${MAC[0]} ${fa(r1(x.p))} · ${MAC[1]} ${fa(r1(x.c))} · ${MAC[2]} ${fa(r1(x.f))}</span></span></li>`).join("")}</ul>
+    <p class="small muted num" style="margin-top:6px">جمع: ${fa(Math.round(t.k))} kcal · P ${fa(Math.round(t.p))} g</p><p class="tiny faint">وعده‌ی هر غذا را اگر اشتباه است همین‌جا عوض کن.</p><button class="btn pri block" style="margin-top:8px" data-act="aiadd">افزودن به وعده‌ها</button>`;
+}
 async function aiParseFood() {
   const q = ($("#aiq") || {}).value || "", m = +(($("#aim") || {}).value ?? -1), out = $("#aiout"), dd = peek(dateOf(sel)) || {};
   const imgs = smpImg ? aiImgs.slice() : [];
-  if (!smp || aiBusy || (!q.trim() && !imgs.length)) return; aiBusy = true; out.innerHTML = `<p class="small muted" style="margin-top:10px">در حال محاسبه…</p>`;
+  if (!smp || aiBusy || (!q.trim() && !imgs.length)) return; aiBusy = true; aiQ = q; out.innerHTML = `<p class="small muted" style="margin-top:10px">در حال محاسبه…</p>`;
   const imgNote = imgs.length ? ` ${imgs.length} photo(s) are attached. If a photo is a nutrition facts label, read its per-serving or per-100 g values exactly and scale them to the amount stated in the text (if no amount is stated, use one serving and say so). If a photo shows a plate or food, identify each food and estimate the portion weights from the photo (plate size, utensils), and say "~" in the amount. The text, if any, adds context (brand, amount, what was eaten).` : "";
-  const prompt = `Convert this food description (Persian or English) into nutrition items.${imgNote} Use standard USDA values; assume weights are as eaten (cooked) unless stated raw; if a quantity is missing, assume a typical portion and say so in the amount text. If the text gives a clock time for an item (e.g. "8 am", "ساعت ۸ صبح", "13:00"), put it as "t" in 24-hour "HH:MM"; otherwise "t": null. Return ONLY a JSON array, no prose: [{"t": "HH:MM or null", "n": "<${LANG === "en" ? "English" : "Persian"} food name>", "a": "<amount in Persian, e.g. ۲۰۰ گرم>", "k": kcal, "p": protein_g, "c": carbs_g, "f": fat_g}]. Numbers with at most 1 decimal.\n\nDescription: ${q}`;
+  const prompt = `Convert this food description (Persian or English) into nutrition items.${imgNote} Use standard USDA values; assume weights are as eaten (cooked) unless stated raw; if a quantity is missing, assume a typical portion and say so in the amount text. If the text gives a clock time for an item (e.g. "8 am", "ساعت ۸ صبح", "13:00"), put it as "t" in 24-hour "HH:MM"; otherwise "t": null. If the text names the meal an item belongs to, put its slot as "s" (for every item of that meal): 0 = first meal or breakfast (وعده اول، صبحانه), 1 = pre-workout meal (قبل تمرین، پیش از تمرین), 2 = post-workout meal (بعد تمرین، بعد از باشگاه), 3 = last main meal or dinner (وعده آخر، شام), 4 = snack (میان‌وعده، اسنک); "meal N" or "وعده N" for N 1 to 4 means N-1; otherwise "s": null. Never guess "s" from the clock time. Return ONLY a JSON array, no prose: [{"t": "HH:MM or null", "s": "0-4 or null", "n": "<${LANG === "en" ? "English" : "Persian"} food name>", "a": "<amount in ${LANG === "en" ? "English, e.g. 200 g" : "Persian, e.g. ۲۰۰ گرم"}>", "k": kcal, "p": protein_g, "c": carbs_g, "f": fat_g}]. Numbers with at most 1 decimal.\n\nDescription: ${q}`;
   try {
     const arr = await smp.json(prompt + (q.trim() ? "" : "\n\nDescription: (photos only)"), imgs.length ? { modelTier: "default", images: imgs } : { modelTier: "default" });
     const now = new Date(), nowT = dateOf(sel) === todayISO() ? hm(now.getHours() * 60 + now.getMinutes()) : null;
-    const items = (Array.isArray(arr) ? arr : []).filter(isObj).slice(0, 20).map(x => { const t = TIME_RE.test(String(x.t || "")) ? String(x.t) : null; return { m: m >= 0 ? m : mealAt(t || nowT, dd), t, n: String(x.n || "").slice(0, 60), a: String(x.a || "").slice(0, 30), k: numOr(x.k, 0, 5000) || 0, p: numOr(x.p, 0, 500) || 0, c: numOr(x.c, 0, 1000) || 0, f: numOr(x.f, 0, 500) || 0 }; }).filter(x => x.n);
-    aiParsed = items; const t = sumF(items);
-    out.innerHTML = items.length ? `<ul class="foods" style="margin-top:10px">${items.map(x => `<li><div class="fn"><b>${esc(x.n)}</b><span class="tiny muted">${esc(x.a)} · ${plain(MEALS()[x.m])}${x.t ? ` · <bdi dir="ltr">${fa(x.t)}</bdi>` : ""}</span></div><span class="num small fmac">${fa(Math.round(x.k))} کالری<br><span class="faint">پ ${fa(r1(x.p))} · ک ${fa(r1(x.c))} · چ ${fa(r1(x.f))}</span></span></li>`).join("")}</ul>
-      <p class="small muted num" style="margin-top:6px">جمع: ${fa(Math.round(t.k))} kcal · P ${fa(Math.round(t.p))} g</p><button class="btn pri block" style="margin-top:8px" data-act="aiadd">${m >= 0 ? "افزودن همه به " + MEALS()[m].split(" · ")[0] : "افزودن همه به وعده‌ها"}</button>` : `<p class="small faint" style="margin-top:10px">چیزی تشخیص داده نشد. دقیق‌تر بنویس.</p>`;
+    const items = (Array.isArray(arr) ? arr : []).filter(isObj).slice(0, 20).map(x => { const t = TIME_RE.test(String(x.t || "")) ? String(x.t) : null, sl = x.s === null || x.s === "" || x.s === undefined ? NaN : +x.s; return { m: m >= 0 ? m : null, s: Number.isInteger(sl) && sl >= 0 && sl <= 4 ? sl : null, t, n: String(x.n || "").slice(0, 60), a: String(x.a || "").slice(0, 30), k: numOr(x.k, 0, 5000) || 0, p: numOr(x.p, 0, 500) || 0, c: numOr(x.c, 0, 1000) || 0, f: numOr(x.f, 0, 500) || 0 }; }).filter(x => x.n);
+    if (m < 0) placeItems(items, dd, nowT);
+    items.forEach(x => delete x.s);
+    aiParsed = items; aiDay = sel; out.innerHTML = items.length ? aiOutHtml() : `<p class="small faint" style="margin-top:10px">چیزی تشخیص داده نشد. دقیق‌تر بنویس.</p>`;
   } catch (e) { out.innerHTML = `<p class="small faint" style="margin-top:10px">${e && e.code === "not_granted" ? "اجازه‌ی استفاده از Claude داده نشد." : "محاسبه انجام نشد. دوباره امتحان کن."}</p>`; }
   aiBusy = false;
 }
@@ -1882,8 +1918,8 @@ function checkSessionDone(inf, d) {
   const W = PROGRAM.workouts[inf.letter]; if (!W) return false;
   const home = S.prefs.mode === "home";
   const all = W.ex.every(ex => { const n = setsOf(doseOf(ex, inf.week, home)); return !n || (d.sets[ex.id] || 0) >= n; });
-  if (all && !d.done.workout) { d.done.workout = true; d.done.wauto = true; stopTimer(); toast("همه ست‌ها انجام شد. جلسه ثبت شد."); }
-  else if (!all && d.done.workout && d.done.wauto) { d.done.workout = false; d.done.wauto = false; }
+  if (all && !d.done.workout) { d.done.workout = true; d.done.wauto = true; markWt(d, inf); stopTimer(); toast("همه ست‌ها انجام شد. جلسه ثبت شد."); }
+  else if (!all && d.done.workout && d.done.wauto) { d.done.workout = false; d.done.wauto = false; delete d.wt; }
   return all;
 }
 function refreshMeters(inf, d) {
@@ -1947,13 +1983,13 @@ document.addEventListener("click", e => {
     case "fdel": { const d = D(inf.date); d.food = (d.food || []).filter((_, i) => i !== +b.dataset.i); if (d.food.length) syncFood(d); else { delete d.kin; delete d.pin; } save(); return render(); }
     case "fcopy": { const p = peek(dateOf(sel - 1)); if (!p || !(p.food || []).length) return toast("دیروز غذایی ثبت نشده."); const d = D(inf.date); d.food = (d.food || []).concat(p.food.map(x => ({ ...x }))); syncFood(d); save(); toast(`${fa(p.food.length)} آیتم کپی شد.`); return render(); }
     case "aiparse": return aiParseFood();
-    case "aiadd": { if (!aiParsed || !aiParsed.length) return; const d = D(inf.date); d.mt = d.mt || {};
-      aiParsed.forEach(x => { if (x.t && !(d.food || []).some(y => y.m === x.m)) d.mt[x.m] = x.t; });
-      d.food = (d.food || []).concat(aiParsed.map(({ t, ...x }) => x)); syncFood(d); aiImgs = []; aiImgUrls = []; aiParsed = null; save(); toast("ثبت شد."); return render(); }
+    case "aiadd": { if (!aiParsed || !aiParsed.length || aiDay !== sel) return; const d = D(inf.date); d.mt = d.mt || {};
+      aiParsed.filter(x => x.t).sort((a, b) => toMin(a.t) - toMin(b.t)).forEach(x => { if (!d.mt[x.m] && !(d.food || []).some(y => y.m === x.m)) d.mt[x.m] = x.t; });  // first time per empty meal; a typed meal time stays
+      d.food = (d.food || []).concat(aiParsed.map(({ t, ...x }) => x)); syncFood(d); aiImgs = []; aiImgUrls = []; aiParsed = null; aiQ = ""; save(); toast("ثبت شد."); return render(); }
     case "coach": return askCoach(b.dataset.k);
     case "coachq": { const q = ($("#cq").value || "").trim().slice(0, 500); if (!q) return toast("سؤالت را بنویس."); return askCoach("q", q); }
     case "mode": S.prefs.mode = b.dataset.v; save(); return render();
-    case "tog": { const d = D(inf.date); d.done[b.dataset.k] = !d.done[b.dataset.k]; if (b.dataset.k === "workout") d.done.wauto = false; save(); return render(); }
+    case "tog": { const d = D(inf.date); d.done[b.dataset.k] = !d.done[b.dataset.k]; if (b.dataset.k === "workout") { d.done.wauto = false; if (d.done.workout) markWt(d, inf); else delete d.wt; } save(); return render(); }
     case "pip": { const d = D(inf.date), k = b.dataset.k, n = +b.dataset.n; d.done[k] = (d.done[k] || 0) === n ? n - 1 : n; save(); return render(); }
     case "scale": { openD.add("rd"); const d = D(inf.date), f = b.dataset.f, n = +b.dataset.n; d[f] = d[f] === n ? undefined : n; if (d[f] === undefined) delete d[f]; save(); return render(); }
     case "set": {
@@ -2008,6 +2044,7 @@ document.addEventListener("change", e => {
       render(); const q2 = $("#aiq"); if (q2) q2.value = keep;
     }); return;
   }
+  if (a === "aislot") { if (aiParsed && aiParsed[+el.dataset.i]) aiParsed[+el.dataset.i].m = +el.value; return; }
   if (a === "wake") {
     const d = D(inf.date); if (TIME_RE.test(el.value)) { d.wake = el.value; d.wakeAsked = true; } else delete d.wake;
     save(); return render();
@@ -2073,6 +2110,7 @@ document.addEventListener("change", e => {
   }
 });
 document.addEventListener("input", e => {
+  if (e.target.id === "aiq") { aiQ = e.target.value; return; }
   const el = e.target, a = el.dataset && el.dataset.act; if (!FS) return;
   if (a === "fsearch") { FS.q = el.value; const l = $("#flist"); if (l) l.innerHTML = foodList(); }
   if (a === "famt") { FS.amt = el.value; const p = $("#fprev"); if (p) p.innerHTML = previewHtml(); }

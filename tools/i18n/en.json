@@ -1118,5 +1118,11 @@
 "خودکار (ساعت)": "Auto",
 "تمرین ": "Training ",
 "ساعت وعده‌ها و تمرین از روی آن چیده شد.": "Meal and training times are set from it.",
-"وعده‌ها": "Meals"
+"وعده‌ها": "Meals",
+"(for every item of that meal): 0 = first meal or breakfast (وعده اول، صبحانه), 1 = pre-workout meal (قبل تمرین، پیش از تمرین), 2 = post-workout meal (بعد تمرین، بعد از باشگاه), 3 = last main meal or dinner (وعده آخر، شام), 4 = snack (میان‌وعده، اسنک);": "(for every item of that meal): 0 = first meal or breakfast (وعده اول، صبحانه), 1 = pre-workout meal (قبل تمرین، پیش از تمرین), 2 = post-workout meal (بعد تمرین، بعد از باشگاه), 3 = last main meal or dinner (وعده آخر، شام), 4 = snack (میان‌وعده، اسنک);",
+"وعده N": "وعده N",
+"وعده‌ی هر غذا را اگر اشتباه است همین‌جا عوض کن.": "Change any item’s meal here if it is wrong.",
+"افزودن به وعده‌ها": "Add to meals",
+"ک": "C",
+"Persian, e.g. ۲۰۰ گرم": "Persian, e.g. ۲۰۰ گرم"
 }

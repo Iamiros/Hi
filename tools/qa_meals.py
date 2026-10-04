@@ -14,10 +14,11 @@ with sync_playwright() as p:
     pg.fill('[data-act=mtime][data-m="0"]', '08:00'); pg.press('[data-act=mtime][data-m="0"]', 'Tab'); pg.wait_for_timeout(300)
     assert pg.evaluate('S.days[dateOf(sel)].mt[0]') == '08:00'
     # simulate AI result with times
-    pg.evaluate('''()=>{const dd=peek(dateOf(sel))||{}; aiParsed=[{m:mealAt("08:10",dd),t:"08:10",n:"تخم‌مرغ",a:"۳ عدد",k:215,p:19,c:1,f:15},{m:mealAt("13:00",dd),t:"13:00",n:"مرغ",a:"۲۰۰ گرم",k:330,p:62,c:0,f:7}]; const bt=document.createElement('button');bt.dataset.act='aiadd';bt.id='tmpai';bt.textContent='x';document.body.appendChild(bt)}''')
+    pg.evaluate('''()=>{const dd=peek(dateOf(sel))||{}; aiDay=sel; aiParsed=placeItems([{m:null,s:null,t:"13:00",n:"مرغ",a:"۲۰۰ گرم",k:330,p:62,c:0,f:7},{m:null,s:null,t:"08:10",n:"تخم‌مرغ",a:"۳ عدد",k:215,p:19,c:1,f:15}],dd,null); const bt=document.createElement('button');bt.dataset.act='aiadd';bt.id='tmpai';bt.textContent='x';document.body.appendChild(bt)}''')
     pg.click('#tmpai'); pg.wait_for_timeout(400)
     d = pg.evaluate('S.days[dateOf(sel)]')
     print('food', [(x['m'], x['n']) for x in d['food']], 'mt', d.get('mt'), 'kin', d.get('kin'))
+    assert [x['m'] for x in d['food']] == [1, 0] and d['mt'] == {'0': '08:00', '1': '13:00'}, d
     print('window', pg.evaluate('eatWindow(sel)'))
     pg.screenshot(path=out + 'meals.png')
     b.close()

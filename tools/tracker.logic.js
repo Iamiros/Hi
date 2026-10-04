@@ -53,6 +53,7 @@ function normalize(o) {
     if (Array.isArray(d.food)) r.food = d.food.filter(isObj).slice(0, 80).map(x => ({ m: numOr(x.m, 0, 4) ?? 4, n: String(x.n || "").slice(0, 60), a: String(x.a || "").slice(0, 30), k: numOr(x.k, 0, 5000) || 0, p: numOr(x.p, 0, 500) || 0, c: numOr(x.c, 0, 1000) || 0, f: numOr(x.f, 0, 500) || 0 })).filter(x => x.n);
     if (typeof d.wake === "string" && /^([01]\d|2[0-3]):[0-5]\d$/.test(d.wake)) r.wake = d.wake;
     if (d.wakeAsked === true) r.wakeAsked = true;
+    if (typeof d.wt === "string" && /^([01]\d|2[0-3]):[0-5]\d$/.test(d.wt)) r.wt = d.wt;
     if (isObj(d.mt)) { r.mt = {}; Object.keys(d.mt).forEach(k => { if (/^[0-4]$/.test(k) && /^([01]\d|2[0-3]):[0-5]\d$/.test(d.mt[k])) r.mt[k] = d.mt[k]; }); }
     if (isObj(d.wh)) { r.wh = {}; Object.keys(WH).forEach(f => { const v = numOr(d.wh[f], WH[f][0], WH[f][1]); if (v !== null) r.wh[f] = v; }); }
     if (isObj(d.sf)) { r.sf = {}; ["ch", "ab", "th"].forEach(f => { const v = numOr(d.sf[f], 1, 80); if (v !== null) r.sf[f] = v; }); }
@@ -84,7 +85,8 @@ function save(fromCloud) {
   catch (e) { if (!saveWarned) { saveWarned = true; toast("ذخیره‌سازی مرورگر در دسترس نیست. از Export برای پشتیبان استفاده کن."); } }
 }
 function toast(msg) {
-  const t = $("#toast"), host = document.querySelector("dialog[open]") || document.body; if (t.parentNode !== host) host.appendChild(t); t.textContent = msg; t.hidden = false;
+  const t = toast.el = toast.el || $("#toast"),  // kept by reference: a dialog redraw can detach it
+    host = document.querySelector("dialog[open]") || document.body; if (t.parentNode !== host) host.appendChild(t); t.textContent = msg; t.hidden = false;
   clearTimeout(toast.t); toast.t = setTimeout(() => t.hidden = true, 3200);
 }
 function D(date) { const d = S.days[date] || (S.days[date] = { done: {}, water: 0, lifts: {}, sets: {} }); d.sets = d.sets || {}; d.lifts = d.lifts || {}; return d; }
