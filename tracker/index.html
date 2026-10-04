@@ -995,7 +995,7 @@ let jumpIO = null;
 function bindJump() {
   if (jumpIO) jumpIO.disconnect(); const bar = $("#view .jump"); if (!bar || !("IntersectionObserver" in window)) return;
   const btn = id => bar.querySelector(`[data-to="${id}"]`);
-  jumpIO = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { bar.querySelectorAll("[aria-current]").forEach(x => x.removeAttribute("aria-current")); const b = btn(e.target.id); if (b) { b.setAttribute("aria-current", "true"); b.scrollIntoView({ block: "nearest", inline: "center" }); } } }), { rootMargin: "-30% 0px -60% 0px" });
+  jumpIO = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { bar.querySelectorAll("[aria-current]").forEach(x => x.removeAttribute("aria-current")); const b = btn(e.target.id); if (b) { b.setAttribute("aria-current", "true"); const sc = b.parentElement; sc.scrollTo({ left: b.offsetLeft - (sc.clientWidth - b.offsetWidth) / 2, behavior: "smooth" }); } } }), { rootMargin: "-30% 0px -60% 0px" });
   bar.querySelectorAll("button").forEach(b => { const t = document.getElementById(b.dataset.to); if (t) jumpIO.observe(t); });
 }
 function goTo(t, to, day) {
