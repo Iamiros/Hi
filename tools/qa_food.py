@@ -12,7 +12,7 @@ try:
    ctx=b.new_context(viewport={'width':int(w),'height':int(h)},color_scheme=sch,device_scale_factor=2 if name=='m' else 1)
    ctx.add_init_script("const _D=Date;const off=new _D('2026-10-15T10:00:00+08:00')-new _D();Date=class extends _D{constructor(...a){a.length?super(...a):super(_D.now()+off)}static now(){return _D.now()+off}};")
    pg=ctx.new_page(); pg.on('pageerror',lambda e:errs.append(str(e)))
-   pg.goto('http://localhost:8792/tracker/index.html'); pg.wait_for_timeout(400); pg.evaluate("localStorage.clear()"); pg.reload(); pg.wait_for_timeout(400)
+   pg.add_init_script("addEventListener('DOMContentLoaded',()=>{askWake=()=>{}})"); pg.goto('http://localhost:8792/tracker/index.html'); pg.wait_for_timeout(400); pg.evaluate("localStorage.clear()"); pg.reload(); pg.wait_for_timeout(400)
    # yesterday food for copy test
    pg.evaluate("()=>{const d=D(dateOf(sel-1));d.food=[{m:0,n:'تست',a:'۱ عدد',k:100,p:10,c:5,f:2}];save();}")
    pg.click('nav.tabs >> text=غذا'); pg.wait_for_timeout(300)

@@ -570,6 +570,24 @@ section[id^="s-"]{scroll-margin-top:72px}
 .aibtn > svg{width:18px;height:18px;flex:none;color:var(--ink3)}
 :root[dir=rtl] .aibtn > svg{transform:scaleX(-1)}
 .mtime input::-webkit-calendar-picker-indicator{display:none}
+.composer{border-radius:20px;background:var(--surface2);box-shadow:inset 0 1px 0 var(--hl),inset 0 0 0 1px var(--rim);padding:6px;margin-top:4px;transition:box-shadow .2s ease}
+.composer:focus-within{box-shadow:0 0 0 2px var(--accent),inset 0 1px 0 var(--hl)}
+.cthumbs{display:flex;gap:8px;flex-wrap:wrap;padding:6px 6px 2px}
+.cta{width:100%;border:0;background:transparent;resize:none;min-height:76px;padding:10px;font:inherit;color:var(--ink);line-height:1.6}
+.cta:focus{outline:none}
+.cbar{display:flex;align-items:center;gap:6px;padding:4px}
+.cbtn{display:inline-flex;align-items:center;gap:6px;min-height:42px;padding:0 12px;border-radius:14px;background:var(--lens);color:var(--accent-ink);font-weight:700;font-size:.86rem;cursor:pointer;box-shadow:inset 0 1px 0 var(--hl),inset 0 0 0 1px var(--rim);flex:none}
+.cbtn svg{width:20px;height:20px}
+.cbtn b{min-width:20px;height:20px;border-radius:99px;display:grid;place-items:center;background:var(--accent);color:var(--on-accent);font-size:.72rem}
+.csel{flex:1;min-width:0;min-height:42px;border:0;border-radius:14px;background:transparent;padding:0 8px;font:inherit;font-size:.84rem;color:var(--ink2)}
+.cgo{min-height:42px;flex:none}
+.wakec{padding:12px 14px}
+.wakec.need{background:var(--sheen),color-mix(in srgb,var(--gold) 12%,var(--panel));box-shadow:var(--shadow),inset 0 0 0 1.5px var(--gold-soft)}
+.wk-row{display:flex;align-items:center;gap:12px}
+.wk-ic{width:40px;height:40px;flex:none;border-radius:13px;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,#F7B733,#FC4A1A)}
+.wk-ic svg{width:22px;height:22px}
+.wk-t{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.4}
+.wk-t b{font-size:.92rem} .wk-t span{font-size:.76rem;color:var(--ink2)} .wk-sum{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:10px;padding-top:9px;border-top:1px solid var(--rim);font-size:.8rem;color:var(--ink2)} .wk-sum bdi{color:var(--ink);font-weight:700} .nw{white-space:nowrap}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .empty{padding:22px;text-align:center;color:var(--ink2);border:1.5px dashed var(--line);border-radius:var(--r-lg);font-size:.9rem}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
@@ -1008,15 +1026,35 @@ function whoopCard(inf, dd) {
 }
 async function whoopAI(images, text) {
   const st = $("#whst"); if (!smp || aiBusy) return; aiBusy = true; if (st) st.textContent = "در حال خواندن…";
-  const prompt = `Extract WHOOP metrics from the ${images ? "screenshot(s)" : "text"} below. Return ONLY a JSON object, no prose: {"rec": recovery percent, "hrv": HRV in ms, "rhr": resting heart rate bpm, "sp": sleep performance percent, "sh": hours of sleep as a decimal, "strain": the previous day's day strain (0-21), "kcal": the previous day's calories burned}. Use null for anything not shown. Do not guess.${text ? "\n\nText:\n" + text.slice(0, 4000) : ""}`;
+  const prompt = `Extract WHOOP metrics from the ${images ? "screenshot(s)" : "text"} below. Return ONLY a JSON object, no prose: {"rec": recovery percent, "hrv": HRV in ms, "rhr": resting heart rate bpm, "sp": sleep performance percent, "sh": hours of sleep as a decimal, "strain": the previous day's day strain (0-21), "kcal": the previous day's calories burned, "wake": wake-up time this morning as 24-hour "HH:MM"}. Use null for anything not shown. Do not guess.${text ? "\n\nText:\n" + text.slice(0, 4000) : ""}`;
   try {
     const o = await smp.json(prompt, images ? { images, modelTier: "default" } : { modelTier: "quick" });
     const d = D(info(sel).date); d.wh = d.wh || {}; let n = 0;
     Object.keys(WH).forEach(f => { const v = o && o[f] != null ? numOr(o[f], WH[f][0], WH[f][1]) : null; if (v !== null) { d.wh[f] = v; n++; } });
     if (d.wh.sh != null && d.sleepH == null) d.sleepH = d.wh.sh;
+    if (o && TIME_RE.test(String(o.wake || "")) && !d.wake) { d.wake = String(o.wake); d.wakeAsked = true; n++; }
     openD.delete("whtxt"); save(); render(); toast(n ? `${fa(n)} عدد از WHOOP ثبت شد.` : "عددی پیدا نشد. واضح‌تر بفرست یا دستی وارد کن.");
   } catch (e) { const s2 = $("#whst"); if (s2) s2.textContent = e && e.code === "not_granted" ? "اجازه‌ی استفاده از Claude داده نشد." : "خواندن انجام نشد. دوباره امتحان کن یا دستی وارد کن."; }
   aiBusy = false;
+}
+function wakeCard(inf, dd) {
+  const w = dd.wake, tw = trainWin(dd), times = [0, 1, 2, 3].map(k => mealT(dd, k));
+  return `<section class="panel rise wakec ${w ? "" : "need"}" id="s-wake" style="--i:1" aria-label="ساعت بیدار شدن">
+    <div class="wk-row"><span class="wk-ic">${SV('<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>', 1.8)}</span>
+      <div class="wk-t"><b>${w ? "بیدار شدن" : "امروز کی بیدار شدی؟"}</b><span>${w ? "ساعت وعده‌ها و تمرین از روی آن چیده شد." : "ساعت وعده‌ها و تمرین از روی آن چیده می‌شود."}</span></div>
+      <label class="mtime">${SV('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>', 2)}<input type="time" value="${esc(w || "")}" data-act="wake" aria-label="ساعت بیدار شدن"></label></div>
+      ${w ? `<div class="wk-sum"><span>وعده‌ها <bdi class="nw">${times.map(fa).join(" · ")}</bdi></span>${inf.letter && tw ? `<span>تمرین <bdi class="nw">${fa(tw[0])}–${fa(tw[1])}</bdi></span>` : ""}</div>` : ""}</section>`;
+}
+function askWake() {
+  const dl = $("#dlg"), d0 = peek(dateOf(sel)); if (dl.open || $("#sheet").open || sel !== todayIdx() || !d0 || d0.wake || d0.wakeAsked) return;
+  const ae = document.activeElement; if (ae && /^(INPUT|TEXTAREA|SELECT)$/.test(ae.tagName)) { ae.addEventListener("blur", () => setTimeout(askWake, 700), { once: true }); return; }
+  dl.innerHTML = `<div class="in"><h2 id="dt">امروز کی بیدار شدی؟</h2><p class="small muted" style="margin:8px 0 14px">ساعت وعده‌ها و پیشنهاد ساعت تمرین امروز از روی ساعت بیدار شدن چیده می‌شود.</p>
+    <input id="wkin" class="inp num" type="time" dir="ltr" value="${hm(Math.max(0, Math.floor((new Date().getHours() * 60 + new Date().getMinutes() - 60) / 15) * 15))}" style="font-size:1.4rem;text-align:center">
+    <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:16px"><button class="btn" id="no">بعداً</button><button class="btn pri" id="yes">ثبت</button></div></div>`;
+  const d = D(dateOf(sel)); d.wakeAsked = true; save();
+  dl.showModal(); $("#wkin").focus();
+  $("#no").onclick = () => dl.close();
+  $("#yes").onclick = () => { const v = $("#wkin").value; if (TIME_RE.test(v)) { d.wake = v; d.wakeAsked = true; save(); dl.close(); render(); toast("ساعت وعده‌ها از روی بیدار شدن چیده شد."); } else toast("ساعت معتبر وارد کن."); };
 }
 function readyCard(inf, dd) {
   const rd = readiness(dd), sc = (f, v) => `<div class="scale5" role="group" aria-label="${f}">${[1, 2, 3, 4, 5].map(k => `<button data-act="scale" data-f="${f}" data-n="${k}" aria-pressed="${v === k}">${fa(k)}</button>`).join("")}</div>`;
@@ -1099,7 +1137,7 @@ function safety() {
 function viewToday() {
   const inf = info(sel), dd = peek(inf.date) || { done: {}, water: 0, lifts: {}, sets: {} };
   dd.sets = dd.sets || {};
-  const left = whoopCard(inf, dd) + (inf.letter ? readyCard(inf, dd) + session(inf, dd) : walkDay(inf, dd)) + checklist(inf, dd);
+  const left = (sel === todayIdx() || dd.wake ? wakeCard(inf, dd) : "") + whoopCard(inf, dd) + (inf.letter ? readyCard(inf, dd) + session(inf, dd) : walkDay(inf, dd)) + checklist(inf, dd);
   const right = waterCard(inf, dd) + fuel(inf, dd) + dayLog(inf, dd) + (inf.dow === 6 ? bodyCard(inf, dd) : "") + (inf.letter ? safety() : "");
   const J = [inf.letter ? ["s-session", "جلسه"] : ["s-walk", "پیاده‌روی"], ["s-whoop", "WHOOP"], inf.letter ? ["s-ready", "آمادگی"] : null, ["s-check", "چک‌لیست"], ["s-water", "آب"], ["s-fuel", "تغذیه"], ["s-log", "ثبت روز"], inf.dow === 6 ? ["s-body", "ترکیب بدن"] : null].filter(Boolean);
   return weekStrip(inf) + hero(inf, dd) + notices(inf, dd) + jumpBar(J) + `<div class="grid2" style="margin-top:14px"><div class="stack">${left}</div><div class="stack">${right}</div></div>`;
@@ -1392,6 +1430,7 @@ function burst() {
 }
 function afterSave() {
   const d = peek(dateOf(sel)), p = pct(sel), w = !!(d && d.done.workout);
+  if (d && sel === todayIdx() && !d.wake && !d.wakeAsked) setTimeout(askWake, 350);
   if (lastP && lastP.i === sel) {
     if (lastP.p < 1 && p >= 1) { burst(); toast("روز ۱۰۰٪ کامل شد."); }
     else if (!lastP.w && w) burst();
@@ -1475,7 +1514,10 @@ function pageWo(p) {
 /* ---------- food log ---------- */
 const MEAL_NAMES = ["وعده ۱", "وعده ۲ · پیش از تمرین", "وعده ۳ · بعد از تمرین", "وعده ۴", "میان‌وعده"], MEAL_T = ["12:00", "15:00", "17:30", "19:30", ""];
 const TIME_RE = /^([01]\d|2[0-3]):[0-5]\d$/;
-const mealT = (d, i) => (d && d.mt && d.mt[i]) || MEAL_T[i];
+// Meal clock: explicit time > derived from wake-up (W+4h, +7h, +10.5h, +12h: an 8 h window, training ~W+8.5h) > fixed default.
+const WAKE_OFF = [240, 420, 630, 720];
+const mealT = (d, i) => (d && d.mt && d.mt[i]) || (d && d.wake && i < 4 ? hm(toMin(d.wake) + WAKE_OFF[i]) : MEAL_T[i]);
+const trainWin = d => d && d.wake ? [hm(toMin(d.wake) + 510), hm(toMin(d.wake) + 600)] : null;
 const mealLabel = (d, i) => MEAL_NAMES[i] + (mealT(d, i) ? ` · <bdi dir="ltr">${fa(mealT(d, i))}</bdi>` : "");
 const MEALS = () => { const d = peek(dateOf(sel)) || {}; return MEAL_NAMES.map((_, i) => mealLabel(d, i)); };
 const toMin = t => TIME_RE.test(t || "") ? +t.slice(0, 2) * 60 + +t.slice(3) : null;
@@ -1599,12 +1641,14 @@ function viewFood() {
   if (ew.a) h = h.replace("<!--EW-->", `<p class="small muted num" style="margin-top:6px">پنجره‌ی غذا: <bdi dir="ltr">${fa(hm(ew.a[0]))}–${fa(hm(ew.a[1]))}</bdi> · ${faN((ew.a[1] - ew.a[0]) / 60, 1)} ساعت${ew.fast != null ? ` · ناشتایی از دیروز: ${faN(ew.fast / 60, 1)} ساعت` : ""}</p>`);
   h += plannerCard(sel);
   if (smp) h += `<section class="panel rise" style="--i:1;margin-top:14px">${ph("ثبت با متن (هوش مصنوعی)", "aifood")}
-    <label class="f" for="aiq">چی خوردی و کی؟ مثلاً «ساعت ۸ صبح ۳ تخم‌مرغ و نان، ساعت ۱۳ دویست گرم مرغ با برنج»</label>
-    <textarea id="aiq" class="inp" style="min-height:70px"></textarea>
-    ${smpImg ? `<div class="aiimgs">${aiImgs.map((f, k) => `<span class="aithumb"><img src="${aiImgUrls[k]}" alt=""><button data-act="aiimgdel" data-i="${k}" aria-label="حذف عکس">✕</button></span>`).join("")}
-      <label class="btn aipic" for="aiimg">${SV('<path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>', 1.8)}عکس جدول غذایی یا بشقاب</label><input id="aiimg" type="file" accept="image/*" multiple hidden data-act="aiimg"></div>
-      <p class="tiny faint" style="margin-top:6px">جدول ارزش غذایی بسته: مقدار مصرفی را در متن بنویس (مثلاً «۸۰ گرم از این پاستا خشک»). عکس بشقاب: مقدار تخمینی است.</p>` : ""}
-    <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;align-items:center"><select id="aim" class="inp" style="width:auto"><option value="-1">خودکار از روی ساعت</option>${MEALS().map((m, i) => `<option value="${i}">${plain(m)}</option>`).join("")}</select><button class="btn pri" data-act="aiparse">محاسبه</button></div>
+    <div class="composer">
+      ${smpImg && aiImgs.length ? `<div class="cthumbs">${aiImgs.map((f, k) => `<span class="aithumb"><img src="${aiImgUrls[k]}" alt=""><button data-act="aiimgdel" data-i="${k}" aria-label="حذف عکس">✕</button></span>`).join("")}</div>` : ""}
+      <textarea id="aiq" class="cta" rows="3" aria-label="چی خوردی؟" placeholder="چی خوردی و کی؟ مثلاً «ساعت ۸ صبح ۳ تخم‌مرغ و نان، ساعت ۱۳ دویست گرم مرغ با برنج»"></textarea>
+      <div class="cbar">${smpImg ? `<label class="cbtn" for="aiimg" title="عکس جدول غذایی یا بشقاب">${SV('<path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>', 1.8)}<span>عکس</span>${aiImgs.length ? `<b class="num">${fa(aiImgs.length)}</b>` : ""}</label><input id="aiimg" type="file" accept="image/*" multiple hidden data-act="aiimg">` : ""}
+        <select id="aim" class="csel" aria-label="وعده"><option value="-1">خودکار (ساعت)</option>${MEALS().map((m, i) => `<option value="${i}">${plain(m)}</option>`).join("")}</select>
+        <button class="btn pri cgo" data-act="aiparse">محاسبه</button></div>
+    </div>
+    ${smpImg ? `<p class="tiny faint" style="margin-top:8px">عکس جدول ارزش غذایی: مقدار مصرفی را در متن بنویس (مثلاً «۸۰ گرم از این پاستا خشک»). عکس بشقاب: مقدار تخمینی است.</p>` : ""}
     <div id="aiout"></div></section>`;
   h += MEALS().map((m, mi) => {
     const L = items.map((x, i) => ({ x, i })).filter(o => o.x.m === mi), st = sumF(L.map(o => o.x));
@@ -1963,6 +2007,10 @@ document.addEventListener("change", e => {
       files.forEach((f, k) => { aiImgs.push(f); aiImgUrls.push(urls[k]); });
       render(); const q2 = $("#aiq"); if (q2) q2.value = keep;
     }); return;
+  }
+  if (a === "wake") {
+    const d = D(inf.date); if (TIME_RE.test(el.value)) { d.wake = el.value; d.wakeAsked = true; } else delete d.wake;
+    save(); return render();
   }
   if (a === "mtime") {
     const d = D(inf.date), m = +el.dataset.m, v = el.value;

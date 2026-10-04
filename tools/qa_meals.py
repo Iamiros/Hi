@@ -7,7 +7,7 @@ errs = []
 with sync_playwright() as p:
     b = p.chromium.launch(executable_path=CH); pg = b.new_page(viewport={'width': 390, 'height': 844})
     pg.on('pageerror', lambda e: errs.append(str(e)))
-    pg.goto((root / 'tracker/index.html').as_uri()); pg.wait_for_timeout(300)
+    pg.add_init_script("addEventListener('DOMContentLoaded',()=>{askWake=()=>{}})"); pg.goto((root / 'tracker/index.html').as_uri()); pg.wait_for_timeout(300)
     # yesterday: last meal 18:00
     pg.evaluate('''()=>{const y=D(dateOf(sel-1));y.food=[{m:3,n:"x",a:"",k:500,p:40,c:40,f:10}];y.mt={3:"18:00"};save()}''')
     pg.locator('nav.tabs button').nth(1).click(); pg.wait_for_timeout(400)

@@ -7,7 +7,7 @@ errs = []
 with sync_playwright() as p:
     b = p.chromium.launch(executable_path=CH); pg = b.new_page(viewport={'width': 390, 'height': 844})
     pg.on('pageerror', lambda e: errs.append(str(e)))
-    pg.goto((root / 'tracker/index.html').as_uri()); pg.wait_for_timeout(300)
+    pg.add_init_script("addEventListener('DOMContentLoaded',()=>{askWake=()=>{}})"); pg.goto((root / 'tracker/index.html').as_uri()); pg.wait_for_timeout(300)
     table = pg.evaluate('''()=>{const o=[];for(const L of "ABCDE"){const W=PROGRAM.workouts[L];for(const ex of W.ex){const r=[L+" "+ex.gym];for(let w=1;w<=8;w++){const d=doseOf(ex,w,false),x=loadFor(ex.gym,d,0,w===4);r.push(d+" → "+(x?loadTxt(x).replace(/<[^>]+>/g,""):"-"))}o.push(r.join(" | "))}}return o}''')
     print('\n'.join(table))
     # taps

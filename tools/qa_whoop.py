@@ -7,7 +7,7 @@ errs = []
 with sync_playwright() as p:
     b = p.chromium.launch(executable_path=CH); pg = b.new_page(viewport={'width': 390, 'height': 844})
     pg.on('pageerror', lambda e: errs.append(str(e)))
-    pg.goto((root / 'tracker/index.html').as_uri()); pg.wait_for_timeout(400)
+    pg.add_init_script("addEventListener('DOMContentLoaded',()=>{askWake=()=>{}})"); pg.goto((root / 'tracker/index.html').as_uri()); pg.wait_for_timeout(400)
     assert pg.locator('#s-whoop').count() == 1
     for f, v in [('rec', '52'), ('hrv', '61'), ('rhr', '58'), ('sp', '84'), ('sh', '6.9'), ('strain', '12.4'), ('kcal', '2650'), ('rec', '250')]:
         pg.fill(f'#wh-{f}', v); pg.press(f'#wh-{f}', 'Tab'); pg.wait_for_timeout(120)

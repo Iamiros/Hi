@@ -9,7 +9,7 @@ with sync_playwright() as p:
     for scheme in ("dark", "light"):
         pg = b.new_page(viewport={'width': 390, 'height': 844}, color_scheme=scheme)
         pg.on('pageerror', lambda e: errs.append(str(e))); pg.on('console', lambda m: m.type == 'error' and errs.append(m.text))
-        pg.goto((root / 'tracker/index.html').as_uri()); pg.wait_for_timeout(500)
+        pg.add_init_script("addEventListener('DOMContentLoaded',()=>{askWake=()=>{}})"); pg.goto((root / 'tracker/index.html').as_uri()); pg.wait_for_timeout(500)
         pg.screenshot(path=str(out / f'{scheme}-today.png'), full_page=True)
         assert pg.locator('.ex .thumb').count() >= 4, 'session thumbs'
         pg.click('.wolink >> nth=0'); pg.wait_for_timeout(300)

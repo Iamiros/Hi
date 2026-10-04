@@ -153,3 +153,10 @@ Evidence: more weekly sets give more hypertrophy, with about 10+ hard sets per m
 - Test table: fixed column widths, wrapping labels, compact inputs; the comparison bars only list tests that have a value.
 - English: food amounts read "100 g".
 - Full QA suite re-run in both languages.
+
+## Edit 22: photo key and wake-up time
+- AI food entry is one composer box: text area with photo thumbnails inside, and a bottom bar holding its own "Photo" key (with a count badge), the meal select ("Auto (time)") and "Calculate".
+- Wake-up time per day (`wake`). When set, default meal times follow it: meal 1 at wake +4 h, pre-workout +7 h, post-workout +10.5 h, meal 4 +12 h; suggested training window +8.5 h to +10 h. Times typed into a meal header still win.
+- Today shows a wake card first (time input plus the derived meal and training times).
+- On the first data saved for today, a dialog asks for the wake-up time once (`wakeAsked`). It waits until the user leaves the field being typed in, so it never interrupts entry. The WHOOP reader also fills `wake` if the screenshot shows it.
+- QA: `tools/qa_wake.py` (card, dialog timing, derived times, composer layout in both languages); other QA scripts stub the dialog. Overflow check over all 56 days in both languages and both colour schemes.
