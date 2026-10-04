@@ -130,3 +130,8 @@ Evidence: more weekly sets give more hypertrophy, with about 10+ hard sets per m
 - Training re-check after Edit 16: every muscle at least twice a week, 48 h+ between sessions for the same muscle, Saturday's heavy pulls and presses no longer follow arm work. No further changes needed.
 - Smoothness: removed the continuous background drift (it forced every glass panel to re-blur each frame), removed filter blur from page transitions, lighter glass blur (22 px), no ghost clone on tab and day changes (cloning cost about 20 ms), ghost copies skip backdrop blur. Under 4x CPU throttling the tab switch drops at most one long frame at the start; the rest run at frame rate (`tools/qa_perf.py`).
 - Bug review (subagent) found no runtime errors; QA suite plus `tools/qa_whoop.py` pass.
+
+## Edit 18: meal times
+- Every meal has an editable clock time (stored per day in `mt`, validated in `normalize()`); defaults 12:00, 15:00, 17:30, 19:30 and none for the snack. The meal header shows a time picker.
+- The Food hero shows the day's eating window (first to last meal that has food) and the fast since the previous day's last meal.
+- AI text entry accepts times ("8 am 3 eggs and bread, 13:00 chicken with rice"): each item gets its time, and with "Auto by time" (default) it lands in the meal nearest that time (or nearest the current time when no time is given, today only). An empty meal takes the time that was written. QA: `tools/qa_meals.py`.
