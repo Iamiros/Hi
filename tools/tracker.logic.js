@@ -10,6 +10,8 @@ const GUIDE = __GUIDE__;
 const IMGS = __IMGS__;
 const DEFAULT_START = "2026-10-03";
 const TARGET_W = 83, START_W = 89;
+// WHOOP morning entry: recovery %, HRV ms, resting HR, sleep performance %, sleep hours, yesterday's strain and calories burned.
+const WH = { rec: [0, 100], hrv: [5, 300], rhr: [25, 150], sp: [0, 100], sh: [0, 16], strain: [0, 21], kcal: [0, 10000] };
 const DAYFA = ["شنبه","یکشنبه","دوشنبه","سه‌شنبه","چهارشنبه","پنجشنبه","جمعه"];
 const FD = "۰۱۲۳۴۵۶۷۸۹";
 
@@ -49,6 +51,7 @@ function normalize(o) {
     if (typeof d.note === "string") r.note = d.note.slice(0, 2000);
     [["sleepH", 0, 16], ["energy", 1, 5], ["sore", 1, 5], ["hunger", 1, 5], ["kin", 0, 10000], ["pin", 0, 1000], ["waist", 40, 200]].forEach(([f, lo, hi]) => { const v = numOr(d[f], lo, hi); if (v !== null) r[f] = v; });
     if (Array.isArray(d.food)) r.food = d.food.filter(isObj).slice(0, 80).map(x => ({ m: numOr(x.m, 0, 4) ?? 4, n: String(x.n || "").slice(0, 60), a: String(x.a || "").slice(0, 30), k: numOr(x.k, 0, 5000) || 0, p: numOr(x.p, 0, 500) || 0, c: numOr(x.c, 0, 1000) || 0, f: numOr(x.f, 0, 500) || 0 })).filter(x => x.n);
+    if (isObj(d.wh)) { r.wh = {}; Object.keys(WH).forEach(f => { const v = numOr(d.wh[f], WH[f][0], WH[f][1]); if (v !== null) r.wh[f] = v; }); }
     if (isObj(d.sf)) { r.sf = {}; ["ch", "ab", "th"].forEach(f => { const v = numOr(d.sf[f], 1, 80); if (v !== null) r.sf[f] = v; }); }
     R.days[k] = r;
   });
