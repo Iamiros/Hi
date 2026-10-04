@@ -939,5 +939,12 @@
 "ردیف دوم: وزنه‌ی پیشنهادی (kg؛ دمبل هر دست؛ BW وزن بدن؛ − یعنی کمک دستگاه).": "Second row: suggested load (kg; dumbbells per hand; BW bodyweight; − means machine assistance).",
 "kg = میزان کمک دستگاه (کمتر یعنی قوی‌تر).": "kg = machine assistance (less means stronger).",
 "kg = وزن هر دمبل.": "kg = weight of each dumbbell.",
-"kg کمک": "kg assist"
+"kg کمک": "kg assist",
+"جایگزین باشگاه": "Gym alternative",
+"جایگزین خانه": "Home alternative",
+"پرش به بخش": "Jump to section",
+"جلسه": "Session",
+"نقشه": "Map",
+"وزن": "Weight",
+"پیشرفت وزنه": "Strength"
 }

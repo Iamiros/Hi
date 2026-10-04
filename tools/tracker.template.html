@@ -470,14 +470,47 @@ dialog::backdrop{background:rgba(3,6,12,.55);-webkit-backdrop-filter:blur(3px);b
 [data-act="go"]:active,.dayno:active{transform:scale(.97)}
 .kpis3 > [data-act="go"]:hover,.kpi[data-act="go"]:hover,.macro[data-act="go"]:hover{filter:brightness(1.04)}
 section[id^="s-"]{scroll-margin-top:14px}
-.flash{animation:flash 1.5s ease}
-@keyframes flash{0%,100%{box-shadow:var(--shadow),inset 0 1px 0 var(--hl),inset 0 0 0 1px var(--rim)}25%{box-shadow:0 0 0 3px var(--accent),0 0 32px var(--accent-soft)}}
+.flash{animation:flash 3s cubic-bezier(.2,.8,.2,1) both;z-index:2;background:var(--sheen),color-mix(in srgb,var(--accent) 9%,var(--panel))}
+.flash :is(p,span,label,li,b,h2,h3,button,summary,td){font-weight:700}
+@keyframes flash{0%{transform:scale(1);box-shadow:var(--shadow),inset 0 1px 0 var(--hl),inset 0 0 0 1px var(--rim)}
+  10%{transform:scale(1.025);box-shadow:0 0 0 3px var(--accent),0 0 0 10px var(--accent-soft),0 24px 60px var(--accent-soft)}
+  75%{transform:scale(1.012);box-shadow:0 0 0 3px var(--accent),0 0 0 6px var(--accent-soft),0 18px 44px var(--accent-soft)}
+  100%{transform:none;box-shadow:var(--shadow),inset 0 1px 0 var(--hl),inset 0 0 0 1px var(--rim)}}
 .hint-line.load{display:block;background:var(--gold-soft);color:var(--ink)}
 .hint-line.load b{color:var(--gold)}
 .wprog td,.wprog th{text-align:center;white-space:nowrap;padding:8px 6px}
 .wprog td:first-child,.wprog th:first-child{text-align:start;white-space:normal;min-width:120px}
 .wprog td span{display:block}
 .wprog td.up bdi{color:var(--ok)} .wprog td.dn bdi{color:var(--bad)}
+.ex-head{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:center}
+.ex-pic{position:relative;display:block;border-radius:14px}
+.ex-pic .thumb{width:64px;height:64px;border-radius:14px}
+.ex-pic .thumb.nopic{display:grid;place-items:center;font-family:var(--f-x);font-weight:800;color:var(--ink3);background:var(--surface2)}
+.ex-pic .exn{position:absolute;inset-inline-start:-4px;top:-4px;width:22px;height:22px;border-radius:999px;display:grid;place-items:center;font-size:.7rem;font-weight:800;background:var(--ink);color:var(--bg);box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.ex-main{min-width:0;display:flex;flex-direction:column;gap:4px}
+.ex-main .ename{font-size:1.08rem;min-height:0}
+.ex-tags{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.ex-tags .dose{font-size:.95rem;max-width:none;padding:2px 10px;border-radius:999px;background:var(--accent-soft)}
+.ex-tags .rest{display:inline-flex;align-items:center;gap:4px;font-size:.78rem;color:var(--ink2);padding:2px 10px;border-radius:999px;background:var(--surface2)}
+.ex-tags .rest svg{width:14px;height:14px}
+.altlink{display:flex;align-items:center;gap:8px;width:100%;margin-top:10px;padding:8px 12px;border-radius:14px;background:var(--surface2);text-align:start;font-size:.82rem;color:var(--ink2);box-shadow:inset 0 1px 0 var(--hl),inset 0 0 0 1px var(--rim)}
+.altlink b{flex:1;min-width:0;color:var(--ink);font-family:var(--f-x);font-weight:700;font-size:.9rem}
+.altlink svg{width:16px;height:16px;flex:none;color:var(--ink3)}
+:root[dir=rtl] .altlink svg{transform:scaleX(-1)}
+.ex .meta{margin-top:8px}
+.xlink{display:inline;color:var(--accent-ink);font-weight:700;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px;padding:0;font:inherit;font-weight:700}
+.ytbtn svg{width:22px;height:22px}
+.wklbl{cursor:pointer}
+[data-act]:not(input,select,textarea):active{transition:transform .12s ease}
+button:active,.excard:active,.pd:active,.badge:active,.notice[data-act]:active{transform:scale(.97)}
+.ghost .rise{animation:none!important}
+.jump{position:sticky;top:calc(8px + env(safe-area-inset-top));z-index:12;margin:14px 0 0}
+html{overflow-x:clip}
+.jump .in{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:6px;border-radius:999px;background:var(--sheen),var(--panel);-webkit-backdrop-filter:blur(24px) saturate(185%);backdrop-filter:blur(24px) saturate(185%);box-shadow:var(--shadow),inset 0 1px 0 var(--hl),inset 0 0 0 1px var(--rim)}
+.jump .in::-webkit-scrollbar{display:none}
+.jump button{flex:none;min-height:36px;padding:0 14px;border-radius:999px;font-size:.84rem;font-weight:600;color:var(--ink2);white-space:nowrap;transition:background .25s ease,color .25s ease}
+.jump button[aria-current]{background:var(--lens);color:var(--accent-ink);box-shadow:0 2px 8px rgba(20,30,80,.12),inset 0 1px 0 var(--hl),inset 0 0 0 1px var(--rim)}
+section[id^="s-"]{scroll-margin-top:72px}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .empty{padding:22px;text-align:center;color:var(--ink2);border:1.5px dashed var(--line);border-radius:var(--r-lg);font-size:.9rem}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
@@ -698,13 +731,26 @@ async function setLang(l) {
   if (cloudRef) { clearTimeout(pushT); try { await Promise.race([cloudRef.set({ s: JSON.stringify(S), t: savedAt }), new Promise(r => setTimeout(r, 2500))]); } catch (e) {} }
   location.reload();
 }
+function jumpBar(items) {
+  return `<nav class="jump" aria-label="پرش به بخش"><div class="in">${items.map(x => `<button data-act="go" data-tab="${tab}" data-to="${x[0]}">${x[1]}</button>`).join("")}</div></nav>`;
+}
+let jumpIO = null;
+function bindJump() {
+  if (jumpIO) jumpIO.disconnect(); const bar = $("#view .jump"); if (!bar || !("IntersectionObserver" in window)) return;
+  const btn = id => bar.querySelector(`[data-to="${id}"]`);
+  jumpIO = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { bar.querySelectorAll("[aria-current]").forEach(x => x.removeAttribute("aria-current")); const b = btn(e.target.id); if (b) { b.setAttribute("aria-current", "true"); b.scrollIntoView({ block: "nearest", inline: "center" }); } } }), { rootMargin: "-30% 0px -60% 0px" });
+  bar.querySelectorAll("button").forEach(b => { const t = document.getElementById(b.dataset.to); if (t) jumpIO.observe(t); });
+}
 function goTo(t, to, day) {
-  if (day != null) sel = clamp(+day, 0, 55);
-  page = null; tab = t; render();
-  const el = to && document.getElementById(to);
+  let el = to && day == null && t === tab && document.getElementById(to);
+  if (!el) {
+    if (day != null) { const i = clamp(+day, 0, 55); navHint = i === sel ? "tab" : i > sel ? "next" : "prev"; sel = i; } else navHint = "tab";
+    page = null; tab = t; render(); el = to && document.getElementById(to);
+  }
   if (!el) return window.scrollTo(0, 0);
   el.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
-  el.classList.remove("flash"); void el.offsetWidth; el.classList.add("flash");
+  clearTimeout(goTo.t); document.querySelectorAll(".flash").forEach(x => x.classList.remove("flash"));
+  void el.offsetWidth; el.classList.add("flash"); goTo.t = setTimeout(() => el.classList.remove("flash"), 3000);
 }
 function wkMenu(open) {
   const m = $("#wkmenu"), bk = $("#wkback"), btn = $("#phase");
@@ -725,8 +771,60 @@ function wkMenu(open) {
   (m.querySelector('[aria-checked="true"]') || m.querySelector("button")).focus({ preventScroll: true });
   m.querySelector('[aria-checked="true"]')?.scrollIntoView({ block: "nearest" });
 }
-function go(t) { tab = t; render(); window.scrollTo(0, 0); }
-function setSel(i) { sel = clamp(i, 0, 55); render(); }
+function go(t) { navHint = "tab"; tab = t; render(); window.scrollTo(0, 0); }
+function setSel(i) { i = clamp(i, 0, 55); if (i !== sel) navHint = i > sel ? "next" : "prev"; sel = i; render(); }
+
+/* ---------- motion: page transitions (ghost of the old view + spring-in of the new one) ---------- */
+let navHint = "", navFrom = null, navAnims = [];
+const SPRING = CSS.supports("animation-timing-function", "linear(0, 1)")
+  ? "linear(0, .009, .035 2.1%, .141 4.4%, .723 12.9%, .938 16.7%, 1.017, 1.077 21.5%, 1.121 24%, 1.149 26.9%, 1.159 30%, 1.14 34.6%, 1.04 47.4%, 1.008 54%, .989 60.3%, .997 77.6%, 1)"
+  : "cubic-bezier(.2,.9,.25,1)";
+const SOFT = "cubic-bezier(.2,.8,.2,1)";
+const motionOK = () => !matchMedia("(prefers-reduced-motion: reduce)").matches;
+function makeGhost(v) {
+  const r = v.getBoundingClientRect(); if (r.bottom < 0 || r.top > innerHeight) return null;
+  const g = v.cloneNode(false); g.removeAttribute("id"); g.className = "ghost"; g.setAttribute("aria-hidden", "true"); g.inert = true;
+  g.style.cssText = `position:fixed;left:${r.left}px;top:${r.top}px;width:${r.width}px;margin:0;pointer-events:none;z-index:15`;
+  for (const c of v.children) {
+    const cr = c.getBoundingClientRect();
+    if (cr.bottom < -40 || cr.top > innerHeight + 40) { const sp = document.createElement("div"); sp.style.height = cr.height + "px"; sp.style.marginTop = getComputedStyle(c).marginTop; g.appendChild(sp); }
+    else g.appendChild(c.cloneNode(true));
+  }
+  g.querySelectorAll("[id],[data-act]").forEach(e => { e.removeAttribute("id"); e.removeAttribute("data-act"); });
+  return g;
+}
+function runNav(kind, g) {
+  navAnims.forEach(a => a.cancel()); navAnims = [];
+  document.querySelectorAll("body > .ghost").forEach(x => x.remove());
+  const v = $("#view"), d = LANG === "en" ? 1 : -1, X = n => `translate3d(${n * d}%,0,0)`;
+  const F = {
+    push: [[{ opacity: 0, transform: X(28) }, { opacity: 1, transform: "none" }], [{ opacity: 1, transform: "none" }, { opacity: 0, transform: X(-14) + " scale(.94)" }]],
+    pop: [[{ opacity: 0, transform: X(-24) + " scale(.97)" }, { opacity: 1, transform: "none" }], [{ opacity: 1, transform: "none" }, { opacity: 0, transform: X(30) }]],
+    next: [[{ opacity: 0, transform: X(16) }, { opacity: 1, transform: "none" }], [{ opacity: 1, transform: "none" }, { opacity: 0, transform: X(-12) }]],
+    prev: [[{ opacity: 0, transform: X(-16) }, { opacity: 1, transform: "none" }], [{ opacity: 1, transform: "none" }, { opacity: 0, transform: X(12) }]],
+    zoom: [[{ opacity: 0, transform: "scale(.97)" }, { opacity: 1, transform: "none" }], [{ opacity: 1 }, { opacity: 0, transform: "scale(1.02)" }]],
+    tab: [[{ opacity: 0, transform: "translate3d(0,18px,0) scale(.985)", filter: "blur(6px)" }, { opacity: 1, transform: "none", filter: "blur(0)" }], [{ opacity: 1, filter: "blur(0)" }, { opacity: 0, transform: "scale(.97)", filter: "blur(8px)" }]]
+  }[kind] || null;
+  if (!F) return;
+  navAnims.push(v.animate(F[0], { duration: kind === "tab" ? 420 : 520, easing: SPRING }));
+  if (g) {
+    document.body.appendChild(g);
+    const a = g.animate(F[1], { duration: 260, easing: "cubic-bezier(.4,0,1,1)", fill: "forwards" });
+    const rm = () => g.remove(); a.finished.then(rm, rm); navAnims.push(a);
+  }
+}
+// Shared element: the tapped thumbnail grows into the exercise page's figure.
+function shareFrom(b) {
+  const img = b.querySelector(".thumb img") || (b.closest(".excard,.ex") || b).querySelector(".thumb img");
+  navFrom = img ? img.getBoundingClientRect() : null;
+}
+function runShared() {
+  const from = navFrom; navFrom = null; const fig = $("#view .flip");
+  if (!from || !fig || !motionOK()) return;
+  const to = fig.getBoundingClientRect();
+  fig.style.transformOrigin = "0 0";
+  navAnims.push(fig.animate([{ transform: `translate(${from.left - to.left}px,${from.top - to.top}px) scale(${from.width / to.width},${from.height / to.height})`, borderRadius: "24px" }, { transform: "none", borderRadius: "16px" }], { duration: 620, easing: SPRING }));
+}
 function applyTheme() {
   const t = S.prefs.theme, dark = t === "dark" || (t !== "light" && matchMedia("(prefers-color-scheme: dark)").matches);
   const m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = dark ? "#04060C" : "#E7EBFA";
@@ -738,7 +836,7 @@ function applyTheme() {
 function weekStrip(inf) {
   const base = (inf.week - 1) * 7, cur = todayIdx();
   let h = `<div class="weekbar"><button class="iconbtn" data-act="prev" aria-label="روز قبل" ${sel === 0 ? "disabled" : ""}>${ICON.prev}</button>
-    <div class="small muted" style="display:flex;align-items:center;gap:8px">هفته ${fa(inf.week)} از ۸ · ${esc(inf.phaseFa)} ${infoBtn("week")}</div>
+    <div class="small muted" style="display:flex;align-items:center;gap:8px"><span data-act="wkmenu" role="button" tabindex="0" class="wklbl">هفته ${fa(inf.week)} از ۸ · ${esc(inf.phaseFa)}</span> ${infoBtn("week")}</div>
     <button class="iconbtn" data-act="next" aria-label="روز بعد" ${sel === 55 ? "disabled" : ""}>${ICON.next}</button></div><div class="week" role="group" aria-label="روزهای هفته">`;
   for (let d = 0; d < 7; d++) {
     const i = base + d, f = info(i), p = pct(i), dn = fmtDay.format(parseISO(f.date));
@@ -768,12 +866,12 @@ function hero(inf, dd) {
 function notices(inf, dd) {
   const cur = todayIdx(); let h = "";
   if (cur < 0) h += `<div class="notice acc"><div><b>${LANG === "en" ? `Program starts in ${-cur} day${-cur === 1 ? "" : "s"}` : `برنامه ${fa(-cur)} روز دیگر شروع می‌شود`}</b>شروع: ${esc(fmtJ.format(startDate()))}. روزها را از قبل ببین.</div></div>`;
-  if (cur > 55) h += `<div class="notice"><div><b>۸ هفته تمام شد</b>نتیجه‌ها در بخش آمار.</div></div>`;
-  if (inf.deload) h += `<div class="notice"><div><b>هفته دیلود</b>نصف ست‌ها، وزنه‌ی سبک‌تر. جمعه تست میانی.</div></div>`;
+  if (cur > 55) h += `<div class="notice" data-act="go" data-tab="stats" role="button" tabindex="0"><div><b>۸ هفته تمام شد</b>نتیجه‌ها در بخش آمار.</div></div>`;
+  if (inf.deload) h += `<div class="notice" data-act="go" data-tab="plan" role="button" tabindex="0"><div><b>هفته دیلود</b>نصف ست‌ها، وزنه‌ی سبک‌تر. جمعه تست میانی.</div></div>`;
   if (inf.week === 8 && !inf.mu) h += `<div class="notice"><div><b>هفته اوج و تست</b>حجم کم. جمعه ${en("Pull-up Test Day")}.</div></div>`;
-  if (inf.refeed) h += `<div class="notice"><div><b>ریفید</b>کربوهیدرات اضافه از برنج، ماکارونی، سیب‌زمینی و میوه، نه از چربی.</div></div>`;
+  if (inf.refeed) h += `<div class="notice" data-act="go" data-tab="today" data-to="s-fuel" role="button" tabindex="0"><div><b>ریفید</b>کربوهیدرات اضافه از برنج، ماکارونی، سیب‌زمینی و میوه، نه از چربی.</div></div>`;
   if (inf.mu) h += `<div class="notice"><div><b>${en("Pull-up Test Day")}</b>گرم کردن کامل، یک ست ${en("Max Strict Pull-up")} (هدف ۸ تا ۱۰)، ۵ دقیقه استراحت، ست دوم اختیاری. اهداف دوم: ۸ ${en("Dip")} و ۶ ${en("Chin-up")}. اگر ۸ یا بیشتر زدی، ۳ تلاش اختیاری ${en("Muscle-Up")}.</div></div>`;
-  else if (inf.test) h += `<div class="notice"><div><b>روز تست</b>بعد از گرم کردن، بین هر تست ۳ تا ۵ دقیقه استراحت. نتایج را در آمار ثبت کن.</div></div>`;
+  else if (inf.test) h += `<div class="notice" data-act="go" data-tab="stats" data-to="s-tests" role="button" tabindex="0"><div><b>روز تست</b>بعد از گرم کردن، بین هر تست ۳ تا ۵ دقیقه استراحت. نتایج را در آمار ثبت کن.</div></div>`;
   const rd = readiness(dd);
   if (inf.letter && rd != null && rd < 50) h += `<div class="notice bad"><div><b>آمادگی پایین (${fa(rd)})</b>یک ست از حرکت‌های سنگین کم کن و RPE ۷ بمان. سرگیجه یا خستگی شدید: فقط پیاده‌روی سبک.</div></div>`;
   return h;
@@ -791,10 +889,11 @@ function session(inf, dd) {
     let dots = "";
     for (let s = 1; s <= n; s++) dots += `<button class="dot ${s <= k ? "on" : ""}" data-act="set" data-id="${ex.id}" data-n="${s}" data-max="${n}" data-rest="${restSec(ex.rest)}" aria-pressed="${s <= k}" aria-label="${esc(shown.en)} ست ${fa(s)} از ${fa(n)}">${fa(s)}</button>`;
     return `<article class="ex ${n && k >= n ? "done" : ""}">
-      <div class="ex-top"><div class="lead">${thumb(id)}<div style="min-width:0"><span class="faint tiny num">${fa(idx + 1)} </span><button class="ename" lang="en" data-act="exinfo" data-ex="${ex.id}" data-w="${inf.letter}">${esc(shown.en)}</button>
-        <p class="meta">${shown.en === other.en ? "باشگاه و خانه: همین حرکت" : `${home ? "باشگاه" : "خانه"}: ${en(other.en)}`} · استراحت ${en(ex.rest)}</p></div></div>
-        <span class="dose">${doseH(dose === "test" ? "Test" : dose)}</span></div>
-      ${ex.fa ? `<p class="meta" style="margin-top:6px">${bidi(ex.fa)}</p>` : ""}
+      <div class="ex-head"><button class="ex-pic" data-act="exinfo" data-ex="${ex.id}" data-w="${inf.letter}" aria-label="${esc(shown.en)}">${thumb(id) || `<span class="thumb nopic">${fa(idx + 1)}</span>`}<span class="exn num">${fa(idx + 1)}</span></button>
+        <div class="ex-main"><button class="ename" lang="en" data-act="exinfo" data-ex="${ex.id}" data-w="${inf.letter}">${esc(shown.en)}</button>
+          <div class="ex-tags" data-act="exinfo" data-ex="${ex.id}" data-w="${inf.letter}" role="button" tabindex="0"><span class="dose">${doseH(dose === "test" ? "Test" : dose)}</span><span class="rest" data-act="rtimer" data-sec="${restSec(ex.rest)}" data-l="${esc(shown.en)}" role="button" tabindex="0">${SV('<circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 3h6"/>', 2)}${en(ex.rest)}</span></div></div></div>
+      ${shown.en === other.en ? "" : `<button class="altlink" data-act="exinfo" data-ex="${ex.id}" data-w="${inf.letter}" data-alt="1"><span>${home ? "جایگزین باشگاه" : "جایگزین خانه"}</span><b lang="en">${esc(other.en)}</b>${SV('<path d="M9 6l6 6-6 6"/>', 2.2)}</button>`}
+      ${ex.fa ? `<p class="meta">${linkLib(bidi(ex.fa), id)}</p>` : ""}
       ${n ? loadLine(id, dose) : ""}${sug ? `<p class="hint-line">${sug}</p>` : ""}
       ${n ? `<div class="sets">${dots}<button class="linkbtn" data-act="log" data-id="${ex.id}" data-lib="${id}">ثبت وزنه${logs.length ? " · " + fa(logs.length) : ""}</button></div>` : `<p class="hint">این هفته اجرا نمی‌شود.</p>`}
     </article>`;
@@ -804,7 +903,7 @@ function session(inf, dd) {
       <div style="display:flex;gap:8px;align-items:center"><div class="seg" role="group" aria-label="نسخه تمرین"><button data-act="mode" data-v="gym" aria-pressed="${!home}">${en("Gym")}</button><button data-act="mode" data-v="home" aria-pressed="${home}">${en("Home")}</button></div>${infoBtn("session")}</div></div>
     <div class="prog" role="progressbar" aria-label="پیشرفت جلسه" aria-valuemin="0" aria-valuemax="${total}" aria-valuenow="${done}"><i style="width:${(sp * 100).toFixed(1)}%"></i></div>
     <p class="tiny muted num">${fa(done)} از ${fa(total)} ست · روی هر ست بزن تا تایمر استراحت شروع شود</p>
-    <details class="fold" data-d="wu" ${openD.has("wu") ? "open" : ""}><summary>گرم کردن ۸ تا ۱۰ دقیقه</summary><ul class="wu">${PROGRAM.warmup.map(w => `<li>${en(w[0])}<span class="en">${esc(w[1])}</span></li>`).join("")}</ul></details>
+    <details class="fold" data-d="wu" ${openD.has("wu") ? "open" : ""}><summary>گرم کردن ۸ تا ۱۰ دقیقه</summary><ul class="wu">${PROGRAM.warmup.map(w => `<li>${linkLib(en(w[0]))}<span class="en">${esc(w[1])}</span></li>`).join("")}</ul></details>
     ${rows}
     <button class="btn ${wd ? "done" : "pri"} block tick" style="margin-top:14px" data-act="tog" data-k="workout" aria-pressed="${wd}">${wd ? "جلسه انجام شد" : "پایان جلسه"}</button>`;
   if (inf.mu) return `<section class="panel rise" id="s-session" style="--i:1"><details class="fold" style="border:0;margin:0" data-d="mu" ${openD.has("mu") ? "open" : ""}><summary>تمرین ${inf.letter} (سبک، فقط بعد از تست‌ها اگر تازه‌ای)</summary>${body}</details></section>`;
@@ -830,7 +929,7 @@ function readyCard(inf, dd) {
   const rd = readiness(dd), sc = (f, v) => `<div class="scale5" role="group" aria-label="${f}">${[1, 2, 3, 4, 5].map(k => `<button data-act="scale" data-f="${f}" data-n="${k}" aria-pressed="${v === k}">${fa(k)}</button>`).join("")}</div>`;
   const msg = rd == null ? "خواب، انرژی و کوفتگی را وارد کن." : rd >= 75 ? "آماده‌ای. طبق برنامه برو." : rd >= 50 ? "متوسط. ست‌های سنگین را RPE ۷ تا ۷٫۵ نگه دار." : "پایین. یک ست سنگین کمتر و RPE ۷.";
   return `<section class="panel rise" id="s-ready" style="--i:2" aria-label="آمادگی امروز">${ph("آمادگی امروز", "ready")}
-    <div class="gauge" id="gauge" style="margin-bottom:0">${gaugeHtml(dd)}</div>
+    <div class="gauge" id="gauge" style="margin-bottom:0" data-act="rdopen" role="button" tabindex="0">${gaugeHtml(dd)}</div>
     <details class="fold" data-d="rd" ${rd == null || dd.hunger == null || openD.has("rd") ? "open" : ""}><summary>${rd == null ? "ثبت خواب، انرژی و کوفتگی" : "ویرایش"}</summary>
     <div class="fq"><label class="f" for="sl">خواب دیشب (ساعت)</label><input id="sl" class="inp num" type="text" inputmode="decimal" dir="ltr" value="${esc(dd.sleepH ?? "")}" data-act="field" data-f="sleepH" autocomplete="off"></div>
     <div class="fq"><div class="lb"><span>انرژی</span><span>۱ کم · ۵ عالی</span></div>${sc("energy", dd.energy)}</div>
@@ -855,7 +954,7 @@ function checklist(inf, dd) {
 
 function waterCard(inf, dd) {
   const t = waterTarget(inf), ml = dd.water || 0, p = clamp(ml / t, 0, 1);
-  return `<section class="panel rise" id="s-water" style="--i:3" aria-label="آب">${ph("آب", "water")}<div class="water"><div class="tank" role="progressbar" aria-label="آب" aria-valuemin="0" aria-valuemax="${t}" aria-valuenow="${Math.min(ml, t)}"><i style="height:${(p * 100).toFixed(1)}%"></i></div>
+  return `<section class="panel rise" id="s-water" style="--i:3" aria-label="آب">${ph("آب", "water")}<div class="water"><div class="tank" data-act="water" data-v="250" role="progressbar" aria-label="آب" aria-valuemin="0" aria-valuemax="${t}" aria-valuenow="${Math.min(ml, t)}"><i style="height:${(p * 100).toFixed(1)}%"></i></div>
     <div><p><span class="big x num">${fa(String(Number((ml / 1000).toFixed(2))))}</span> <span class="muted">از ${fa(t / 1000)} لیتر</span></p>
     <p class="small muted">${fa(Math.floor(ml / 250))} لیوان ۲۵۰ میلی‌لیتری.</p>
     <div class="wbtns"><button class="btn pri" data-act="water" data-v="250"><bdi dir="ltr">+۲۵۰</bdi></button><button class="btn pri" data-act="water" data-v="500"><bdi dir="ltr">+۵۰۰</bdi></button><button class="btn" data-act="water" data-v="-250" ${ml <= 0 ? "disabled" : ""} aria-label="کم کردن ۲۵۰"><bdi dir="ltr">−۲۵۰</bdi></button></div></div></div></section>`;
@@ -866,11 +965,11 @@ function fuel(inf, dd) {
   const M = (lbl, v, t, u) => { const q = v ? v / t : 0; return `<div class="meter ${q > 1.05 ? "over" : ""}"><div class="lb"><span>${lbl}</span><span class="num">${fa(v || 0)} / ${fa(t)} ${u}</span></div><div class="tr"><i style="width:${(clamp(q, 0, 1) * 100).toFixed(1)}%"></i></div></div>`; };
   return `<section class="panel rise" id="s-fuel" style="--i:3" aria-label="تغذیه">${ph("سوخت امروز", "fuel", `<span class="tiny muted">۱۲:۰۰ تا ۲۰:۰۰</span>`)}
     <div class="macro num" data-act="go" data-tab="food" data-to="s-food" role="button" tabindex="0"><div><b class="x">${fa(n.kcal)}</b><span>کیلوکالری</span></div><div><b class="x">${fa(n.p)}</b><span>پروتئین g</span></div><div><b class="x">${fa(n.f)}</b><span>چربی g</span></div><div><b class="x">${fa(n.c)}</b><span>کربو g</span></div></div>
-    <div class="ratio" aria-hidden="true"><i style="width:${kp / tot * 100}%;background:var(--accent)"></i><i style="width:${kf / tot * 100}%;background:var(--gold)"></i><i style="width:${kc / tot * 100}%;background:var(--ink3)"></i></div>
-    <div class="legend"><span><i style="background:var(--accent)"></i>پروتئین ${fa(Math.round(kp / tot * 100))}٪</span><span><i style="background:var(--gold)"></i>چربی ${fa(Math.round(kf / tot * 100))}٪</span><span><i style="background:var(--ink3)"></i>کربو ${fa(Math.round(kc / tot * 100))}٪</span></div>
+    <div class="ratio" aria-hidden="true" data-act="go" data-tab="food" data-to="s-food"><i style="width:${kp / tot * 100}%;background:var(--accent)"></i><i style="width:${kf / tot * 100}%;background:var(--gold)"></i><i style="width:${kc / tot * 100}%;background:var(--ink3)"></i></div>
+    <div class="legend" data-act="go" data-tab="food" data-to="s-food"><span><i style="background:var(--accent)"></i>پروتئین ${fa(Math.round(kp / tot * 100))}٪</span><span><i style="background:var(--gold)"></i>چربی ${fa(Math.round(kf / tot * 100))}٪</span><span><i style="background:var(--ink3)"></i>کربو ${fa(Math.round(kc / tot * 100))}٪</span></div>
     <div class="fgrid" style="margin-top:14px"><div><label class="f" for="kin">کالری خورده‌شده</label><input id="kin" class="inp num" type="text" inputmode="numeric" dir="ltr" value="${esc(dd.kin ?? "")}" data-act="field" data-f="kin" autocomplete="off"></div>
     <div><label class="f" for="pin">پروتئین خورده‌شده g</label><input id="pin" class="inp num" type="text" inputmode="numeric" dir="ltr" value="${esc(dd.pin ?? "")}" data-act="field" data-f="pin" autocomplete="off"></div></div>
-    <div id="meters">${M("کالری", dd.kin, n.kcal, "kcal")}${M("پروتئین", dd.pin, n.p, "g")}</div></section>`;
+    <div id="meters" data-act="go" data-tab="food" data-to="s-food" role="button" tabindex="0">${M("کالری", dd.kin, n.kcal, "kcal")}${M("پروتئین", dd.pin, n.p, "g")}</div></section>`;
 }
 
 function dayLog(inf, dd) {
@@ -909,7 +1008,8 @@ function viewToday() {
   dd.sets = dd.sets || {};
   const left = (inf.letter ? readyCard(inf, dd) + session(inf, dd) : walkDay(inf, dd)) + checklist(inf, dd);
   const right = waterCard(inf, dd) + fuel(inf, dd) + dayLog(inf, dd) + (inf.dow === 6 ? bodyCard(inf, dd) : "") + (inf.letter ? safety() : "");
-  return weekStrip(inf) + hero(inf, dd) + notices(inf, dd) + `<div class="grid2" style="margin-top:14px"><div class="stack">${left}</div><div class="stack">${right}</div></div>`;
+  const J = [inf.letter ? ["s-session", "جلسه"] : ["s-walk", "پیاده‌روی"], inf.letter ? ["s-ready", "آمادگی"] : null, ["s-check", "چک‌لیست"], ["s-water", "آب"], ["s-fuel", "تغذیه"], ["s-log", "ثبت روز"], inf.dow === 6 ? ["s-body", "ترکیب بدن"] : null].filter(Boolean);
+  return weekStrip(inf) + hero(inf, dd) + notices(inf, dd) + jumpBar(J) + `<div class="grid2" style="margin-top:14px"><div class="stack">${left}</div><div class="stack">${right}</div></div>`;
 }
 
 /* ---------- program ---------- */
@@ -925,7 +1025,7 @@ function viewPlan() {
   Object.keys(PROGRAM.workouts).forEach((L, k) => {
     const W = PROGRAM.workouts[L];
     h += `<section class="panel rise" style="--i:${k + 1};margin-top:14px"><div class="sess-h" style="margin-bottom:6px"><div><button class="x wolink" lang="en" style="font-size:1.5rem" data-act="wopage" data-w="${L}">WORKOUT ${L}</button><span class="muted small">${esc(W.fa.split(":")[1] || W.fa)}</span></div></div><ul class="wlist">` +
-      W.ex.map(ex => { const id = home ? ex.home : ex.gym; return `<li><button class="ename" lang="en" data-act="exinfo" data-ex="${ex.id}" data-w="${L}">${esc(PROGRAM.lib[id].en)}</button><span class="dose" style="font-size:1rem">${doseH(doseOf(ex, wk, home))}</span></li>`; }).join("") + `</ul></section>`;
+      W.ex.map(ex => { const id = home ? ex.home : ex.gym; return `<li><button class="ename" lang="en" data-act="exinfo" data-ex="${ex.id}" data-w="${L}">${esc(PROGRAM.lib[id].en)}</button><span class="dose" style="font-size:1rem" data-act="exinfo" data-ex="${ex.id}" data-w="${L}" role="button" tabindex="0">${doseH(doseOf(ex, wk, home))}</span></li>`; }).join("") + `</ul></section>`;
   });
   return h;
 }
@@ -1058,9 +1158,10 @@ function viewStats() {
     <div class="panel kpi rise" style="--i:1" data-act="go" data-tab="stats" data-to="s-map" role="button" tabindex="0"><b class="x">${fa(streak(todayIdx()))}</b><span>روز پیاپی ۷۰٪+</span></div>
     <div class="panel kpi rise" style="--i:2" data-act="go" data-tab="stats" data-to="s-weight" role="button" tabindex="0"><b class="x">${wNow ? faN(wNow, 1) : "-"}</b><span>میانگین ۷ روزه kg</span></div>
     <div class="panel kpi rise" style="--i:3" data-act="go" data-tab="stats" data-to="s-weight" role="button" tabindex="0"><b class="x">${ch == null ? "-" : (ch < 0 ? "−" : "+") + faN(Math.abs(ch), 1)}</b><span>تغییر از شروع kg</span></div></div>`;
+  h += jumpBar([["s-map", "نقشه"], ["s-weight", "وزن"], ["s-prog", "پیشرفت وزنه"], ["s-tests", "تست‌ها"], ["s-pr", "رکوردها"], ["s-badges", "نشان‌ها"]]);
   h += coachCard() + `<div style="margin-top:14px">${viewMap()}</div>`;
   h += `<section class="panel rise" id="s-weight" style="margin-top:14px">${ph("روند وزن", "weight", `<span class="tiny muted">هدف ${fa(TARGET_W)} kg</span>`)}${weightChart(todayIdx())}
-    <div class="legend"><span><i style="background:var(--accent)"></i>میانگین ۷ روزه</span><span><i style="background:var(--ink3)"></i>وزن روزانه</span><span><i style="background:var(--gold)"></i>مسیر ${fa(START_W)} به ${fa(TARGET_W)}</span></div></section>`;
+    <div class="legend" data-act="info" data-k="weight" role="button" tabindex="0"><span><i style="background:var(--accent)"></i>میانگین ۷ روزه</span><span><i style="background:var(--ink3)"></i>وزن روزانه</span><span><i style="background:var(--gold)"></i>مسیر ${fa(START_W)} به ${fa(TARGET_W)}</span></div></section>`;
   const a = weekStats(wk), b = weekStats(wk - 1), cell = (x, f) => x == null ? "-" : f(x);
   h += `<section class="panel rise" style="margin-top:14px">${ph("این هفته و هفته‌ی قبل", "weekcmp")}<div class="tw"><table class="wk2"><thead><tr><th></th><th>هفته ${fa(wk)}</th><th>${wk > 1 ? "هفته " + fa(wk - 1) : "-"}</th></tr></thead><tbody>
     <tr><td>درصد انجام</td><td class="num">${cell(a && a.pct, x => fa(Math.round(x * 100)) + "٪")}</td><td class="num">${cell(b && b.pct, x => fa(Math.round(x * 100)) + "٪")}</td></tr>
@@ -1082,7 +1183,7 @@ function viewStats() {
   for (let i = 0; i < 56; i++) { const d = peek(dateOf(i)); if (d) { if (d.waist) waistPts.push({ i, v: +d.waist }); const bf = bodyFat(d.sf, dateOf(i)); if (bf != null) bfPts.push({ i, v: bf }); } }
   h += `<section class="panel rise" style="margin-top:14px">${ph("دور شکم و درصد چربی", "body2")}<h3 class="small muted" style="margin-bottom:4px">دور شکم (cm)</h3>${miniChart(waistPts, "دور شکم", "cm", "var(--accent)")}<h3 class="small muted" style="margin:10px 0 4px">درصد چربی</h3>${miniChart(bfPts, "درصد چربی", "٪", "var(--gold)")}</section>`;
   h += `<section class="panel rise" style="margin-top:14px">${ph("چالش‌ها", "chal")}<div id="chal">${chalHtml()}</div></section>`;
-  h += `<section class="panel rise" style="margin-top:14px">${ph("نشان‌ها", "badges")}<div id="bdg">${badgesHtml()}</div></section>`;
+  h += `<section class="panel rise" id="s-badges" style="margin-top:14px">${ph("نشان‌ها", "badges")}<div id="bdg">${badgesHtml()}</div></section>`;
   return h + statsTail();
 }
 function chalHtml() {
@@ -1134,13 +1235,12 @@ function viewSettings() {
 
 /* ---------- pages: exercise + workout ---------- */
 let page = null;
-function openPage(p) { page = p; render(); window.scrollTo(0, 0); }
+function openPage(p) { navHint = navFrom ? "zoom" : "push"; page = p; render(); window.scrollTo(0, 0); runShared(); }
 function backBtn(label) { return `<button class="back" data-act="pback">${ICON.prev}<span>${label || "بازگشت"}</span></button>`; }
 function muscleChips(m) {
-  return Object.keys(m || {}).sort((a, b) => m[b] - m[a]).map(k => `<span class="pill ${m[k] >= 1 ? "acc" : ""}">${esc(PROGRAM.muscles[k] || k)}${m[k] >= 1 ? "" : " (فرعی)"}</span>`).join("");
+  return Object.keys(m || {}).sort((a, b) => m[b] - m[a]).map(k => `<span class="pill ${m[k] >= 1 ? "acc" : ""}" data-act="go" data-tab="stats" data-to="s-prog" role="button" tabindex="0">${esc(PROGRAM.muscles[k] || k)}${m[k] >= 1 ? "" : " (فرعی)"}</span>`).join("");
 }
 function historyHtml(ex, id) {
-  if (!ex.main) return "";
   const rows = [];
   for (let i = 0; i < 56; i++) { const p = peek(dateOf(i)); const L = p && p.lifts && p.lifts[ex.id]; if (L) { const m = L.filter(s => (s.ex || "") === id && +s.reps > 0); if (m.length) rows.push({ i, m }); } }
   if (!rows.length) return `<section class="panel rise" style="--i:6"><h2 class="h2">سابقه‌ی تو</h2><p class="small faint" style="margin-top:6px">هنوز ستی برای این حرکت ثبت نشده. در جلسه روی «ثبت وزنه» بزن.</p></section>`;
@@ -1154,7 +1254,8 @@ const imgOf = id => { const d = IMGS.map[id]; return d ? IMGS.src[d] : null; };
 const thumb = (id, cls = "") => { const s = imgOf(id); return s ? `<span class="thumb ${cls}" aria-hidden="true"><img src="${s[0]}" alt="">${cls ? `<img src="${s[1]}" alt="">` : ""}</span>` : ""; };
 function figHtml(id) {
   const s = imgOf(id); if (!s) return "";
-  return `<figure class="flip"><img src="${s[0]}" alt="وضعیت شروع حرکت"><img src="${s[1]}" alt="وضعیت پایان حرکت"><figcaption class="lab"><span>۱ · شروع</span><span>۲ · پایان</span></figcaption></figure>`;
+  const nt = IMGS.note && IMGS.note[id];
+  return `<figure class="flip"><img src="${s[0]}" alt="وضعیت شروع حرکت"><img src="${s[1]}" alt="وضعیت پایان حرکت"><figcaption class="lab"><span>۱ · شروع</span><span>۲ · پایان</span></figcaption></figure>${nt ? `<p class="tiny faint" style="margin:-8px 0 12px">${esc(nt[LANG === "en" ? 1 : 0])}</p>` : ""}`;
 }
 const collage = ids => { const u = [...new Set(ids)].map(imgOf).filter(Boolean); return u.length ? `<div class="collage" aria-hidden="true">${u.map(x => `<img src="${x[1]}" alt="">`).join("")}</div>` : ""; };
 
@@ -1183,7 +1284,7 @@ function badgesHtml() {
     [water >= 7, "drop", "۷ روز آب کامل", "Hydrated"], [food >= 7, "bowl", "۷ روز ثبت غذا", "Food Logger"], [steps >= 14, "feet", "۱۴ روز ۱۲ هزار قدم", "Walker"],
     [sets >= 50, "bar", "۵۰ ست ثبت‌شده", "50 Logged Sets"], [t("pullups") >= 10, "crown", "۱۰ بارفیکس", "10 Pull-ups"], [t("mu") >= 1, "star", "اولین Muscle-Up", "Muscle-Up"]];
   const on = B.filter(b => b[0]).length;
-  return `<p class="tiny muted num" style="margin-bottom:10px">${fa(on)} از ${fa(B.length)} باز شده</p><div class="badges">` + B.map(b => `<div class="badge ${b[0] ? "on" : ""}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${BADGE_SVG[b[1]]}</svg><b>${bidi(b[2])}</b><span lang="en" dir="ltr">${b[3]}</span>${b[0] ? '<span class="sr-only">باز شده</span>' : '<span class="sr-only">قفل</span>'}</div>`).join("") + `</div>`;
+  return `<p class="tiny muted num" style="margin-bottom:10px">${fa(on)} از ${fa(B.length)} باز شده</p><div class="badges">` + B.map(b => `<div class="badge ${b[0] ? "on" : ""}" data-act="info" data-k="badges" role="button" tabindex="0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${BADGE_SVG[b[1]]}</svg><b>${bidi(b[2])}</b><span lang="en" dir="ltr">${b[3]}</span>${b[0] ? '<span class="sr-only">باز شده</span>' : '<span class="sr-only">قفل</span>'}</div>`).join("") + `</div>`;
 }
 let lastP = null;
 function burst() {
@@ -1202,6 +1303,37 @@ function afterSave() {
   lastP = { i: sel, p, w };
 }
 
+/* ---------- exercise library pages + auto links ---------- */
+const LIBRE = (() => {
+  const names = Object.keys(PROGRAM.lib).map(k => [esc(PROGRAM.lib[k].en), k]).sort((a, b) => b[0].length - a[0].length);
+  const map = Object.fromEntries(names);
+  return { map, re: new RegExp("(?<![\\w-])(" + names.map(n => n[0].replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|") + ")(?![\\w-])", "g") };
+})();
+function linkLib(html, self) {
+  return String(html).split(/(<[^>]+>)/).map(part => part[0] === "<" ? part : part.replace(LIBRE.re, m => LIBRE.map[m] && LIBRE.map[m] !== self ? `<button class="xlink" data-act="libpage" data-lib="${LIBRE.map[m]}">${m}</button>` : m)).join("");
+}
+function openLib(lib) {
+  const home = S.prefs.mode === "home";
+  for (const L of Object.keys(PROGRAM.workouts)) for (const ex of PROGRAM.workouts[L].ex) {
+    if (ex.gym === lib || ex.home === lib) return openPage({ type: "ex", ex: ex.id, w: L, alt: ex.gym === lib ? home : !home });
+  }
+  openPage({ type: "lib", lib });
+}
+function pageLib(p) {
+  const lb = PROGRAM.lib[p.lib]; if (!lb) { page = null; return viewToday(); }
+  const yt = "https://www.youtube.com/results?search_query=" + encodeURIComponent(lb.yt);
+  return `<div class="pagehead rise">${backBtn()}<span class="pill">گرم کردن</span></div>
+  <section class="panel hero rise" style="--i:1"><span class="glow"></span>${figHtml(p.lib)}
+    <h1 class="pt-fa">${esc(lb.fan || lb.en)}</h1>${lb.fan ? `<p class="pt-en x" lang="en">${esc(lb.en)}</p>` : ""}</section>
+  <section class="panel rise" style="--i:2;margin-top:14px"><h2 class="h2">اصول حرکت</h2><p style="margin-top:6px">${linkLib(bidi(lb.fa), p.lib)}</p></section>
+  <div class="grid2" style="margin-top:14px">
+    <section class="panel rise" style="--i:3"><h2 class="h2">اجرای صحیح</h2><ol class="steps">${lb.cues.map(c => `<li>${linkLib(bidi(c), p.lib)}</li>`).join("")}</ol></section>
+    <section class="panel rise" style="--i:4"><h2 class="h2">اشتباه‌های رایج</h2><ul class="bad-list">${lb.mistakes.map(c => `<li>${linkLib(bidi(c), p.lib)}</li>`).join("")}</ul></section></div>
+  <div class="grid2" style="margin-top:14px">
+    <section class="panel rise" style="--i:5"><h2 class="h2">ساده‌تر</h2><p style="margin-top:6px">${linkLib(bidi(lb.reg), p.lib)}</p></section>
+    <section class="panel rise" style="--i:5"><h2 class="h2">سخت‌تر</h2><p style="margin-top:6px">${linkLib(bidi(lb.prog), p.lib)}</p></section></div>
+  <a class="btn pri block rise ytbtn" style="margin-top:14px;text-decoration:none" href="${yt}" target="_blank" rel="noopener">${SV('<rect x="3" y="6" width="18" height="12" rx="3"/><path d="M10.5 9.5l4 2.5-4 2.5z" fill="currentColor"/>', 1.8)}ویدیوی آموزشی در YouTube</a>`;
+}
 function pageEx(p) {
   const W = PROGRAM.workouts[p.w], ex = W.ex.find(e => e.id === p.ex); if (!ex) { page = null; return viewToday(); }
   const home = (S.prefs.mode === "home") !== !!p.alt, id = home ? ex.home : ex.gym, lb = PROGRAM.lib[id], otherId = home ? ex.gym : ex.home, other = PROGRAM.lib[otherId];
@@ -1213,34 +1345,34 @@ function pageEx(p) {
   <section class="panel hero rise" style="--i:1"><span class="glow"></span>
     ${figHtml(id)}<p class="tiny muted">${home ? "نسخه‌ی خانه" : "نسخه‌ی باشگاه"}</p>
     <h1 class="pt-fa">${esc(lb.fan || lb.en)}</h1>${lb.fan ? `<p class="pt-en x" lang="en">${esc(lb.en)}</p>` : ""}
-    <div class="chips" style="margin-top:14px"><span class="pill acc">${en(dose === "test" ? "Test" : dose)}</span><span class="pill">استراحت ${en(ex.rest)}</span><span class="pill">هفته ${fa(wk)}</span></div>
+    <div class="chips" style="margin-top:14px"><span class="pill acc" data-act="go" data-tab="plan" role="button" tabindex="0">${en(dose === "test" ? "Test" : dose)}</span><span class="pill" data-act="rtimer" data-sec="${restSec(ex.rest)}" data-l="${esc(lb.en)}" role="button" tabindex="0">استراحت ${en(ex.rest)}</span><span class="pill" data-act="wkmenu" role="button" tabindex="0">هفته ${fa(wk)}</span></div>
     <div class="chips">${muscleChips(ex.m)}</div>${loadLine(id, dose)}
     ${lb.en !== other.en ? `<button class="btn" style="margin-top:14px" data-act="exalt">نمایش نسخه‌ی ${home ? "باشگاه" : "خانه"}: ${en(other.en)}</button>` : ""}</section>
-  <section class="panel rise" style="--i:2"><h2 class="h2">اصول حرکت</h2><p style="margin-top:6px">${bidi(lb.fa)}</p>${ex.fa ? `<p class="hint-line" style="margin-top:10px">${bidi(ex.fa)}</p>` : ""}</section>
+  <section class="panel rise" style="--i:2"><h2 class="h2">اصول حرکت</h2><p style="margin-top:6px">${linkLib(bidi(lb.fa), id)}</p>${ex.fa ? `<p class="hint-line" style="margin-top:10px">${linkLib(bidi(ex.fa), id)}</p>` : ""}</section>
   <div class="grid2" style="margin-top:14px">
-    <section class="panel rise" style="--i:3"><h2 class="h2">اجرای صحیح</h2><ol class="steps">${lb.cues.map(c => `<li>${bidi(c)}</li>`).join("")}</ol></section>
-    <section class="panel rise" style="--i:4"><h2 class="h2">اشتباه‌های رایج</h2><ul class="bad-list">${lb.mistakes.map(c => `<li>${bidi(c)}</li>`).join("")}</ul></section></div>
+    <section class="panel rise" style="--i:3"><h2 class="h2">اجرای صحیح</h2><ol class="steps">${lb.cues.map(c => `<li>${linkLib(bidi(c), id)}</li>`).join("")}</ol></section>
+    <section class="panel rise" style="--i:4"><h2 class="h2">اشتباه‌های رایج</h2><ul class="bad-list">${lb.mistakes.map(c => `<li>${linkLib(bidi(c), id)}</li>`).join("")}</ul></section></div>
   <div class="grid2" style="margin-top:14px">
-    <section class="panel rise" style="--i:5"><h2 class="h2">ساده‌تر</h2><p style="margin-top:6px">${bidi(lb.reg)}</p></section>
-    <section class="panel rise" style="--i:5"><h2 class="h2">سخت‌تر</h2><p style="margin-top:6px">${bidi(lb.prog)}</p></section></div>
+    <section class="panel rise" style="--i:5"><h2 class="h2">ساده‌تر</h2><p style="margin-top:6px">${linkLib(bidi(lb.reg), id)}</p></section>
+    <section class="panel rise" style="--i:5"><h2 class="h2">سخت‌تر</h2><p style="margin-top:6px">${linkLib(bidi(lb.prog), id)}</p></section></div>
   <section class="panel rise" style="--i:6;margin-top:14px"><h2 class="h2">دوز ۸ هفته</h2><div class="tw" style="margin-top:8px"><table><thead><tr>${[1, 2, 3, 4, 5, 6, 7, 8].map(w => `<th style="text-align:center">${fa(w)}</th>`).join("")}</tr></thead><tbody><tr>${doses}</tr>${loads}</tbody></table></div>
     <p class="tiny faint" style="margin-top:6px">هفته‌ی ۴ دیلود، هفته‌ی ۸ اوج و تست.${loads ? " ردیف دوم: وزنه‌ی پیشنهادی (kg؛ دمبل هر دست؛ BW وزن بدن؛ − یعنی کمک دستگاه)." : ""}</p></section>
   ${historyHtml(ex, id)}
-  <a class="btn pri block rise" style="margin-top:14px;text-decoration:none" href="${yt}" target="_blank" rel="noopener">ویدیوی آموزشی در YouTube</a>`;
+  <a class="btn pri block rise ytbtn" style="margin-top:14px;text-decoration:none" href="${yt}" target="_blank" rel="noopener">${SV('<rect x="3" y="6" width="18" height="12" rx="3"/><path d="M10.5 9.5l4 2.5-4 2.5z" fill="currentColor"/>', 1.8)}ویدیوی آموزشی در YouTube</a>`;
 }
 function pageWo(p) {
   const W = PROGRAM.workouts[p.w], I = W.info, home = S.prefs.mode === "home", wk = info(sel).week, vol = {};
   W.ex.forEach(ex => { const n = ex.h ? setsOf(doseOf(ex, wk, home)) : 0; Object.keys(ex.m || {}).forEach(k => { vol[k] = (vol[k] || 0) + n * ex.m[k]; }); });
-  const vchips = Object.keys(vol).filter(k => vol[k] > 0).sort((a, b) => vol[b] - vol[a]).map(k => `<span class="pill">${esc(PROGRAM.muscles[k])} <b class="num">${faN(vol[k], vol[k] % 1 ? 1 : 0)}</b></span>`).join("");
-  return `<div class="pagehead rise">${backBtn()}<span class="pill">هفته ${fa(wk)}</span></div>
+  const vchips = Object.keys(vol).filter(k => vol[k] > 0).sort((a, b) => vol[b] - vol[a]).map(k => `<span class="pill" data-act="go" data-tab="${tab}" data-to="s-exlist" role="button" tabindex="0">${esc(PROGRAM.muscles[k])} <b class="num">${faN(vol[k], vol[k] % 1 ? 1 : 0)}</b></span>`).join("");
+  return `<div class="pagehead rise">${backBtn()}<span class="pill" data-act="wkmenu" role="button" tabindex="0">هفته ${fa(wk)}</span></div>
   <section class="panel hero rise" style="--i:1"><span class="glow"></span>
     ${collage(W.ex.map(ex => home ? ex.home : ex.gym))}<p class="pt-en x" lang="en" style="font-size:2.4rem">WORKOUT ${p.w}</p><h1 class="pt-fa" style="font-size:1.25rem">${esc(W.fa.split(":")[1] || W.fa)}</h1>
-    <p style="margin-top:10px">${bidi(I.goal)}</p>
-    <div class="chips" style="margin-top:12px"><span class="pill acc">زمان ${esc(I.time)}</span><span class="pill">${fa(W.ex.length)} حرکت</span></div></section>
-  <section class="panel rise" style="--i:2;margin-top:14px"><h2 class="h2">اصول این جلسه</h2><ol class="steps">${I.rules.map(r => `<li>${bidi(r)}</li>`).join("")}</ol></section>
+    <p style="margin-top:10px">${linkLib(bidi(I.goal))}</p>
+    <div class="chips" style="margin-top:12px"><span class="pill acc" data-act="go" data-tab="${tab}" data-to="s-exlist" role="button" tabindex="0">زمان ${esc(I.time)}</span><span class="pill" data-act="go" data-tab="${tab}" data-to="s-exlist" role="button" tabindex="0">${fa(W.ex.length)} حرکت</span></div></section>
+  <section class="panel rise" style="--i:2;margin-top:14px"><h2 class="h2">اصول این جلسه</h2><ol class="steps">${I.rules.map(r => `<li>${linkLib(bidi(r))}</li>`).join("")}</ol></section>
   <section class="panel rise" style="--i:3;margin-top:14px"><h2 class="h2">ست سخت برای هر عضله در این جلسه</h2><div class="chips" style="margin-top:8px">${vchips || '<span class="small faint">فقط ست‌های مهارتی</span>'}</div></section>
-  <section class="panel rise" style="--i:4;margin-top:14px"><h2 class="h2">گرم کردن</h2><ul class="wu" style="margin-top:8px">${PROGRAM.warmup.map(w => `<li>${en(w[0])}<span class="en">${esc(w[1])}</span></li>`).join("")}</ul></section>
-  <section class="panel rise" style="--i:5;margin-top:14px"><h2 class="h2">حرکت‌ها</h2><div class="exlist">` +
+  <section class="panel rise" style="--i:4;margin-top:14px"><h2 class="h2">گرم کردن</h2><ul class="wu" style="margin-top:8px">${PROGRAM.warmup.map(w => `<li>${linkLib(en(w[0]))}<span class="en">${esc(w[1])}</span></li>`).join("")}</ul></section>
+  <section class="panel rise" id="s-exlist" style="--i:5;margin-top:14px"><h2 class="h2">حرکت‌ها</h2><div class="exlist">` +
     W.ex.map((ex, i) => { const id = home ? ex.home : ex.gym, lb = PROGRAM.lib[id]; return `<button class="excard" data-act="exinfo" data-ex="${ex.id}" data-w="${p.w}"><span style="position:relative;display:block">${thumb(id, "mo") || '<span class="thumb" style="display:grid;place-items:center;color:var(--ink3);font-weight:800" lang="en">' + esc(lb.en.slice(0, 2).toUpperCase()) + '</span>'}<span class="exn num x">${fa(i + 1)}</span></span><span class="exm"><b>${esc(lb.fan)}</b><span class="en" lang="en">${esc(lb.en)}</span></span><span class="dose" style="font-size:1rem">${doseH(doseOf(ex, wk, home))}</span></button>`; }).join("") + `</div></section>`;
 }
 
@@ -1263,8 +1395,8 @@ function viewFood() {
     <div style="text-align:center"><b>${esc(DAYFA[inf.dow])}، ${esc(fmtJ.format(parseISO(inf.date)))}</b><div class="tiny muted">روز ${fa(sel + 1)} · ${inf.type === "refeed" ? "ریفید" : inf.letter ? "تمرین " + en(inf.letter) : "پیاده‌روی"}</div></div>
     <button class="iconbtn" data-act="next" aria-label="روز بعد" ${sel === 55 ? "disabled" : ""}>${ICON.next}</button></div>
   <section class="panel hero rise" id="s-food" style="margin-top:10px"><span class="glow"></span>${ph("خوراک امروز", "food")}
-    <div class="hero-grid"><div class="ring">${ring(t.k / n.kcal, 150, 12)}<div class="ctr"><div><b class="x num">${fa(Math.round(t.k))}</b><span>از ${fa(n.kcal)} kcal</span></div></div></div>
-    <div style="min-width:0">${macroBar("پروتئین", t.p, n.p, "var(--accent)")}${macroBar("کربوهیدرات", t.c, n.c, "var(--ink3)")}${macroBar("چربی", t.f, n.f, "var(--gold)")}</div></div>
+    <div class="hero-grid"><div class="ring" data-act="info" data-k="food" role="button" tabindex="0">${ring(t.k / n.kcal, 150, 12)}<div class="ctr"><div><b class="x num">${fa(Math.round(t.k))}</b><span>از ${fa(n.kcal)} kcal</span></div></div></div>
+    <div style="min-width:0" data-act="info" data-k="food" role="button" tabindex="0">${macroBar("پروتئین", t.p, n.p, "var(--accent)")}${macroBar("کربوهیدرات", t.c, n.c, "var(--ink3)")}${macroBar("چربی", t.f, n.f, "var(--gold)")}</div></div>
     <p class="small ${left < 0 ? "" : "muted"}" style="margin-top:12px;${left < 0 ? "color:var(--warn)" : ""}">${left >= 0 ? `${fa(Math.round(left))} کیلوکالری باقی مانده` : `${fa(Math.round(-left))} کیلوکالری بیشتر از هدف`} · پروتئین ${t.p >= n.p ? "کامل" : fa(Math.round(n.p - t.p)) + " گرم مانده"}</p></section>`;
   if (smp) h += `<section class="panel rise" style="--i:1;margin-top:14px">${ph("ثبت با متن (هوش مصنوعی)", "aifood")}
     <label class="f" for="aiq">چی خوردی؟ مثلاً «۲۰۰ گرم سینه مرغ و ۱۵۰ گرم برنج و یک قاشق روغن زیتون»</label>
@@ -1361,8 +1493,10 @@ let cloudRef = null;
 const TABS = [["today", "امروز", "today"], ["food", "غذا", "food"], ["plan", "برنامه", "plan"], ["stats", "آمار", "stats"], ["set", "تنظیمات", "set"]];
 function render() {
   const a = document.activeElement, sig = a && a.dataset && a.dataset.act ? { ...a.dataset } : null;
-  const v = $("#view"); gid = 0; const vk = tab + ":" + sel + ":" + (page ? page.type + page.w + (page.ex || "") : ""); v.classList.toggle("anim", vk !== render.k); render.k = vk;
-  v.innerHTML = page ? (page.type === "ex" ? pageEx(page) : pageWo(page)) : tab === "today" ? viewToday() : tab === "food" ? viewFood() : tab === "plan" ? viewPlan() : tab === "stats" ? viewStats() : viewSettings();
+  const v = $("#view"); gid = 0; const vk = tab + ":" + sel + ":" + (page ? page.type + page.w + (page.ex || "") + (page.lib || "") + (page.alt ? 1 : 0) : ""), changed = vk !== render.k;
+  const kind = changed ? (navHint || "tab") : "", ghost = changed && render.k !== undefined && motionOK() ? makeGhost(v) : null;
+  v.classList.toggle("anim", kind === "tab"); render.k = vk; navHint = "";
+  v.innerHTML = page ? (page.type === "ex" ? pageEx(page) : page.type === "lib" ? pageLib(page) : pageWo(page)) : tab === "today" ? viewToday() : tab === "food" ? viewFood() : tab === "plan" ? viewPlan() : tab === "stats" ? viewStats() : viewSettings();
   if (!lastP || lastP.i !== sel) { const d = peek(dateOf(sel)); lastP = { i: sel, p: pct(sel), w: !!(d && d.done.workout) }; }
   const inf = info(sel);
   $("#phase").innerHTML = `<span>هفته ${fa(inf.week)} · ${esc(inf.phaseFa)}</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>`;
@@ -1372,7 +1506,8 @@ function render() {
     const q = Object.keys(sig).map(k => `[data-${k.replace(/[A-Z]/g, c => "-" + c.toLowerCase())}="${CSS.escape(sig[k])}"]`).join("");
     const el = v.querySelector(q); if (el && !el.disabled) el.focus({ preventScroll: true });
   }
-  bindChart();
+  bindChart(); bindJump();
+  if (ghost || (kind && kind !== "tab" && motionOK())) runNav(kind, ghost);
 }
 function bindChart() {
   const svg = $("#wchart"), tip = $("#tip"); if (!svg || !chartPts.length) return;
@@ -1519,15 +1654,18 @@ document.addEventListener("click", e => {
     case "lang": return setLang(LANG === "en" ? "fa" : "en");
     case "setlang": return setLang(b.dataset.v);
     case "go": return goTo(b.dataset.tab || tab, b.dataset.to, b.dataset.day);
+    case "rdopen": { const f = document.querySelector('details[data-d="rd"]'); if (f) { f.open = !f.open; f.scrollIntoView({ behavior: "smooth", block: "nearest" }); } return; }
+    case "rtimer": return startTimer(+b.dataset.sec, b.dataset.l || "");
     case "wkmenu": return wkMenu($("#wkmenu").hidden);
     case "wkclose": return wkMenu(false);
     case "wkpick": { const w = +b.dataset.w, t = todayIdx(); wkMenu(false); page = null; tab = "today";
       sel = t >= (w - 1) * 7 && t < w * 7 ? t : (w - 1) * 7 + (sel % 7); render(); window.scrollTo(0, 0); $("#phase").focus({ preventScroll: true }); return; }
     case "open": page = null; sel = +b.dataset.i; if (tab !== "today") { tab = "today"; window.scrollTo(0, 0); } return render();
     case "info": return openInfo(b.dataset.k);
-    case "exinfo": if ($("#sheet").open) $("#sheet").close(); return openPage({ type: "ex", ex: b.dataset.ex, w: b.dataset.w, alt: false });
+    case "exinfo": if ($("#sheet").open) $("#sheet").close(); shareFrom(b); return openPage({ type: "ex", ex: b.dataset.ex, w: b.dataset.w, alt: b.dataset.alt === "1" });
+    case "libpage": shareFrom(b); return openLib(b.dataset.lib);
     case "wopage": return openPage({ type: "wo", w: b.dataset.w });
-    case "pback": page = null; render(); return window.scrollTo(0, 0);
+    case "pback": navHint = "pop"; page = null; render(); return window.scrollTo(0, 0);
     case "exalt": page.alt = !page.alt; return render();
     case "fadd": return openFoodSheet(+b.dataset.m);
     case "fnew": FS = { m: 4, f: null, unit: false, amt: "", q: "", newf: true }; drawFoodSheet(); return $("#sheet").showModal();

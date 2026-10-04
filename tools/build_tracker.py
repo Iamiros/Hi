@@ -22,7 +22,7 @@ if __name__!="__main__": pass
 imap = json.loads((root/"tools/img/map.json").read_text())
 uri = lambda f: "data:image/webp;base64," + base64.b64encode((root/"tools/img"/f).read_bytes()).decode()
 imgs = {d: [uri(d+"-0.webp"), uri(d+"-1.webp")] for d in sorted(set(imap.values()))}
-t = t.replace("__IMGS__", json.dumps(dict(map=imap, src=imgs)))
+t = t.replace("__IMGS__", json.dumps(dict(map=imap, src=imgs, note=json.loads((root/"tools/img/notes.json").read_text())), ensure_ascii=False))
 base = t.replace("__FONTS__",font_css(barlow=False, archivo=True)).replace("__PROGRAM__", json.dumps(prog, ensure_ascii=False))
 out = base.replace("__GUIDE__", '"../guide/index.html"')
 (root / "tracker/index.html").write_text(out)
